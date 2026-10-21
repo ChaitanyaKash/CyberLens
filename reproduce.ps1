@@ -33,6 +33,10 @@ try {
         if ($LASTEXITCODE -ne 0) { throw 'Complaint encoder training failed' }
         & $taskPython -m cyberlens.template_evaluation
         if ($LASTEXITCODE -ne 0) { throw 'Template-family evaluation failed' }
+        & $taskPython -m cyberlens.cli train --backend robust --task call_scam
+        if ($LASTEXITCODE -ne 0) { throw 'Nested call experiment failed' }
+        & $taskPython -m cyberlens.cli train --backend regularized --task complaint
+        if ($LASTEXITCODE -ne 0) { throw 'Regularized complaint experiment failed' }
         & $taskPython -m cyberlens.diagnose
         if ($LASTEXITCODE -ne 0) { throw 'Parent-category diagnostic failed' }
         & $taskPython -m cyberlens.report

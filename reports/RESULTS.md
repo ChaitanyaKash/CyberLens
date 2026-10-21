@@ -46,6 +46,21 @@ Each message is evaluated exactly once; no family crosses a fold's training and 
 The 1.0000 call scores above came from the earlier exact-deduplicated split. They were too optimistic because related templates remained on both sides. I keep them for comparison, but use the family-held-out result in the README headline.
 Family grouping uses a 0.80 character-TF-IDF cosine threshold and connected components. This is a heuristic stress test, not a human-verified semantic split or an independent real-world benchmark.
 
+## Bounded call improvement experiment
+
+I compared six fixed candidates inside three inner family folds, then assessed the selection procedure on five outer family folds. The outer assessment messages never fitted a vocabulary, scaler or classifier in their fold.
+
+| Model procedure | Clean macro-F1 | Typo macro-F1 | Accuracy |
+|---|---:|---:|---:|
+| Reference word baseline | 0.6308 | 0.6337 | 0.7416 |
+| Nested candidate selection | 0.8256 | 0.7709 | 0.8654 |
+
+The approximate paired family-bootstrap 95% interval for the **clean F1 difference** is **[-0.0283, 0.4064]** (500 resamples). This is wide and includes zero.
+My fixed promotion rule was: Mean gain >=0.02; paired clean family-bootstrap lower bound >0; typo F1 drop <=0.005. Passed: **False**.
+The optional `robust` artifact uses **frozen_c01**, selected with a separate grouped inner search and refitted on all 743 development messages. Its training-set performance is not the reported nested score.
+I kept the baseline as the default. The encoder is frozen; only a small L2-regularized classification head learns labels. This reduces capacity but does not prove absence of overfitting.
+This corpus was explored before this experiment, families are heuristic, and several classes have few independent families. Fresh human-labelled English/Hinglish messages are still needed for independent confirmation.
+
 Default inference uses validation-selected backends:
 
 - call_scam: **baseline** (selection score 1.0000).

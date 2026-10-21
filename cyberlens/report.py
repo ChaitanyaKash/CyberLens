@@ -63,6 +63,10 @@ def main():
     measured = {}
     family_path = reports/"call_family_evaluation.json"
     family = json.loads(family_path.read_text()) if family_path.exists() else None
+    robust_path = reports/"call_scam_robust.json"
+    robust = json.loads(robust_path.read_text()) if robust_path.exists() else None
+    regularized_path = reports/"complaint_regularized.json"
+    regularized = json.loads(regularized_path.read_text()) if regularized_path.exists() else None
     for task in TASKS:
         baseline = json.loads((reports / f"{task}_baseline.json").read_text())
         for mode in ("word", "char", "hybrid"):
@@ -80,11 +84,17 @@ def main():
                 r = json.loads(extra_path.read_text())
                 measured[task][mode] = r
                 lines.append(f"| {task} | {title} | {r['validation']['macro_f1']:.4f} | {r['test']['macro_f1']:.4f} | {r['test_typos']['macro_f1']:.4f} | {r['test']['accuracy']:.4f} | {r['seconds']:.1f} |")
+    if regularized and regularized["adopt"]:
+        measured["complaint"]["regularized"] = regularized
+        lines.append(f"| complaint | regularized {regularized['selected']} | {regularized['validation']['macro_f1']:.4f} | {regularized['test']['macro_f1']:.4f} | {regularized['test_typos']['macro_f1']:.4f} | {regularized['test']['accuracy']:.4f} | {regularized['seconds']:.1f} |")
     champions = {}
     for task, candidates in measured.items():
         best = max(candidates, key=lambda k:(candidates[k]["validation"]["macro_f1"] + candidates[k]["validation_typos"]["macro_f1"])/2)
         champions[task] = {"backend":best,"selection":"mean clean + synthetic-typo validation macro-F1",
                            "score":(candidates[best]["validation"]["macro_f1"]+candidates[best]["validation_typos"]["macro_f1"])/2}
+    if robust and robust["adopt"]:
+        champions["call_scam"] = {"backend":"robust","selection":"nested family CV with fixed uncertainty/promotion rule",
+                                  "score":(robust["nested"]["macro_f1"]+robust["nested_typos"]["macro_f1"])/2}
     (ROOT/"models/champions.json").write_text(json.dumps(champions,indent=2),encoding="utf-8")
     if family:
         lines += ["", "## Harder call evaluation: template families", "",
@@ -93,6 +103,27 @@ def main():
                   "", "Each message is evaluated exactly once; no family crosses a fold's training and test sets. All four classes are represented in training for each recorded fold.",
                   "The 1.0000 call scores above came from the earlier exact-deduplicated split. They were too optimistic because related templates remained on both sides. I keep them for comparison, but use the family-held-out result in the README headline.",
                   "Family grouping uses a 0.80 character-TF-IDF cosine threshold and connected components. This is a heuristic stress test, not a human-verified semantic split or an independent real-world benchmark."]
+    if robust:
+        interval = robust["paired_uncertainty"]
+        lines += ["", "## Bounded call improvement experiment", "",
+                  "I compared six fixed candidates inside three inner family folds, then assessed the selection procedure on five outer family folds. The outer assessment messages never fitted a vocabulary, scaler or classifier in their fold.",
+                  "", "| Model procedure | Clean macro-F1 | Typo macro-F1 | Accuracy |", "|---|---:|---:|---:|",
+                  f"| Reference word baseline | {robust['reference']['macro_f1']:.4f} | {robust['reference_typos']['macro_f1']:.4f} | {robust['reference']['accuracy']:.4f} |",
+                  f"| Nested candidate selection | {robust['nested']['macro_f1']:.4f} | {robust['nested_typos']['macro_f1']:.4f} | {robust['nested']['accuracy']:.4f} |",
+                  "", f"The approximate paired family-bootstrap 95% interval for the **clean F1 difference** is **[{interval['lower_95']:.4f}, {interval['upper_95']:.4f}]** ({interval['repetitions']} resamples). This is wide and includes zero.",
+                  f"My fixed promotion rule was: {robust['adoption_rule']}. Passed: **{robust['adopt']}**.",
+                  f"The optional `robust` artifact uses **{robust['deployment_variant']}**, selected with a separate grouped inner search and refitted on all {robust['deployment_training_rows']} development messages. Its training-set performance is not the reported nested score.",
+                  ("The candidate passed the fixed promotion rule." if robust["adopt"] else "I kept the baseline as the default.")+" The encoder is frozen; only a small L2-regularized classification head learns labels. This reduces capacity but does not prove absence of overfitting.",
+                  "This corpus was explored before this experiment, families are heuristic, and several classes have few independent families. Fresh human-labelled English/Hinglish messages are still needed for independent confirmation."]
+    if regularized:
+        lines += ["", "## Bounded complaint improvement experiment", "",
+                  "I compared three fixed heads on the same training-only TF-IDF features. Selection uses only the mean clean/noisy validation macro-F1, with a fixed minimum gain of 0.02 before promotion.",
+                  "", "| Head | Clean validation macro-F1 | Typo validation macro-F1 | Selection mean |", "|---|---:|---:|---:|"]
+        for name,r in regularized["search"].items():
+            lines.append(f"| {name} | {r['validation']['macro_f1']:.4f} | {r['validation_typos']['macro_f1']:.4f} | {r['selection_score']:.4f} |")
+        lines += ["", f"Reference selection mean: **{regularized['reference_selection_score']:.4f}**. Selected head: **{regularized['selected']}**. Promotion rule passed: **{regularized['adopt']}**.",
+                  regularized.get("test_policy","Only the selected candidate was evaluated on the supplied test after passing the validation criterion."),
+                  "The validation set has been used in earlier development, so this remains development evidence. I did not change labels, remove difficult classes or choose settings from test scores."]
     lines += ["", "Default inference uses validation-selected backends:", ""]
     for task, info in champions.items():
         lines.append(f"- {task}: **{info['backend']}** (selection score {info['score']:.4f}).")
@@ -140,12 +171,17 @@ def main():
                          "| Task | Backend | Evaluation protocol | Macro-F1 | Typo macro-F1 | Accuracy |",
                          "|---|---|---|---:|---:|---:|"]
         for task,info in champions.items():
-            r = measured[task][info["backend"]]
-            clean, noisy, protocol = r["test"],r["test_typos"],"Supplied test.csv"
-            if task == "call_scam" and family:
+            if task == "call_scam" and info["backend"] == "robust":
+                clean,noisy,protocol = robust["nested"],robust["nested_typos"],"Nested template-family CV"
+            elif task == "call_scam" and family:
                 clean,noisy,protocol = family["oof"],family["oof_typos"],"5-fold template-family CV (frozen baseline)"
+            else:
+                r = measured[task][info["backend"]]
+                clean,noisy,protocol = r["test"],r["test_typos"],"Supplied test.csv"
             summary_lines.append(f"| {task} | {info['backend']} | {protocol} | {clean['macro_f1']:.4f} | {noisy['macro_f1']:.4f} | {clean['accuracy']:.4f} |")
         summary_lines += ["", "[Full comparisons and failure cases](reports/RESULTS.md). Scores are fractions, not percentages.", ""]
+        if robust and not robust["adopt"]:
+            summary_lines += [f"The optional `robust` call experiment reached **{robust['nested']['macro_f1']:.4f}** clean / **{robust['nested_typos']['macro_f1']:.4f}** typo macro-F1 in nested family CV. I kept it experimental: the approximate paired family-bootstrap interval for its clean improvement includes zero. These are development results, pending fresh independent data.", ""]
         before, after = readme_text.split(start_marker,1)
         _, after = after.split(end_marker,1)
         readme.write_text(before+start_marker+"\n".join(summary_lines)+end_marker+after,encoding="utf-8")

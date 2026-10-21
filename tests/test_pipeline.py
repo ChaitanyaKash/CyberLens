@@ -5,6 +5,14 @@ from cyberlens.data import ROOT, TASKS, load
 
 
 class PreprocessingTests(unittest.TestCase):
+    def test_promotion_rejects_uncertain_gain_and_typo_regression(self):
+        from cyberlens.robust import promotion_allowed
+        self.assertFalse(promotion_allowed(.16,-.028,.77,.63))
+        self.assertFalse(promotion_allowed(.16,0.,.77,.63))
+        self.assertFalse(promotion_allowed(.01,.001,.77,.63))
+        self.assertFalse(promotion_allowed(.16,.001,.60,.63))
+        self.assertTrue(promotion_allowed(.03,.001,.64,.63))
+
     def test_expert_preserves_parent_mass_and_class_order(self):
         from types import SimpleNamespace
         from cyberlens.hierarchical import FinancialExpert
@@ -60,12 +68,27 @@ class DataTests(unittest.TestCase):
                          "Local model artifacts are unavailable")
     def test_all_available_saved_backends_load_and_predict(self):
         from cyberlens.predict import Predictor
-        for backend in ("baseline","word2vec","subword","hierarchical","transformer"):
+        for backend in ("baseline","word2vec","subword","hierarchical","transformer","regularized"):
             path = ROOT/"models"/("complaint_transformer" if backend == "transformer" else f"complaint_{backend}.joblib")
             if path.exists():
                 result = Predictor(backend=backend).predict("Someone asked for my UPI PIN 1234","complaint")
                 self.assertNotIn("1234",result["masked_text"])
                 self.assertTrue(result["predictions"]["complaint"]["top"])
+
+    @unittest.skipUnless((ROOT/"models/call_scam_robust.joblib").exists(),
+                         "Optional local robust artifact is unavailable")
+    def test_robust_artifact_in_fresh_inference_path(self):
+        from cyberlens.predict import Predictor
+        predictor = Predictor(backend="robust")
+        result = predictor.predict("police bol rha hu OTP 123456 bhejo","call_scam")
+        self.assertNotIn("123456",result["masked_text"])
+        output = result["predictions"]["call_scam"]
+        self.assertEqual(output["class_evidence"]["source"],"nested template-family cross-validation")
+        self.assertEqual(len(output["top"]),3)
+        encoder = predictor.models[("call_scam","robust")]["model"]._encoder
+        if encoder is not None:
+            self.assertFalse(encoder.model.training)
+            self.assertTrue(all(not p.requires_grad for p in encoder.model.parameters()))
 
     @unittest.skipUnless(all((ROOT/"data/processed"/f"{task}.csv").exists() for task in TASKS),
                          "Private processed datasets are not available (expected in public CI)")

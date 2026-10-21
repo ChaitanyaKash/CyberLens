@@ -1,5 +1,13 @@
 # What changed
 
+## 2026-10-21 — Bounded improvement experiments
+
+I added a six-candidate call experiment with five outer and three inner template-family folds. The encoder stays frozen, and vocabularies/scalers/classifiers fit their own training folds. Nested clean macro-F1 improved from 0.6308 to 0.8256; typo macro-F1 improved from 0.6337 to 0.7709.
+
+I kept that model experimental because the approximate paired family-bootstrap interval for clean improvement includes zero. The default-promotion rule was fixed before the run; I did not change it to accept a higher point estimate. The optional `robust` backend is available in the CLI and desktop interface.
+
+I also added a fixed three-head complaint comparison using the same training-only TF-IDF features. It only evaluates the selected head on the supplied test if the clean/noisy validation mean improves by at least 0.02. The generated results record the outcome, including rejected candidates. I expanded reproduction commands, inference checks and the interview notes to explain the mechanism, uncertainty and remaining need for independent data.
+
 ## 2026-10-21 — First working text-classification pipeline
 
 I moved the experiments into a separate project so I could work without changing my original notebooks or datasets.

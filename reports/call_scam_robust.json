@@ -1,0 +1,448 @@
+{
+  "protocol": "5 outer family-grouped folds; 3 inner family-grouped folds; six predeclared candidates",
+  "family_threshold": 0.8,
+  "families": 77,
+  "rows": 743,
+  "candidates": [
+    "reference_word",
+    "word_l2",
+    "char_l2",
+    "hybrid_l2",
+    "frozen_c001",
+    "frozen_c01"
+  ],
+  "nested": {
+    "n": 743,
+    "accuracy": 0.8654104979811574,
+    "macro_f1": 0.825622179121335,
+    "weighted_f1": 0.8578203725419233,
+    "per_class": {
+      "none": {
+        "precision": 0.8333333333333334,
+        "recall": 0.9090909090909091,
+        "f1-score": 0.8695652173913043,
+        "support": 110.0
+      },
+      "other_scam": {
+        "precision": 0.9482758620689655,
+        "recall": 0.5238095238095238,
+        "f1-score": 0.6748466257668712,
+        "support": 105.0
+      },
+      "police_blackmail": {
+        "precision": 0.9259259259259259,
+        "recall": 0.7936507936507936,
+        "f1-score": 0.8547008547008547,
+        "support": 126.0
+      },
+      "police_digital_arrest": {
+        "precision": 0.849015317286652,
+        "recall": 0.9651741293532339,
+        "f1-score": 0.9033760186263097,
+        "support": 402.0
+      },
+      "accuracy": 0.8654104979811574,
+      "macro avg": {
+        "precision": 0.8891376096537192,
+        "recall": 0.7979313389761151,
+        "f1-score": 0.825622179121335,
+        "support": 743.0
+      },
+      "weighted avg": {
+        "precision": 0.8737637367426767,
+        "recall": 0.8654104979811574,
+        "f1-score": 0.8578203725419233,
+        "support": 743.0
+      }
+    },
+    "confusion_labels": [
+      "none",
+      "other_scam",
+      "police_blackmail",
+      "police_digital_arrest"
+    ],
+    "confusion_matrix": [
+      [100, 3, 0, 7],
+      [11, 55, 3, 36],
+      [0, 0, 100, 26],
+      [9, 0, 5, 388]
+    ]
+  },
+  "nested_typos": {
+    "n": 743,
+    "accuracy": 0.82907133243607,
+    "macro_f1": 0.7709196953164343,
+    "weighted_f1": 0.8192054711976883,
+    "per_class": {
+      "none": {
+        "precision": 0.7285714285714285,
+        "recall": 0.9272727272727272,
+        "f1-score": 0.816,
+        "support": 110.0
+      },
+      "other_scam": {
+        "precision": 0.9107142857142857,
+        "recall": 0.4857142857142857,
+        "f1-score": 0.6335403726708074,
+        "support": 105.0
+      },
+      "police_blackmail": {
+        "precision": 0.8469387755102041,
+        "recall": 0.6587301587301587,
+        "f1-score": 0.7410714285714286,
+        "support": 126.0
+      },
+      "police_digital_arrest": {
+        "precision": 0.8463251670378619,
+        "recall": 0.945273631840796,
+        "f1-score": 0.8930669800235017,
+        "support": 402.0
+      },
+      "accuracy": 0.82907133243607,
+      "macro avg": {
+        "precision": 0.8331374142084451,
+        "recall": 0.7542477008894919,
+        "f1-score": 0.7709196953164343,
+        "support": 743.0
+      },
+      "weighted avg": {
+        "precision": 0.8380953701296949,
+        "recall": 0.82907133243607,
+        "f1-score": 0.8192054711976883,
+        "support": 743.0
+      }
+    },
+    "confusion_labels": [
+      "none",
+      "other_scam",
+      "police_blackmail",
+      "police_digital_arrest"
+    ],
+    "confusion_matrix": [
+      [102, 2, 0, 6],
+      [23, 51, 4, 27],
+      [5, 2, 83, 36],
+      [10, 1, 11, 380]
+    ]
+  },
+  "reference": {
+    "n": 743,
+    "accuracy": 0.7415881561238223,
+    "macro_f1": 0.6308192447266142,
+    "weighted_f1": 0.7056941750926276,
+    "per_class": {
+      "none": {
+        "precision": 0.95,
+        "recall": 0.6909090909090909,
+        "f1-score": 0.8,
+        "support": 110.0
+      },
+      "other_scam": {
+        "precision": 0.7105263157894737,
+        "recall": 0.2571428571428571,
+        "f1-score": 0.3776223776223776,
+        "support": 105.0
+      },
+      "police_blackmail": {
+        "precision": 0.92,
+        "recall": 0.36507936507936506,
+        "f1-score": 0.5227272727272727,
+        "support": 126.0
+      },
+      "police_digital_arrest": {
+        "precision": 0.6991304347826087,
+        "recall": 1.0,
+        "f1-score": 0.8229273285568065,
+        "support": 402.0
+      },
+      "accuracy": 0.7415881561238223,
+      "macro avg": {
+        "precision": 0.8199141876430206,
+        "recall": 0.5782828282828283,
+        "f1-score": 0.6308192447266142,
+        "support": 743.0
+      },
+      "weighted avg": {
+        "precision": 0.7753374131096951,
+        "recall": 0.7415881561238223,
+        "f1-score": 0.7056941750926276,
+        "support": 743.0
+      }
+    },
+    "confusion_labels": [
+      "none",
+      "other_scam",
+      "police_blackmail",
+      "police_digital_arrest"
+    ],
+    "confusion_matrix": [
+      [76, 11, 4, 19],
+      [4, 27, 0, 74],
+      [0, 0, 46, 80],
+      [0, 0, 0, 402]
+    ]
+  },
+  "reference_typos": {
+    "n": 743,
+    "accuracy": 0.7442799461641992,
+    "macro_f1": 0.633731316813222,
+    "weighted_f1": 0.7091056689513844,
+    "per_class": {
+      "none": {
+        "precision": 0.926829268292683,
+        "recall": 0.6909090909090909,
+        "f1-score": 0.7916666666666666,
+        "support": 110.0
+      },
+      "other_scam": {
+        "precision": 0.7105263157894737,
+        "recall": 0.2571428571428571,
+        "f1-score": 0.3776223776223776,
+        "support": 105.0
+      },
+      "police_blackmail": {
+        "precision": 0.9230769230769231,
+        "recall": 0.38095238095238093,
+        "f1-score": 0.5393258426966292,
+        "support": 126.0
+      },
+      "police_digital_arrest": {
+        "precision": 0.7040280210157618,
+        "recall": 1.0,
+        "f1-score": 0.8263103802672148,
+        "support": 402.0
+      },
+      "accuracy": 0.7442799461641992,
+      "macro avg": {
+        "precision": 0.8161151320437103,
+        "recall": 0.5822510822510822,
+        "f1-score": 0.633731316813222,
+        "support": 743.0
+      },
+      "weighted avg": {
+        "precision": 0.7750786533325955,
+        "recall": 0.7442799461641992,
+        "f1-score": 0.7091056689513844,
+        "support": 743.0
+      }
+    },
+    "confusion_labels": [
+      "none",
+      "other_scam",
+      "police_blackmail",
+      "police_digital_arrest"
+    ],
+    "confusion_matrix": [
+      [76, 11, 4, 19],
+      [5, 27, 0, 73],
+      [1, 0, 48, 77],
+      [0, 0, 0, 402]
+    ]
+  },
+  "paired_uncertainty": {
+    "method": "paired template-family bootstrap; approximate, not independent external evidence",
+    "repetitions": 500,
+    "lower_95": -0.02828979081875756,
+    "upper_95": 0.40644039260758313
+  },
+  "mean_clean_noisy_gain": 0.16599565644896652,
+  "adopt": false,
+  "adoption_rule": "Mean gain >=0.02; paired clean family-bootstrap lower bound >0; typo F1 drop <=0.005",
+  "folds": [
+    {
+      "fold": 0,
+      "selected_in_inner_cv": "frozen_c01",
+      "inner_search": {
+        "reference_word": {
+          "folds": [0.6169916009830322, 0.4819047153383142, 0.8062934320729145],
+          "mean": 0.6350632494647536
+        },
+        "word_l2": {
+          "folds": [0.613810518720109, 0.4337855034845782, 0.632948958193509],
+          "mean": 0.5601816601327322
+        },
+        "char_l2": {
+          "folds": [0.6256510416666666, 0.5172980307581914, 0.8544557266402052],
+          "mean": 0.6658015996883543
+        },
+        "hybrid_l2": {
+          "folds": [0.6256510416666666, 0.477703677595944, 0.8420138898916077],
+          "mean": 0.6484562030514062
+        },
+        "frozen_c001": {
+          "folds": [0.7289121641710269, 0.7879547155660169, 0.7507883397581738],
+          "mean": 0.7558850731650727
+        },
+        "frozen_c01": {
+          "folds": [0.7371906607947165, 0.8061488248651815, 0.8080404031870094],
+          "mean": 0.7837932962823025
+        }
+      },
+      "train_rows": 598,
+      "assessment_rows": 145,
+      "overlapping_families": 0
+    },
+    {
+      "fold": 1,
+      "selected_in_inner_cv": "frozen_c01",
+      "inner_search": {
+        "reference_word": {
+          "folds": [0.4718375374853001, 0.7518776516271533, 0.4382515600909135],
+          "mean": 0.5539889164011224
+        },
+        "word_l2": {
+          "folds": [0.43700579644191695, 0.5745953188471438, 0.37937459841507815],
+          "mean": 0.463658571234713
+        },
+        "char_l2": {
+          "folds": [0.4458411319073084, 0.5240054403517689, 0.40456892816460865],
+          "mean": 0.45813850014122864
+        },
+        "hybrid_l2": {
+          "folds": [0.43562961974087294, 0.559596514415397, 0.39039859569108026],
+          "mean": 0.4618749099491168
+        },
+        "frozen_c001": {
+          "folds": [0.6278052423758622, 0.7354900421564451, 0.4615373632509568],
+          "mean": 0.608277549261088
+        },
+        "frozen_c01": {
+          "folds": [0.6258715946215947, 0.7756755165338794, 0.4406956595410346],
+          "mean": 0.6140809235655028
+        }
+      },
+      "train_rows": 598,
+      "assessment_rows": 145,
+      "overlapping_families": 0
+    },
+    {
+      "fold": 2,
+      "selected_in_inner_cv": "frozen_c001",
+      "inner_search": {
+        "reference_word": {
+          "folds": [0.47573100385387396, 0.4968278463432089, 0.41654672846533314],
+          "mean": 0.463035192887472
+        },
+        "word_l2": {
+          "folds": [0.3959557401617946, 0.39601858675415225, 0.4013705410471501],
+          "mean": 0.3977816226543656
+        },
+        "char_l2": {
+          "folds": [0.45923838130163663, 0.4510536239369759, 0.45961538461538465],
+          "mean": 0.456635796617999
+        },
+        "hybrid_l2": {
+          "folds": [0.4412058202053669, 0.4481495869531112, 0.4549661066902446],
+          "mean": 0.4481071712829076
+        },
+        "frozen_c001": {
+          "folds": [0.7378341442712251, 0.5663060220566198, 0.5366431351876062],
+          "mean": 0.6135944338384837
+        },
+        "frozen_c01": {
+          "folds": [0.7434017374607413, 0.5598087801559696, 0.5338343986524083],
+          "mean": 0.6123483054230398
+        }
+      },
+      "train_rows": 578,
+      "assessment_rows": 165,
+      "overlapping_families": 0
+    },
+    {
+      "fold": 3,
+      "selected_in_inner_cv": "frozen_c01",
+      "inner_search": {
+        "reference_word": {
+          "folds": [0.7291229171033213, 0.6232962074458788, 0.5292317011573449],
+          "mean": 0.6272169419021817
+        },
+        "word_l2": {
+          "folds": [0.7373351824597154, 0.4587778274281543, 0.5080954314859577],
+          "mean": 0.5680694804579424
+        },
+        "char_l2": {
+          "folds": [0.6590869878913357, 0.5388839923845004, 0.5459174156750162],
+          "mean": 0.5812961319836174
+        },
+        "hybrid_l2": {
+          "folds": [0.6848327439624304, 0.571331835335465, 0.5457888890776362],
+          "mean": 0.6006511561251773
+        },
+        "frozen_c001": {
+          "folds": [0.8436512801089883, 0.625690886828732, 0.7824639573402719],
+          "mean": 0.7506020414259974
+        },
+        "frozen_c01": {
+          "folds": [0.8163665479604758, 0.665857952903907, 0.7901781180860274],
+          "mean": 0.7574675396501368
+        }
+      },
+      "train_rows": 599,
+      "assessment_rows": 144,
+      "overlapping_families": 0
+    },
+    {
+      "fold": 4,
+      "selected_in_inner_cv": "frozen_c01",
+      "inner_search": {
+        "reference_word": {
+          "folds": [0.5409885277982688, 0.41381949191159717, 0.44227794863654757],
+          "mean": 0.4656953227821378
+        },
+        "word_l2": {
+          "folds": [0.3712117253191448, 0.40456317777507006, 0.43721424076544235],
+          "mean": 0.4043297146198858
+        },
+        "char_l2": {
+          "folds": [0.3714457485079214, 0.4143118445121478, 0.6011669125336494],
+          "mean": 0.4623081685179062
+        },
+        "hybrid_l2": {
+          "folds": [0.37936502927477656, 0.4001527556222325, 0.5570299645515366],
+          "mean": 0.4455159164828486
+        },
+        "frozen_c001": {
+          "folds": [0.700573528616311, 0.7704510661877907, 0.7182692590021307],
+          "mean": 0.7297646179354107
+        },
+        "frozen_c01": {
+          "folds": [0.7333487626682216, 0.7926201582329938, 0.6906592622216592],
+          "mean": 0.7388760610409583
+        }
+      },
+      "train_rows": 599,
+      "assessment_rows": 144,
+      "overlapping_families": 0
+    }
+  ],
+  "deployment_variant": "frozen_c01",
+  "deployment_inner_search": {
+    "reference_word": {
+      "folds": [0.510631559558905, 0.585576561915973, 0.5853366156854107],
+      "mean": 0.5605149123867629
+    },
+    "word_l2": {
+      "folds": [0.5035806568998049, 0.42605241664318066, 0.6117538383374397],
+      "mean": 0.5137956372934751
+    },
+    "char_l2": {
+      "folds": [0.47831609387775476, 0.5467210838380075, 0.5948384143718988],
+      "mean": 0.5399585306958871
+    },
+    "hybrid_l2": {
+      "folds": [0.517707128875981, 0.5217330971153005, 0.6247670270855633],
+      "mean": 0.554735751025615
+    },
+    "frozen_c001": {
+      "folds": [0.5071848247648252, 0.5662882195086707, 0.6550686677618682],
+      "mean": 0.5761805706784547
+    },
+    "frozen_c01": {
+      "folds": [0.5216444507536365, 0.6218022964665363, 0.6737674688436079],
+      "mean": 0.6057380720212603
+    }
+  },
+  "deployment_training_rows": 743,
+  "seconds": 21.575605899999573,
+  "limits": "Previously explored development corpus, heuristic families, no independent new dataset. Frozen encoder saw no task training. Fold scalers and text vocabularies fit training only. Refit-on-all artifact is distinct from CV assessment models."
+}

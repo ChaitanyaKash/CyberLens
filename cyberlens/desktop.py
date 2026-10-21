@@ -20,7 +20,7 @@ def main():
     controls.pack(fill="x", padx=20, pady=10)
     backend = tk.StringVar(value="best")
     ttk.Label(controls, text="Model:").pack(side="left")
-    ttk.Combobox(controls, textvariable=backend, values=("best", "baseline", "word2vec", "subword", "transformer", "hierarchical"),
+    ttk.Combobox(controls, textvariable=backend, values=("best", "baseline", "word2vec", "subword", "transformer", "hierarchical", "robust", "regularized"),
                  state="readonly", width=16).pack(side="left", padx=8)
     output = tk.Text(window, wrap="word", font=("Consolas", 11), state="disabled")
     output.pack(fill="both", expand=True, padx=20, pady=(0,20))

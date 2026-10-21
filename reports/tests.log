@@ -1,9 +1,24 @@
 test_all_available_saved_backends_load_and_predict (test_pipeline.DataTests.test_all_available_saved_backends_load_and_predict) ...
 Loading weights:   0%|          | 0/104 [00:00<?, ?it/s]
-Loading weights: 100%|##########| 104/104 [00:00<00:00, 5122.45it/s]
+Loading weights: 100%|██████████| 104/104 [00:00<00:00, 2211.43it/s]
 ok
 test_inference (test_pipeline.DataTests.test_inference) ... ok
 test_no_duplicate_leakage_and_label_coverage (test_pipeline.DataTests.test_no_duplicate_leakage_and_label_coverage) ... ok
+test_robust_artifact_in_fresh_inference_path (test_pipeline.DataTests.test_robust_artifact_in_fresh_inference_path) ...
+Loading weights:   0%|          | 0/100 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 100/100 [00:00<00:00, 1852.06it/s]
+[transformers] DistilBertModel LOAD REPORT from: <project>\.cache\pretrained\distilmbert
+Key                     | Status     |  |
+------------------------+------------+--+-
+vocab_transform.weight  | UNEXPECTED |  |
+vocab_transform.bias    | UNEXPECTED |  |
+vocab_layer_norm.weight | UNEXPECTED |  |
+vocab_layer_norm.bias   | UNEXPECTED |  |
+vocab_projector.bias    | UNEXPECTED |  |
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+ok
 test_subword_hash_and_gradient (test_pipeline.DataTests.test_subword_hash_and_gradient) ... ok
 test_corruption_does_not_touch_entities (test_pipeline.PreprocessingTests.test_corruption_does_not_touch_entities) ... ok
 test_duplicate_templates (test_pipeline.PreprocessingTests.test_duplicate_templates) ... ok
@@ -16,6 +31,6 @@ test_specific_masks_and_clues (test_pipeline.PreprocessingTests.test_specific_ma
 test_test_only_labels_do_not_change_validation_macro (test_pipeline.PreprocessingTests.test_test_only_labels_do_not_change_validation_macro) ... ok
 
 ----------------------------------------------------------------------
-Ran 13 tests in 27.092s
+Ran 14 tests in 58.836s
 
 OK

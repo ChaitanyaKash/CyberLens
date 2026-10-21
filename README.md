@@ -29,6 +29,8 @@ The protocols differ, so I list them explicitly. The call result uses the harder
 | complaint | baseline | Supplied test.csv | 0.2345 | 0.2269 | 0.5014 |
 
 [Full comparisons and failure cases](reports/RESULTS.md). Scores are fractions, not percentages.
+
+The optional `robust` call experiment reached **0.8256** clean / **0.7709** typo macro-F1 in nested family CV. I kept it experimental: the approximate paired family-bootstrap interval for its clean improvement includes zero. These are development results, pending fresh independent data.
 <!-- RESULTS SUMMARY END -->
 
 The first exact-deduplicated call split scored 1.0000, but related templates were still present on both sides. I replaced that headline with a harder template-family evaluation. This is still a small dataset, not an independent real-world benchmark. English/Hinglish transfer and seven-subtype classification need better labels and more diverse examples.
@@ -64,6 +66,9 @@ Open PowerShell in this folder:
 
 # Choose a particular label vocabulary
 .\run.ps1 predict --task complaint --text 'Someone sent me a fake UPI payment request'
+
+# Optional experimental call model; it has not passed the default-promotion rule
+.\run.ps1 predict --backend robust --task call_scam --text 'police bol rha hu abhi paise bhejo'
 ```
 
 The launchers use `CYBERLENS_PYTHON` if set, otherwise a local `.venv`, otherwise the existing `anaconda3/envs/NLP` environment under the current user's profile, then `python`. They do not modify an existing environment. Python's WindowsApps alias did not work on the development laptop, so an explicit working environment was used.
@@ -90,6 +95,8 @@ Both models accept English and Hinglish strings, but each source validates its o
 # Requires public pretrained weights on first use; training/inference stay local.
 .\run.ps1 train --backend transformer --task call_scam --epochs 3
 .\run.ps1 train --backend transformer --task complaint --epochs 1 --batch-size 32 --accumulation 1
+.\run.ps1 train --backend robust --task call_scam
+.\run.ps1 train --backend regularized --task complaint
 python -m unittest discover -s tests -v
 python -m cyberlens.template_evaluation
 python -m cyberlens.report
@@ -97,7 +104,9 @@ python -m cyberlens.challenge
 python -m cyberlens.report
 ```
 
-Run preparation before training and do not change processed splits during an experiment. All fitted vocabularies and classifiers use the training split only. Models are saved under `models/`; reports under `reports/`. For larger embedding experiments, increase `--max-pairs` and `--epochs`, compare validation results, and use a fresh final test set after extensive tuning.
+Run preparation before training and do not change processed splits during an experiment. Fitted vocabularies and classifiers use their training partition only. The nested `robust` experiment uses its own inner/outer family folds over the call development corpus; its deployment artifact is refitted on all development messages after assessment. Models are saved under `models/`; reports under `reports/`. Further tuning needs fresh final evaluation data.
+
+The `robust` experiment requires the locally downloaded public encoder from the transformer setup. It freezes that encoder and compares six fixed candidates with nested family CV. The `regularized` experiment needs a trained complaint baseline and compares three heads without accessing test during selection. Both commands save experimental artifacts; run `python -m cyberlens.report` to apply the recorded promotion rules and regenerate reports. Selecting `robust` for both tasks falls back to baseline for complaints; selecting `regularized` falls back to baseline for calls.
 
 `best` is the default inference backend. After generating reports, it selects the backend for each task using clean and noisy validation macro-F1. Explicit `baseline`, `word2vec`, `subword`, `transformer` and `hierarchical` options remain available for comparison. The financial expert did not beat the baseline's selection score, so it is not the default. Transformer inputs are truncated at 192 subword tokens; this can miss evidence in long complaints.
 

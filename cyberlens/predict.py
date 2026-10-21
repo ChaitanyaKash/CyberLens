@@ -29,6 +29,8 @@ class Predictor:
                 backend = json.loads(registry.read_text())[name]["backend"] if registry.exists() else "baseline"
             if backend == "hierarchical" and name == "call_scam":
                 backend = "baseline"
+            if (backend == "robust" and name == "complaint") or (backend == "regularized" and name == "call_scam"):
+                backend = "baseline"
             cache_key = (name,backend)
             if cache_key not in self.models:
                 if backend == "transformer":
@@ -38,12 +40,16 @@ class Predictor:
                     path = self.root / "models" / f"{name}_{backend}.joblib"
                     self.models[cache_key] = joblib.load(path)
             bundle = self.models[cache_key]
-            if backend == "baseline":
+            if backend in ("baseline","regularized"):
                 model = bundle["model"]
                 features = model.named_steps["features"].transform([cleaned])
                 probs = model.named_steps["classifier"].predict_proba(features)[0]
                 labels = model.classes_
                 coverage = features.nnz > 0
+            elif backend == "robust":
+                probs = bundle["model"].predict_proba([cleaned])[0]
+                labels = bundle["model"].classes_
+                coverage = True
             elif backend == "hierarchical":
                 model = bundle["model"]
                 probs = model.predict_proba([cleaned])[0]
@@ -69,6 +75,9 @@ class Predictor:
                 if name == "call_scam" and backend == "baseline" and family_path.exists():
                     quality = json.loads(family_path.read_text())["oof"]["per_class"]
                     source = "template-family cross-validation"
+                elif backend == "robust" and report_path.exists():
+                    quality = json.loads(report_path.read_text())["nested"]["per_class"]
+                    source = "nested template-family cross-validation"
                 elif report_path.exists():
                     report = json.loads(report_path.read_text())
                     if backend == "baseline":

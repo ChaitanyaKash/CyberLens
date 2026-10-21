@@ -353,6 +353,58 @@ That experiment did not win. Its best clean validation macro-F1 was about 0.264,
 
 The initial Hugging Face helper fetched small files but stalled on the large weight file. A separate HTTPS probe confirmed the public model file was reachable. The project includes `download_encoder.py`, which downloads only the public assets into the new folder, pins the publisher's revision and validates the weight file against the publisher's LFS SHA-256. Fine-tuning then loads that local directory. The fallback is an infrastructure workaround, not a change of model or an accuracy comparison.
 
+## Improving scores without chasing the test set
+
+My next question was whether I could improve the harder scores without simply memorising the dataset. I cannot promise that a model does not overfit. What I can do is restrict the search, separate selection from assessment, and keep an honest record when a promising result is too uncertain to promote.
+
+### Why I froze the multilingual encoder
+
+The call dataset has 743 distinct messages. Updating millions of encoder parameters on that much data gives the model plenty of room to learn template quirks. Instead, I used the public multilingual DistilBERT weights as a fixed feature extractor. I disabled gradients and put the model in evaluation mode, which also disables dropout. There is no task-specific encoder fine-tuning in this experiment.
+
+The pipeline is: conservatively normalised and partially masked text -> multilingual tokenizer -> frozen encoder -> attention-mask mean pooling -> L2 vector normalisation -> training-fold StandardScaler -> L2-regularised logistic regression -> ranked class scores. Padding is excluded from the mean. Sequences are truncated at 192 tokens and encoded in batches of 24. The encoder uses CUDA when available, with bfloat16 inference on this laptop. The scores are still uncalibrated.
+
+The public encoder has already learned language patterns from pretraining. This is transfer learning, not a from-scratch embedding experiment. My Skip-gram implementation remains useful for learning the mechanics, but its weaker results did not justify making it the default.
+
+### How I separated tuning from assessment
+
+I fixed six candidates before running the experiment: the original word baseline; word, character and combined TF-IDF with logistic regression at C=1; and frozen encoder features with logistic regression at C=0.01 or 0.1. Smaller C means stronger regularisation. I did not expand this search after seeing the outer-fold results.
+
+I kept the existing character-similarity family definition: cosine threshold 0.80, connected components, 77 families. The grouping is unsupervised split construction; text vocabularies used by classifiers are fitted only on their training fold. Some classes have only a few families, so 743 messages should not be mistaken for 743 independent scenarios.
+
+For each of five outer family folds, I used three inner family folds on the outer training portion to select a candidate by mean clean/noisy macro-F1. I then fitted that candidate on the outer training portion and predicted the outer assessment messages once. No family could appear on both sides. I also refitted the unchanged reference baseline on the same outer training portion, making the comparison paired. Every message contributed exactly one outer prediction.
+
+The frozen encoder can transform all messages in advance because it learns nothing from this corpus. The scaler cannot: its mean and variance must be fitted inside each training fold. The same applies to TF-IDF vocabularies and IDF values. Caching fixed vectors saves time without moving a learned preprocessing step outside the folds.
+
+Nested CV estimates the entire selection procedure, not a single final model's performance. After assessment, I ran a separate three-fold grouped selection over the development corpus, then fitted the chosen deployment head on all 743 messages. That saved artifact is different from the models that generated the reported outer predictions. These messages no longer form an untouched holdout for the deployment artifact.
+
+### What improved, and why I did not promote it
+
+The nested procedure reached clean macro-F1 0.8256 versus 0.6308 for the reference, and typo macro-F1 0.7709 versus 0.6337. Four outer folds chose C=0.1 for the frozen representation and one chose C=0.01. The final development search chose C=0.1. Fixed multilingual representations appear to transfer across these template families better than word overlap alone, but the mechanism is an interpretation, not proof about unseen real-world scams.
+
+Before running, I required a clean/noisy mean gain of at least 0.02, a positive lower bound for the clean improvement interval, and no typo-F1 drop greater than 0.005. I used 500 paired bootstrap resamples of whole families, rather than resampling individual messages as if they were independent. Both models get the same resampled family weights, and macro-F1 is recomputed for each resample.
+
+The approximate 95% interval for the clean F1 difference was [-0.0283, 0.4064]. It includes zero. The point estimate improved a lot, but there is not enough independent family evidence to satisfy my promotion rule. I kept the old baseline as the default and exposed the new model as the optional `robust` backend. I did not loosen the rule after seeing the result. This bootstrap interval is approximate; overlapping CV training folds and heuristic families limit its interpretation.
+
+There is another limitation: I had already explored this corpus before the nested experiment. Nested folds reduce selection leakage within this run; they cannot undo previous development exposure. The next useful evaluation is a fresh, human-labelled collection with new scam scenarios, legitimate warnings, negation, spelling variation, English, Hinglish, and aligned labels. Synthetic letter swaps only test one kind of spelling noise.
+
+### The English comparison
+
+I limited the new complaint experiment to three heads: Complement Naive Bayes with alpha=0.5 and one-vs-rest L2 logistic regression at C=1, with and without balanced class weights. I reused the existing training-only hybrid TF-IDF features, unchanged train/validation partitions and all supported classes. The validation criterion was a mean clean/noisy macro-F1 gain of at least 0.02. Only a candidate passing that criterion could be evaluated on the supplied test and become eligible for default selection.
+
+Balanced weights can improve minority-class recall but can also increase false positives. Complement Naive Bayes is inexpensive and often worth checking for sparse text, but its assumptions may be too restrictive. These are hypotheses to test, not reasons to assume improvement. The generated results below record which heads actually worked and which failed. Earlier validation reuse means even this small search needs independent confirmation before a strong deployment claim.
+
+### Challenges and practical choices
+
+The main challenge was uncertainty, not GPU memory. A higher score on a small family set can look more convincing than it is. I preserved the original labels and hard examples, kept the reference comparison on identical outer folds, and reported the failed promotion decision alongside the improvement.
+
+A verification run also exposed a small numerical variation: clean macro-F1 changed from 0.8256 to 0.8226 with the same inner-fold selections. I fixed native numerical thread pools to one for classifier fitting; the recorded run returned 0.8256, with the same typo result and rejected promotion decision. I kept this history instead of selecting a run by its score. Fixed seeds do not automatically guarantee identical floating-point behaviour across environments.
+
+The local pretrained tokenizer also triggered a Mistral-regex warning in the installed Transformers loader. I inspected the loader: this old DistilBERT config lacks the version field used by that detection. I explicitly disabled the unrelated Mistral patch for this WordPiece tokenizer, preserving its tokenisation. Loading a base encoder from masked-language-model weights also reports unused vocabulary-prediction-head weights; those belong to the discarded pretraining head, not missing encoder layers.
+
+I made the frozen encoder load lazily during inference and excluded its loaded tensors from the joblib wrapper state. That keeps the saved head small and lets a fresh process load the model using the local public weights. The module entry point imports the canonical class before training so the artifact can load outside the original training command. Private datasets, vector caches and model weights remain local. The full reproduction script runs both bounded experiments and regenerates the reports.
+
+In an interview, my claim is: I improved development generalisation across held-out template families with a frozen multilingual representation and a regularised head, measured the uncertainty, and declined to promote it when the evidence did not pass the rule. I would not claim production reliability or that overfitting has been eliminated.
+
 <!-- GENERATED RESULTS -->
 
 ## 19. Final measured outcomes (automatically generated)
@@ -402,6 +454,21 @@ Family-held-out macro-F1: **0.6308**; typo macro-F1: **0.6337**; accuracy: **0.7
 Each message is evaluated exactly once; no family crosses a fold's training and test sets. All four classes are represented in training for each recorded fold.
 The 1.0000 call scores above came from the earlier exact-deduplicated split. They were too optimistic because related templates remained on both sides. I keep them for comparison, but use the family-held-out result in the README headline.
 Family grouping uses a 0.80 character-TF-IDF cosine threshold and connected components. This is a heuristic stress test, not a human-verified semantic split or an independent real-world benchmark.
+
+## Bounded call improvement experiment
+
+I compared six fixed candidates inside three inner family folds, then assessed the selection procedure on five outer family folds. The outer assessment messages never fitted a vocabulary, scaler or classifier in their fold.
+
+| Model procedure | Clean macro-F1 | Typo macro-F1 | Accuracy |
+|---|---:|---:|---:|
+| Reference word baseline | 0.6308 | 0.6337 | 0.7416 |
+| Nested candidate selection | 0.8256 | 0.7709 | 0.8654 |
+
+The approximate paired family-bootstrap 95% interval for the **clean F1 difference** is **[-0.0283, 0.4064]** (500 resamples). This is wide and includes zero.
+My fixed promotion rule was: Mean gain >=0.02; paired clean family-bootstrap lower bound >0; typo F1 drop <=0.005. Passed: **False**.
+The optional `robust` artifact uses **frozen_c01**, selected with a separate grouped inner search and refitted on all 743 development messages. Its training-set performance is not the reported nested score.
+I kept the baseline as the default. The encoder is frozen; only a small L2-regularized classification head learns labels. This reduces capacity but does not prove absence of overfitting.
+This corpus was explored before this experiment, families are heuristic, and several classes have few independent families. Fresh human-labelled English/Hinglish messages are still needed for independent confirmation.
 
 Default inference uses validation-selected backends:
 
