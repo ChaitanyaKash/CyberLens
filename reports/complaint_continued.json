@@ -1,0 +1,2059 @@
+{
+  "history": [
+    {
+      "total_epoch": 2,
+      "training_loss": 2.0232872899555527,
+      "validation": {
+        "n": 15532,
+        "accuracy": 0.4775302601081638,
+        "macro_f1": 0.20622787913819365,
+        "weighted_f1": 0.45732821595319784,
+        "per_class": {
+          "Any Other Cyber Crime :: Other": {
+            "precision": 0.4513826940231936,
+            "recall": 0.2387918829636621,
+            "f1-score": 0.31234567901234567,
+            "support": 2119.0
+          },
+          "Child Pornography CPChild Sexual Abuse Material CSAM :: Unspecified": {
+            "precision": 0.3225806451612903,
+            "recall": 0.29411764705882354,
+            "f1-score": 0.3076923076923077,
+            "support": 68.0
+          },
+          "Cryptocurrency Crime :: Cryptocurrency Fraud": {
+            "precision": 0.3333333333333333,
+            "recall": 0.7282608695652174,
+            "f1-score": 0.45733788395904434,
+            "support": 92.0
+          },
+          "Cyber Attack/ Dependent Crimes :: Data Breach/Theft": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1-score": 0.0,
+            "support": 97.0
+          },
+          "Cyber Attack/ Dependent Crimes :: Denial of Service (DoS)/Distributed Denial of Service (DDOS) attacks": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1-score": 0.0,
+            "support": 101.0
+          },
+          "Cyber Attack/ Dependent Crimes :: Hacking/Defacement": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1-score": 0.0,
+            "support": 108.0
+          },
+          "Cyber Attack/ Dependent Crimes :: Malware Attack": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1-score": 0.0,
+            "support": 104.0
+          },
+          "Cyber Attack/ Dependent Crimes :: Ransomware Attack": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1-score": 0.0,
+            "support": 107.0
+          },
+          "Cyber Attack/ Dependent Crimes :: SQL Injection": {
+            "precision": 0.14127423822714683,
+            "recall": 1.0,
+            "f1-score": 0.24757281553398058,
+            "support": 102.0
+          },
+          "Cyber Attack/ Dependent Crimes :: Tampering with computer source documents": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1-score": 0.0,
+            "support": 103.0
+          },
+          "Cyber Terrorism :: Cyber Terrorism": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1-score": 0.0,
+            "support": 32.0
+          },
+          "Hacking  Damage to computercomputer system etc :: Damage to computer computer systems etc": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1-score": 0.0,
+            "support": 21.0
+          },
+          "Hacking  Damage to computercomputer system etc :: Email Hacking": {
+            "precision": 0.3287671232876712,
+            "recall": 0.7058823529411765,
+            "f1-score": 0.4485981308411215,
+            "support": 68.0
+          },
+          "Hacking  Damage to computercomputer system etc :: Tampering with computer source documents": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1-score": 0.0,
+            "support": 10.0
+          },
+          "Hacking  Damage to computercomputer system etc :: Unauthorised AccessData Breach": {
+            "precision": 0.23095238095238096,
+            "recall": 0.44495412844036697,
+            "f1-score": 0.30407523510971785,
+            "support": 218.0
+          },
+          "Hacking  Damage to computercomputer system etc :: Website DefacementHacking": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1-score": 0.0,
+            "support": 17.0
+          },
+          "Online Cyber Trafficking :: Online Trafficking": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1-score": 0.0,
+            "support": 36.0
+          },
+          "Online Financial Fraud :: Business Email CompromiseEmail Takeover": {
+            "precision": 0.11940298507462686,
+            "recall": 0.14285714285714285,
+            "f1-score": 0.13008130081300814,
+            "support": 56.0
+          },
+          "Online Financial Fraud :: DebitCredit Card FraudSim Swap Fraud": {
+            "precision": 0.6389167502507522,
+            "recall": 0.7359907567879839,
+            "f1-score": 0.6840268456375839,
+            "support": 1731.0
+          },
+          "Online Financial Fraud :: DematDepository Fraud": {
+            "precision": 0.09090909090909091,
+            "recall": 0.055944055944055944,
+            "f1-score": 0.06926406926406926,
+            "support": 143.0
+          },
+          "Online Financial Fraud :: EWallet Related Fraud": {
+            "precision": 0.5849731663685152,
+            "recall": 0.42633637548891784,
+            "f1-score": 0.49321266968325794,
+            "support": 767.0
+          },
+          "Online Financial Fraud :: Fraud CallVishing": {
+            "precision": 0.27326007326007323,
+            "recall": 0.33155555555555555,
+            "f1-score": 0.2995983935742972,
+            "support": 1125.0
+          },
+          "Online Financial Fraud :: Internet Banking Related Fraud": {
+            "precision": 0.6531645569620254,
+            "recall": 0.5469964664310955,
+            "f1-score": 0.5953846153846154,
+            "support": 1415.0
+          },
+          "Online Financial Fraud :: UPI Related Frauds": {
+            "precision": 0.6246833985724154,
+            "recall": 0.7156423107359535,
+            "f1-score": 0.6670764691418736,
+            "support": 3791.0
+          },
+          "Online Gambling  Betting :: Online Gambling  Betting": {
+            "precision": 0.4166666666666667,
+            "recall": 0.11494252873563218,
+            "f1-score": 0.18018018018018017,
+            "support": 87.0
+          },
+          "Online and Social Media Related Crime :: Cheating by Impersonation": {
+            "precision": 0.1297709923664122,
+            "recall": 0.04404145077720207,
+            "f1-score": 0.06576402321083172,
+            "support": 386.0
+          },
+          "Online and Social Media Related Crime :: Cyber Bullying  Stalking  Sexting": {
+            "precision": 0.42005420054200543,
+            "recall": 0.5946291560102301,
+            "f1-score": 0.4923239809422975,
+            "support": 782.0
+          },
+          "Online and Social Media Related Crime :: EMail Phishing": {
+            "precision": 0.21212121212121213,
+            "recall": 0.23333333333333334,
+            "f1-score": 0.2222222222222222,
+            "support": 30.0
+          },
+          "Online and Social Media Related Crime :: FakeImpersonating Profile": {
+            "precision": 0.4225663716814159,
+            "recall": 0.4282511210762332,
+            "f1-score": 0.42538975501113585,
+            "support": 446.0
+          },
+          "Online and Social Media Related Crime :: Impersonating Email": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1-score": 0.0,
+            "support": 9.0
+          },
+          "Online and Social Media Related Crime :: Intimidating Email": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1-score": 0.0,
+            "support": 6.0
+          },
+          "Online and Social Media Related Crime :: Online Job Fraud": {
+            "precision": 0.20342612419700215,
+            "recall": 0.5307262569832403,
+            "f1-score": 0.29411764705882354,
+            "support": 179.0
+          },
+          "Online and Social Media Related Crime :: Online Matrimonial Fraud": {
+            "precision": 0.6,
+            "recall": 0.12,
+            "f1-score": 0.2,
+            "support": 25.0
+          },
+          "Online and Social Media Related Crime :: Profile Hacking Identity Theft": {
+            "precision": 0.47074468085106386,
+            "recall": 0.4425,
+            "f1-score": 0.45618556701030927,
+            "support": 400.0
+          },
+          "Online and Social Media Related Crime :: Provocative Speech for unlawful acts": {
+            "precision": 0.15037593984962405,
+            "recall": 0.2564102564102564,
+            "f1-score": 0.1895734597156398,
+            "support": 78.0
+          },
+          "Ransomware :: Ransomware": {
+            "precision": 0.3333333333333333,
+            "recall": 0.18181818181818182,
+            "f1-score": 0.23529411764705882,
+            "support": 11.0
+          },
+          "RapeGang Rape RGRSexually Abusive Content :: Unspecified": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1-score": 0.0,
+            "support": 46.0
+          },
+          "Sexually Explicit Act :: Unspecified": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1-score": 0.0,
+            "support": 283.0
+          },
+          "Sexually Obscene material :: Unspecified": {
+            "precision": 0.21814671814671815,
+            "recall": 0.33933933933933935,
+            "f1-score": 0.26556991774383076,
+            "support": 333.0
+          },
+          "accuracy": 0.4775302601081638,
+          "macro avg": {
+            "precision": 0.2146360686189223,
+            "recall": 0.24752105562188717,
+            "f1-score": 0.20622787913819365,
+            "support": 15532.0
+          },
+          "weighted avg": {
+            "precision": 0.46405769582559897,
+            "recall": 0.4775302601081638,
+            "f1-score": 0.45732821595319784,
+            "support": 15532.0
+          }
+        },
+        "confusion_labels": [
+          "Any Other Cyber Crime :: Other",
+          "Child Pornography CPChild Sexual Abuse Material CSAM :: Unspecified",
+          "Cryptocurrency Crime :: Cryptocurrency Fraud",
+          "Cyber Attack/ Dependent Crimes :: Data Breach/Theft",
+          "Cyber Attack/ Dependent Crimes :: Denial of Service (DoS)/Distributed Denial of Service (DDOS) attacks",
+          "Cyber Attack/ Dependent Crimes :: Hacking/Defacement",
+          "Cyber Attack/ Dependent Crimes :: Malware Attack",
+          "Cyber Attack/ Dependent Crimes :: Ransomware Attack",
+          "Cyber Attack/ Dependent Crimes :: SQL Injection",
+          "Cyber Attack/ Dependent Crimes :: Tampering with computer source documents",
+          "Cyber Terrorism :: Cyber Terrorism",
+          "Hacking  Damage to computercomputer system etc :: Damage to computer computer systems etc",
+          "Hacking  Damage to computercomputer system etc :: Email Hacking",
+          "Hacking  Damage to computercomputer system etc :: Tampering with computer source documents",
+          "Hacking  Damage to computercomputer system etc :: Unauthorised AccessData Breach",
+          "Hacking  Damage to computercomputer system etc :: Website DefacementHacking",
+          "Online Cyber Trafficking :: Online Trafficking",
+          "Online Financial Fraud :: Business Email CompromiseEmail Takeover",
+          "Online Financial Fraud :: DebitCredit Card FraudSim Swap Fraud",
+          "Online Financial Fraud :: DematDepository Fraud",
+          "Online Financial Fraud :: EWallet Related Fraud",
+          "Online Financial Fraud :: Fraud CallVishing",
+          "Online Financial Fraud :: Internet Banking Related Fraud",
+          "Online Financial Fraud :: UPI Related Frauds",
+          "Online Gambling  Betting :: Online Gambling  Betting",
+          "Online and Social Media Related Crime :: Cheating by Impersonation",
+          "Online and Social Media Related Crime :: Cyber Bullying  Stalking  Sexting",
+          "Online and Social Media Related Crime :: EMail Phishing",
+          "Online and Social Media Related Crime :: FakeImpersonating Profile",
+          "Online and Social Media Related Crime :: Impersonating Email",
+          "Online and Social Media Related Crime :: Intimidating Email",
+          "Online and Social Media Related Crime :: Online Job Fraud",
+          "Online and Social Media Related Crime :: Online Matrimonial Fraud",
+          "Online and Social Media Related Crime :: Profile Hacking Identity Theft",
+          "Online and Social Media Related Crime :: Provocative Speech for unlawful acts",
+          "Ransomware :: Ransomware",
+          "RapeGang Rape RGRSexually Abusive Content :: Unspecified",
+          "Sexually Explicit Act :: Unspecified",
+          "Sexually Obscene material :: Unspecified"
+        ],
+        "confusion_matrix": [
+          [506, 2, 34, 0, 0, 0, 0, 0, 0, 0, 0, 0, 19, 0, 113, 0, 0, 17, 182, 23, 28, 323, 73, 380, 5, 24, 141, 6, 32, 0, 1, 112, 0, 27, 32, 0, 0, 1, 38],
+          [3, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 2, 0, 0, 11, 0, 3, 0, 0, 1, 0, 1, 1, 0, 0, 0, 23],
+          [1, 0, 67, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 4, 2, 0, 0, 13, 0, 0, 0, 1, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0, 0, 0, 0, 97, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0, 0, 0, 0, 101, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0, 0, 0, 0, 108, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0, 0, 0, 0, 104, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0, 0, 0, 0, 107, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0, 0, 0, 0, 102, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0, 0, 0, 0, 103, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+          [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 2, 0, 1, 9, 0, 5, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 2],
+          [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 2, 0, 0, 0, 2, 0, 1, 2, 1, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 2, 0, 1, 0, 0, 2],
+          [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 48, 0, 0, 0, 0, 2, 1, 0, 0, 2, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 11, 1, 0, 0, 0, 0],
+          [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0],
+          [15, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 97, 0, 0, 0, 3, 0, 3, 43, 2, 2, 0, 0, 6, 0, 3, 0, 0, 0, 0, 28, 2, 0, 0, 0, 3],
+          [4, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 8, 0, 1, 0, 0, 0],
+          [2, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 1, 0, 2, 7, 3, 5, 0, 1, 8, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1],
+          [7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 1, 0, 0, 8, 4, 0, 2, 6, 1, 9, 0, 1, 0, 1, 3, 0, 0, 8, 0, 1, 0, 0, 0, 0, 0],
+          [46, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 4, 0, 0, 2, 1274, 0, 18, 68, 98, 186, 0, 1, 3, 3, 1, 0, 0, 13, 0, 6, 1, 1, 0, 0, 1],
+          [23, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 1, 3, 8, 2, 24, 2, 47, 0, 0, 6, 0, 3, 0, 0, 11, 0, 1, 0, 0, 0, 0, 0],
+          [38, 0, 12, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 5, 0, 0, 2, 48, 3, 327, 44, 32, 220, 2, 5, 3, 0, 5, 0, 0, 10, 1, 5, 0, 0, 0, 0, 3],
+          [77, 1, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 61, 0, 0, 10, 120, 5, 10, 373, 47, 245, 0, 13, 49, 5, 18, 0, 0, 55, 0, 10, 6, 0, 0, 0, 15],
+          [50, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 3, 0, 0, 5, 174, 0, 56, 90, 774, 213, 1, 3, 6, 2, 3, 0, 0, 21, 0, 2, 1, 0, 0, 0, 1],
+          [169, 3, 42, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 13, 0, 0, 8, 151, 33, 98, 180, 129, 2713, 6, 40, 32, 2, 39, 0, 0, 108, 0, 18, 4, 0, 0, 1, 1],
+          [8, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 4, 5, 2, 7, 1, 26, 10, 3, 4, 0, 3, 0, 0, 6, 0, 2, 0, 0, 0, 0, 0],
+          [62, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 7, 0, 0, 2, 5, 2, 3, 26, 7, 120, 0, 17, 46, 1, 40, 0, 0, 8, 0, 13, 8, 0, 0, 0, 10],
+          [27, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 23, 0, 0, 0, 4, 1, 0, 41, 1, 25, 0, 3, 465, 1, 13, 0, 0, 0, 0, 14, 21, 0, 2, 0, 132],
+          [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 1, 0, 0, 3, 2, 0, 0, 0, 1, 1, 0, 1, 1, 7, 0, 0, 0, 0, 0, 5, 1, 0, 0, 0, 0],
+          [27, 2, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 9, 0, 0, 0, 2, 1, 3, 20, 4, 52, 0, 8, 38, 1, 191, 0, 0, 3, 1, 25, 6, 0, 0, 1, 45],
+          [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+          [16, 1, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 4, 3, 0, 9, 2, 31, 0, 2, 4, 0, 1, 0, 0, 95, 0, 0, 0, 0, 0, 0, 0],
+          [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 6, 0, 1, 5, 0, 3, 0, 0, 1, 3, 0, 0, 0, 0, 0, 2],
+          [11, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 23, 0, 45, 0, 0, 0, 1, 0, 0, 37, 2, 10, 0, 3, 30, 1, 40, 0, 0, 2, 0, 177, 2, 0, 1, 0, 15],
+          [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 16, 0, 2, 0, 1, 11, 1, 1, 0, 0, 1, 0, 6, 20, 0, 0, 0, 14],
+          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 3, 0, 1, 0, 0, 2, 0, 0, 0, 0, 0, 0, 1, 0, 2, 0, 0, 0],
+          [2, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 3, 0, 3, 0, 0, 0, 0, 0, 5, 0, 0, 0, 24],
+          [8, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 4, 0, 0, 0, 5, 0, 0, 17, 2, 18, 0, 2, 102, 1, 22, 0, 0, 5, 0, 4, 9, 0, 0, 0, 73],
+          [9, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 8, 0, 0, 0, 1, 0, 0, 13, 2, 9, 0, 2, 120, 0, 22, 0, 0, 4, 0, 8, 9, 0, 0, 0, 113]
+        ]
+      },
+      "validation_typos": {
+        "n": 15532,
+        "accuracy": 0.4660056657223796,
+        "macro_f1": 0.20122262459983098,
+        "weighted_f1": 0.4477143735768006,
+        "per_class": {
+          "Any Other Cyber Crime :: Other": {
+            "precision": 0.4190556492411467,
+            "recall": 0.2345445965077867,
+            "f1-score": 0.30075642965204236,
+            "support": 2119.0
+          },
+          "Child Pornography CPChild Sexual Abuse Material CSAM :: Unspecified": {
+            "precision": 0.3333333333333333,
+            "recall": 0.3382352941176471,
+            "f1-score": 0.3357664233576642,
+            "support": 68.0
+          },
+          "Cryptocurrency Crime :: Cryptocurrency Fraud": {
+            "precision": 0.3018867924528302,
+            "recall": 0.6956521739130435,
+            "f1-score": 0.42105263157894735,
+            "support": 92.0
+          },
+          "Cyber Attack/ Dependent Crimes :: Data Breach/Theft": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1-score": 0.0,
+            "support": 97.0
+          },
+          "Cyber Attack/ Dependent Crimes :: Denial of Service (DoS)/Distributed Denial of Service (DDOS) attacks": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1-score": 0.0,
+            "support": 101.0
+          },
+          "Cyber Attack/ Dependent Crimes :: Hacking/Defacement": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1-score": 0.0,
+            "support": 108.0
+          },
+          "Cyber Attack/ Dependent Crimes :: Malware Attack": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1-score": 0.0,
+            "support": 104.0
+          },
+          "Cyber Attack/ Dependent Crimes :: Ransomware Attack": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1-score": 0.0,
+            "support": 107.0
+          },
+          "Cyber Attack/ Dependent Crimes :: SQL Injection": {
+            "precision": 0.14127423822714683,
+            "recall": 1.0,
+            "f1-score": 0.24757281553398058,
+            "support": 102.0
+          },
+          "Cyber Attack/ Dependent Crimes :: Tampering with computer source documents": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1-score": 0.0,
+            "support": 103.0
+          },
+          "Cyber Terrorism :: Cyber Terrorism": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1-score": 0.0,
+            "support": 32.0
+          },
+          "Hacking  Damage to computercomputer system etc :: Damage to computer computer systems etc": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1-score": 0.0,
+            "support": 21.0
+          },
+          "Hacking  Damage to computercomputer system etc :: Email Hacking": {
+            "precision": 0.2937062937062937,
+            "recall": 0.6176470588235294,
+            "f1-score": 0.3981042654028436,
+            "support": 68.0
+          },
+          "Hacking  Damage to computercomputer system etc :: Tampering with computer source documents": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1-score": 0.0,
+            "support": 10.0
+          },
+          "Hacking  Damage to computercomputer system etc :: Unauthorised AccessData Breach": {
+            "precision": 0.22511848341232227,
+            "recall": 0.43577981651376146,
+            "f1-score": 0.296875,
+            "support": 218.0
+          },
+          "Hacking  Damage to computercomputer system etc :: Website DefacementHacking": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1-score": 0.0,
+            "support": 17.0
+          },
+          "Online Cyber Trafficking :: Online Trafficking": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1-score": 0.0,
+            "support": 36.0
+          },
+          "Online Financial Fraud :: Business Email CompromiseEmail Takeover": {
+            "precision": 0.1206896551724138,
+            "recall": 0.125,
+            "f1-score": 0.12280701754385964,
+            "support": 56.0
+          },
+          "Online Financial Fraud :: DebitCredit Card FraudSim Swap Fraud": {
+            "precision": 0.6514675052410901,
+            "recall": 0.7180820335066436,
+            "f1-score": 0.683154712833196,
+            "support": 1731.0
+          },
+          "Online Financial Fraud :: DematDepository Fraud": {
+            "precision": 0.08045977011494253,
+            "recall": 0.04895104895104895,
+            "f1-score": 0.06086956521739131,
+            "support": 143.0
+          },
+          "Online Financial Fraud :: EWallet Related Fraud": {
+            "precision": 0.5457627118644067,
+            "recall": 0.4198174706649283,
+            "f1-score": 0.4745762711864407,
+            "support": 767.0
+          },
+          "Online Financial Fraud :: Fraud CallVishing": {
+            "precision": 0.27211394302848574,
+            "recall": 0.32266666666666666,
+            "f1-score": 0.29524196827978855,
+            "support": 1125.0
+          },
+          "Online Financial Fraud :: Internet Banking Related Fraud": {
+            "precision": 0.615144418423107,
+            "recall": 0.5568904593639576,
+            "f1-score": 0.5845697329376854,
+            "support": 1415.0
+          },
+          "Online Financial Fraud :: UPI Related Frauds": {
+            "precision": 0.6209073900841908,
+            "recall": 0.7003429174360327,
+            "f1-score": 0.6582372629230198,
+            "support": 3791.0
+          },
+          "Online Gambling  Betting :: Online Gambling  Betting": {
+            "precision": 0.32142857142857145,
+            "recall": 0.10344827586206896,
+            "f1-score": 0.1565217391304348,
+            "support": 87.0
+          },
+          "Online and Social Media Related Crime :: Cheating by Impersonation": {
+            "precision": 0.1,
+            "recall": 0.04145077720207254,
+            "f1-score": 0.05860805860805861,
+            "support": 386.0
+          },
+          "Online and Social Media Related Crime :: Cyber Bullying  Stalking  Sexting": {
+            "precision": 0.41740850642927796,
+            "recall": 0.5396419437340153,
+            "f1-score": 0.47071946458449526,
+            "support": 782.0
+          },
+          "Online and Social Media Related Crime :: EMail Phishing": {
+            "precision": 0.22580645161290322,
+            "recall": 0.23333333333333334,
+            "f1-score": 0.22950819672131148,
+            "support": 30.0
+          },
+          "Online and Social Media Related Crime :: FakeImpersonating Profile": {
+            "precision": 0.4135514018691589,
+            "recall": 0.3968609865470852,
+            "f1-score": 0.40503432494279173,
+            "support": 446.0
+          },
+          "Online and Social Media Related Crime :: Impersonating Email": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1-score": 0.0,
+            "support": 9.0
+          },
+          "Online and Social Media Related Crime :: Intimidating Email": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1-score": 0.0,
+            "support": 6.0
+          },
+          "Online and Social Media Related Crime :: Online Job Fraud": {
+            "precision": 0.19831223628691982,
+            "recall": 0.5251396648044693,
+            "f1-score": 0.2879019908116386,
+            "support": 179.0
+          },
+          "Online and Social Media Related Crime :: Online Matrimonial Fraud": {
+            "precision": 0.5,
+            "recall": 0.12,
+            "f1-score": 0.1935483870967742,
+            "support": 25.0
+          },
+          "Online and Social Media Related Crime :: Profile Hacking Identity Theft": {
+            "precision": 0.4456824512534819,
+            "recall": 0.4,
+            "f1-score": 0.42160737812911725,
+            "support": 400.0
+          },
+          "Online and Social Media Related Crime :: Provocative Speech for unlawful acts": {
+            "precision": 0.15827338129496402,
+            "recall": 0.28205128205128205,
+            "f1-score": 0.20276497695852536,
+            "support": 78.0
+          },
+          "Ransomware :: Ransomware": {
+            "precision": 0.4,
+            "recall": 0.18181818181818182,
+            "f1-score": 0.25,
+            "support": 11.0
+          },
+          "RapeGang Rape RGRSexually Abusive Content :: Unspecified": {
+            "precision": 0.25,
+            "recall": 0.021739130434782608,
+            "f1-score": 0.04,
+            "support": 46.0
+          },
+          "Sexually Explicit Act :: Unspecified": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1-score": 0.0,
+            "support": 283.0
+          },
+          "Sexually Obscene material :: Unspecified": {
+            "precision": 0.19630872483221476,
+            "recall": 0.35135135135135137,
+            "f1-score": 0.2518837459634015,
+            "support": 333.0
+          },
+          "accuracy": 0.4660056657223796,
+          "macro avg": {
+            "precision": 0.21147927972587696,
+            "recall": 0.24129344778470993,
+            "f1-score": 0.20122262459983098,
+            "support": 15532.0
+          },
+          "weighted avg": {
+            "precision": 0.4520301269362366,
+            "recall": 0.4660056657223796,
+            "f1-score": 0.4477143735768006,
+            "support": 15532.0
+          }
+        },
+        "confusion_labels": [
+          "Any Other Cyber Crime :: Other",
+          "Child Pornography CPChild Sexual Abuse Material CSAM :: Unspecified",
+          "Cryptocurrency Crime :: Cryptocurrency Fraud",
+          "Cyber Attack/ Dependent Crimes :: Data Breach/Theft",
+          "Cyber Attack/ Dependent Crimes :: Denial of Service (DoS)/Distributed Denial of Service (DDOS) attacks",
+          "Cyber Attack/ Dependent Crimes :: Hacking/Defacement",
+          "Cyber Attack/ Dependent Crimes :: Malware Attack",
+          "Cyber Attack/ Dependent Crimes :: Ransomware Attack",
+          "Cyber Attack/ Dependent Crimes :: SQL Injection",
+          "Cyber Attack/ Dependent Crimes :: Tampering with computer source documents",
+          "Cyber Terrorism :: Cyber Terrorism",
+          "Hacking  Damage to computercomputer system etc :: Damage to computer computer systems etc",
+          "Hacking  Damage to computercomputer system etc :: Email Hacking",
+          "Hacking  Damage to computercomputer system etc :: Tampering with computer source documents",
+          "Hacking  Damage to computercomputer system etc :: Unauthorised AccessData Breach",
+          "Hacking  Damage to computercomputer system etc :: Website DefacementHacking",
+          "Online Cyber Trafficking :: Online Trafficking",
+          "Online Financial Fraud :: Business Email CompromiseEmail Takeover",
+          "Online Financial Fraud :: DebitCredit Card FraudSim Swap Fraud",
+          "Online Financial Fraud :: DematDepository Fraud",
+          "Online Financial Fraud :: EWallet Related Fraud",
+          "Online Financial Fraud :: Fraud CallVishing",
+          "Online Financial Fraud :: Internet Banking Related Fraud",
+          "Online Financial Fraud :: UPI Related Frauds",
+          "Online Gambling  Betting :: Online Gambling  Betting",
+          "Online and Social Media Related Crime :: Cheating by Impersonation",
+          "Online and Social Media Related Crime :: Cyber Bullying  Stalking  Sexting",
+          "Online and Social Media Related Crime :: EMail Phishing",
+          "Online and Social Media Related Crime :: FakeImpersonating Profile",
+          "Online and Social Media Related Crime :: Impersonating Email",
+          "Online and Social Media Related Crime :: Intimidating Email",
+          "Online and Social Media Related Crime :: Online Job Fraud",
+          "Online and Social Media Related Crime :: Online Matrimonial Fraud",
+          "Online and Social Media Related Crime :: Profile Hacking Identity Theft",
+          "Online and Social Media Related Crime :: Provocative Speech for unlawful acts",
+          "Ransomware :: Ransomware",
+          "RapeGang Rape RGRSexually Abusive Content :: Unspecified",
+          "Sexually Explicit Act :: Unspecified",
+          "Sexually Obscene material :: Unspecified"
+        ],
+        "confusion_matrix": [
+          [497, 2, 36, 0, 0, 0, 0, 0, 0, 0, 0, 0, 19, 0, 117, 0, 0, 15, 181, 16, 35, 304, 87, 377, 10, 33, 128, 9, 28, 0, 0, 109, 1, 29, 32, 0, 0, 0, 54],
+          [4, 23, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 2, 0, 0, 11, 0, 2, 0, 0, 1, 0, 2, 0, 0, 0, 0, 22],
+          [5, 0, 64, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 5, 1, 1, 0, 10, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0, 0, 0, 0, 97, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0, 0, 0, 0, 101, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0, 0, 0, 0, 108, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0, 0, 0, 0, 104, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0, 0, 0, 0, 107, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0, 0, 0, 0, 102, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0, 0, 0, 0, 103, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+          [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 2, 0, 1, 9, 0, 6, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 1, 3],
+          [1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 3, 0, 0, 0, 2, 0, 1, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 3],
+          [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 42, 0, 3, 0, 0, 2, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 15, 1, 0, 0, 0, 0],
+          [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0],
+          [19, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 0, 95, 0, 0, 0, 3, 0, 2, 42, 2, 3, 1, 0, 9, 1, 3, 0, 0, 0, 0, 25, 1, 0, 0, 0, 3],
+          [3, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 8, 0, 1, 0, 0, 0],
+          [2, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 1, 0, 2, 6, 3, 6, 0, 1, 6, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 3],
+          [9, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 1, 0, 0, 7, 3, 1, 2, 4, 1, 9, 0, 2, 0, 1, 2, 0, 0, 7, 0, 1, 1, 0, 0, 0, 0],
+          [46, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 4, 0, 0, 3, 1243, 0, 20, 68, 121, 195, 1, 0, 3, 1, 0, 0, 0, 14, 0, 4, 1, 0, 0, 0, 1],
+          [21, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 3, 7, 2, 28, 1, 46, 0, 2, 1, 0, 4, 0, 0, 13, 0, 1, 0, 0, 0, 0, 0],
+          [47, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 3, 41, 4, 322, 45, 41, 212, 1, 8, 3, 0, 4, 0, 0, 10, 1, 6, 0, 0, 0, 0, 2],
+          [86, 1, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 60, 0, 0, 7, 114, 5, 12, 363, 57, 241, 1, 14, 42, 3, 14, 0, 0, 59, 0, 10, 9, 0, 0, 0, 19],
+          [63, 2, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 3, 0, 0, 3, 158, 3, 59, 78, 788, 210, 0, 5, 4, 0, 3, 0, 0, 22, 0, 1, 1, 0, 0, 0, 0],
+          [191, 3, 43, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 13, 0, 0, 5, 126, 36, 118, 186, 156, 2655, 3, 41, 36, 1, 41, 0, 0, 108, 0, 18, 5, 0, 0, 1, 4],
+          [12, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 4, 5, 2, 7, 0, 24, 9, 3, 4, 0, 2, 0, 0, 6, 0, 3, 0, 0, 0, 0, 1],
+          [58, 0, 11, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 5, 0, 0, 2, 4, 1, 3, 27, 5, 124, 0, 16, 48, 2, 38, 0, 0, 9, 0, 13, 7, 0, 0, 0, 11],
+          [26, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 24, 0, 0, 0, 4, 1, 0, 41, 2, 23, 2, 6, 422, 2, 13, 0, 0, 1, 0, 17, 27, 0, 2, 0, 161],
+          [4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 3, 2, 0, 0, 1, 1, 1, 0, 1, 1, 7, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0],
+          [30, 3, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 7, 0, 0, 0, 4, 1, 5, 18, 5, 52, 0, 11, 33, 1, 177, 0, 0, 3, 1, 23, 7, 0, 0, 0, 57],
+          [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+          [0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+          [15, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 4, 2, 1, 8, 4, 32, 0, 3, 3, 0, 2, 0, 0, 94, 0, 0, 0, 0, 0, 0, 0],
+          [3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 6, 0, 1, 5, 0, 2, 0, 0, 1, 3, 0, 0, 0, 0, 0, 2],
+          [13, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 29, 0, 45, 0, 0, 1, 2, 0, 1, 39, 1, 12, 0, 4, 32, 0, 39, 0, 0, 2, 0, 160, 3, 0, 0, 0, 16],
+          [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 1, 16, 0, 1, 0, 1, 8, 1, 1, 0, 0, 1, 0, 5, 22, 0, 0, 0, 15],
+          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 3, 0, 1, 0, 0, 2, 0, 0, 0, 0, 0, 0, 1, 0, 2, 0, 0, 0],
+          [2, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 3, 0, 3, 0, 0, 0, 0, 0, 5, 0, 1, 0, 23],
+          [11, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 4, 0, 0, 0, 5, 0, 0, 20, 2, 17, 0, 2, 94, 0, 19, 0, 0, 7, 0, 4, 6, 0, 0, 0, 79],
+          [11, 11, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 9, 0, 0, 0, 1, 0, 0, 12, 2, 9, 0, 4, 108, 0, 28, 0, 0, 4, 0, 7, 7, 0, 1, 1, 117]
+        ]
+      },
+      "selection_score": 0.2037252518690123,
+      "checkpoint_improved": true,
+      "seconds": 749.4584686000017
+    },
+    {
+      "total_epoch": 3,
+      "training_loss": 1.8408370271589902,
+      "validation": {
+        "n": 15532,
+        "accuracy": 0.48049188771568374,
+        "macro_f1": 0.2228282533322538,
+        "weighted_f1": 0.46884632875792637,
+        "per_class": {
+          "Any Other Cyber Crime :: Other": {
+            "precision": 0.41172638436482084,
+            "recall": 0.2982538933459179,
+            "f1-score": 0.3459222769567597,
+            "support": 2119.0
+          },
+          "Child Pornography CPChild Sexual Abuse Material CSAM :: Unspecified": {
+            "precision": 0.37254901960784315,
+            "recall": 0.27941176470588236,
+            "f1-score": 0.31932773109243695,
+            "support": 68.0
+          },
+          "Cryptocurrency Crime :: Cryptocurrency Fraud": {
+            "precision": 0.3541666666666667,
+            "recall": 0.7391304347826086,
+            "f1-score": 0.4788732394366197,
+            "support": 92.0
+          },
+          "Cyber Attack/ Dependent Crimes :: Data Breach/Theft": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1-score": 0.0,
+            "support": 97.0
+          },
+          "Cyber Attack/ Dependent Crimes :: Denial of Service (DoS)/Distributed Denial of Service (DDOS) attacks": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1-score": 0.0,
+            "support": 101.0
+          },
+          "Cyber Attack/ Dependent Crimes :: Hacking/Defacement": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1-score": 0.0,
+            "support": 108.0
+          },
+          "Cyber Attack/ Dependent Crimes :: Malware Attack": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1-score": 0.0,
+            "support": 104.0
+          },
+          "Cyber Attack/ Dependent Crimes :: Ransomware Attack": {
+            "precision": 0.13172541743970315,
+            "recall": 0.6635514018691588,
+            "f1-score": 0.21981424148606812,
+            "support": 107.0
+          },
+          "Cyber Attack/ Dependent Crimes :: SQL Injection": {
+            "precision": 0.14754098360655737,
+            "recall": 0.2647058823529412,
+            "f1-score": 0.18947368421052632,
+            "support": 102.0
+          },
+          "Cyber Attack/ Dependent Crimes :: Tampering with computer source documents": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1-score": 0.0,
+            "support": 103.0
+          },
+          "Cyber Terrorism :: Cyber Terrorism": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1-score": 0.0,
+            "support": 32.0
+          },
+          "Hacking  Damage to computercomputer system etc :: Damage to computer computer systems etc": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1-score": 0.0,
+            "support": 21.0
+          },
+          "Hacking  Damage to computercomputer system etc :: Email Hacking": {
+            "precision": 0.4065934065934066,
+            "recall": 0.5441176470588235,
+            "f1-score": 0.46540880503144655,
+            "support": 68.0
+          },
+          "Hacking  Damage to computercomputer system etc :: Tampering with computer source documents": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1-score": 0.0,
+            "support": 10.0
+          },
+          "Hacking  Damage to computercomputer system etc :: Unauthorised AccessData Breach": {
+            "precision": 0.22270742358078602,
+            "recall": 0.46788990825688076,
+            "f1-score": 0.30177514792899407,
+            "support": 218.0
+          },
+          "Hacking  Damage to computercomputer system etc :: Website DefacementHacking": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1-score": 0.0,
+            "support": 17.0
+          },
+          "Online Cyber Trafficking :: Online Trafficking": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1-score": 0.0,
+            "support": 36.0
+          },
+          "Online Financial Fraud :: Business Email CompromiseEmail Takeover": {
+            "precision": 0.09090909090909091,
+            "recall": 0.125,
+            "f1-score": 0.10526315789473684,
+            "support": 56.0
+          },
+          "Online Financial Fraud :: DebitCredit Card FraudSim Swap Fraud": {
+            "precision": 0.6742794997281131,
+            "recall": 0.7163489312536107,
+            "f1-score": 0.6946778711484594,
+            "support": 1731.0
+          },
+          "Online Financial Fraud :: DematDepository Fraud": {
+            "precision": 0.0755813953488372,
+            "recall": 0.09090909090909091,
+            "f1-score": 0.08253968253968254,
+            "support": 143.0
+          },
+          "Online Financial Fraud :: EWallet Related Fraud": {
+            "precision": 0.509915014164306,
+            "recall": 0.46936114732724904,
+            "f1-score": 0.48879837067209775,
+            "support": 767.0
+          },
+          "Online Financial Fraud :: Fraud CallVishing": {
+            "precision": 0.279874213836478,
+            "recall": 0.3164444444444444,
+            "f1-score": 0.29703796412181893,
+            "support": 1125.0
+          },
+          "Online Financial Fraud :: Internet Banking Related Fraud": {
+            "precision": 0.6549239391513211,
+            "recall": 0.5780918727915194,
+            "f1-score": 0.6141141141141141,
+            "support": 1415.0
+          },
+          "Online Financial Fraud :: UPI Related Frauds": {
+            "precision": 0.6616213442791175,
+            "recall": 0.6802954365602744,
+            "f1-score": 0.6708284562361816,
+            "support": 3791.0
+          },
+          "Online Gambling  Betting :: Online Gambling  Betting": {
+            "precision": 0.3,
+            "recall": 0.13793103448275862,
+            "f1-score": 0.1889763779527559,
+            "support": 87.0
+          },
+          "Online and Social Media Related Crime :: Cheating by Impersonation": {
+            "precision": 0.15706806282722513,
+            "recall": 0.07772020725388601,
+            "f1-score": 0.10398613518197573,
+            "support": 386.0
+          },
+          "Online and Social Media Related Crime :: Cyber Bullying  Stalking  Sexting": {
+            "precision": 0.43981900452488687,
+            "recall": 0.6214833759590793,
+            "f1-score": 0.5151033386327504,
+            "support": 782.0
+          },
+          "Online and Social Media Related Crime :: EMail Phishing": {
+            "precision": 0.175,
+            "recall": 0.23333333333333334,
+            "f1-score": 0.2,
+            "support": 30.0
+          },
+          "Online and Social Media Related Crime :: FakeImpersonating Profile": {
+            "precision": 0.3978102189781022,
+            "recall": 0.48878923766816146,
+            "f1-score": 0.4386317907444668,
+            "support": 446.0
+          },
+          "Online and Social Media Related Crime :: Impersonating Email": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1-score": 0.0,
+            "support": 9.0
+          },
+          "Online and Social Media Related Crime :: Intimidating Email": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1-score": 0.0,
+            "support": 6.0
+          },
+          "Online and Social Media Related Crime :: Online Job Fraud": {
+            "precision": 0.21052631578947367,
+            "recall": 0.5363128491620112,
+            "f1-score": 0.30236220472440944,
+            "support": 179.0
+          },
+          "Online and Social Media Related Crime :: Online Matrimonial Fraud": {
+            "precision": 0.47619047619047616,
+            "recall": 0.4,
+            "f1-score": 0.43478260869565216,
+            "support": 25.0
+          },
+          "Online and Social Media Related Crime :: Profile Hacking Identity Theft": {
+            "precision": 0.4408866995073892,
+            "recall": 0.4475,
+            "f1-score": 0.4441687344913151,
+            "support": 400.0
+          },
+          "Online and Social Media Related Crime :: Provocative Speech for unlawful acts": {
+            "precision": 0.18584070796460178,
+            "recall": 0.2692307692307692,
+            "f1-score": 0.2198952879581152,
+            "support": 78.0
+          },
+          "Ransomware :: Ransomware": {
+            "precision": 0.3333333333333333,
+            "recall": 0.18181818181818182,
+            "f1-score": 0.23529411764705882,
+            "support": 11.0
+          },
+          "RapeGang Rape RGRSexually Abusive Content :: Unspecified": {
+            "precision": 0.16,
+            "recall": 0.08695652173913043,
+            "f1-score": 0.11267605633802817,
+            "support": 46.0
+          },
+          "Sexually Explicit Act :: Unspecified": {
+            "precision": 0.07142857142857142,
+            "recall": 0.0035335689045936395,
+            "f1-score": 0.006734006734006734,
+            "support": 283.0
+          },
+          "Sexually Obscene material :: Unspecified": {
+            "precision": 0.22442244224422442,
+            "recall": 0.2042042042042042,
+            "f1-score": 0.2138364779874214,
+            "support": 333.0
+          },
+          "accuracy": 0.48049188771568374,
+          "macro avg": {
+            "precision": 0.2196522982580854,
+            "recall": 0.25441859331832084,
+            "f1-score": 0.2228282533322538,
+            "support": 15532.0
+          },
+          "weighted avg": {
+            "precision": 0.4712480201405246,
+            "recall": 0.48049188771568374,
+            "f1-score": 0.46884632875792637,
+            "support": 15532.0
+          }
+        },
+        "confusion_labels": [
+          "Any Other Cyber Crime :: Other",
+          "Child Pornography CPChild Sexual Abuse Material CSAM :: Unspecified",
+          "Cryptocurrency Crime :: Cryptocurrency Fraud",
+          "Cyber Attack/ Dependent Crimes :: Data Breach/Theft",
+          "Cyber Attack/ Dependent Crimes :: Denial of Service (DoS)/Distributed Denial of Service (DDOS) attacks",
+          "Cyber Attack/ Dependent Crimes :: Hacking/Defacement",
+          "Cyber Attack/ Dependent Crimes :: Malware Attack",
+          "Cyber Attack/ Dependent Crimes :: Ransomware Attack",
+          "Cyber Attack/ Dependent Crimes :: SQL Injection",
+          "Cyber Attack/ Dependent Crimes :: Tampering with computer source documents",
+          "Cyber Terrorism :: Cyber Terrorism",
+          "Hacking  Damage to computercomputer system etc :: Damage to computer computer systems etc",
+          "Hacking  Damage to computercomputer system etc :: Email Hacking",
+          "Hacking  Damage to computercomputer system etc :: Tampering with computer source documents",
+          "Hacking  Damage to computercomputer system etc :: Unauthorised AccessData Breach",
+          "Hacking  Damage to computercomputer system etc :: Website DefacementHacking",
+          "Online Cyber Trafficking :: Online Trafficking",
+          "Online Financial Fraud :: Business Email CompromiseEmail Takeover",
+          "Online Financial Fraud :: DebitCredit Card FraudSim Swap Fraud",
+          "Online Financial Fraud :: DematDepository Fraud",
+          "Online Financial Fraud :: EWallet Related Fraud",
+          "Online Financial Fraud :: Fraud CallVishing",
+          "Online Financial Fraud :: Internet Banking Related Fraud",
+          "Online Financial Fraud :: UPI Related Frauds",
+          "Online Gambling  Betting :: Online Gambling  Betting",
+          "Online and Social Media Related Crime :: Cheating by Impersonation",
+          "Online and Social Media Related Crime :: Cyber Bullying  Stalking  Sexting",
+          "Online and Social Media Related Crime :: EMail Phishing",
+          "Online and Social Media Related Crime :: FakeImpersonating Profile",
+          "Online and Social Media Related Crime :: Impersonating Email",
+          "Online and Social Media Related Crime :: Intimidating Email",
+          "Online and Social Media Related Crime :: Online Job Fraud",
+          "Online and Social Media Related Crime :: Online Matrimonial Fraud",
+          "Online and Social Media Related Crime :: Profile Hacking Identity Theft",
+          "Online and Social Media Related Crime :: Provocative Speech for unlawful acts",
+          "Ransomware :: Ransomware",
+          "RapeGang Rape RGRSexually Abusive Content :: Unspecified",
+          "Sexually Explicit Act :: Unspecified",
+          "Sexually Obscene material :: Unspecified"
+        ],
+        "confusion_matrix": [
+          [632, 2, 29, 0, 0, 0, 0, 0, 0, 0, 0, 0, 12, 0, 125, 1, 0, 21, 162, 40, 42, 282, 73, 293, 10, 37, 113, 8, 45, 0, 1, 104, 4, 32, 30, 0, 1, 1, 19],
+          [5, 19, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 15, 0, 5, 0, 0, 1, 0, 2, 0, 0, 1, 0, 17],
+          [4, 0, 68, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 8, 3, 0, 0, 5, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0, 0, 0, 81, 16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0, 0, 0, 73, 28, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0, 0, 0, 89, 19, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0, 0, 0, 70, 34, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0, 0, 0, 71, 36, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0, 0, 0, 75, 27, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0, 0, 0, 80, 23, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+          [3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 0, 0, 1, 1, 1, 8, 0, 4, 0, 1, 3, 0, 0, 0, 0, 0, 0, 1, 3, 0, 0, 0, 0],
+          [3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 8, 0, 0, 0, 2, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 2],
+          [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 37, 0, 5, 0, 0, 2, 1, 0, 0, 0, 0, 0, 0, 0, 1, 5, 2, 0, 0, 0, 0, 12, 1, 0, 0, 0, 0],
+          [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 2, 0, 1, 0, 0, 0],
+          [26, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 102, 0, 0, 0, 3, 0, 4, 33, 2, 1, 0, 0, 5, 0, 2, 0, 0, 0, 0, 34, 0, 0, 0, 0, 1],
+          [3, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 1, 0, 0, 0],
+          [5, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 1, 2, 6, 3, 3, 0, 1, 7, 0, 2, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1],
+          [9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 1, 0, 0, 7, 4, 0, 2, 5, 2, 8, 0, 2, 0, 2, 3, 0, 0, 8, 0, 1, 0, 0, 0, 0, 0],
+          [76, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 3, 1240, 1, 34, 60, 129, 148, 1, 1, 3, 1, 1, 0, 0, 14, 0, 8, 1, 1, 0, 1, 0],
+          [26, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 2, 1, 13, 3, 24, 2, 40, 0, 3, 1, 0, 4, 0, 0, 13, 0, 1, 0, 0, 0, 0, 0],
+          [65, 0, 11, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 6, 0, 0, 0, 32, 9, 360, 38, 29, 174, 4, 9, 2, 0, 9, 0, 0, 12, 1, 5, 0, 0, 0, 0, 0],
+          [138, 1, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 66, 0, 0, 9, 97, 9, 22, 356, 47, 221, 1, 18, 34, 2, 22, 0, 0, 57, 1, 10, 3, 0, 1, 1, 6],
+          [76, 0, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 5, 0, 0, 6, 135, 6, 70, 78, 818, 174, 0, 5, 3, 1, 5, 0, 0, 20, 0, 2, 1, 0, 0, 0, 0],
+          [237, 3, 41, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 13, 0, 0, 9, 133, 61, 145, 192, 125, 2579, 8, 51, 19, 0, 47, 0, 0, 103, 3, 17, 2, 0, 0, 3, 0],
+          [9, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 3, 8, 2, 9, 1, 21, 12, 1, 3, 0, 3, 0, 0, 6, 0, 3, 0, 0, 0, 0, 0],
+          [76, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 4, 6, 3, 6, 26, 7, 97, 0, 30, 45, 0, 41, 0, 0, 7, 0, 13, 3, 0, 0, 0, 8],
+          [37, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 19, 0, 0, 1, 4, 2, 2, 38, 0, 22, 3, 5, 486, 1, 29, 0, 0, 1, 0, 18, 20, 0, 8, 3, 77],
+          [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 1, 0, 0, 5, 2, 0, 0, 0, 1, 1, 0, 1, 1, 7, 1, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0],
+          [30, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 0, 1, 2, 1, 3, 22, 3, 42, 1, 12, 36, 2, 218, 0, 0, 1, 1, 27, 5, 0, 1, 1, 26],
+          [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+          [0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+          [21, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 3, 7, 1, 11, 1, 22, 0, 4, 2, 0, 2, 0, 0, 96, 0, 0, 0, 0, 0, 0, 0],
+          [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 6, 0, 0, 5, 0, 1, 0, 0, 1, 10, 0, 0, 0, 0, 0, 0],
+          [17, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 18, 0, 49, 0, 0, 0, 1, 0, 2, 31, 1, 9, 0, 3, 32, 3, 43, 0, 0, 1, 0, 179, 3, 0, 1, 0, 7],
+          [5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 1, 15, 0, 0, 0, 1, 10, 1, 2, 0, 0, 1, 0, 8, 21, 0, 1, 0, 8],
+          [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 2, 0, 1, 0, 0, 2, 0, 0, 0, 0, 0, 0, 1, 0, 2, 0, 0, 0],
+          [2, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 7, 0, 4, 0, 0, 0, 1, 0, 5, 0, 4, 1, 15],
+          [12, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 4, 0, 0, 1, 6, 2, 0, 17, 2, 15, 0, 2, 119, 2, 23, 0, 0, 5, 0, 6, 7, 0, 5, 1, 48],
+          [10, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 10, 0, 0, 0, 1, 0, 0, 14, 2, 9, 0, 3, 147, 1, 34, 0, 0, 3, 0, 8, 8, 0, 2, 2, 68]
+        ]
+      },
+      "validation_typos": {
+        "n": 15532,
+        "accuracy": 0.4689029101210404,
+        "macro_f1": 0.2156454930628157,
+        "weighted_f1": 0.45921286186677374,
+        "per_class": {
+          "Any Other Cyber Crime :: Other": {
+            "precision": 0.39285714285714285,
+            "recall": 0.28551203397829167,
+            "f1-score": 0.330691445750205,
+            "support": 2119.0
+          },
+          "Child Pornography CPChild Sexual Abuse Material CSAM :: Unspecified": {
+            "precision": 0.3793103448275862,
+            "recall": 0.3235294117647059,
+            "f1-score": 0.3492063492063492,
+            "support": 68.0
+          },
+          "Cryptocurrency Crime :: Cryptocurrency Fraud": {
+            "precision": 0.3023255813953488,
+            "recall": 0.7065217391304348,
+            "f1-score": 0.4234527687296417,
+            "support": 92.0
+          },
+          "Cyber Attack/ Dependent Crimes :: Data Breach/Theft": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1-score": 0.0,
+            "support": 97.0
+          },
+          "Cyber Attack/ Dependent Crimes :: Denial of Service (DoS)/Distributed Denial of Service (DDOS) attacks": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1-score": 0.0,
+            "support": 101.0
+          },
+          "Cyber Attack/ Dependent Crimes :: Hacking/Defacement": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1-score": 0.0,
+            "support": 108.0
+          },
+          "Cyber Attack/ Dependent Crimes :: Malware Attack": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1-score": 0.0,
+            "support": 104.0
+          },
+          "Cyber Attack/ Dependent Crimes :: Ransomware Attack": {
+            "precision": 0.14076782449725778,
+            "recall": 0.719626168224299,
+            "f1-score": 0.23547400611620795,
+            "support": 107.0
+          },
+          "Cyber Attack/ Dependent Crimes :: SQL Injection": {
+            "precision": 0.14285714285714285,
+            "recall": 0.24509803921568626,
+            "f1-score": 0.18050541516245489,
+            "support": 102.0
+          },
+          "Cyber Attack/ Dependent Crimes :: Tampering with computer source documents": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1-score": 0.0,
+            "support": 103.0
+          },
+          "Cyber Terrorism :: Cyber Terrorism": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1-score": 0.0,
+            "support": 32.0
+          },
+          "Hacking  Damage to computercomputer system etc :: Damage to computer computer systems etc": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1-score": 0.0,
+            "support": 21.0
+          },
+          "Hacking  Damage to computercomputer system etc :: Email Hacking": {
+            "precision": 0.3404255319148936,
+            "recall": 0.47058823529411764,
+            "f1-score": 0.3950617283950617,
+            "support": 68.0
+          },
+          "Hacking  Damage to computercomputer system etc :: Tampering with computer source documents": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1-score": 0.0,
+            "support": 10.0
+          },
+          "Hacking  Damage to computercomputer system etc :: Unauthorised AccessData Breach": {
+            "precision": 0.20652173913043478,
+            "recall": 0.43577981651376146,
+            "f1-score": 0.28023598820059,
+            "support": 218.0
+          },
+          "Hacking  Damage to computercomputer system etc :: Website DefacementHacking": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1-score": 0.0,
+            "support": 17.0
+          },
+          "Online Cyber Trafficking :: Online Trafficking": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1-score": 0.0,
+            "support": 36.0
+          },
+          "Online Financial Fraud :: Business Email CompromiseEmail Takeover": {
+            "precision": 0.11475409836065574,
+            "recall": 0.125,
+            "f1-score": 0.11965811965811966,
+            "support": 56.0
+          },
+          "Online Financial Fraud :: DebitCredit Card FraudSim Swap Fraud": {
+            "precision": 0.6848928974069899,
+            "recall": 0.7019064124783362,
+            "f1-score": 0.6932952924393724,
+            "support": 1731.0
+          },
+          "Online Financial Fraud :: DematDepository Fraud": {
+            "precision": 0.07692307692307693,
+            "recall": 0.07692307692307693,
+            "f1-score": 0.07692307692307693,
+            "support": 143.0
+          },
+          "Online Financial Fraud :: EWallet Related Fraud": {
+            "precision": 0.4648241206030151,
+            "recall": 0.48239895697522817,
+            "f1-score": 0.473448496481126,
+            "support": 767.0
+          },
+          "Online Financial Fraud :: Fraud CallVishing": {
+            "precision": 0.26381322957198444,
+            "recall": 0.30133333333333334,
+            "f1-score": 0.2813278008298755,
+            "support": 1125.0
+          },
+          "Online Financial Fraud :: Internet Banking Related Fraud": {
+            "precision": 0.6131656804733728,
+            "recall": 0.5858657243816254,
+            "f1-score": 0.5992049150704735,
+            "support": 1415.0
+          },
+          "Online Financial Fraud :: UPI Related Frauds": {
+            "precision": 0.6665776115415443,
+            "recall": 0.6581376945396993,
+            "f1-score": 0.6623307671887444,
+            "support": 3791.0
+          },
+          "Online Gambling  Betting :: Online Gambling  Betting": {
+            "precision": 0.24489795918367346,
+            "recall": 0.13793103448275862,
+            "f1-score": 0.17647058823529413,
+            "support": 87.0
+          },
+          "Online and Social Media Related Crime :: Cheating by Impersonation": {
+            "precision": 0.128,
+            "recall": 0.08290155440414508,
+            "f1-score": 0.10062893081761007,
+            "support": 386.0
+          },
+          "Online and Social Media Related Crime :: Cyber Bullying  Stalking  Sexting": {
+            "precision": 0.4391634980988593,
+            "recall": 0.5907928388746803,
+            "f1-score": 0.5038167938931297,
+            "support": 782.0
+          },
+          "Online and Social Media Related Crime :: EMail Phishing": {
+            "precision": 0.14634146341463414,
+            "recall": 0.2,
+            "f1-score": 0.16901408450704225,
+            "support": 30.0
+          },
+          "Online and Social Media Related Crime :: FakeImpersonating Profile": {
+            "precision": 0.3980392156862745,
+            "recall": 0.4551569506726457,
+            "f1-score": 0.4246861924686193,
+            "support": 446.0
+          },
+          "Online and Social Media Related Crime :: Impersonating Email": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1-score": 0.0,
+            "support": 9.0
+          },
+          "Online and Social Media Related Crime :: Intimidating Email": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1-score": 0.0,
+            "support": 6.0
+          },
+          "Online and Social Media Related Crime :: Online Job Fraud": {
+            "precision": 0.20734341252699784,
+            "recall": 0.5363128491620112,
+            "f1-score": 0.29906542056074764,
+            "support": 179.0
+          },
+          "Online and Social Media Related Crime :: Online Matrimonial Fraud": {
+            "precision": 0.4444444444444444,
+            "recall": 0.32,
+            "f1-score": 0.37209302325581395,
+            "support": 25.0
+          },
+          "Online and Social Media Related Crime :: Profile Hacking Identity Theft": {
+            "precision": 0.4336734693877551,
+            "recall": 0.425,
+            "f1-score": 0.4292929292929293,
+            "support": 400.0
+          },
+          "Online and Social Media Related Crime :: Provocative Speech for unlawful acts": {
+            "precision": 0.19230769230769232,
+            "recall": 0.2564102564102564,
+            "f1-score": 0.21978021978021978,
+            "support": 78.0
+          },
+          "Ransomware :: Ransomware": {
+            "precision": 0.3333333333333333,
+            "recall": 0.18181818181818182,
+            "f1-score": 0.23529411764705882,
+            "support": 11.0
+          },
+          "RapeGang Rape RGRSexually Abusive Content :: Unspecified": {
+            "precision": 0.21739130434782608,
+            "recall": 0.10869565217391304,
+            "f1-score": 0.14492753623188406,
+            "support": 46.0
+          },
+          "Sexually Explicit Act :: Unspecified": {
+            "precision": 0.05263157894736842,
+            "recall": 0.0035335689045936395,
+            "f1-score": 0.006622516556291391,
+            "support": 283.0
+          },
+          "Sexually Obscene material :: Unspecified": {
+            "precision": 0.2188365650969529,
+            "recall": 0.23723723723723725,
+            "f1-score": 0.2276657060518732,
+            "support": 333.0
+          },
+          "accuracy": 0.4689029101210404,
+          "macro avg": {
+            "precision": 0.21144666561887845,
+            "recall": 0.24753873761264147,
+            "f1-score": 0.2156454930628157,
+            "support": 15532.0
+          },
+          "weighted avg": {
+            "precision": 0.46156137310804357,
+            "recall": 0.4689029101210404,
+            "f1-score": 0.45921286186677374,
+            "support": 15532.0
+          }
+        },
+        "confusion_labels": [
+          "Any Other Cyber Crime :: Other",
+          "Child Pornography CPChild Sexual Abuse Material CSAM :: Unspecified",
+          "Cryptocurrency Crime :: Cryptocurrency Fraud",
+          "Cyber Attack/ Dependent Crimes :: Data Breach/Theft",
+          "Cyber Attack/ Dependent Crimes :: Denial of Service (DoS)/Distributed Denial of Service (DDOS) attacks",
+          "Cyber Attack/ Dependent Crimes :: Hacking/Defacement",
+          "Cyber Attack/ Dependent Crimes :: Malware Attack",
+          "Cyber Attack/ Dependent Crimes :: Ransomware Attack",
+          "Cyber Attack/ Dependent Crimes :: SQL Injection",
+          "Cyber Attack/ Dependent Crimes :: Tampering with computer source documents",
+          "Cyber Terrorism :: Cyber Terrorism",
+          "Hacking  Damage to computercomputer system etc :: Damage to computer computer systems etc",
+          "Hacking  Damage to computercomputer system etc :: Email Hacking",
+          "Hacking  Damage to computercomputer system etc :: Tampering with computer source documents",
+          "Hacking  Damage to computercomputer system etc :: Unauthorised AccessData Breach",
+          "Hacking  Damage to computercomputer system etc :: Website DefacementHacking",
+          "Online Cyber Trafficking :: Online Trafficking",
+          "Online Financial Fraud :: Business Email CompromiseEmail Takeover",
+          "Online Financial Fraud :: DebitCredit Card FraudSim Swap Fraud",
+          "Online Financial Fraud :: DematDepository Fraud",
+          "Online Financial Fraud :: EWallet Related Fraud",
+          "Online Financial Fraud :: Fraud CallVishing",
+          "Online Financial Fraud :: Internet Banking Related Fraud",
+          "Online Financial Fraud :: UPI Related Frauds",
+          "Online Gambling  Betting :: Online Gambling  Betting",
+          "Online and Social Media Related Crime :: Cheating by Impersonation",
+          "Online and Social Media Related Crime :: Cyber Bullying  Stalking  Sexting",
+          "Online and Social Media Related Crime :: EMail Phishing",
+          "Online and Social Media Related Crime :: FakeImpersonating Profile",
+          "Online and Social Media Related Crime :: Impersonating Email",
+          "Online and Social Media Related Crime :: Intimidating Email",
+          "Online and Social Media Related Crime :: Online Job Fraud",
+          "Online and Social Media Related Crime :: Online Matrimonial Fraud",
+          "Online and Social Media Related Crime :: Profile Hacking Identity Theft",
+          "Online and Social Media Related Crime :: Provocative Speech for unlawful acts",
+          "Ransomware :: Ransomware",
+          "RapeGang Rape RGRSexually Abusive Content :: Unspecified",
+          "Sexually Explicit Act :: Unspecified",
+          "Sexually Obscene material :: Unspecified"
+        ],
+        "confusion_matrix": [
+          [605, 2, 36, 0, 0, 0, 0, 0, 0, 0, 0, 1, 11, 0, 126, 0, 0, 15, 164, 33, 60, 293, 87, 261, 10, 50, 121, 11, 34, 0, 0, 109, 4, 33, 29, 0, 1, 2, 21],
+          [5, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 15, 0, 2, 0, 0, 1, 0, 2, 0, 0, 2, 0, 17],
+          [5, 0, 65, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 4, 5, 1, 0, 6, 0, 3, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0, 0, 0, 76, 21, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0, 0, 0, 73, 28, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0, 0, 0, 90, 18, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0, 0, 0, 74, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0, 0, 0, 77, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0, 0, 0, 77, 25, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0, 0, 0, 80, 23, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+          [3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 2, 0, 1, 8, 0, 5, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 2],
+          [5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 5, 0, 0, 0, 2, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 3],
+          [3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 32, 0, 5, 0, 0, 2, 1, 0, 0, 1, 0, 0, 0, 0, 1, 3, 3, 0, 0, 0, 0, 16, 1, 0, 0, 0, 0],
+          [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 1, 0, 0, 0],
+          [26, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 95, 0, 0, 0, 3, 0, 2, 37, 4, 3, 1, 0, 4, 0, 3, 0, 0, 0, 0, 31, 1, 0, 0, 0, 1],
+          [2, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 9, 0, 1, 0, 0, 0],
+          [4, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 2, 7, 3, 4, 0, 2, 6, 0, 3, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1],
+          [13, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 1, 0, 0, 7, 3, 2, 2, 4, 0, 9, 0, 1, 0, 2, 2, 0, 0, 7, 0, 1, 0, 0, 0, 0, 0],
+          [83, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 0, 0, 3, 1215, 1, 40, 50, 155, 143, 1, 3, 3, 1, 0, 0, 0, 15, 0, 4, 0, 1, 0, 1, 0],
+          [25, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 1, 1, 11, 3, 26, 2, 39, 0, 3, 0, 0, 5, 0, 0, 12, 0, 1, 0, 0, 0, 0, 0],
+          [63, 0, 12, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 0, 0, 0, 26, 9, 370, 41, 33, 160, 5, 9, 3, 0, 10, 0, 0, 10, 1, 6, 0, 0, 0, 0, 0],
+          [144, 1, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 68, 0, 0, 10, 95, 7, 29, 339, 61, 208, 2, 19, 35, 1, 21, 0, 0, 55, 1, 10, 4, 0, 0, 2, 8],
+          [83, 1, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 7, 0, 0, 3, 123, 9, 73, 69, 829, 177, 0, 5, 2, 1, 3, 0, 0, 18, 0, 0, 1, 0, 0, 0, 0],
+          [242, 3, 47, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 16, 0, 0, 5, 106, 50, 183, 214, 157, 2495, 10, 69, 20, 0, 43, 0, 0, 106, 2, 16, 2, 0, 0, 4, 1],
+          [13, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 4, 5, 2, 7, 0, 17, 12, 3, 4, 0, 2, 0, 0, 6, 0, 3, 0, 0, 0, 1, 0],
+          [72, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 1, 9, 1, 8, 28, 6, 94, 2, 32, 45, 2, 37, 0, 0, 9, 0, 14, 2, 0, 0, 0, 9],
+          [32, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 18, 0, 0, 0, 4, 2, 2, 44, 2, 21, 3, 10, 462, 4, 25, 0, 0, 1, 0, 21, 16, 0, 7, 4, 99],
+          [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 5, 2, 0, 0, 2, 1, 2, 0, 1, 1, 6, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0],
+          [39, 1, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 7, 0, 0, 1, 3, 1, 6, 18, 5, 35, 2, 15, 38, 2, 203, 0, 0, 2, 1, 26, 4, 0, 1, 0, 30],
+          [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 1, 0, 1, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+          [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+          [17, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 2, 6, 2, 9, 1, 27, 1, 4, 2, 1, 2, 0, 0, 96, 0, 0, 0, 0, 0, 0, 0],
+          [3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 0, 5, 0, 1, 0, 0, 1, 8, 0, 0, 0, 0, 0, 1],
+          [16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 22, 0, 50, 0, 0, 1, 1, 1, 3, 37, 1, 7, 0, 6, 29, 2, 41, 0, 0, 2, 0, 170, 3, 0, 1, 0, 7],
+          [6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 1, 13, 0, 0, 0, 1, 10, 1, 2, 0, 0, 1, 0, 7, 20, 0, 0, 0, 10],
+          [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 2, 0, 1, 0, 0, 2, 0, 0, 0, 0, 0, 0, 1, 0, 2, 0, 0, 0],
+          [2, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 5, 0, 4, 0, 0, 0, 1, 0, 5, 0, 5, 0, 16],
+          [12, 7, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 4, 0, 0, 0, 7, 1, 1, 19, 2, 12, 0, 4, 107, 1, 24, 0, 0, 6, 0, 7, 7, 0, 2, 1, 56],
+          [11, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10, 0, 0, 0, 1, 0, 0, 12, 2, 8, 0, 9, 129, 0, 39, 0, 0, 4, 0, 6, 5, 0, 4, 4, 79]
+        ]
+      },
+      "selection_score": 0.21923687319753477,
+      "checkpoint_improved": true,
+      "seconds": 1197.0348328
+    }
+  ],
+  "selected_total_epoch": 3,
+  "initial_validation_mean": 0.16590365905544044,
+  "validation": {
+    "n": 15532,
+    "accuracy": 0.48049188771568374,
+    "macro_f1": 0.2228282533322538,
+    "weighted_f1": 0.46884632875792637,
+    "per_class": {
+      "Any Other Cyber Crime :: Other": {
+        "precision": 0.41172638436482084,
+        "recall": 0.2982538933459179,
+        "f1-score": 0.3459222769567597,
+        "support": 2119.0
+      },
+      "Child Pornography CPChild Sexual Abuse Material CSAM :: Unspecified": {
+        "precision": 0.37254901960784315,
+        "recall": 0.27941176470588236,
+        "f1-score": 0.31932773109243695,
+        "support": 68.0
+      },
+      "Cryptocurrency Crime :: Cryptocurrency Fraud": {
+        "precision": 0.3541666666666667,
+        "recall": 0.7391304347826086,
+        "f1-score": 0.4788732394366197,
+        "support": 92.0
+      },
+      "Cyber Attack/ Dependent Crimes :: Data Breach/Theft": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 97.0
+      },
+      "Cyber Attack/ Dependent Crimes :: Denial of Service (DoS)/Distributed Denial of Service (DDOS) attacks": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 101.0
+      },
+      "Cyber Attack/ Dependent Crimes :: Hacking/Defacement": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 108.0
+      },
+      "Cyber Attack/ Dependent Crimes :: Malware Attack": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 104.0
+      },
+      "Cyber Attack/ Dependent Crimes :: Ransomware Attack": {
+        "precision": 0.13172541743970315,
+        "recall": 0.6635514018691588,
+        "f1-score": 0.21981424148606812,
+        "support": 107.0
+      },
+      "Cyber Attack/ Dependent Crimes :: SQL Injection": {
+        "precision": 0.14754098360655737,
+        "recall": 0.2647058823529412,
+        "f1-score": 0.18947368421052632,
+        "support": 102.0
+      },
+      "Cyber Attack/ Dependent Crimes :: Tampering with computer source documents": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 103.0
+      },
+      "Cyber Terrorism :: Cyber Terrorism": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 32.0
+      },
+      "Hacking  Damage to computercomputer system etc :: Damage to computer computer systems etc": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 21.0
+      },
+      "Hacking  Damage to computercomputer system etc :: Email Hacking": {
+        "precision": 0.4065934065934066,
+        "recall": 0.5441176470588235,
+        "f1-score": 0.46540880503144655,
+        "support": 68.0
+      },
+      "Hacking  Damage to computercomputer system etc :: Tampering with computer source documents": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 10.0
+      },
+      "Hacking  Damage to computercomputer system etc :: Unauthorised AccessData Breach": {
+        "precision": 0.22270742358078602,
+        "recall": 0.46788990825688076,
+        "f1-score": 0.30177514792899407,
+        "support": 218.0
+      },
+      "Hacking  Damage to computercomputer system etc :: Website DefacementHacking": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 17.0
+      },
+      "Online Cyber Trafficking :: Online Trafficking": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 36.0
+      },
+      "Online Financial Fraud :: Business Email CompromiseEmail Takeover": {
+        "precision": 0.09090909090909091,
+        "recall": 0.125,
+        "f1-score": 0.10526315789473684,
+        "support": 56.0
+      },
+      "Online Financial Fraud :: DebitCredit Card FraudSim Swap Fraud": {
+        "precision": 0.6742794997281131,
+        "recall": 0.7163489312536107,
+        "f1-score": 0.6946778711484594,
+        "support": 1731.0
+      },
+      "Online Financial Fraud :: DematDepository Fraud": {
+        "precision": 0.0755813953488372,
+        "recall": 0.09090909090909091,
+        "f1-score": 0.08253968253968254,
+        "support": 143.0
+      },
+      "Online Financial Fraud :: EWallet Related Fraud": {
+        "precision": 0.509915014164306,
+        "recall": 0.46936114732724904,
+        "f1-score": 0.48879837067209775,
+        "support": 767.0
+      },
+      "Online Financial Fraud :: Fraud CallVishing": {
+        "precision": 0.279874213836478,
+        "recall": 0.3164444444444444,
+        "f1-score": 0.29703796412181893,
+        "support": 1125.0
+      },
+      "Online Financial Fraud :: Internet Banking Related Fraud": {
+        "precision": 0.6549239391513211,
+        "recall": 0.5780918727915194,
+        "f1-score": 0.6141141141141141,
+        "support": 1415.0
+      },
+      "Online Financial Fraud :: UPI Related Frauds": {
+        "precision": 0.6616213442791175,
+        "recall": 0.6802954365602744,
+        "f1-score": 0.6708284562361816,
+        "support": 3791.0
+      },
+      "Online Gambling  Betting :: Online Gambling  Betting": {
+        "precision": 0.3,
+        "recall": 0.13793103448275862,
+        "f1-score": 0.1889763779527559,
+        "support": 87.0
+      },
+      "Online and Social Media Related Crime :: Cheating by Impersonation": {
+        "precision": 0.15706806282722513,
+        "recall": 0.07772020725388601,
+        "f1-score": 0.10398613518197573,
+        "support": 386.0
+      },
+      "Online and Social Media Related Crime :: Cyber Bullying  Stalking  Sexting": {
+        "precision": 0.43981900452488687,
+        "recall": 0.6214833759590793,
+        "f1-score": 0.5151033386327504,
+        "support": 782.0
+      },
+      "Online and Social Media Related Crime :: EMail Phishing": {
+        "precision": 0.175,
+        "recall": 0.23333333333333334,
+        "f1-score": 0.2,
+        "support": 30.0
+      },
+      "Online and Social Media Related Crime :: FakeImpersonating Profile": {
+        "precision": 0.3978102189781022,
+        "recall": 0.48878923766816146,
+        "f1-score": 0.4386317907444668,
+        "support": 446.0
+      },
+      "Online and Social Media Related Crime :: Impersonating Email": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 9.0
+      },
+      "Online and Social Media Related Crime :: Intimidating Email": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 6.0
+      },
+      "Online and Social Media Related Crime :: Online Job Fraud": {
+        "precision": 0.21052631578947367,
+        "recall": 0.5363128491620112,
+        "f1-score": 0.30236220472440944,
+        "support": 179.0
+      },
+      "Online and Social Media Related Crime :: Online Matrimonial Fraud": {
+        "precision": 0.47619047619047616,
+        "recall": 0.4,
+        "f1-score": 0.43478260869565216,
+        "support": 25.0
+      },
+      "Online and Social Media Related Crime :: Profile Hacking Identity Theft": {
+        "precision": 0.4408866995073892,
+        "recall": 0.4475,
+        "f1-score": 0.4441687344913151,
+        "support": 400.0
+      },
+      "Online and Social Media Related Crime :: Provocative Speech for unlawful acts": {
+        "precision": 0.18584070796460178,
+        "recall": 0.2692307692307692,
+        "f1-score": 0.2198952879581152,
+        "support": 78.0
+      },
+      "Ransomware :: Ransomware": {
+        "precision": 0.3333333333333333,
+        "recall": 0.18181818181818182,
+        "f1-score": 0.23529411764705882,
+        "support": 11.0
+      },
+      "RapeGang Rape RGRSexually Abusive Content :: Unspecified": {
+        "precision": 0.16,
+        "recall": 0.08695652173913043,
+        "f1-score": 0.11267605633802817,
+        "support": 46.0
+      },
+      "Sexually Explicit Act :: Unspecified": {
+        "precision": 0.07142857142857142,
+        "recall": 0.0035335689045936395,
+        "f1-score": 0.006734006734006734,
+        "support": 283.0
+      },
+      "Sexually Obscene material :: Unspecified": {
+        "precision": 0.22442244224422442,
+        "recall": 0.2042042042042042,
+        "f1-score": 0.2138364779874214,
+        "support": 333.0
+      },
+      "accuracy": 0.48049188771568374,
+      "macro avg": {
+        "precision": 0.2196522982580854,
+        "recall": 0.25441859331832084,
+        "f1-score": 0.2228282533322538,
+        "support": 15532.0
+      },
+      "weighted avg": {
+        "precision": 0.4712480201405246,
+        "recall": 0.48049188771568374,
+        "f1-score": 0.46884632875792637,
+        "support": 15532.0
+      }
+    },
+    "confusion_labels": [
+      "Any Other Cyber Crime :: Other",
+      "Child Pornography CPChild Sexual Abuse Material CSAM :: Unspecified",
+      "Cryptocurrency Crime :: Cryptocurrency Fraud",
+      "Cyber Attack/ Dependent Crimes :: Data Breach/Theft",
+      "Cyber Attack/ Dependent Crimes :: Denial of Service (DoS)/Distributed Denial of Service (DDOS) attacks",
+      "Cyber Attack/ Dependent Crimes :: Hacking/Defacement",
+      "Cyber Attack/ Dependent Crimes :: Malware Attack",
+      "Cyber Attack/ Dependent Crimes :: Ransomware Attack",
+      "Cyber Attack/ Dependent Crimes :: SQL Injection",
+      "Cyber Attack/ Dependent Crimes :: Tampering with computer source documents",
+      "Cyber Terrorism :: Cyber Terrorism",
+      "Hacking  Damage to computercomputer system etc :: Damage to computer computer systems etc",
+      "Hacking  Damage to computercomputer system etc :: Email Hacking",
+      "Hacking  Damage to computercomputer system etc :: Tampering with computer source documents",
+      "Hacking  Damage to computercomputer system etc :: Unauthorised AccessData Breach",
+      "Hacking  Damage to computercomputer system etc :: Website DefacementHacking",
+      "Online Cyber Trafficking :: Online Trafficking",
+      "Online Financial Fraud :: Business Email CompromiseEmail Takeover",
+      "Online Financial Fraud :: DebitCredit Card FraudSim Swap Fraud",
+      "Online Financial Fraud :: DematDepository Fraud",
+      "Online Financial Fraud :: EWallet Related Fraud",
+      "Online Financial Fraud :: Fraud CallVishing",
+      "Online Financial Fraud :: Internet Banking Related Fraud",
+      "Online Financial Fraud :: UPI Related Frauds",
+      "Online Gambling  Betting :: Online Gambling  Betting",
+      "Online and Social Media Related Crime :: Cheating by Impersonation",
+      "Online and Social Media Related Crime :: Cyber Bullying  Stalking  Sexting",
+      "Online and Social Media Related Crime :: EMail Phishing",
+      "Online and Social Media Related Crime :: FakeImpersonating Profile",
+      "Online and Social Media Related Crime :: Impersonating Email",
+      "Online and Social Media Related Crime :: Intimidating Email",
+      "Online and Social Media Related Crime :: Online Job Fraud",
+      "Online and Social Media Related Crime :: Online Matrimonial Fraud",
+      "Online and Social Media Related Crime :: Profile Hacking Identity Theft",
+      "Online and Social Media Related Crime :: Provocative Speech for unlawful acts",
+      "Ransomware :: Ransomware",
+      "RapeGang Rape RGRSexually Abusive Content :: Unspecified",
+      "Sexually Explicit Act :: Unspecified",
+      "Sexually Obscene material :: Unspecified"
+    ],
+    "confusion_matrix": [
+      [632, 2, 29, 0, 0, 0, 0, 0, 0, 0, 0, 0, 12, 0, 125, 1, 0, 21, 162, 40, 42, 282, 73, 293, 10, 37, 113, 8, 45, 0, 1, 104, 4, 32, 30, 0, 1, 1, 19],
+      [5, 19, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 15, 0, 5, 0, 0, 1, 0, 2, 0, 0, 1, 0, 17],
+      [4, 0, 68, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 8, 3, 0, 0, 5, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 81, 16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 73, 28, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 89, 19, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 70, 34, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 71, 36, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 75, 27, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 80, 23, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 0, 0, 1, 1, 1, 8, 0, 4, 0, 1, 3, 0, 0, 0, 0, 0, 0, 1, 3, 0, 0, 0, 0],
+      [3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 8, 0, 0, 0, 2, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 2],
+      [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 37, 0, 5, 0, 0, 2, 1, 0, 0, 0, 0, 0, 0, 0, 1, 5, 2, 0, 0, 0, 0, 12, 1, 0, 0, 0, 0],
+      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 2, 0, 1, 0, 0, 0],
+      [26, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 102, 0, 0, 0, 3, 0, 4, 33, 2, 1, 0, 0, 5, 0, 2, 0, 0, 0, 0, 34, 0, 0, 0, 0, 1],
+      [3, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 1, 0, 0, 0],
+      [5, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 1, 2, 6, 3, 3, 0, 1, 7, 0, 2, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1],
+      [9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 1, 0, 0, 7, 4, 0, 2, 5, 2, 8, 0, 2, 0, 2, 3, 0, 0, 8, 0, 1, 0, 0, 0, 0, 0],
+      [76, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 3, 1240, 1, 34, 60, 129, 148, 1, 1, 3, 1, 1, 0, 0, 14, 0, 8, 1, 1, 0, 1, 0],
+      [26, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 2, 1, 13, 3, 24, 2, 40, 0, 3, 1, 0, 4, 0, 0, 13, 0, 1, 0, 0, 0, 0, 0],
+      [65, 0, 11, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 6, 0, 0, 0, 32, 9, 360, 38, 29, 174, 4, 9, 2, 0, 9, 0, 0, 12, 1, 5, 0, 0, 0, 0, 0],
+      [138, 1, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 66, 0, 0, 9, 97, 9, 22, 356, 47, 221, 1, 18, 34, 2, 22, 0, 0, 57, 1, 10, 3, 0, 1, 1, 6],
+      [76, 0, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 5, 0, 0, 6, 135, 6, 70, 78, 818, 174, 0, 5, 3, 1, 5, 0, 0, 20, 0, 2, 1, 0, 0, 0, 0],
+      [237, 3, 41, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 13, 0, 0, 9, 133, 61, 145, 192, 125, 2579, 8, 51, 19, 0, 47, 0, 0, 103, 3, 17, 2, 0, 0, 3, 0],
+      [9, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 3, 8, 2, 9, 1, 21, 12, 1, 3, 0, 3, 0, 0, 6, 0, 3, 0, 0, 0, 0, 0],
+      [76, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 4, 6, 3, 6, 26, 7, 97, 0, 30, 45, 0, 41, 0, 0, 7, 0, 13, 3, 0, 0, 0, 8],
+      [37, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 19, 0, 0, 1, 4, 2, 2, 38, 0, 22, 3, 5, 486, 1, 29, 0, 0, 1, 0, 18, 20, 0, 8, 3, 77],
+      [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 1, 0, 0, 5, 2, 0, 0, 0, 1, 1, 0, 1, 1, 7, 1, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0],
+      [30, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 0, 1, 2, 1, 3, 22, 3, 42, 1, 12, 36, 2, 218, 0, 0, 1, 1, 27, 5, 0, 1, 1, 26],
+      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [21, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 3, 7, 1, 11, 1, 22, 0, 4, 2, 0, 2, 0, 0, 96, 0, 0, 0, 0, 0, 0, 0],
+      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 6, 0, 0, 5, 0, 1, 0, 0, 1, 10, 0, 0, 0, 0, 0, 0],
+      [17, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 18, 0, 49, 0, 0, 0, 1, 0, 2, 31, 1, 9, 0, 3, 32, 3, 43, 0, 0, 1, 0, 179, 3, 0, 1, 0, 7],
+      [5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 1, 15, 0, 0, 0, 1, 10, 1, 2, 0, 0, 1, 0, 8, 21, 0, 1, 0, 8],
+      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 2, 0, 1, 0, 0, 2, 0, 0, 0, 0, 0, 0, 1, 0, 2, 0, 0, 0],
+      [2, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 7, 0, 4, 0, 0, 0, 1, 0, 5, 0, 4, 1, 15],
+      [12, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 4, 0, 0, 1, 6, 2, 0, 17, 2, 15, 0, 2, 119, 2, 23, 0, 0, 5, 0, 6, 7, 0, 5, 1, 48],
+      [10, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 10, 0, 0, 0, 1, 0, 0, 14, 2, 9, 0, 3, 147, 1, 34, 0, 0, 3, 0, 8, 8, 0, 2, 2, 68]
+    ]
+  },
+  "validation_typos": {
+    "n": 15532,
+    "accuracy": 0.4689029101210404,
+    "macro_f1": 0.2156454930628157,
+    "weighted_f1": 0.45921286186677374,
+    "per_class": {
+      "Any Other Cyber Crime :: Other": {
+        "precision": 0.39285714285714285,
+        "recall": 0.28551203397829167,
+        "f1-score": 0.330691445750205,
+        "support": 2119.0
+      },
+      "Child Pornography CPChild Sexual Abuse Material CSAM :: Unspecified": {
+        "precision": 0.3793103448275862,
+        "recall": 0.3235294117647059,
+        "f1-score": 0.3492063492063492,
+        "support": 68.0
+      },
+      "Cryptocurrency Crime :: Cryptocurrency Fraud": {
+        "precision": 0.3023255813953488,
+        "recall": 0.7065217391304348,
+        "f1-score": 0.4234527687296417,
+        "support": 92.0
+      },
+      "Cyber Attack/ Dependent Crimes :: Data Breach/Theft": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 97.0
+      },
+      "Cyber Attack/ Dependent Crimes :: Denial of Service (DoS)/Distributed Denial of Service (DDOS) attacks": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 101.0
+      },
+      "Cyber Attack/ Dependent Crimes :: Hacking/Defacement": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 108.0
+      },
+      "Cyber Attack/ Dependent Crimes :: Malware Attack": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 104.0
+      },
+      "Cyber Attack/ Dependent Crimes :: Ransomware Attack": {
+        "precision": 0.14076782449725778,
+        "recall": 0.719626168224299,
+        "f1-score": 0.23547400611620795,
+        "support": 107.0
+      },
+      "Cyber Attack/ Dependent Crimes :: SQL Injection": {
+        "precision": 0.14285714285714285,
+        "recall": 0.24509803921568626,
+        "f1-score": 0.18050541516245489,
+        "support": 102.0
+      },
+      "Cyber Attack/ Dependent Crimes :: Tampering with computer source documents": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 103.0
+      },
+      "Cyber Terrorism :: Cyber Terrorism": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 32.0
+      },
+      "Hacking  Damage to computercomputer system etc :: Damage to computer computer systems etc": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 21.0
+      },
+      "Hacking  Damage to computercomputer system etc :: Email Hacking": {
+        "precision": 0.3404255319148936,
+        "recall": 0.47058823529411764,
+        "f1-score": 0.3950617283950617,
+        "support": 68.0
+      },
+      "Hacking  Damage to computercomputer system etc :: Tampering with computer source documents": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 10.0
+      },
+      "Hacking  Damage to computercomputer system etc :: Unauthorised AccessData Breach": {
+        "precision": 0.20652173913043478,
+        "recall": 0.43577981651376146,
+        "f1-score": 0.28023598820059,
+        "support": 218.0
+      },
+      "Hacking  Damage to computercomputer system etc :: Website DefacementHacking": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 17.0
+      },
+      "Online Cyber Trafficking :: Online Trafficking": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 36.0
+      },
+      "Online Financial Fraud :: Business Email CompromiseEmail Takeover": {
+        "precision": 0.11475409836065574,
+        "recall": 0.125,
+        "f1-score": 0.11965811965811966,
+        "support": 56.0
+      },
+      "Online Financial Fraud :: DebitCredit Card FraudSim Swap Fraud": {
+        "precision": 0.6848928974069899,
+        "recall": 0.7019064124783362,
+        "f1-score": 0.6932952924393724,
+        "support": 1731.0
+      },
+      "Online Financial Fraud :: DematDepository Fraud": {
+        "precision": 0.07692307692307693,
+        "recall": 0.07692307692307693,
+        "f1-score": 0.07692307692307693,
+        "support": 143.0
+      },
+      "Online Financial Fraud :: EWallet Related Fraud": {
+        "precision": 0.4648241206030151,
+        "recall": 0.48239895697522817,
+        "f1-score": 0.473448496481126,
+        "support": 767.0
+      },
+      "Online Financial Fraud :: Fraud CallVishing": {
+        "precision": 0.26381322957198444,
+        "recall": 0.30133333333333334,
+        "f1-score": 0.2813278008298755,
+        "support": 1125.0
+      },
+      "Online Financial Fraud :: Internet Banking Related Fraud": {
+        "precision": 0.6131656804733728,
+        "recall": 0.5858657243816254,
+        "f1-score": 0.5992049150704735,
+        "support": 1415.0
+      },
+      "Online Financial Fraud :: UPI Related Frauds": {
+        "precision": 0.6665776115415443,
+        "recall": 0.6581376945396993,
+        "f1-score": 0.6623307671887444,
+        "support": 3791.0
+      },
+      "Online Gambling  Betting :: Online Gambling  Betting": {
+        "precision": 0.24489795918367346,
+        "recall": 0.13793103448275862,
+        "f1-score": 0.17647058823529413,
+        "support": 87.0
+      },
+      "Online and Social Media Related Crime :: Cheating by Impersonation": {
+        "precision": 0.128,
+        "recall": 0.08290155440414508,
+        "f1-score": 0.10062893081761007,
+        "support": 386.0
+      },
+      "Online and Social Media Related Crime :: Cyber Bullying  Stalking  Sexting": {
+        "precision": 0.4391634980988593,
+        "recall": 0.5907928388746803,
+        "f1-score": 0.5038167938931297,
+        "support": 782.0
+      },
+      "Online and Social Media Related Crime :: EMail Phishing": {
+        "precision": 0.14634146341463414,
+        "recall": 0.2,
+        "f1-score": 0.16901408450704225,
+        "support": 30.0
+      },
+      "Online and Social Media Related Crime :: FakeImpersonating Profile": {
+        "precision": 0.3980392156862745,
+        "recall": 0.4551569506726457,
+        "f1-score": 0.4246861924686193,
+        "support": 446.0
+      },
+      "Online and Social Media Related Crime :: Impersonating Email": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 9.0
+      },
+      "Online and Social Media Related Crime :: Intimidating Email": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 6.0
+      },
+      "Online and Social Media Related Crime :: Online Job Fraud": {
+        "precision": 0.20734341252699784,
+        "recall": 0.5363128491620112,
+        "f1-score": 0.29906542056074764,
+        "support": 179.0
+      },
+      "Online and Social Media Related Crime :: Online Matrimonial Fraud": {
+        "precision": 0.4444444444444444,
+        "recall": 0.32,
+        "f1-score": 0.37209302325581395,
+        "support": 25.0
+      },
+      "Online and Social Media Related Crime :: Profile Hacking Identity Theft": {
+        "precision": 0.4336734693877551,
+        "recall": 0.425,
+        "f1-score": 0.4292929292929293,
+        "support": 400.0
+      },
+      "Online and Social Media Related Crime :: Provocative Speech for unlawful acts": {
+        "precision": 0.19230769230769232,
+        "recall": 0.2564102564102564,
+        "f1-score": 0.21978021978021978,
+        "support": 78.0
+      },
+      "Ransomware :: Ransomware": {
+        "precision": 0.3333333333333333,
+        "recall": 0.18181818181818182,
+        "f1-score": 0.23529411764705882,
+        "support": 11.0
+      },
+      "RapeGang Rape RGRSexually Abusive Content :: Unspecified": {
+        "precision": 0.21739130434782608,
+        "recall": 0.10869565217391304,
+        "f1-score": 0.14492753623188406,
+        "support": 46.0
+      },
+      "Sexually Explicit Act :: Unspecified": {
+        "precision": 0.05263157894736842,
+        "recall": 0.0035335689045936395,
+        "f1-score": 0.006622516556291391,
+        "support": 283.0
+      },
+      "Sexually Obscene material :: Unspecified": {
+        "precision": 0.2188365650969529,
+        "recall": 0.23723723723723725,
+        "f1-score": 0.2276657060518732,
+        "support": 333.0
+      },
+      "accuracy": 0.4689029101210404,
+      "macro avg": {
+        "precision": 0.21144666561887845,
+        "recall": 0.24753873761264147,
+        "f1-score": 0.2156454930628157,
+        "support": 15532.0
+      },
+      "weighted avg": {
+        "precision": 0.46156137310804357,
+        "recall": 0.4689029101210404,
+        "f1-score": 0.45921286186677374,
+        "support": 15532.0
+      }
+    },
+    "confusion_labels": [
+      "Any Other Cyber Crime :: Other",
+      "Child Pornography CPChild Sexual Abuse Material CSAM :: Unspecified",
+      "Cryptocurrency Crime :: Cryptocurrency Fraud",
+      "Cyber Attack/ Dependent Crimes :: Data Breach/Theft",
+      "Cyber Attack/ Dependent Crimes :: Denial of Service (DoS)/Distributed Denial of Service (DDOS) attacks",
+      "Cyber Attack/ Dependent Crimes :: Hacking/Defacement",
+      "Cyber Attack/ Dependent Crimes :: Malware Attack",
+      "Cyber Attack/ Dependent Crimes :: Ransomware Attack",
+      "Cyber Attack/ Dependent Crimes :: SQL Injection",
+      "Cyber Attack/ Dependent Crimes :: Tampering with computer source documents",
+      "Cyber Terrorism :: Cyber Terrorism",
+      "Hacking  Damage to computercomputer system etc :: Damage to computer computer systems etc",
+      "Hacking  Damage to computercomputer system etc :: Email Hacking",
+      "Hacking  Damage to computercomputer system etc :: Tampering with computer source documents",
+      "Hacking  Damage to computercomputer system etc :: Unauthorised AccessData Breach",
+      "Hacking  Damage to computercomputer system etc :: Website DefacementHacking",
+      "Online Cyber Trafficking :: Online Trafficking",
+      "Online Financial Fraud :: Business Email CompromiseEmail Takeover",
+      "Online Financial Fraud :: DebitCredit Card FraudSim Swap Fraud",
+      "Online Financial Fraud :: DematDepository Fraud",
+      "Online Financial Fraud :: EWallet Related Fraud",
+      "Online Financial Fraud :: Fraud CallVishing",
+      "Online Financial Fraud :: Internet Banking Related Fraud",
+      "Online Financial Fraud :: UPI Related Frauds",
+      "Online Gambling  Betting :: Online Gambling  Betting",
+      "Online and Social Media Related Crime :: Cheating by Impersonation",
+      "Online and Social Media Related Crime :: Cyber Bullying  Stalking  Sexting",
+      "Online and Social Media Related Crime :: EMail Phishing",
+      "Online and Social Media Related Crime :: FakeImpersonating Profile",
+      "Online and Social Media Related Crime :: Impersonating Email",
+      "Online and Social Media Related Crime :: Intimidating Email",
+      "Online and Social Media Related Crime :: Online Job Fraud",
+      "Online and Social Media Related Crime :: Online Matrimonial Fraud",
+      "Online and Social Media Related Crime :: Profile Hacking Identity Theft",
+      "Online and Social Media Related Crime :: Provocative Speech for unlawful acts",
+      "Ransomware :: Ransomware",
+      "RapeGang Rape RGRSexually Abusive Content :: Unspecified",
+      "Sexually Explicit Act :: Unspecified",
+      "Sexually Obscene material :: Unspecified"
+    ],
+    "confusion_matrix": [
+      [605, 2, 36, 0, 0, 0, 0, 0, 0, 0, 0, 1, 11, 0, 126, 0, 0, 15, 164, 33, 60, 293, 87, 261, 10, 50, 121, 11, 34, 0, 0, 109, 4, 33, 29, 0, 1, 2, 21],
+      [5, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 15, 0, 2, 0, 0, 1, 0, 2, 0, 0, 2, 0, 17],
+      [5, 0, 65, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 4, 5, 1, 0, 6, 0, 3, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 76, 21, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 73, 28, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 90, 18, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 74, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 77, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 77, 25, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 80, 23, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 2, 0, 1, 8, 0, 5, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 2],
+      [5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 5, 0, 0, 0, 2, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 3],
+      [3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 32, 0, 5, 0, 0, 2, 1, 0, 0, 1, 0, 0, 0, 0, 1, 3, 3, 0, 0, 0, 0, 16, 1, 0, 0, 0, 0],
+      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 1, 0, 0, 0],
+      [26, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 95, 0, 0, 0, 3, 0, 2, 37, 4, 3, 1, 0, 4, 0, 3, 0, 0, 0, 0, 31, 1, 0, 0, 0, 1],
+      [2, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 9, 0, 1, 0, 0, 0],
+      [4, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 2, 7, 3, 4, 0, 2, 6, 0, 3, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1],
+      [13, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 1, 0, 0, 7, 3, 2, 2, 4, 0, 9, 0, 1, 0, 2, 2, 0, 0, 7, 0, 1, 0, 0, 0, 0, 0],
+      [83, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 0, 0, 3, 1215, 1, 40, 50, 155, 143, 1, 3, 3, 1, 0, 0, 0, 15, 0, 4, 0, 1, 0, 1, 0],
+      [25, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 1, 1, 11, 3, 26, 2, 39, 0, 3, 0, 0, 5, 0, 0, 12, 0, 1, 0, 0, 0, 0, 0],
+      [63, 0, 12, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 0, 0, 0, 26, 9, 370, 41, 33, 160, 5, 9, 3, 0, 10, 0, 0, 10, 1, 6, 0, 0, 0, 0, 0],
+      [144, 1, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 68, 0, 0, 10, 95, 7, 29, 339, 61, 208, 2, 19, 35, 1, 21, 0, 0, 55, 1, 10, 4, 0, 0, 2, 8],
+      [83, 1, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 7, 0, 0, 3, 123, 9, 73, 69, 829, 177, 0, 5, 2, 1, 3, 0, 0, 18, 0, 0, 1, 0, 0, 0, 0],
+      [242, 3, 47, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 16, 0, 0, 5, 106, 50, 183, 214, 157, 2495, 10, 69, 20, 0, 43, 0, 0, 106, 2, 16, 2, 0, 0, 4, 1],
+      [13, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 4, 5, 2, 7, 0, 17, 12, 3, 4, 0, 2, 0, 0, 6, 0, 3, 0, 0, 0, 1, 0],
+      [72, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 1, 9, 1, 8, 28, 6, 94, 2, 32, 45, 2, 37, 0, 0, 9, 0, 14, 2, 0, 0, 0, 9],
+      [32, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 18, 0, 0, 0, 4, 2, 2, 44, 2, 21, 3, 10, 462, 4, 25, 0, 0, 1, 0, 21, 16, 0, 7, 4, 99],
+      [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 5, 2, 0, 0, 2, 1, 2, 0, 1, 1, 6, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0],
+      [39, 1, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 7, 0, 0, 1, 3, 1, 6, 18, 5, 35, 2, 15, 38, 2, 203, 0, 0, 2, 1, 26, 4, 0, 1, 0, 30],
+      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 1, 0, 1, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [17, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 2, 6, 2, 9, 1, 27, 1, 4, 2, 1, 2, 0, 0, 96, 0, 0, 0, 0, 0, 0, 0],
+      [3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 0, 5, 0, 1, 0, 0, 1, 8, 0, 0, 0, 0, 0, 1],
+      [16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 22, 0, 50, 0, 0, 1, 1, 1, 3, 37, 1, 7, 0, 6, 29, 2, 41, 0, 0, 2, 0, 170, 3, 0, 1, 0, 7],
+      [6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 1, 13, 0, 0, 0, 1, 10, 1, 2, 0, 0, 1, 0, 7, 20, 0, 0, 0, 10],
+      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 2, 0, 1, 0, 0, 2, 0, 0, 0, 0, 0, 0, 1, 0, 2, 0, 0, 0],
+      [2, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 5, 0, 4, 0, 0, 0, 1, 0, 5, 0, 5, 0, 16],
+      [12, 7, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 4, 0, 0, 0, 7, 1, 1, 19, 2, 12, 0, 4, 107, 1, 24, 0, 0, 6, 0, 7, 7, 0, 2, 1, 56],
+      [11, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10, 0, 0, 0, 1, 0, 0, 12, 2, 8, 0, 9, 129, 0, 39, 0, 0, 4, 0, 6, 5, 0, 4, 4, 79]
+    ]
+  },
+  "selection_score": 0.21923687319753477,
+  "reference_selection_score": 0.25794441228491843,
+  "adopt": false,
+  "protocol": "Continue existing one-epoch checkpoint for at most two additional epochs; stop on validation mean gain <0.005; keep best qualifying checkpoint",
+  "adoption_rule": "Best clean/noisy validation mean macro-F1 exceeds sparse baseline by >=0.02",
+  "config": {
+    "learning_rate": 2e-05,
+    "batch_size": 16,
+    "accumulation": 2,
+    "max_length": 192,
+    "class_weights": "square root inverse frequency",
+    "weight_decay": 0.01,
+    "seed": 2026
+  },
+  "limits": "Previously examined validation; early stopping limits but cannot eliminate overfitting. Test never selects checkpoints. Continuation resets optimizer/scheduler.",
+  "test_policy": "Not evaluated: bounded continuation did not pass validation promotion rule.",
+  "seconds": 1969.350750900001
+}

@@ -1,11 +1,9 @@
 """Generate a human-readable experiment record from measured artifacts."""
-import hashlib
 import importlib.metadata
 import json
 import platform
 import sys
 from datetime import datetime, timezone
-from pathlib import Path
 from .data import ROOT, TASKS
 
 
@@ -28,25 +26,9 @@ def main():
     except ImportError:
         pass
     (reports / "environment.json").write_text(json.dumps(environment, indent=2), encoding="utf-8")
-    (ROOT / "requirements-tested.txt").write_text("# Versions already present during the tested run; no packages installed by this project.\n" +
+    (ROOT / "requirements-tested.txt").write_text("# Dependency versions used for the recorded experiments.\n" +
         "\n".join(f"{k}=={v}" for k,v in environment["packages"].items()) + "\n", encoding="utf-8")
-    copies = []
-    for directory in (ROOT / "data/raw", ROOT / "reference"):
-        for file in directory.rglob("*"):
-            if not file.is_file():
-                continue
-            relative = file.relative_to(directory)
-            original = ROOT.parent / relative
-            if not original.is_file():
-                continue
-            a = hashlib.sha256(file.read_bytes()).hexdigest()
-            b = hashlib.sha256(original.read_bytes()).hexdigest()
-            copies.append({"copy": str(file.relative_to(ROOT)), "original": str(original),
-                           "copy_sha256": a, "original_sha256": b, "matches": a == b})
-    (reports / "source_integrity.json").write_text(json.dumps(copies, indent=2), encoding="utf-8")
-    if not all(x["matches"] for x in copies):
-        raise RuntimeError("A source copy differs from its original")
-    lines = ["# My experiment results", "", "I kept the full numbers here so I can compare the models without relying on memory. These tables come from the saved JSON reports; the source CSVs are unchanged.", "",
+    lines = ["# Evaluation Results", "", "Metrics are generated from the saved experiment reports. Evaluation protocols are listed explicitly because the call and complaint datasets use different taxonomies and split strategies.", "",
              "## Dataset audit", "", "| Task | Raw training rows | Training | Validation | Test | Trainable labels |",
              "|---|---:|---:|---:|---:|---:|"]
     for task, info in audit.items():
@@ -117,36 +99,36 @@ def main():
     (ROOT/"models/champions.json").write_text(json.dumps(champions,indent=2),encoding="utf-8")
     if family:
         lines += ["", "## Harder call evaluation: template families", "",
-                  f"I grouped the 743 messages into **{family['families']}** near-duplicate families before evaluating the frozen baseline with five-fold group cross-validation.",
+                  f"The 743 messages form **{family['families']}** near-duplicate families. The fixed baseline is evaluated with five-fold group cross-validation.",
                   f"Family-held-out macro-F1: **{family['oof']['macro_f1']:.4f}**; typo macro-F1: **{family['oof_typos']['macro_f1']:.4f}**; accuracy: **{family['oof']['accuracy']:.4f}**.",
                   "", "Each message is evaluated exactly once; no family crosses a fold's training and test sets. All four classes are represented in training for each recorded fold.",
-                  "The 1.0000 call scores above came from the earlier exact-deduplicated split. They were too optimistic because related templates remained on both sides. I keep them for comparison, but use the family-held-out result in the README headline.",
+                  "The 1.0000 call scores above use the earlier exact-deduplicated split. Related templates crossed that split, producing optimistic estimates. The primary call result uses family-held-out evaluation.",
                   "Family grouping uses a 0.80 character-TF-IDF cosine threshold and connected components. This is a heuristic stress test, not a human-verified semantic split or an independent real-world benchmark."]
     if robust:
         interval = robust["paired_uncertainty"]
         lines += ["", "## Bounded call improvement experiment", "",
-                  "I compared six fixed candidates inside three inner family folds, then assessed the selection procedure on five outer family folds. The outer assessment messages never fitted a vocabulary, scaler or classifier in their fold.",
+                  "Six fixed candidates are compared within three inner family folds. Five outer family folds assess the selection procedure. Vocabularies, scalers and classifiers are fitted only on the corresponding training fold.",
                   "", "| Model procedure | Clean macro-F1 | Typo macro-F1 | Accuracy |", "|---|---:|---:|---:|",
                   f"| Reference word baseline | {robust['reference']['macro_f1']:.4f} | {robust['reference_typos']['macro_f1']:.4f} | {robust['reference']['accuracy']:.4f} |",
                   f"| Nested candidate selection | {robust['nested']['macro_f1']:.4f} | {robust['nested_typos']['macro_f1']:.4f} | {robust['nested']['accuracy']:.4f} |",
                   "", f"The approximate paired family-bootstrap 95% interval for the **clean F1 difference** is **[{interval['lower_95']:.4f}, {interval['upper_95']:.4f}]** ({interval['repetitions']} resamples). This is wide and includes zero.",
-                  f"My fixed promotion rule was: {robust['adoption_rule']}. Passed: **{robust['adopt']}**.",
+                  f"Promotion criteria: {robust['adoption_rule']}. Passed: **{robust['adopt']}**.",
                   f"The optional `robust` artifact uses **{robust['deployment_variant']}**, selected with a separate grouped inner search and refitted on all {robust['deployment_training_rows']} development messages. Its training-set performance is not the reported nested score.",
-                  ("The candidate passed the fixed promotion rule." if robust["adopt"] else "I kept the baseline as the default.")+" The encoder is frozen; only a small L2-regularized classification head learns labels. This reduces capacity but does not prove absence of overfitting.",
+                  ("The candidate passed the fixed promotion rule." if robust["adopt"] else "The baseline remains the default.")+" The encoder is frozen; only a small L2-regularized classification head learns labels. This reduces capacity but does not prove absence of overfitting.",
                   "This corpus was explored before this experiment, families are heuristic, and several classes have few independent families. Fresh human-labelled English/Hinglish messages are still needed for independent confirmation."]
     if regularized:
         lines += ["", "## Bounded complaint improvement experiment", "",
-                  "I compared three fixed heads on the same training-only TF-IDF features. Selection uses only the mean clean/noisy validation macro-F1, with a fixed minimum gain of 0.02 before promotion.",
+                  "Three fixed heads use the same training-only TF-IDF features. Selection uses mean clean/noisy validation macro-F1, with a minimum gain of 0.02 before promotion.",
                   "", "| Head | Clean validation macro-F1 | Typo validation macro-F1 | Selection mean |", "|---|---:|---:|---:|"]
         for name,r in regularized["search"].items():
             lines.append(f"| {name} | {r['validation']['macro_f1']:.4f} | {r['validation_typos']['macro_f1']:.4f} | {r['selection_score']:.4f} |")
         lines += ["", f"Reference selection mean: **{regularized['reference_selection_score']:.4f}**. Selected head: **{regularized['selected']}**. Promotion rule passed: **{regularized['adopt']}**.",
                   regularized.get("test_policy","Only the selected candidate was evaluated on the supplied test after passing the validation criterion."),
-                  "The validation set has been used in earlier development, so this remains development evidence. I did not change labels, remove difficult classes or choose settings from test scores."]
+                  "The validation set has been used in earlier development, so these are development results. Labels and difficult classes are retained; test scores do not select settings."]
     if margin:
         lines += ["", "## Inner-selected complaint margin experiment", "",
-                  f"I split only the original training partition into {margin['inner_train_rows']} inner-training and {margin['inner_validation_rows']} inner-validation messages. Its TF-IDF vocabulary was fitted on inner training only; normalized family overlap was {margin['inner_overlapping_groups']}.",
-                  "I fixed three heads: averaged SGD hinge, averaged SGD modified Huber, and a balanced linear SVM at C=1. All use hybrid word/character features. Earlier word-only SVM checks were weaker; this comparison uses the combined representation.",
+                  f"The training partition contains an inner split of {margin['inner_train_rows']} training and {margin['inner_validation_rows']} validation messages. TF-IDF is fitted on inner training only; normalized group overlap is {margin['inner_overlapping_groups']}.",
+                  "The candidates are averaged SGD hinge, averaged SGD modified Huber, and balanced linear SVM at C=1. All use hybrid word/character features. Earlier word-only SVM results were weaker; this comparison uses the combined representation.",
                   "", "| Head | Inner clean/noisy mean macro-F1 |", "|---|---:|"]
         for name,r in margin["search"].items():
             lines.append(f"| {name} | {r['selection_score']:.4f} |")
@@ -155,8 +137,8 @@ def main():
                   "The original validation corpus was used in earlier experiments. The inner split limits reuse during this search but does not make the existing validation/test corpus fresh independent evidence. Softmax-converted margins are ranking scores, not calibrated probabilities."]
     if semantic_experiments:
         lines += ["", "## Frozen complaint semantics and fixed ensemble", "",
-                  "I also tested fixed pretrained multilingual representations. C=0.01 or 0.1 is selected inside the original training split, with scalers fitted on inner training only. The chosen head is refitted on full original training before the original validation check.",
-                  "The additional ensemble is one predeclared 50/50 average with the baseline. I did not search blend weights. Components use the same class vocabulary with explicit column alignment.",
+                  "The semantic classifier uses fixed pretrained multilingual representations. C=0.01 or 0.1 is selected within the training partition, with scalers fitted on inner training only. The selected head is refitted on full training before validation.",
+                  "The ensemble uses a predeclared 50/50 average with the baseline. Blend weights are not tuned. Component class columns are explicitly aligned.",
                   "", "| Candidate | Clean validation macro-F1 | Typo validation macro-F1 | Mean | Promotion passed |", "|---|---:|---:|---:|---|"]
         for name,r in semantic_experiments.items():
             lines.append(f"| {name} | {r['validation']['macro_f1']:.4f} | {r['validation_typos']['macro_f1']:.4f} | {r['selection_score']:.4f} | {r['adopt']} |")
@@ -165,8 +147,8 @@ def main():
         lines += ["", "All of these runs use an already explored development corpus. The bounded search and frozen encoder reduce some overfitting risks; fresh independent labels are still needed to confirm transfer."]
     if continued:
         lines += ["", "## Bounded encoder continuation", "",
-                  "I continued the existing one-epoch checkpoint for at most two further epochs, with learning rate 2e-5, weight decay 0.01, effective batch 32 and the same 192-token limit. I kept square-root inverse-frequency loss weights and training-only typo augmentation.",
-                  "After each epoch I checked mean clean/noisy validation macro-F1. A gain below 0.005 stopped training; the best qualifying checkpoint was retained. The optimizer/scheduler restarted for this bounded continuation.",
+                  "The one-epoch checkpoint is continued for at most two further epochs, with learning rate 2e-5, weight decay 0.01, effective batch 32 and a 192-token limit. Training uses square-root inverse-frequency loss weights and typo augmentation.",
+                  "Mean clean/noisy validation macro-F1 is checked after each epoch. A gain below 0.005 stops training; the best qualifying checkpoint is retained. The optimizer and scheduler restart for this continuation.",
                   "", "| Total epoch | Training loss | Clean/noisy validation mean F1 | Checkpoint improved |", "|---|---:|---:|---|"]
         for row in continued["history"]:
             lines.append(f"| {row['total_epoch']} | {row['training_loss']:.4f} | {row['selection_score']:.4f} | {row['checkpoint_improved']} |")
@@ -203,11 +185,9 @@ def main():
             lines.append(f"- {backend}: {r['correct']}/{r['total']} correct. Inspect every example in `manual_challenge.json`, including warning/negation failures.")
             for item in [x for x in r["records"] if x["expected"] != x["predicted"]][:6]:
                 lines.append(f"  - Expected `{item['expected']}`, predicted `{item['predicted']}` (score {item['score']:.3f}): {item['text']}")
-    lines += ["", "## Integrity and environment", "", f"Verified **{len(copies)}** copied source files against their originals using SHA-256.",
-              "See `source_integrity.json` and `environment.json` for exact values.",
-              "", "## Limits", "", "- English and Hinglish label vocabularies differ; cross-language transfer is not independently validated.",
+    lines += ["", "## Limitations", "", "- English and Hinglish label vocabularies differ; cross-language transfer is not independently validated.",
               "- Complaint classification has no benign class; call `none` does not prove safety.",
-              "- Rule-based PII masking is incomplete; raw copies/reference notebooks remain sensitive.",
+              "- Rule-based PII masking is incomplete; unstructured names, addresses and contextual identifiers may remain.",
               "- Confidence scores and review threshold are uncalibrated; unknown scams can receive high scores.",
               "- Final reports supersede internal-test exploratory artifacts under `superseded/`.",
               "- No RAG layer, live-call integration, or automatic complaint submission is included."]
@@ -216,7 +196,7 @@ def main():
     readme_text = readme.read_text(encoding="utf-8")
     start_marker, end_marker = "<!-- RESULTS SUMMARY START -->", "<!-- RESULTS SUMMARY END -->"
     if start_marker in readme_text and end_marker in readme_text:
-        summary_lines = ["", "The protocols differ, so I list them explicitly. The call result uses the harder family split; the complaint result uses the supplied test file.", "",
+        summary_lines = ["", "Call classification uses template-family evaluation. Complaint classification uses the supplied test set. Scores from these protocols are not directly comparable.", "",
                          "| Task | Backend | Evaluation protocol | Macro-F1 | Typo macro-F1 | Accuracy |",
                          "|---|---|---|---:|---:|---:|"]
         for task,info in champions.items():
@@ -230,15 +210,15 @@ def main():
             summary_lines.append(f"| {task} | {info['backend']} | {protocol} | {clean['macro_f1']:.4f} | {noisy['macro_f1']:.4f} | {clean['accuracy']:.4f} |")
         summary_lines += ["", "[Full comparisons and failure cases](reports/RESULTS.md). Scores are fractions, not percentages.", ""]
         if robust and not robust["adopt"]:
-            summary_lines += [f"The optional `robust` call experiment reached **{robust['nested']['macro_f1']:.4f}** clean / **{robust['nested_typos']['macro_f1']:.4f}** typo macro-F1 in nested family CV. I kept it experimental: the approximate paired family-bootstrap interval for its clean improvement includes zero. These are development results, pending fresh independent data.", ""]
+            summary_lines += [f"The experimental `robust` call model reached **{robust['nested']['macro_f1']:.4f}** clean / **{robust['nested_typos']['macro_f1']:.4f}** typo macro-F1 in nested family CV. It remains experimental because the paired family-bootstrap interval for clean improvement includes zero. Independent confirmation is required.", ""]
         before, after = readme_text.split(start_marker,1)
         _, after = after.split(end_marker,1)
         readme.write_text(before+start_marker+"\n".join(summary_lines)+end_marker+after,encoding="utf-8")
-    guide = ROOT/"INTERVIEW_GUIDE.md"
+    guide = ROOT/"TECHNICAL_GUIDE.md"
     guide_text = guide.read_text(encoding="utf-8").split("\n<!-- GENERATED RESULTS -->")[0]
-    guide.write_text(guide_text+"\n<!-- GENERATED RESULTS -->\n\n## 19. Final measured outcomes (automatically generated)\n\n"+
-                     "\n".join(lines[2:])+"\n", encoding="utf-8")
-    print("Wrote reports/RESULTS.md and verified source integrity")
+    guide.write_text(guide_text+"\n<!-- GENERATED RESULTS -->\n\n## Evaluation reference\n\n"+
+                     "[Evaluation results](reports/RESULTS.md) contain the measured comparisons, class-level metrics and model-promotion decisions.\n", encoding="utf-8")
+    print("Updated evaluation reports")
 
 
 if __name__ == "__main__":

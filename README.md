@@ -1,27 +1,25 @@
-# CyberLens: local English / Hinglish scam classification
+# CyberLens
 
 [![Core tests](https://github.com/ChaitanyaKash/CyberLens/actions/workflows/ci.yml/badge.svg)](https://github.com/ChaitanyaKash/CyberLens/actions/workflows/ci.yml)
 
-I’m building CyberLens to classify suspicious messages written in English or Hinglish, including messages with spelling mistakes. This version focuses on text classification; I plan to add retrieval-based guidance and report drafting later.
+CyberLens classifies English and Hinglish text into call-scam scenarios and cybercrime complaint categories. The pipeline combines conservative preprocessing, partial sensitive-data masking, typo-tolerant text features and task-specific classifiers.
 
-The main challenge started with preprocessing: an English spellchecker can damage valid Hinglish words. I compared word and character TF-IDF, **Skip-gram with negative sampling implemented in PyTorch**, a custom subword extension, and a fine-tuned multilingual encoder. I also found duplicate messages and contradictory labels, which turned out to matter as much as the choice of model.
-
-I worked in a separate copy of the original project. Both training CSVs are used; `test.csv` is held out for complaint evaluation. Earlier notebooks and stemmed files are kept locally as references, not added as extra training examples.
+The project compares sparse text models, a PyTorch implementation of Skip-gram with negative sampling, character-subword embeddings and multilingual transformer approaches. Model selection accounts for duplicate templates, label conflicts, class imbalance and spelling noise.
 
 ```mermaid
 flowchart LR
-    A[English or Hinglish text] --> B[Conservative normalization and partial PII masking]
-    B --> C[Saved task-specific representation]
-    C --> D[Call scam taxonomy]
-    C --> E[Cybercrime complaint taxonomy]
-    D --> F[Ranked alternatives and review flag]
+    A[English or Hinglish text] --> B[Normalization and partial sensitive-data masking]
+    B --> C[Task-specific text representation]
+    C --> D[Call-scam classifier]
+    C --> E[Complaint-category classifier]
+    D --> F[Ranked predictions and review status]
     E --> F
 ```
 
-## Measured results
+## Results
 
 <!-- RESULTS SUMMARY START -->
-The protocols differ, so I list them explicitly. The call result uses the harder family split; the complaint result uses the supplied test file.
+Call classification uses template-family evaluation. Complaint classification uses the supplied test set. Scores from these protocols are not directly comparable.
 
 | Task | Backend | Evaluation protocol | Macro-F1 | Typo macro-F1 | Accuracy |
 |---|---|---|---:|---:|---:|
@@ -30,71 +28,86 @@ The protocols differ, so I list them explicitly. The call result uses the harder
 
 [Full comparisons and failure cases](reports/RESULTS.md). Scores are fractions, not percentages.
 
-The optional `robust` call experiment reached **0.8256** clean / **0.7709** typo macro-F1 in nested family CV. I kept it experimental: the approximate paired family-bootstrap interval for its clean improvement includes zero. These are development results, pending fresh independent data.
+The experimental `robust` call model reached **0.8256** clean / **0.7709** typo macro-F1 in nested family CV. It remains experimental because the paired family-bootstrap interval for clean improvement includes zero. Independent confirmation is required.
 <!-- RESULTS SUMMARY END -->
 
-The first exact-deduplicated call split scored 1.0000, but related templates were still present on both sides. I replaced that headline with a harder template-family evaluation. This is still a small dataset, not an independent real-world benchmark. English/Hinglish transfer and seven-subtype classification need better labels and more diverse examples.
+The initial exact-deduplicated call split produced macro-F1 of 1.0000. Related templates still crossed that split, so the primary result uses the stricter template-family protocol. Earlier scores remain in the evaluation report for comparison.
 
-The English subtype score is still weak. Its baseline test accuracy is 0.5014 and weighted F1 is 0.5081, while macro-F1 is 0.2345 because each class gets equal weight. Training support ranges from 23 to 15,162 examples per class. Three test labels have no trained class, and 130 test templates have conflicting labels. Some frequent classes also perform badly, so imbalance alone does not explain the result. I keep all these test cases in the report.
+Complaint classification remains challenging. Baseline test accuracy is 0.5014 and weighted F1 is 0.5081, compared with macro-F1 of 0.2345. Training support ranges from 23 to 15,162 examples per class. Three test labels have no trained class, and 130 normalized test templates carry conflicting labels. These cases remain in the reported test evaluation.
 
-## Setup from GitHub
+## Tasks and datasets
 
-Raw complaints, reference notebook outputs, pretrained caches and trained weights are **not distributed in this repository**. Public CI runs the available self-contained tests; private-data/model integration tests explicitly skip when assets are absent.
+| Task | Training source | Label space |
+|---|---|---|
+| `call_scam` | `India_Cyber_Scam_Hinglish_Dataset.csv` | `none`, `police_digital_arrest`, `police_blackmail`, `other_scam` |
+| `complaint` | `train.csv` | 39 category/subcategory combinations |
+
+`test.csv` is the supplied complaint test set. Training templates overlapping this set are excluded from training.
+
+The Hinglish dataset contains 10,000 rows but only 743 distinct texts. Identical messages carry conflicting labels among `aadhaar`, `amazon`, `bank_kyc`, `lottery` and `relative`; these labels map explicitly to `other_scam`. The mapping reduces subtype granularity rather than establishing equivalence between the underlying scam mechanisms.
+
+The datasets use different taxonomies and are evaluated as distinct tasks. Both classifiers accept English and Hinglish strings, but reliable cross-language transfer is not independently established. Complaint labels contain no benign class; a complaint-category prediction does not establish that a message is fraudulent.
+
+## Installation
+
+Python 3.12 is recommended. Sparse models run on CPU; neural experiments require the optional dependencies, and transformer fine-tuning expects CUDA.
 
 ```powershell
 git clone https://github.com/ChaitanyaKash/CyberLens.git
 cd CyberLens
 py -3.12 -m venv .venv
 .\.venv\Scripts\python -m pip install -e .
-# Optional neural experiments; choose a CUDA PyTorch wheel using its official installer.
+# Optional neural dependencies; install an appropriate CUDA PyTorch build.
 .\.venv\Scripts\python -m pip install -e '.[neural]'
 ```
 
-Place your own permitted copies of `train.csv`, `test.csv`, and `India_Cyber_Scam_Hinglish_Dataset.csv` in `data/raw/`. Create the `reports/` and `models/` directories if needed, run preparation and training below, then launch the interface. Core installation supports sparse training and inference; PyTorch/Transformers are optional for neural models. A GPU is not needed for sparse inference.
+Datasets and trained weights are not distributed in the repository. Place the three dataset files in `data/raw/`, then run preparation and training. Public CI runs self-contained tests; integration tests requiring private datasets, local models or optional neural dependencies skip when those assets are unavailable.
 
-## Start on this laptop
-
-Open PowerShell in this folder:
-
-```powershell
-# Open the local desktop classifier (Tkinter; no server or cloud)
-.\classify.ps1
-
-# Or use an interactive terminal
-.\run.ps1 predict --interactive
-
-# One message, both classification tasks
-.\run.ps1 predict --text 'police bol rha hu tumhara beta arrest hai abhi paise bhejo'
-
-# Choose a particular label vocabulary
-.\run.ps1 predict --task complaint --text 'Someone sent me a fake UPI payment request'
-
-# Optional experimental call model; it has not passed the default-promotion rule
-.\run.ps1 predict --backend robust --task call_scam --text 'police bol rha hu abhi paise bhejo'
-```
-
-The launchers use `CYBERLENS_PYTHON` if set, otherwise a local `.venv`, otherwise the existing `anaconda3/envs/NLP` environment under the current user's profile, then `python`. They do not modify an existing environment. Python's WindowsApps alias did not work on the development laptop, so an explicit working environment was used.
-
-## What the two outputs mean
-
-| Task | Training source | Supported labels |
-|---|---|---|
-| `call_scam` | `India_Cyber_Scam_Hinglish_Dataset.csv` | `none`, `police_digital_arrest`, `police_blackmail`, `other_scam` |
-| `complaint` | `train.csv` | 39 parent-category + subcategory combinations, e.g. `Online Financial Fraud :: UPI Related Frauds` |
-
-The Hinglish source has 10,000 rows but only **743 unique texts**. Five original scam labels conflict on identical messages, so I merged `aadhaar`, `amazon`, `bank_kyc`, `lottery`, and `relative` into `other_scam`. The original CSV is unchanged, and the mapping is recorded in `reports/data_audit.json`. The English source has broader complaint labels and **no benign class**, so I treat that output as an incident category, not proof that a message is a scam.
-
-Both models accept English and Hinglish strings, but each source validates its own language/domain. **Reliable seven-subtype classification in both languages needs corrected, aligned training/evaluation data.** Returning both task outputs does not establish cross-language transfer. The interface shows these scope limitations.
-
-## Reproduce training
+## Usage
 
 ```powershell
 .\run.ps1 prepare
 .\run.ps1 train --backend baseline
+
+# Desktop interface
+.\classify.ps1
+
+# Command-line classification
+.\run.ps1 predict --text 'police bol rha hu abhi paise bhejo'
+.\run.ps1 predict --task complaint --text 'Someone sent me a fake UPI payment request'
+.\run.ps1 predict --interactive
+
+# Experimental call model; requires training and local encoder weights
+.\run.ps1 predict --backend robust --task call_scam --text 'police bol rha hu abhi paise bhejo'
+```
+
+PowerShell launchers resolve Python through `CYBERLENS_PYTHON`, a project `.venv`, an available NLP conda environment, or `python`. The `cyberlens` console command is also available after installation.
+
+Predictions include ranked alternatives, class-level evaluation evidence and a review flag. Scores are uncalibrated. An experimental model that has not passed its promotion rule always requires review. Weak complaint-subtype evidence can produce a broader category suggestion.
+
+## Experiments
+
+| Backend | Representation and classifier |
+|---|---|
+| `baseline` | Word, character and hybrid TF-IDF with averaged log-loss SGD |
+| `word2vec` | Custom Skip-gram negative sampling; mean document vectors and a linear head |
+| `subword` | Skip-gram with hashed character n-gram representations |
+| `transformer` | Multilingual DistilBERT fine-tuning |
+| `hierarchical` | Conditional financial-subtype expert combined with baseline scores |
+| `robust` | Nested family-CV comparison including frozen multilingual features |
+| `regularized` | Fixed Naive Bayes and logistic-head comparison for complaints |
+| `margin` | Inner-selected hinge, modified Huber and linear-SVM heads |
+| `semantic` | Frozen multilingual features with an inner-selected regularized head |
+| `ensemble` | Fixed equal-weight sparse/semantic score average |
+| `continued` | Bounded continuation of the one-epoch complaint transformer |
+
+Examples:
+
+```powershell
 .\run.ps1 train --backend word2vec --epochs 3 --max-pairs 300000
 .\run.ps1 train --backend subword --epochs 3 --max-pairs 300000
 .\run.ps1 train --backend hierarchical --task complaint
-# Requires public pretrained weights on first use; training/inference stay local.
+# Public encoder weights are required for neural experiments.
 .\run.ps1 train --backend transformer --task call_scam --epochs 3
 .\run.ps1 train --backend transformer --task complaint --epochs 1 --batch-size 32 --accumulation 1
 .\run.ps1 train --backend robust --task call_scam
@@ -103,54 +116,23 @@ Both models accept English and Hinglish strings, but each source validates its o
 .\run.ps1 train --backend semantic --task complaint
 .\run.ps1 train --backend ensemble --task complaint
 .\run.ps1 train --backend continued --task complaint
+python -m cyberlens.report
 python -m unittest discover -s tests -v
-python -m cyberlens.template_evaluation
-python -m cyberlens.report
-python -m cyberlens.challenge
-python -m cyberlens.report
 ```
 
-Run preparation before training and do not change processed splits during an experiment. Fitted vocabularies and classifiers use their training partition only. The nested `robust` experiment uses its own inner/outer family folds over the call development corpus; its deployment artifact is refitted on all development messages after assessment. Models are saved under `models/`; reports under `reports/`. Further tuning needs fresh final evaluation data.
+The ensemble requires trained baseline and semantic artifacts. Continuation requires the saved one-epoch complaint transformer. Full reproduction, including public encoder acquisition when required, is available through `reproduce.ps1`.
 
-The `robust` experiment requires the locally downloaded public encoder from the transformer setup. It freezes that encoder and compares six fixed candidates with nested family CV. The `regularized` experiment needs a trained complaint baseline and compares three heads without accessing test during selection. Both commands save experimental artifacts; run `python -m cyberlens.report` to apply the recorded promotion rules and regenerate reports. Selecting `robust` for both tasks falls back to baseline for complaints; selecting `regularized` falls back to baseline for calls.
+The default backend follows the recorded promotion criteria. Complaint candidates require a clean/noisy validation macro-F1 gain of at least 0.02 before an additional official-test evaluation. The call candidate also requires a positive lower confidence bound for its family-held-out improvement. Validation has been reused during development; independent evaluation remains necessary.
 
-An optional model that failed its promotion rule is marked experimental in prediction output and always requires review, even if its model score is high. The desktop interface shows that status as well.
+## Documentation
 
-The `margin` experiment selects one of three combined word/character heads inside the original training split. The `semantic` experiment selects C for a regularised head over frozen encoder features using that same inner partition. The `ensemble` experiment requires the baseline and semantic artifacts and averages their scores with fixed equal weights; it does not tune blend weights. Each needs a clean/noisy validation macro-F1 gain of 0.02 before official-test evaluation. These comparisons reuse a development corpus, so a validation gain still needs independent confirmation.
+- [Technical design and methodology](TECHNICAL_GUIDE.md)
+- [Evaluation results](reports/RESULTS.md)
+- [Aggregate complaint error analysis](reports/complaint_error_audit.json)
+- [Changelog](CHANGELOG.md)
 
-The `continued` experiment starts from the saved one-epoch complaint transformer, allows at most two additional epochs and stops if validation mean F1 fails to improve by 0.005. It retains the best qualifying checkpoint and only evaluates it on test if it beats the sparse baseline's validation mean by at least 0.02. It keeps separate weights and reports; the earlier one-epoch artifact remains available.
+## Limitations
 
-`best` is the default inference backend. After generating reports, it selects the backend for each task using clean and noisy validation macro-F1. Explicit `baseline`, `word2vec`, `subword`, `transformer` and `hierarchical` options remain available for comparison. The financial expert did not beat the baseline's selection score, so it is not the default. Transformer inputs are truncated at 192 subword tokens; this can miss evidence in long complaints.
+Structured masking covers selected URL, email, phone, payment and identifier patterns. Names, addresses and contextual identifiers may remain; masked text is not guaranteed anonymous. Processing and inference run locally. Raw datasets and model artifacts are excluded from version control; only trusted serialized models should be loaded.
 
-Alternatively, `.\reproduce.ps1` runs these dependent steps in order and saves a complete console transcript to `reports/reproduction.log`.
-
-For an alternative environment, install `requirements.txt` into your own virtual environment. Select a CUDA-compatible PyTorch wheel using the [official installer](https://pytorch.org/get-started/locally/) if GPU acceleration is required. Baseline inference needs NumPy, pandas, scikit-learn and joblib; PyTorch is needed only for embedding training/tests. `reports/environment.json` records the actual tested package versions.
-
-## Read these next
-
-- `INTERVIEW_GUIDE.md`: detailed mechanisms, decisions, failures, caveats and interview questions.
-- `reports/RESULTS.md`: measured comparisons and test results generated from JSON artifacts.
-- `reports/data_audit.json`: row counts, exclusions, labels, source hashes and mapping.
-- `reports/call_label_conflicts.csv`: hashed template IDs and conflicting label sets; no message text.
-- `reports/manual_challenge.json`: hand-authored diagnostic examples and predictions, including failures.
-- `reports/call_family_evaluation.json`: the harder grouped call evaluation, family counts and fold coverage.
-
-## Repository map
-
-| Path | Purpose |
-|---|---|
-| `cyberlens/` | Data preparation, classifiers, custom embeddings, encoder training, inference and GUI |
-| `tests/` | Language preservation, masking, split separation, gradients and local inference |
-| `.github/workflows/ci.yml` | Core package installation and available tests on Python 3.12 |
-| `INTERVIEW_GUIDE.md` | Mechanisms, decisions, failed experiments, limitations and interview questions |
-| `reports/` | Aggregate metrics and a transparent development diagnostic |
-
-RAG and grounded report generation are future work; the current milestone is text classification.
-
-## Privacy and inference limits
-
-Processing and inference are local. Rule masking handles selected structured identifiers, not all names/addresses or all identifier formats. Copied raw files and reference notebooks remain sensitive. Never upload this folder as a public dataset. Original text and unsafe Python serialization artifacts are excluded by `.gitignore`. Only load trusted local `.joblib` models.
-
-Scores are uncalibrated. `needs_review` uses a heuristic 0.55 threshold and feature coverage; it does not reliably detect all out-of-distribution input. Placeholder replacement is not certified anonymization. There is no RAG or automatic reporting in this version.
-
-The review flag also checks class-level evaluation evidence. Weak or sparsely evaluated complaint subtypes fall back to a broad suggested category with a review note. This is a practical triage rule, not calibrated certainty. The complaint test contains three label combinations absent from training; those remain in the reported test metrics as unsupported classes.
+Synthetic typo tests cover a limited corruption pattern. Template-family grouping is heuristic. Performance on new scam scenarios, languages and label taxonomies requires independent data. The current scope is text classification; retrieval-based guidance and report drafting are planned extensions.

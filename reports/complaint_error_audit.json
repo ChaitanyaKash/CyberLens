@@ -13,6 +13,120 @@
     "weighted_f1": 0.5080955769727915,
     "accuracy": 0.5013811705826915
   },
+  "training_attack_subtype_similarity": {
+    "training_rows": 2886,
+    "classes": 7,
+    "minimum_class_centroid_cosine": 0.9922983475074197,
+    "maximum_class_centroid_cosine": 0.9983253380253337,
+    "pairs": [
+      {
+        "first": "Cyber Attack/ Dependent Crimes :: Data Breach/Theft",
+        "second": "Cyber Attack/ Dependent Crimes :: Denial of Service (DoS)/Distributed Denial of Service (DDOS) attacks",
+        "cosine": 0.9952270591696359
+      },
+      {
+        "first": "Cyber Attack/ Dependent Crimes :: Data Breach/Theft",
+        "second": "Cyber Attack/ Dependent Crimes :: Hacking/Defacement",
+        "cosine": 0.994701069666453
+      },
+      {
+        "first": "Cyber Attack/ Dependent Crimes :: Data Breach/Theft",
+        "second": "Cyber Attack/ Dependent Crimes :: Malware Attack",
+        "cosine": 0.9960095395233268
+      },
+      {
+        "first": "Cyber Attack/ Dependent Crimes :: Data Breach/Theft",
+        "second": "Cyber Attack/ Dependent Crimes :: Ransomware Attack",
+        "cosine": 0.9969431557918058
+      },
+      {
+        "first": "Cyber Attack/ Dependent Crimes :: Data Breach/Theft",
+        "second": "Cyber Attack/ Dependent Crimes :: SQL Injection",
+        "cosine": 0.99343287649098
+      },
+      {
+        "first": "Cyber Attack/ Dependent Crimes :: Data Breach/Theft",
+        "second": "Cyber Attack/ Dependent Crimes :: Tampering with computer source documents",
+        "cosine": 0.9923959393414646
+      },
+      {
+        "first": "Cyber Attack/ Dependent Crimes :: Denial of Service (DoS)/Distributed Denial of Service (DDOS) attacks",
+        "second": "Cyber Attack/ Dependent Crimes :: Hacking/Defacement",
+        "cosine": 0.9958851546145295
+      },
+      {
+        "first": "Cyber Attack/ Dependent Crimes :: Denial of Service (DoS)/Distributed Denial of Service (DDOS) attacks",
+        "second": "Cyber Attack/ Dependent Crimes :: Malware Attack",
+        "cosine": 0.9979169153758167
+      },
+      {
+        "first": "Cyber Attack/ Dependent Crimes :: Denial of Service (DoS)/Distributed Denial of Service (DDOS) attacks",
+        "second": "Cyber Attack/ Dependent Crimes :: Ransomware Attack",
+        "cosine": 0.9979081705895596
+      },
+      {
+        "first": "Cyber Attack/ Dependent Crimes :: Denial of Service (DoS)/Distributed Denial of Service (DDOS) attacks",
+        "second": "Cyber Attack/ Dependent Crimes :: SQL Injection",
+        "cosine": 0.9952351329118329
+      },
+      {
+        "first": "Cyber Attack/ Dependent Crimes :: Denial of Service (DoS)/Distributed Denial of Service (DDOS) attacks",
+        "second": "Cyber Attack/ Dependent Crimes :: Tampering with computer source documents",
+        "cosine": 0.9923737184299498
+      },
+      {
+        "first": "Cyber Attack/ Dependent Crimes :: Hacking/Defacement",
+        "second": "Cyber Attack/ Dependent Crimes :: Malware Attack",
+        "cosine": 0.9968802337285695
+      },
+      {
+        "first": "Cyber Attack/ Dependent Crimes :: Hacking/Defacement",
+        "second": "Cyber Attack/ Dependent Crimes :: Ransomware Attack",
+        "cosine": 0.9970675471101023
+      },
+      {
+        "first": "Cyber Attack/ Dependent Crimes :: Hacking/Defacement",
+        "second": "Cyber Attack/ Dependent Crimes :: SQL Injection",
+        "cosine": 0.9922983475074197
+      },
+      {
+        "first": "Cyber Attack/ Dependent Crimes :: Hacking/Defacement",
+        "second": "Cyber Attack/ Dependent Crimes :: Tampering with computer source documents",
+        "cosine": 0.9964518005977376
+      },
+      {
+        "first": "Cyber Attack/ Dependent Crimes :: Malware Attack",
+        "second": "Cyber Attack/ Dependent Crimes :: Ransomware Attack",
+        "cosine": 0.9983253380253337
+      },
+      {
+        "first": "Cyber Attack/ Dependent Crimes :: Malware Attack",
+        "second": "Cyber Attack/ Dependent Crimes :: SQL Injection",
+        "cosine": 0.9967662915163669
+      },
+      {
+        "first": "Cyber Attack/ Dependent Crimes :: Malware Attack",
+        "second": "Cyber Attack/ Dependent Crimes :: Tampering with computer source documents",
+        "cosine": 0.9945279686608312
+      },
+      {
+        "first": "Cyber Attack/ Dependent Crimes :: Ransomware Attack",
+        "second": "Cyber Attack/ Dependent Crimes :: SQL Injection",
+        "cosine": 0.9958287352528862
+      },
+      {
+        "first": "Cyber Attack/ Dependent Crimes :: Ransomware Attack",
+        "second": "Cyber Attack/ Dependent Crimes :: Tampering with computer source documents",
+        "cosine": 0.9955287315825471
+      },
+      {
+        "first": "Cyber Attack/ Dependent Crimes :: SQL Injection",
+        "second": "Cyber Attack/ Dependent Crimes :: Tampering with computer source documents",
+        "cosine": 0.9940885439230516
+      }
+    ],
+    "interpretation": "Very similar average wording warrants human review; centroid similarity alone does not prove incorrect labels or absent predictive signal."
+  },
   "classes": [
     {
       "label": "Any Other Cyber Crime :: Other",

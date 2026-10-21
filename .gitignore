@@ -6,6 +6,7 @@ models/
 *.log
 .cache/
 .publish/
+local_notes/
 reports/*
 !reports/RESULTS.md
 !reports/data_audit.json
@@ -25,7 +26,6 @@ reports/*
 !reports/complaint_error_audit.json
 !reports/optimizer_validation.json
 !reports/manual_challenge.json
-!reports/tests.log
 .coverage
 *.egg-info/
 build/

@@ -3,6 +3,8 @@ import json
 import numpy as np
 from .data import ROOT, load
 from .metrics import save_report
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
 
 
 def parent_metrics(report):
@@ -54,12 +56,27 @@ def main():
     labels = report["confusion_labels"]
     errors = [{"actual":labels[i],"predicted":labels[j],"count":int(matrix[i,j])}
               for i in range(len(labels)) for j in range(len(labels)) if i != j and matrix[i,j]]
+    attacks = tr[tr.label.str.startswith("Cyber Attack/ Dependent Crimes ::")]
+    attack_similarity = {}
+    if attacks.label.nunique() > 1:
+        features = TfidfVectorizer(ngram_range=(1,2),min_df=3,max_features=30000).fit_transform(attacks.text)
+        names = sorted(attacks.label.unique())
+        centres = np.vstack([np.asarray(features[attacks.label.to_numpy()==name].mean(axis=0)).ravel() for name in names])
+        similarities = cosine_similarity(centres)
+        pairs = [{"first":names[i],"second":names[j],"cosine":float(similarities[i,j])}
+                 for i in range(len(names)) for j in range(i+1,len(names))]
+        attack_similarity = {"training_rows":len(attacks),"classes":len(names),
+                             "minimum_class_centroid_cosine":min(row["cosine"] for row in pairs),
+                             "maximum_class_centroid_cosine":max(row["cosine"] for row in pairs),
+                             "pairs":pairs,
+                             "interpretation":"Very similar average wording warrants human review; centroid similarity alone does not prove incorrect labels or absent predictive signal."}
     save_report(ROOT/"reports/complaint_error_audit.json",{
         "training_support_min":int(counts.min()),"training_support_max":int(counts.max()),
         "training_support_ratio":float(counts.max()/counts.min()),
         "unsupported_test_labels":sorted(set(te.label)-set(tr.label)),
         "test_conflicting_normalized_groups":int((te.groupby("group").label.nunique()>1).sum()),
         "baseline_test_metrics":{key:report[key] for key in ("macro_f1","weighted_f1","accuracy")},
+        "training_attack_subtype_similarity":attack_similarity,
         "classes":classes,"largest_confusions":sorted(errors,key=lambda row:row["count"],reverse=True)[:20],
         "limits":"Diagnostic of an already-examined benchmark; these aggregate observations do not establish causality or justify tuning on test."})
 

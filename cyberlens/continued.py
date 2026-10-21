@@ -66,6 +66,8 @@ def train(root=ROOT):
                 with torch.autocast(device_type="cuda",dtype=torch.bfloat16):
                     logits = model(**inputs).logits
                 predictions.extend(labels[i] for i in logits.argmax(-1).cpu().tolist())
+                if (offset+24)%2400 == 0:
+                    print("Validation predicted",min(offset+24,len(values)),"/",len(values),flush=True)
         return predictions
 
     validation_typos = [corrupt(t,seed=42+i,rate=.25) for i,t in enumerate(va.text)]
@@ -91,6 +93,7 @@ def train(root=ROOT):
                 optimizer.zero_grad(set_to_none=True)
             if (step+1)%400 == 0:
                 print("Total epoch",added_epoch+1,"batch",step+1,"/",len(loader),"mean loss",total/(step+1),flush=True)
+        print("Finished training total epoch",added_epoch+1,"checking clean/noisy validation",flush=True)
         clean = score(va.label,predict(va.text.tolist()),labels)
         noisy = score(va.label,predict(validation_typos),labels)
         selection = (clean["macro_f1"]+noisy["macro_f1"])/2
