@@ -385,6 +385,8 @@ Before running, I required a clean/noisy mean gain of at least 0.02, a positive 
 
 The approximate 95% interval for the clean F1 difference was [-0.0283, 0.4064]. It includes zero. The point estimate improved a lot, but there is not enough independent family evidence to satisfy my promotion rule. I kept the old baseline as the default and exposed the new model as the optional `robust` backend. I did not loosen the rule after seeing the result. This bootstrap interval is approximate; overlapping CV training folds and heuristic families limit its interpretation.
 
+I also carried the promotion decision into inference. A rejected optional model is marked experimental and its predictions always require review, regardless of the model score. This prevents a promising development experiment from silently looking like the validated default in the desktop interface.
+
 There is another limitation: I had already explored this corpus before the nested experiment. Nested folds reduce selection leakage within this run; they cannot undo previous development exposure. The next useful evaluation is a fresh, human-labelled collection with new scam scenarios, legitimate warnings, negation, spelling variation, English, Hinglish, and aligned labels. Synthetic letter swaps only test one kind of spelling noise.
 
 ### The English comparison
@@ -404,6 +406,44 @@ The local pretrained tokenizer also triggered a Mistral-regex warning in the ins
 I made the frozen encoder load lazily during inference and excluded its loaded tensors from the joblib wrapper state. That keeps the saved head small and lets a fresh process load the model using the local public weights. The module entry point imports the canonical class before training so the artifact can load outside the original training command. Private datasets, vector caches and model weights remain local. The full reproduction script runs both bounded experiments and regenerates the reports.
 
 In an interview, my claim is: I improved development generalisation across held-out template families with a frozen multilingual representation and a regularised head, measured the uncertainty, and declined to promote it when the evidence did not pass the rule. I would not claim production reliability or that overfitting has been eliminated.
+
+## Why the complaint score stayed low, and my next comparison
+
+The complaint baseline has test accuracy 0.5014 and weighted F1 0.5081, but macro-F1 0.2345. Those metrics answer different questions. Macro-F1 gives the tiny classes the same weight as the largest class, so a model that mainly recognises common financial complaints can have reasonable aggregate accuracy and still have poor macro-F1. I should not substitute the larger number and call the subtype problem solved.
+
+The prepared training set has between 23 and 15,162 examples per class, roughly a 659:1 ratio. Three test labels have no trained class. There are 130 conflicting normalized templates in the official test. I retain them rather than cleaning the test to make the result look better. There is also a distribution difference: one sexual-abuse-content label has 186 training messages but 911 test messages. That is an observed mismatch, not proof of its cause. Several cyberattack subtypes with hundreds of training examples also have low F1; class imbalance does not explain all the errors.
+
+The fixed Naive Bayes/logistic comparison failed: its best clean/noisy validation mean was 0.2472, below the baseline's 0.2579. It did not pass the minimum-improvement rule, so I did not run another official-test evaluation. The full logistic comparison took much longer than the small GPU call experiment because it fitted separate sparse classifiers for 39 labels. Sparse models are not automatically the fastest option for every training setup.
+
+For the next comparison I fixed three margin-based heads: SGD hinge loss, SGD modified Huber loss, and linear SVM at C=1. All use the combined word/character features. An earlier word-only SVM check had failed; this experiment also changes the representation, so I record that distinction. Hinge loss concentrates on classification margins rather than estimating class probabilities. Modified Huber provides a smooth margin loss. These objectives may rank rare classes differently from log loss, but there is no guarantee they improve this dataset.
+
+I used a stratified 80/20 inner split of the original training portion with seed 2026. The training portion has unique normalized groups; the inner sides cannot share one of those groups. This is exact-template control, not a semantic-family guarantee. I fitted the inner TF-IDF features only on inner training, then selected one head using the mean clean/noisy inner-validation macro-F1. I refitted only that selected head on all original training examples and checked the existing validation set once. The same fixed minimum gain of 0.02 applies before official-test evaluation.
+
+This extra inner split avoids comparing all new candidates directly on the already reused original validation set. It cannot erase earlier development exposure. I did not adjust the test split, merge more labels, remove hard classes or use test errors to tune individual keywords. The generated section records the outcome whether the experiment wins or loses.
+
+The margin head exposes softmax-transformed decision scores for the existing ranking interface. That transformation preserves the predicted class ordering; it is not calibration. I added a regression test for score normalisation and prediction order, and rejected optional artifacts still require review during inference.
+
+I tested a different representation in parallel: attention-mask mean-pooled, L2-normalised features from the frozen multilingual encoder. The choice of logistic-head C=0.01 or 0.1 is made only on the original-training inner partition, including synthetic typo inputs. Each scaler learns only its inner-training mean and variance. After selection, I refit the head and scaler on all original training examples, then check original validation. Fixed encoder vectors are cached locally, keyed by input content and encoder location; no task labels update the encoder.
+
+Before the component validation outcomes arrived, I also declared one fixed 50/50 sparse/semantic ensemble. Averaging can help when the representations make different errors, but uncalibrated score scales can also make it worse. I did not search weights. The implementation verifies that the class vocabularies match and explicitly reorders semantic probability columns before averaging. A regression test covers reordered labels and mismatched vocabularies.
+
+These are additional development comparisons, not a fresh final benchmark. I retained the minimum gain of 0.02 before any new official-test evaluation and will not keep adding settings merely until one looks good. The diagnostic audit is reproducible with `python -m cyberlens.diagnose`; its public JSON contains aggregate label counts, confusion counts and metrics, without complaint text.
+
+### What the additional comparisons showed
+
+The inner-selected hybrid SVM reached original-validation mean F1 0.2292, below the baseline 0.2579. The frozen semantic head reached 0.1524, and the predeclared equal-weight ensemble reached 0.2064. None passed the gate, so I did not spend another test evaluation on them. The modified Huber inner fit also reached its fixed 80-iteration limit before convergence. This is a limitation of that bounded run, not evidence that every possible Huber model is inferior.
+
+This is useful negative evidence: a frozen encoder that helped the small call dataset did not transfer that benefit to the much broader complaint taxonomy. A linear SVM also did not automatically beat averaged log-loss SGD. Combining two representations did not help when their score scales and errors were unsuitable. I keep the optional artifacts for learning, with experimental/review flags, rather than replacing a stronger default.
+
+### Checking insufficient training without training indefinitely
+
+The original complaint transformer had only one epoch, taking about 974 seconds with training loss 2.3992 and validation macro-F1 0.1677. One epoch does not establish that this model family has been adequately fitted. Those numbers do not prove underfitting either; they justify a bounded continuation check.
+
+I kept the existing encoder checkpoint and allowed at most two additional epochs. I reset AdamW and its warmup/decay scheduler, used learning rate 2e-5, weight decay 0.01, batch size 16 with two-step gradient accumulation, the same 192-token limit, square-root inverse-frequency loss weights and training-only typo augmentation. Gradient checkpointing, bfloat16 and gradient clipping keep this within the laptop's memory budget. I did not update call-model weights or the source CSVs.
+
+After each additional epoch I evaluate clean/noisy validation, keep a checkpoint only when its mean F1 improves by at least 0.005, and stop when that improvement stalls. The unchanged original one-epoch checkpoint is the starting comparison and remains saved separately. The continued model still needs to exceed the sparse baseline's validation mean by at least 0.02 before official-test evaluation. Test scores cannot choose the number of epochs.
+
+More epochs are not automatically overfitting, and fewer epochs are not automatically safe. The relevant evidence is whether training improvements transfer to unseen validation examples. Even this stopping rule cannot undo the cumulative reuse of validation during development; a fresh independent set is needed for a strong final claim. The generated history below records the actual outcome, including a failed continuation if that is what happens.
 
 <!-- GENERATED RESULTS -->
 
@@ -469,6 +509,51 @@ My fixed promotion rule was: Mean gain >=0.02; paired clean family-bootstrap low
 The optional `robust` artifact uses **frozen_c01**, selected with a separate grouped inner search and refitted on all 743 development messages. Its training-set performance is not the reported nested score.
 I kept the baseline as the default. The encoder is frozen; only a small L2-regularized classification head learns labels. This reduces capacity but does not prove absence of overfitting.
 This corpus was explored before this experiment, families are heuristic, and several classes have few independent families. Fresh human-labelled English/Hinglish messages are still needed for independent confirmation.
+
+## Bounded complaint improvement experiment
+
+I compared three fixed heads on the same training-only TF-IDF features. Selection uses only the mean clean/noisy validation macro-F1, with a fixed minimum gain of 0.02 before promotion.
+
+| Head | Clean validation macro-F1 | Typo validation macro-F1 | Selection mean |
+|---|---:|---:|---:|
+| complement_nb | 0.1635 | 0.1687 | 0.1661 |
+| l2_balanced | 0.2501 | 0.2443 | 0.2472 |
+| l2_unweighted | 0.2028 | 0.1896 | 0.1962 |
+
+Reference selection mean: **0.2579**. Selected head: **l2_balanced**. Promotion rule passed: **False**.
+Not evaluated: no material validation improvement. Existing baseline retained.
+The validation set has been used in earlier development, so this remains development evidence. I did not change labels, remove difficult classes or choose settings from test scores.
+
+## Inner-selected complaint margin experiment
+
+I split only the original training partition into 49700 inner-training and 12426 inner-validation messages. Its TF-IDF vocabulary was fitted on inner training only; normalized family overlap was 0.
+I fixed three heads: averaged SGD hinge, averaged SGD modified Huber, and a balanced linear SVM at C=1. All use hybrid word/character features. Earlier word-only SVM checks were weaker; this comparison uses the combined representation.
+
+| Head | Inner clean/noisy mean macro-F1 |
+|---|---:|
+| sgd_hinge | 0.2368 |
+| modified_huber | 0.2235 |
+| linear_svc | 0.2466 |
+
+Inner-selected head: **linear_svc**. After refitting on the full original training split, original validation mean macro-F1 was **0.2292**, versus **0.2579** for the baseline. Promotion rule passed: **False**.
+Not evaluated: selected candidate did not pass the validation improvement rule.
+The original validation corpus was used in earlier experiments. The inner split limits reuse during this search but does not make the existing validation/test corpus fresh independent evidence. Softmax-converted margins are ranking scores, not calibrated probabilities.
+
+## Frozen complaint semantics and fixed ensemble
+
+I also tested fixed pretrained multilingual representations. C=0.01 or 0.1 is selected inside the original training split, with scalers fitted on inner training only. The chosen head is refitted on full original training before the original validation check.
+The additional ensemble is one predeclared 50/50 average with the baseline. I did not search blend weights. Components use the same class vocabulary with explicit column alignment.
+
+| Candidate | Clean validation macro-F1 | Typo validation macro-F1 | Mean | Promotion passed |
+|---|---:|---:|---:|---|
+| semantic | 0.1614 | 0.1434 | 0.1524 | False |
+| ensemble | 0.2125 | 0.2002 | 0.2064 | False |
+
+semantic: Not evaluated: validation improvement rule failed.
+
+ensemble: Not evaluated: validation improvement rule failed.
+
+All of these runs use an already explored development corpus. The bounded search and frozen encoder reduce some overfitting risks; fresh independent labels are still needed to confirm transfer.
 
 Default inference uses validation-selected backends:
 

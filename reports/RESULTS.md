@@ -61,6 +61,51 @@ The optional `robust` artifact uses **frozen_c01**, selected with a separate gro
 I kept the baseline as the default. The encoder is frozen; only a small L2-regularized classification head learns labels. This reduces capacity but does not prove absence of overfitting.
 This corpus was explored before this experiment, families are heuristic, and several classes have few independent families. Fresh human-labelled English/Hinglish messages are still needed for independent confirmation.
 
+## Bounded complaint improvement experiment
+
+I compared three fixed heads on the same training-only TF-IDF features. Selection uses only the mean clean/noisy validation macro-F1, with a fixed minimum gain of 0.02 before promotion.
+
+| Head | Clean validation macro-F1 | Typo validation macro-F1 | Selection mean |
+|---|---:|---:|---:|
+| complement_nb | 0.1635 | 0.1687 | 0.1661 |
+| l2_balanced | 0.2501 | 0.2443 | 0.2472 |
+| l2_unweighted | 0.2028 | 0.1896 | 0.1962 |
+
+Reference selection mean: **0.2579**. Selected head: **l2_balanced**. Promotion rule passed: **False**.
+Not evaluated: no material validation improvement. Existing baseline retained.
+The validation set has been used in earlier development, so this remains development evidence. I did not change labels, remove difficult classes or choose settings from test scores.
+
+## Inner-selected complaint margin experiment
+
+I split only the original training partition into 49700 inner-training and 12426 inner-validation messages. Its TF-IDF vocabulary was fitted on inner training only; normalized family overlap was 0.
+I fixed three heads: averaged SGD hinge, averaged SGD modified Huber, and a balanced linear SVM at C=1. All use hybrid word/character features. Earlier word-only SVM checks were weaker; this comparison uses the combined representation.
+
+| Head | Inner clean/noisy mean macro-F1 |
+|---|---:|
+| sgd_hinge | 0.2368 |
+| modified_huber | 0.2235 |
+| linear_svc | 0.2466 |
+
+Inner-selected head: **linear_svc**. After refitting on the full original training split, original validation mean macro-F1 was **0.2292**, versus **0.2579** for the baseline. Promotion rule passed: **False**.
+Not evaluated: selected candidate did not pass the validation improvement rule.
+The original validation corpus was used in earlier experiments. The inner split limits reuse during this search but does not make the existing validation/test corpus fresh independent evidence. Softmax-converted margins are ranking scores, not calibrated probabilities.
+
+## Frozen complaint semantics and fixed ensemble
+
+I also tested fixed pretrained multilingual representations. C=0.01 or 0.1 is selected inside the original training split, with scalers fitted on inner training only. The chosen head is refitted on full original training before the original validation check.
+The additional ensemble is one predeclared 50/50 average with the baseline. I did not search blend weights. Components use the same class vocabulary with explicit column alignment.
+
+| Candidate | Clean validation macro-F1 | Typo validation macro-F1 | Mean | Promotion passed |
+|---|---:|---:|---:|---|
+| semantic | 0.1614 | 0.1434 | 0.1524 | False |
+| ensemble | 0.2125 | 0.2002 | 0.2064 | False |
+
+semantic: Not evaluated: validation improvement rule failed.
+
+ensemble: Not evaluated: validation improvement rule failed.
+
+All of these runs use an already explored development corpus. The bounded search and frozen encoder reduce some overfitting risks; fresh independent labels are still needed to confirm transfer.
+
 Default inference uses validation-selected backends:
 
 - call_scam: **baseline** (selection score 1.0000).

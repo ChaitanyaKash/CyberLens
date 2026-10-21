@@ -11,7 +11,7 @@ def main():
     commands = parser.add_subparsers(dest="command", required=True)
     commands.add_parser("prepare")
     train = commands.add_parser("train")
-    train.add_argument("--backend", choices=["baseline", "word2vec", "subword", "transformer", "hierarchical", "robust", "regularized"], default="baseline")
+    train.add_argument("--backend", choices=["baseline", "word2vec", "subword", "transformer", "hierarchical", "robust", "regularized", "margin", "semantic", "ensemble", "continued"], default="baseline")
     train.add_argument("--task", choices=["both", *TASKS], default="both")
     train.add_argument("--epochs", type=int)
     train.add_argument("--max-pairs", type=int, default=300000)
@@ -20,7 +20,7 @@ def main():
     pred = commands.add_parser("predict")
     pred.add_argument("--text")
     pred.add_argument("--task", choices=["both", *TASKS], default="both")
-    pred.add_argument("--backend", choices=["best", "baseline", "word2vec", "subword", "transformer", "hierarchical", "robust", "regularized"], default="best")
+    pred.add_argument("--backend", choices=["best", "baseline", "word2vec", "subword", "transformer", "hierarchical", "robust", "regularized", "margin", "semantic", "ensemble", "continued"], default="best")
     pred.add_argument("--interactive", action="store_true")
     args = parser.parse_args()
     if args.command == "prepare":
@@ -34,6 +34,24 @@ def main():
             if args.task == "complaint":
                 parser.error("The nested robust experiment is for --task call_scam")
             from .robust import train
+            train()
+        elif args.backend == "continued":
+            if args.task == "call_scam":
+                parser.error("The bounded continuation requires --task complaint")
+            from .continued import train
+            train()
+        elif args.backend in ("semantic","ensemble"):
+            if args.task == "call_scam":
+                parser.error("This complaint experiment requires --task complaint")
+            if args.backend == "semantic":
+                from .semantic import train
+            else:
+                from .ensemble import train
+            train()
+        elif args.backend == "margin":
+            if args.task == "call_scam":
+                parser.error("The margin experiment is for --task complaint")
+            from .margin import train
             train()
         elif args.backend == "regularized":
             if args.task == "call_scam":

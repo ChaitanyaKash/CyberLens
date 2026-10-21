@@ -20,7 +20,7 @@ def main():
     controls.pack(fill="x", padx=20, pady=10)
     backend = tk.StringVar(value="best")
     ttk.Label(controls, text="Model:").pack(side="left")
-    ttk.Combobox(controls, textvariable=backend, values=("best", "baseline", "word2vec", "subword", "transformer", "hierarchical", "robust", "regularized"),
+    ttk.Combobox(controls, textvariable=backend, values=("best", "baseline", "word2vec", "subword", "transformer", "hierarchical", "robust", "regularized", "margin", "semantic", "ensemble", "continued"),
                  state="readonly", width=16).pack(side="left", padx=8)
     output = tk.Text(window, wrap="word", font=("Consolas", 11), state="disabled")
     output.pack(fill="both", expand=True, padx=20, pady=(0,20))
@@ -38,6 +38,8 @@ def main():
             lines = ["MODEL INPUT (partially masked):", data["masked_text"], ""]
             for task, result in data["predictions"].items():
                 lines.extend([task.upper(), result["scope"]])
+                if result["experimental"]:
+                    lines.append("Experimental model: did not pass the default-promotion rule.")
                 lines.append("Suggested type: "+result["suggested_type"])
                 if "category_top" in result:
                     category = result["category_top"][0]

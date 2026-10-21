@@ -1,7 +1,7 @@
 """Read saved confusion matrices to inspect class failures without exposing source text."""
 import json
 import numpy as np
-from .data import ROOT
+from .data import ROOT, load
 from .metrics import save_report
 
 
@@ -40,6 +40,28 @@ def main():
         if " :: " in name:
             print(name, round(r["f1-score"],3),"support",r["support"])
     save_report(ROOT/"reports/parent_diagnostic.json",diagnostic)
+    df = load("complaint")
+    tr,te = df[df.split == "train"],df[df.split == "test"]
+    counts = tr.label.value_counts()
+    report = models["baseline"]["test"]
+    classes = []
+    for label in report["confusion_labels"]:
+        row = report["per_class"][label]
+        a,b = int((tr.label==label).sum()),int((te.label==label).sum())
+        classes.append({"label":label,"train_rows":a,"test_rows":b,
+                        "train_fraction":a/len(tr),"test_fraction":b/len(te),"test_f1":row["f1-score"]})
+    matrix = np.array(report["confusion_matrix"])
+    labels = report["confusion_labels"]
+    errors = [{"actual":labels[i],"predicted":labels[j],"count":int(matrix[i,j])}
+              for i in range(len(labels)) for j in range(len(labels)) if i != j and matrix[i,j]]
+    save_report(ROOT/"reports/complaint_error_audit.json",{
+        "training_support_min":int(counts.min()),"training_support_max":int(counts.max()),
+        "training_support_ratio":float(counts.max()/counts.min()),
+        "unsupported_test_labels":sorted(set(te.label)-set(tr.label)),
+        "test_conflicting_normalized_groups":int((te.groupby("group").label.nunique()>1).sum()),
+        "baseline_test_metrics":{key:report[key] for key in ("macro_f1","weighted_f1","accuracy")},
+        "classes":classes,"largest_confusions":sorted(errors,key=lambda row:row["count"],reverse=True)[:20],
+        "limits":"Diagnostic of an already-examined benchmark; these aggregate observations do not establish causality or justify tuning on test."})
 
 
 if __name__ == "__main__":

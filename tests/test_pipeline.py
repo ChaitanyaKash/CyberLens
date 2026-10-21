@@ -5,6 +5,29 @@ from cyberlens.data import ROOT, TASKS, load
 
 
 class PreprocessingTests(unittest.TestCase):
+    def test_fixed_ensemble_aligns_class_columns(self):
+        from cyberlens.ensemble import FixedBlend
+        class Stub:
+            def __init__(self,labels,probs):
+                self.classes_,self.probs = np.array(labels),np.array([probs])
+            def predict_proba(self,texts):
+                return np.repeat(self.probs,len(texts),axis=0)
+        model = FixedBlend(Stub(["a","b","c"],[.6,.3,.1]),Stub(["c","a","b"],[.1,.8,.1]))
+        np.testing.assert_allclose(model.predict_proba(["x"]),[[.7,.2,.1]])
+        np.testing.assert_array_equal(model.predict(["x"]),["a"])
+        with self.assertRaises(ValueError):
+            FixedBlend(Stub(["a","b"],[.5,.5]),Stub(["a","c"],[.5,.5]))
+
+    def test_margin_scores_preserve_prediction_order(self):
+        from cyberlens.margin import head
+        x = np.array([[2,0,0],[3,0,0],[0,2,0],[0,3,0],[0,0,2],[0,0,3]],dtype=float)
+        y = np.array(["a","a","b","b","c","c"])
+        for name in ("sgd_hinge","modified_huber","linear_svc"):
+            model = head(name).fit(x,y)
+            probs = model.predict_proba(x)
+            np.testing.assert_allclose(probs.sum(axis=1),np.ones(len(x)))
+            np.testing.assert_array_equal(model.classes_[probs.argmax(axis=1)],model.predict(x))
+
     def test_promotion_rejects_uncertain_gain_and_typo_regression(self):
         from cyberlens.robust import promotion_allowed
         self.assertFalse(promotion_allowed(.16,-.028,.77,.63))
@@ -68,8 +91,8 @@ class DataTests(unittest.TestCase):
                          "Local model artifacts are unavailable")
     def test_all_available_saved_backends_load_and_predict(self):
         from cyberlens.predict import Predictor
-        for backend in ("baseline","word2vec","subword","hierarchical","transformer","regularized"):
-            path = ROOT/"models"/("complaint_transformer" if backend == "transformer" else f"complaint_{backend}.joblib")
+        for backend in ("baseline","word2vec","subword","hierarchical","transformer","regularized","margin","semantic","ensemble","continued"):
+            path = ROOT/"models"/(f"complaint_{backend}" if backend in ("transformer","continued") else f"complaint_{backend}.joblib")
             if path.exists():
                 result = Predictor(backend=backend).predict("Someone asked for my UPI PIN 1234","complaint")
                 self.assertNotIn("1234",result["masked_text"])
@@ -84,6 +107,11 @@ class DataTests(unittest.TestCase):
         self.assertNotIn("123456",result["masked_text"])
         output = result["predictions"]["call_scam"]
         self.assertEqual(output["class_evidence"]["source"],"nested template-family cross-validation")
+        import json
+        report = json.loads((ROOT/"reports/call_scam_robust.json").read_text())
+        self.assertEqual(output["experimental"],not report["adopt"])
+        if not report["adopt"]:
+            self.assertTrue(output["needs_review"])
         self.assertEqual(len(output["top"]),3)
         encoder = predictor.models[("call_scam","robust")]["model"]._encoder
         if encoder is not None:

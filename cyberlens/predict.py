@@ -29,24 +29,24 @@ class Predictor:
                 backend = json.loads(registry.read_text())[name]["backend"] if registry.exists() else "baseline"
             if backend == "hierarchical" and name == "call_scam":
                 backend = "baseline"
-            if (backend == "robust" and name == "complaint") or (backend == "regularized" and name == "call_scam"):
+            if (backend == "robust" and name == "complaint") or (backend in ("regularized","margin","semantic","ensemble","continued") and name == "call_scam"):
                 backend = "baseline"
             cache_key = (name,backend)
             if cache_key not in self.models:
-                if backend == "transformer":
+                if backend in ("transformer","continued"):
                     from .transformer import TransformerPredictor
-                    self.models[cache_key] = {"model": TransformerPredictor(self.root/"models"/f"{name}_transformer"), "mode":"transformer"}
+                    self.models[cache_key] = {"model": TransformerPredictor(self.root/"models"/f"{name}_{backend}"), "mode":backend}
                 else:
                     path = self.root / "models" / f"{name}_{backend}.joblib"
                     self.models[cache_key] = joblib.load(path)
             bundle = self.models[cache_key]
-            if backend in ("baseline","regularized"):
+            if backend in ("baseline","regularized","margin"):
                 model = bundle["model"]
                 features = model.named_steps["features"].transform([cleaned])
                 probs = model.named_steps["classifier"].predict_proba(features)[0]
                 labels = model.classes_
                 coverage = features.nnz > 0
-            elif backend == "robust":
+            elif backend in ("robust","semantic","ensemble"):
                 probs = bundle["model"].predict_proba([cleaned])[0]
                 labels = bundle["model"].classes_
                 coverage = True
@@ -55,7 +55,7 @@ class Predictor:
                 probs = model.predict_proba([cleaned])[0]
                 labels = model.classes_
                 coverage = model.base.named_steps["features"].transform([cleaned]).nnz > 0
-            elif backend == "transformer":
+            elif backend in ("transformer","continued"):
                 probs = bundle["model"].predict_proba([cleaned])[0]
                 labels = bundle["model"].classes_
                 coverage = True
@@ -70,28 +70,33 @@ class Predictor:
             top = [{"label": str(labels[i]), "score": float(probs[i])} for i in order]
             if cache_key not in self.quality:
                 import json
+                experimental = False
                 report_path = self.root/"reports"/f"{name}_{backend}.json"
                 family_path = self.root/"reports/call_family_evaluation.json"
                 if name == "call_scam" and backend == "baseline" and family_path.exists():
                     quality = json.loads(family_path.read_text())["oof"]["per_class"]
                     source = "template-family cross-validation"
                 elif backend == "robust" and report_path.exists():
-                    quality = json.loads(report_path.read_text())["nested"]["per_class"]
+                    report = json.loads(report_path.read_text())
+                    quality = report["nested"]["per_class"]
+                    experimental = not report.get("adopt",False)
                     source = "nested template-family cross-validation"
                 elif report_path.exists():
                     report = json.loads(report_path.read_text())
                     if backend == "baseline":
                         report = report[report["selected"]]
                     quality,source = report["validation"]["per_class"],"validation"
+                    experimental = backend in ("regularized","margin","semantic","ensemble","continued") and not report.get("adopt",False)
                 else:
                     quality,source = {},"unavailable"
-                self.quality[cache_key] = quality,source
-            quality,source = self.quality[cache_key]
+                self.quality[cache_key] = quality,source,experimental
+            quality,source,experimental = self.quality[cache_key]
             evidence = quality.get(top[0]["label"],{})
             weak_class = evidence.get("f1-score",0) < .5 or evidence.get("support",0) < 20
             result["predictions"][name] = {
                 "model": bundle.get("mode", backend), "top": top,
-                "needs_review": bool(not coverage or top[0]["score"] < threshold or weak_class),
+                "needs_review": bool(not coverage or top[0]["score"] < threshold or weak_class or experimental),
+                "experimental": experimental,
                 "has_known_features": bool(coverage),
                 "class_evidence": {"source":source,"f1":evidence.get("f1-score"),"support":evidence.get("support"),
                                    "notice":"Class-level evaluation summary, not this message's probability of correctness"},

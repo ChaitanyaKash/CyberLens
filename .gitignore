@@ -18,6 +18,11 @@ reports/*
 !reports/call_family_evaluation.json
 !reports/call_scam_robust.json
 !reports/complaint_regularized.json
+!reports/complaint_margin.json
+!reports/complaint_semantic.json
+!reports/complaint_ensemble.json
+!reports/complaint_continued.json
+!reports/complaint_error_audit.json
 !reports/optimizer_validation.json
 !reports/manual_challenge.json
 !reports/tests.log

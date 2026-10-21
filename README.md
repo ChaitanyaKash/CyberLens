@@ -35,6 +35,8 @@ The optional `robust` call experiment reached **0.8256** clean / **0.7709** typo
 
 The first exact-deduplicated call split scored 1.0000, but related templates were still present on both sides. I replaced that headline with a harder template-family evaluation. This is still a small dataset, not an independent real-world benchmark. English/Hinglish transfer and seven-subtype classification need better labels and more diverse examples.
 
+The English subtype score is still weak. Its baseline test accuracy is 0.5014 and weighted F1 is 0.5081, while macro-F1 is 0.2345 because each class gets equal weight. Training support ranges from 23 to 15,162 examples per class. Three test labels have no trained class, and 130 test templates have conflicting labels. Some frequent classes also perform badly, so imbalance alone does not explain the result. I keep all these test cases in the report.
+
 ## Setup from GitHub
 
 Raw complaints, reference notebook outputs, pretrained caches and trained weights are **not distributed in this repository**. Public CI runs the available self-contained tests; private-data/model integration tests explicitly skip when assets are absent.
@@ -97,6 +99,10 @@ Both models accept English and Hinglish strings, but each source validates its o
 .\run.ps1 train --backend transformer --task complaint --epochs 1 --batch-size 32 --accumulation 1
 .\run.ps1 train --backend robust --task call_scam
 .\run.ps1 train --backend regularized --task complaint
+.\run.ps1 train --backend margin --task complaint
+.\run.ps1 train --backend semantic --task complaint
+.\run.ps1 train --backend ensemble --task complaint
+.\run.ps1 train --backend continued --task complaint
 python -m unittest discover -s tests -v
 python -m cyberlens.template_evaluation
 python -m cyberlens.report
@@ -107,6 +113,12 @@ python -m cyberlens.report
 Run preparation before training and do not change processed splits during an experiment. Fitted vocabularies and classifiers use their training partition only. The nested `robust` experiment uses its own inner/outer family folds over the call development corpus; its deployment artifact is refitted on all development messages after assessment. Models are saved under `models/`; reports under `reports/`. Further tuning needs fresh final evaluation data.
 
 The `robust` experiment requires the locally downloaded public encoder from the transformer setup. It freezes that encoder and compares six fixed candidates with nested family CV. The `regularized` experiment needs a trained complaint baseline and compares three heads without accessing test during selection. Both commands save experimental artifacts; run `python -m cyberlens.report` to apply the recorded promotion rules and regenerate reports. Selecting `robust` for both tasks falls back to baseline for complaints; selecting `regularized` falls back to baseline for calls.
+
+An optional model that failed its promotion rule is marked experimental in prediction output and always requires review, even if its model score is high. The desktop interface shows that status as well.
+
+The `margin` experiment selects one of three combined word/character heads inside the original training split. The `semantic` experiment selects C for a regularised head over frozen encoder features using that same inner partition. The `ensemble` experiment requires the baseline and semantic artifacts and averages their scores with fixed equal weights; it does not tune blend weights. Each needs a clean/noisy validation macro-F1 gain of 0.02 before official-test evaluation. These comparisons reuse a development corpus, so a validation gain still needs independent confirmation.
+
+The `continued` experiment starts from the saved one-epoch complaint transformer, allows at most two additional epochs and stops if validation mean F1 fails to improve by 0.005. It retains the best qualifying checkpoint and only evaluates it on test if it beats the sparse baseline's validation mean by at least 0.02. It keeps separate weights and reports; the earlier one-epoch artifact remains available.
 
 `best` is the default inference backend. After generating reports, it selects the backend for each task using clean and noisy validation macro-F1. Explicit `baseline`, `word2vec`, `subword`, `transformer` and `hierarchical` options remain available for comparison. The financial expert did not beat the baseline's selection score, so it is not the default. Transformer inputs are truncated at 192 subword tokens; this can miss evidence in long complaints.
 

@@ -67,6 +67,15 @@ def main():
     robust = json.loads(robust_path.read_text()) if robust_path.exists() else None
     regularized_path = reports/"complaint_regularized.json"
     regularized = json.loads(regularized_path.read_text()) if regularized_path.exists() else None
+    margin_path = reports/"complaint_margin.json"
+    margin = json.loads(margin_path.read_text()) if margin_path.exists() else None
+    continued_path = reports/"complaint_continued.json"
+    continued = json.loads(continued_path.read_text()) if continued_path.exists() else None
+    semantic_experiments = {}
+    for name in ("semantic","ensemble"):
+        path = reports/f"complaint_{name}.json"
+        if path.exists():
+            semantic_experiments[name] = json.loads(path.read_text())
     for task in TASKS:
         baseline = json.loads((reports / f"{task}_baseline.json").read_text())
         for mode in ("word", "char", "hybrid"):
@@ -87,6 +96,16 @@ def main():
     if regularized and regularized["adopt"]:
         measured["complaint"]["regularized"] = regularized
         lines.append(f"| complaint | regularized {regularized['selected']} | {regularized['validation']['macro_f1']:.4f} | {regularized['test']['macro_f1']:.4f} | {regularized['test_typos']['macro_f1']:.4f} | {regularized['test']['accuracy']:.4f} | {regularized['seconds']:.1f} |")
+    if margin and margin["adopt"]:
+        measured["complaint"]["margin"] = margin
+        lines.append(f"| complaint | margin {margin['selected']} | {margin['validation']['macro_f1']:.4f} | {margin['test']['macro_f1']:.4f} | {margin['test_typos']['macro_f1']:.4f} | {margin['test']['accuracy']:.4f} | {margin['seconds']:.1f} |")
+    for name,r in semantic_experiments.items():
+        if r["adopt"]:
+            measured["complaint"][name] = r
+            lines.append(f"| complaint | {name} | {r['validation']['macro_f1']:.4f} | {r['test']['macro_f1']:.4f} | {r['test_typos']['macro_f1']:.4f} | {r['test']['accuracy']:.4f} | {r['seconds']:.1f} |")
+    if continued and continued["adopt"]:
+        measured["complaint"]["continued"] = continued
+        lines.append(f"| complaint | continued encoder | {continued['validation']['macro_f1']:.4f} | {continued['test']['macro_f1']:.4f} | {continued['test_typos']['macro_f1']:.4f} | {continued['test']['accuracy']:.4f} | {continued['seconds']:.1f} |")
     champions = {}
     for task, candidates in measured.items():
         best = max(candidates, key=lambda k:(candidates[k]["validation"]["macro_f1"] + candidates[k]["validation_typos"]["macro_f1"])/2)
@@ -124,6 +143,36 @@ def main():
         lines += ["", f"Reference selection mean: **{regularized['reference_selection_score']:.4f}**. Selected head: **{regularized['selected']}**. Promotion rule passed: **{regularized['adopt']}**.",
                   regularized.get("test_policy","Only the selected candidate was evaluated on the supplied test after passing the validation criterion."),
                   "The validation set has been used in earlier development, so this remains development evidence. I did not change labels, remove difficult classes or choose settings from test scores."]
+    if margin:
+        lines += ["", "## Inner-selected complaint margin experiment", "",
+                  f"I split only the original training partition into {margin['inner_train_rows']} inner-training and {margin['inner_validation_rows']} inner-validation messages. Its TF-IDF vocabulary was fitted on inner training only; normalized family overlap was {margin['inner_overlapping_groups']}.",
+                  "I fixed three heads: averaged SGD hinge, averaged SGD modified Huber, and a balanced linear SVM at C=1. All use hybrid word/character features. Earlier word-only SVM checks were weaker; this comparison uses the combined representation.",
+                  "", "| Head | Inner clean/noisy mean macro-F1 |", "|---|---:|"]
+        for name,r in margin["search"].items():
+            lines.append(f"| {name} | {r['selection_score']:.4f} |")
+        lines += ["", f"Inner-selected head: **{margin['selected']}**. After refitting on the full original training split, original validation mean macro-F1 was **{margin['selection_score']:.4f}**, versus **{margin['reference_selection_score']:.4f}** for the baseline. Promotion rule passed: **{margin['adopt']}**.",
+                  margin.get("test_policy","The selected candidate passed the validation rule before official-test evaluation."),
+                  "The original validation corpus was used in earlier experiments. The inner split limits reuse during this search but does not make the existing validation/test corpus fresh independent evidence. Softmax-converted margins are ranking scores, not calibrated probabilities."]
+    if semantic_experiments:
+        lines += ["", "## Frozen complaint semantics and fixed ensemble", "",
+                  "I also tested fixed pretrained multilingual representations. C=0.01 or 0.1 is selected inside the original training split, with scalers fitted on inner training only. The chosen head is refitted on full original training before the original validation check.",
+                  "The additional ensemble is one predeclared 50/50 average with the baseline. I did not search blend weights. Components use the same class vocabulary with explicit column alignment.",
+                  "", "| Candidate | Clean validation macro-F1 | Typo validation macro-F1 | Mean | Promotion passed |", "|---|---:|---:|---:|---|"]
+        for name,r in semantic_experiments.items():
+            lines.append(f"| {name} | {r['validation']['macro_f1']:.4f} | {r['validation_typos']['macro_f1']:.4f} | {r['selection_score']:.4f} | {r['adopt']} |")
+        for name,r in semantic_experiments.items():
+            lines += ["",f"{name}: "+r.get("test_policy","Validation criterion passed before test evaluation.")]
+        lines += ["", "All of these runs use an already explored development corpus. The bounded search and frozen encoder reduce some overfitting risks; fresh independent labels are still needed to confirm transfer."]
+    if continued:
+        lines += ["", "## Bounded encoder continuation", "",
+                  "I continued the existing one-epoch checkpoint for at most two further epochs, with learning rate 2e-5, weight decay 0.01, effective batch 32 and the same 192-token limit. I kept square-root inverse-frequency loss weights and training-only typo augmentation.",
+                  "After each epoch I checked mean clean/noisy validation macro-F1. A gain below 0.005 stopped training; the best qualifying checkpoint was retained. The optimizer/scheduler restarted for this bounded continuation.",
+                  "", "| Total epoch | Training loss | Clean/noisy validation mean F1 | Checkpoint improved |", "|---|---:|---:|---|"]
+        for row in continued["history"]:
+            lines.append(f"| {row['total_epoch']} | {row['training_loss']:.4f} | {row['selection_score']:.4f} | {row['checkpoint_improved']} |")
+        lines += ["", f"Selected total epoch: **{continued['selected_total_epoch']}**. Validation mean: **{continued['selection_score']:.4f}**, versus baseline **{continued['reference_selection_score']:.4f}**. Promotion rule passed: **{continued['adopt']}**.",
+                  continued.get("test_policy","Only the selected checkpoint was evaluated on test after passing the validation rule."),
+                  "The original validation set has been reused; this bounded budget and stopping rule reduce some risks but do not establish absence of overfitting or independent generalisation."]
     lines += ["", "Default inference uses validation-selected backends:", ""]
     for task, info in champions.items():
         lines.append(f"- {task}: **{info['backend']}** (selection score {info['score']:.4f}).")

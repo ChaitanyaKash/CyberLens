@@ -8,6 +8,10 @@ I kept that model experimental because the approximate paired family-bootstrap i
 
 I also added a fixed three-head complaint comparison using the same training-only TF-IDF features. It only evaluates the selected head on the supplied test if the clean/noisy validation mean improves by at least 0.02. The generated results record the outcome, including rejected candidates. I expanded reproduction commands, inference checks and the interview notes to explain the mechanism, uncertainty and remaining need for independent data.
 
+That first complaint comparison failed: its best validation mean was 0.2472 versus the baseline's 0.2579, so it did not receive another test evaluation. I added an aggregate error audit, then a new training-inner-split comparison of three margin heads and two regularisation settings for frozen semantic features. I also declared a fixed equal-weight sparse/semantic ensemble before seeing the component validation results. New outcomes are recorded in the generated results, including failures. Optional models rejected by their promotion rule are explicitly marked experimental and always require review in the app.
+
+The inner-selected margin, frozen-semantic and fixed-ensemble comparisons also failed the validation gate. Their validation means were 0.2292, 0.1524 and 0.2064 respectively; none received a new test evaluation. I added a bounded continuation of the earlier one-epoch encoder to check whether that model was insufficiently trained: at most two extra epochs, validation stopping and a separate checkpoint/report. Its actual history is recorded when the run finishes.
+
 ## 2026-10-21 — First working text-classification pipeline
 
 I moved the experiments into a separate project so I could work without changing my original notebooks or datasets.

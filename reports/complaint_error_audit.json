@@ -1,0 +1,457 @@
+{
+  "training_support_min": 23,
+  "training_support_max": 15162,
+  "training_support_ratio": 659.2173913043479,
+  "unsupported_test_labels": [
+    "Crime Against Women & Children :: Computer Generated CSAM/CSEM",
+    "Crime Against Women & Children :: Cyber Blackmailing & Threatening",
+    "Crime Against Women & Children :: Sexual Harassment"
+  ],
+  "test_conflicting_normalized_groups": 130,
+  "baseline_test_metrics": {
+    "macro_f1": 0.23449731285314274,
+    "weighted_f1": 0.5080955769727915,
+    "accuracy": 0.5013811705826915
+  },
+  "classes": [
+    {
+      "label": "Any Other Cyber Crime :: Other",
+      "train_rows": 8475,
+      "test_rows": 3610,
+      "train_fraction": 0.13641631523033834,
+      "test_fraction": 0.11731825420038348,
+      "test_f1": 0.36917562724014336
+    },
+    {
+      "label": "Child Pornography CPChild Sexual Abuse Material CSAM :: Unspecified",
+      "train_rows": 274,
+      "test_rows": 118,
+      "train_fraction": 0.0044103917844380775,
+      "test_fraction": 0.0038347795001787395,
+      "test_f1": 0.4048582995951417
+    },
+    {
+      "label": "Crime Against Women & Children :: Computer Generated CSAM/CSEM",
+      "train_rows": 0,
+      "test_rows": 2,
+      "train_fraction": 0.0,
+      "test_fraction": 6.499626271489389e-05,
+      "test_f1": 0.0
+    },
+    {
+      "label": "Crime Against Women & Children :: Cyber Blackmailing & Threatening",
+      "train_rows": 0,
+      "test_rows": 1,
+      "train_fraction": 0.0,
+      "test_fraction": 3.2498131357446946e-05,
+      "test_f1": 0.0
+    },
+    {
+      "label": "Crime Against Women & Children :: Sexual Harassment",
+      "train_rows": 0,
+      "test_rows": 1,
+      "train_fraction": 0.0,
+      "test_fraction": 3.2498131357446946e-05,
+      "test_f1": 0.0
+    },
+    {
+      "label": "Cryptocurrency Crime :: Cryptocurrency Fraud",
+      "train_rows": 366,
+      "test_rows": 165,
+      "train_fraction": 0.005891253259504878,
+      "test_fraction": 0.005362191673978747,
+      "test_f1": 0.5490981963927856
+    },
+    {
+      "label": "Cyber Attack/ Dependent Crimes :: Data Breach/Theft",
+      "train_rows": 387,
+      "test_rows": 171,
+      "train_fraction": 0.006229275987509255,
+      "test_fraction": 0.005557180462123428,
+      "test_f1": 0.10824742268041238
+    },
+    {
+      "label": "Cyber Attack/ Dependent Crimes :: Denial of Service (DoS)/Distributed Denial of Service (DDOS) attacks",
+      "train_rows": 403,
+      "test_rows": 187,
+      "train_fraction": 0.0064868171136078295,
+      "test_fraction": 0.006077150563842579,
+      "test_f1": 0.13054830287206268
+    },
+    {
+      "label": "Cyber Attack/ Dependent Crimes :: Hacking/Defacement",
+      "train_rows": 432,
+      "test_rows": 200,
+      "train_fraction": 0.006953610404661494,
+      "test_fraction": 0.00649962627148939,
+      "test_f1": 0.135
+    },
+    {
+      "label": "Cyber Attack/ Dependent Crimes :: Malware Attack",
+      "train_rows": 417,
+      "test_rows": 170,
+      "train_fraction": 0.006712165598944082,
+      "test_fraction": 0.005524682330765981,
+      "test_f1": 0.10059171597633136
+    },
+    {
+      "label": "Cyber Attack/ Dependent Crimes :: Ransomware Attack",
+      "train_rows": 427,
+      "test_rows": 186,
+      "train_fraction": 0.00687312880275569,
+      "test_fraction": 0.006044652432485132,
+      "test_f1": 0.09655172413793103
+    },
+    {
+      "label": "Cyber Attack/ Dependent Crimes :: SQL Injection",
+      "train_rows": 406,
+      "test_rows": 167,
+      "train_fraction": 0.006535106074751312,
+      "test_fraction": 0.00542718793669364,
+      "test_f1": 0.1206896551724138
+    },
+    {
+      "label": "Cyber Attack/ Dependent Crimes :: Tampering with computer source documents",
+      "train_rows": 414,
+      "test_rows": 180,
+      "train_fraction": 0.006663876637800599,
+      "test_fraction": 0.0058496636443404505,
+      "test_f1": 0.15303430079155672
+    },
+    {
+      "label": "Cyber Terrorism :: Cyber Terrorism",
+      "train_rows": 128,
+      "test_rows": 51,
+      "train_fraction": 0.002060329008788591,
+      "test_fraction": 0.0016574046992297942,
+      "test_f1": 0.0547945205479452
+    },
+    {
+      "label": "Hacking  Damage to computercomputer system etc :: Damage to computer computer systems etc",
+      "train_rows": 83,
+      "test_rows": 35,
+      "train_fraction": 0.001335994591636352,
+      "test_fraction": 0.001137434597510643,
+      "test_f1": 0.03773584905660377
+    },
+    {
+      "label": "Hacking  Damage to computercomputer system etc :: Email Hacking",
+      "train_rows": 273,
+      "test_rows": 130,
+      "train_fraction": 0.0043942954640569165,
+      "test_fraction": 0.004224757076468103,
+      "test_f1": 0.35842293906810035
+    },
+    {
+      "label": "Hacking  Damage to computercomputer system etc :: Tampering with computer source documents",
+      "train_rows": 40,
+      "test_rows": 14,
+      "train_fraction": 0.0006438528152464347,
+      "test_fraction": 0.00045497383900425725,
+      "test_f1": 0.0
+    },
+    {
+      "label": "Hacking  Damage to computercomputer system etc :: Unauthorised AccessData Breach",
+      "train_rows": 870,
+      "test_rows": 359,
+      "train_fraction": 0.014003798731609955,
+      "test_fraction": 0.011666829157323455,
+      "test_f1": 0.2967409948542024
+    },
+    {
+      "label": "Hacking  Damage to computercomputer system etc :: Website DefacementHacking",
+      "train_rows": 70,
+      "test_rows": 39,
+      "train_fraction": 0.0011267424266812607,
+      "test_fraction": 0.0012674271229404308,
+      "test_f1": 0.08
+    },
+    {
+      "label": "Online Cyber Trafficking :: Online Trafficking",
+      "train_rows": 143,
+      "test_rows": 61,
+      "train_fraction": 0.002301773814506004,
+      "test_fraction": 0.0019823860128042638,
+      "test_f1": 0.0
+    },
+    {
+      "label": "Online Financial Fraud :: Business Email CompromiseEmail Takeover",
+      "train_rows": 227,
+      "test_rows": 89,
+      "train_fraction": 0.003653864726523517,
+      "test_fraction": 0.0028923336908127785,
+      "test_f1": 0.17813765182186234
+    },
+    {
+      "label": "Online Financial Fraud :: DebitCredit Card FraudSim Swap Fraud",
+      "train_rows": 6925,
+      "test_rows": 3514,
+      "train_fraction": 0.111467018639539,
+      "test_fraction": 0.11419843359006857,
+      "test_f1": 0.7027886143620864
+    },
+    {
+      "label": "Online Financial Fraud :: DematDepository Fraud",
+      "train_rows": 574,
+      "test_rows": 220,
+      "train_fraction": 0.009239287898786338,
+      "test_fraction": 0.007149588898638328,
+      "test_f1": 0.12105263157894737
+    },
+    {
+      "label": "Online Financial Fraud :: EWallet Related Fraud",
+      "train_rows": 3066,
+      "test_rows": 1310,
+      "train_fraction": 0.049351318288639215,
+      "test_fraction": 0.0425725520782555,
+      "test_f1": 0.5073409461663948
+    },
+    {
+      "label": "Online Financial Fraud :: Fraud CallVishing",
+      "train_rows": 4499,
+      "test_rows": 1792,
+      "train_fraction": 0.07241734539484274,
+      "test_fraction": 0.05823665139254493,
+      "test_f1": 0.30626818302036496
+    },
+    {
+      "label": "Online Financial Fraud :: Internet Banking Related Fraud",
+      "train_rows": 5661,
+      "test_rows": 2959,
+      "train_fraction": 0.09112126967775167,
+      "test_fraction": 0.09616197068668551,
+      "test_f1": 0.6270944741532977
+    },
+    {
+      "label": "Online Financial Fraud :: UPI Related Frauds",
+      "train_rows": 15162,
+      "test_rows": 8739,
+      "train_fraction": 0.24405240961916105,
+      "test_fraction": 0.2840011699327289,
+      "test_f1": 0.7349819130641049
+    },
+    {
+      "label": "Online Gambling  Betting :: Online Gambling  Betting",
+      "train_rows": 346,
+      "test_rows": 133,
+      "train_fraction": 0.00556932685188166,
+      "test_fraction": 0.004322251470540444,
+      "test_f1": 0.16893732970027248
+    },
+    {
+      "label": "Online and Social Media Related Crime :: Cheating by Impersonation",
+      "train_rows": 1545,
+      "test_rows": 708,
+      "train_fraction": 0.02486881498889354,
+      "test_fraction": 0.02300867700107244,
+      "test_f1": 0.1650602409638554
+    },
+    {
+      "label": "Online and Social Media Related Crime :: Cyber Bullying  Stalking  Sexting",
+      "train_rows": 3129,
+      "test_rows": 1336,
+      "train_fraction": 0.05036538647265235,
+      "test_fraction": 0.04341750349354912,
+      "test_f1": 0.5057232049947971
+    },
+    {
+      "label": "Online and Social Media Related Crime :: EMail Phishing",
+      "train_rows": 122,
+      "test_rows": 54,
+      "train_fraction": 0.001963751086501626,
+      "test_fraction": 0.0017548990933021352,
+      "test_f1": 0.12121212121212122
+    },
+    {
+      "label": "Online and Social Media Related Crime :: FakeImpersonating Profile",
+      "train_rows": 1783,
+      "test_rows": 745,
+      "train_fraction": 0.028699739239609827,
+      "test_fraction": 0.024211107861297976,
+      "test_f1": 0.42971147943523635
+    },
+    {
+      "label": "Online and Social Media Related Crime :: Impersonating Email",
+      "train_rows": 35,
+      "test_rows": 13,
+      "train_fraction": 0.0005633712133406303,
+      "test_fraction": 0.0004224757076468103,
+      "test_f1": 0.13333333333333333
+    },
+    {
+      "label": "Online and Social Media Related Crime :: Intimidating Email",
+      "train_rows": 23,
+      "test_rows": 11,
+      "train_fraction": 0.0003702153687666999,
+      "test_fraction": 0.0003574794449319164,
+      "test_f1": 0.0
+    },
+    {
+      "label": "Online and Social Media Related Crime :: Online Job Fraud",
+      "train_rows": 715,
+      "test_rows": 290,
+      "train_fraction": 0.01150886907253002,
+      "test_fraction": 0.009424458093659615,
+      "test_f1": 0.3225806451612903
+    },
+    {
+      "label": "Online and Social Media Related Crime :: Online Matrimonial Fraud",
+      "train_rows": 101,
+      "test_rows": 37,
+      "train_fraction": 0.0016257283584972476,
+      "test_fraction": 0.001202430860225537,
+      "test_f1": 0.24
+    },
+    {
+      "label": "Online and Social Media Related Crime :: Profile Hacking Identity Theft",
+      "train_rows": 1601,
+      "test_rows": 736,
+      "train_fraction": 0.02577020893023855,
+      "test_fraction": 0.023918624679080954,
+      "test_f1": 0.4600262123197903
+    },
+    {
+      "label": "Online and Social Media Related Crime :: Provocative Speech for unlawful acts",
+      "train_rows": 310,
+      "test_rows": 125,
+      "train_fraction": 0.004989859318159868,
+      "test_fraction": 0.004062266419680868,
+      "test_f1": 0.2324159021406728
+    },
+    {
+      "label": "Ransomware :: Ransomware",
+      "train_rows": 45,
+      "test_rows": 18,
+      "train_fraction": 0.000724334417152239,
+      "test_fraction": 0.000584966364434045,
+      "test_f1": 0.5555555555555556
+    },
+    {
+      "label": "RapeGang Rape RGRSexually Abusive Content :: Unspecified",
+      "train_rows": 186,
+      "test_rows": 911,
+      "train_fraction": 0.0029939155908959214,
+      "test_fraction": 0.029605797666634168,
+      "test_f1": 0.031714568880079286
+    },
+    {
+      "label": "Sexually Explicit Act :: Unspecified",
+      "train_rows": 1130,
+      "test_rows": 527,
+      "train_fraction": 0.01818884203071178,
+      "test_fraction": 0.01712651522537454,
+      "test_f1": 0.0715909090909091
+    },
+    {
+      "label": "Sexually Obscene material :: Unspecified",
+      "train_rows": 1333,
+      "test_rows": 657,
+      "train_fraction": 0.021456395068087435,
+      "test_fraction": 0.021351272301842646,
+      "test_f1": 0.2378716744913928
+    }
+  ],
+  "largest_confusions": [
+    {
+      "actual": "RapeGang Rape RGRSexually Abusive Content :: Unspecified",
+      "predicted": "Sexually Explicit Act :: Unspecified",
+      "count": 835
+    },
+    {
+      "actual": "Online Financial Fraud :: Internet Banking Related Fraud",
+      "predicted": "Online Financial Fraud :: UPI Related Frauds",
+      "count": 435
+    },
+    {
+      "actual": "Online Financial Fraud :: UPI Related Frauds",
+      "predicted": "Any Other Cyber Crime :: Other",
+      "count": 428
+    },
+    {
+      "actual": "Any Other Cyber Crime :: Other",
+      "predicted": "Online Financial Fraud :: Fraud CallVishing",
+      "count": 379
+    },
+    {
+      "actual": "Online Financial Fraud :: UPI Related Frauds",
+      "predicted": "Online Financial Fraud :: Fraud CallVishing",
+      "count": 376
+    },
+    {
+      "actual": "Online Financial Fraud :: DebitCredit Card FraudSim Swap Fraud",
+      "predicted": "Online Financial Fraud :: UPI Related Frauds",
+      "count": 375
+    },
+    {
+      "actual": "Any Other Cyber Crime :: Other",
+      "predicted": "Online Financial Fraud :: UPI Related Frauds",
+      "count": 337
+    },
+    {
+      "actual": "Online Financial Fraud :: UPI Related Frauds",
+      "predicted": "Online Financial Fraud :: Internet Banking Related Fraud",
+      "count": 311
+    },
+    {
+      "actual": "Online Financial Fraud :: DebitCredit Card FraudSim Swap Fraud",
+      "predicted": "Online Financial Fraud :: Internet Banking Related Fraud",
+      "count": 274
+    },
+    {
+      "actual": "Online Financial Fraud :: EWallet Related Fraud",
+      "predicted": "Online Financial Fraud :: UPI Related Frauds",
+      "count": 260
+    },
+    {
+      "actual": "Online Financial Fraud :: UPI Related Frauds",
+      "predicted": "Online and Social Media Related Crime :: Cheating by Impersonation",
+      "count": 258
+    },
+    {
+      "actual": "Online Financial Fraud :: Internet Banking Related Fraud",
+      "predicted": "Online Financial Fraud :: DebitCredit Card FraudSim Swap Fraud",
+      "count": 249
+    },
+    {
+      "actual": "Any Other Cyber Crime :: Other",
+      "predicted": "Online Financial Fraud :: DebitCredit Card FraudSim Swap Fraud",
+      "count": 239
+    },
+    {
+      "actual": "Online Financial Fraud :: UPI Related Frauds",
+      "predicted": "Online Financial Fraud :: DebitCredit Card FraudSim Swap Fraud",
+      "count": 219
+    },
+    {
+      "actual": "Online Financial Fraud :: Fraud CallVishing",
+      "predicted": "Online Financial Fraud :: UPI Related Frauds",
+      "count": 214
+    },
+    {
+      "actual": "Online Financial Fraud :: UPI Related Frauds",
+      "predicted": "Online Financial Fraud :: EWallet Related Fraud",
+      "count": 201
+    },
+    {
+      "actual": "Any Other Cyber Crime :: Other",
+      "predicted": "Online and Social Media Related Crime :: Online Job Fraud",
+      "count": 197
+    },
+    {
+      "actual": "Online Financial Fraud :: Fraud CallVishing",
+      "predicted": "Any Other Cyber Crime :: Other",
+      "count": 193
+    },
+    {
+      "actual": "Sexually Obscene material :: Unspecified",
+      "predicted": "Online and Social Media Related Crime :: Cyber Bullying  Stalking  Sexting",
+      "count": 192
+    },
+    {
+      "actual": "Any Other Cyber Crime :: Other",
+      "predicted": "Hacking  Damage to computercomputer system etc :: Unauthorised AccessData Breach",
+      "count": 190
+    }
+  ],
+  "limits": "Diagnostic of an already-examined benchmark; these aggregate observations do not establish causality or justify tuning on test."
+}

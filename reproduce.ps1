@@ -37,6 +37,14 @@ try {
         if ($LASTEXITCODE -ne 0) { throw 'Nested call experiment failed' }
         & $taskPython -m cyberlens.cli train --backend regularized --task complaint
         if ($LASTEXITCODE -ne 0) { throw 'Regularized complaint experiment failed' }
+        & $taskPython -m cyberlens.cli train --backend margin --task complaint
+        if ($LASTEXITCODE -ne 0) { throw 'Margin complaint experiment failed' }
+        & $taskPython -m cyberlens.cli train --backend semantic --task complaint
+        if ($LASTEXITCODE -ne 0) { throw 'Frozen semantic complaint experiment failed' }
+        & $taskPython -m cyberlens.cli train --backend ensemble --task complaint
+        if ($LASTEXITCODE -ne 0) { throw 'Fixed ensemble experiment failed' }
+        & $taskPython -m cyberlens.cli train --backend continued --task complaint
+        if ($LASTEXITCODE -ne 0) { throw 'Bounded encoder continuation failed' }
         & $taskPython -m cyberlens.diagnose
         if ($LASTEXITCODE -ne 0) { throw 'Parent-category diagnostic failed' }
         & $taskPython -m cyberlens.report

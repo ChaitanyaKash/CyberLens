@@ -1,20 +1,20 @@
 test_all_available_saved_backends_load_and_predict (test_pipeline.DataTests.test_all_available_saved_backends_load_and_predict) ...
 Loading weights:   0%|          | 0/104 [00:00<?, ?it/s]
-Loading weights: 100%|██████████| 104/104 [00:00<00:00, 2211.43it/s]
+Loading weights: 100%|██████████| 104/104 [00:00<00:00, 2312.77it/s]
 ok
 test_inference (test_pipeline.DataTests.test_inference) ... ok
 test_no_duplicate_leakage_and_label_coverage (test_pipeline.DataTests.test_no_duplicate_leakage_and_label_coverage) ... ok
 test_robust_artifact_in_fresh_inference_path (test_pipeline.DataTests.test_robust_artifact_in_fresh_inference_path) ...
 Loading weights:   0%|          | 0/100 [00:00<?, ?it/s]
-Loading weights: 100%|██████████| 100/100 [00:00<00:00, 1852.06it/s]
+Loading weights: 100%|██████████| 100/100 [00:00<00:00, 1923.08it/s]
 [transformers] DistilBertModel LOAD REPORT from: <project>\.cache\pretrained\distilmbert
 Key                     | Status     |  |
 ------------------------+------------+--+-
-vocab_transform.weight  | UNEXPECTED |  |
+vocab_projector.bias    | UNEXPECTED |  |
 vocab_transform.bias    | UNEXPECTED |  |
 vocab_layer_norm.weight | UNEXPECTED |  |
 vocab_layer_norm.bias   | UNEXPECTED |  |
-vocab_projector.bias    | UNEXPECTED |  |
+vocab_transform.weight  | UNEXPECTED |  |
 
 Notes:
 - UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
@@ -27,10 +27,11 @@ test_language_not_spellcorrected (test_pipeline.PreprocessingTests.test_language
 test_mask_idempotence (test_pipeline.PreprocessingTests.test_mask_idempotence) ... ok
 test_names_not_claimed_masked (test_pipeline.PreprocessingTests.test_names_not_claimed_masked) ... ok
 test_negation_and_money_preserved (test_pipeline.PreprocessingTests.test_negation_and_money_preserved) ... ok
+test_promotion_rejects_uncertain_gain_and_typo_regression (test_pipeline.PreprocessingTests.test_promotion_rejects_uncertain_gain_and_typo_regression) ... ok
 test_specific_masks_and_clues (test_pipeline.PreprocessingTests.test_specific_masks_and_clues) ... ok
 test_test_only_labels_do_not_change_validation_macro (test_pipeline.PreprocessingTests.test_test_only_labels_do_not_change_validation_macro) ... ok
 
 ----------------------------------------------------------------------
-Ran 14 tests in 58.836s
+Ran 15 tests in 63.528s
 
 OK
