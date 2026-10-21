@@ -18,12 +18,13 @@ def evaluate(predict, df, labels):
     results = {}
     for split in ("validation", "test"):
         part = df.loc[df.split == split]
-        results[split] = score(part.label, predict(part.text.tolist()), labels)
+        split_labels = sorted(set(df.loc[df.split == "train", "label"]) | set(part.label))
+        results[split] = score(part.label, predict(part.text.tolist()), split_labels)
         noisy = [corrupt(t, seed=42+i, rate=.25) for i, t in enumerate(part.text)]
-        results[f"{split}_typos"] = score(part.label, predict(noisy), labels)
+        results[f"{split}_typos"] = score(part.label, predict(noisy), split_labels)
         if split == "test" and "group" in part and part.group.duplicated().any():
             unique = part.drop_duplicates(["group", "label"])
-            results["test_unique_examples"] = score(unique.label, predict(unique.text.tolist()), labels)
+            results["test_unique_examples"] = score(unique.label, predict(unique.text.tolist()), split_labels)
     return results
 
 

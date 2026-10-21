@@ -16,3 +16,11 @@ I moved the experiments into a separate project so I could work without changing
 The biggest change was in how I handled the data. The Hinglish file contains only 743 unique messages, and five labels conflict on identical text. I merged those labels into `other_scam`. For English complaints, I used the supplied `test.csv` and removed overlapping templates from training. The reports explain these choices and keep the weaker results visible.
 
 The encoder comparison and final evaluation are recorded in [the results](reports/RESULTS.md). I’ll use this file to keep track of later fixes and experiments too.
+
+### Evaluation fixes after the first push
+
+The initial call split had no normalized duplicate overlap, but that was not enough: related template variants still crossed the split. I added a five-fold evaluation that keeps 77 near-duplicate families together. Macro-F1 fell from 1.0000 on the easy split to 0.6308 on this harder check. I changed the README headline and kept the earlier result only for comparison.
+
+I also fixed a reporting issue: three complaint labels occur only in the supplied test file. They should count as unsupported classes in test results, but should not add zero-support classes to the validation macro-F1 denominator. The fix recomputes metrics from saved confusion counts without changing predictions or fitting on test data.
+
+I tried a dedicated financial-fraud expert as well. It did not improve the combined clean/noisy validation score, so I kept the simpler baseline as the default and saved the experiment for comparison. The app now shows class-level evaluation evidence and marks weak subtype suggestions for review rather than treating a high model score as sufficient evidence.

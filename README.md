@@ -19,17 +19,17 @@ flowchart LR
 ## Measured results
 
 <!-- RESULTS SUMMARY START -->
-I selected these backends using validation results. The test set was kept out of fitting and selection.
+The protocols differ, so I list them explicitly. The call result uses the harder family split; the complaint result uses the supplied test file.
 
-| Task | Selected backend | Test macro-F1 | Typo-test macro-F1 | Test accuracy |
-|---|---|---:|---:|---:|
-| call_scam | baseline | 1.0000 | 1.0000 | 1.0000 |
-| complaint | baseline | 0.2345 | 0.2269 | 0.5014 |
+| Task | Backend | Evaluation protocol | Macro-F1 | Typo macro-F1 | Accuracy |
+|---|---|---|---:|---:|---:|
+| call_scam | baseline | 5-fold template-family CV (frozen baseline) | 0.6308 | 0.6337 | 0.7416 |
+| complaint | baseline | Supplied test.csv | 0.2345 | 0.2269 | 0.5014 |
 
 [Full comparisons and failure cases](reports/RESULTS.md). Scores are fractions, not percentages.
 <!-- RESULTS SUMMARY END -->
 
-Perfect scores on the small call-template split do **not** establish real-world reliability. English/Hinglish transfer and seven-subtype call classification are limited by the supplied labels; see the data audit below.
+The first exact-deduplicated call split scored 1.0000, but related templates were still present on both sides. I replaced that headline with a harder template-family evaluation. This is still a small dataset, not an independent real-world benchmark. English/Hinglish transfer and seven-subtype classification need better labels and more diverse examples.
 
 ## Setup from GitHub
 
@@ -84,10 +84,12 @@ Both models accept English and Hinglish strings, but each source validates its o
 .\run.ps1 train --backend baseline
 .\run.ps1 train --backend word2vec --epochs 3 --max-pairs 300000
 .\run.ps1 train --backend subword --epochs 3 --max-pairs 300000
+.\run.ps1 train --backend hierarchical --task complaint
 # Requires public pretrained weights on first use; training/inference stay local.
 .\run.ps1 train --backend transformer --task call_scam --epochs 3
 .\run.ps1 train --backend transformer --task complaint --epochs 1 --batch-size 32 --accumulation 1
 python -m unittest discover -s tests -v
+python -m cyberlens.template_evaluation
 python -m cyberlens.report
 python -m cyberlens.challenge
 python -m cyberlens.report
@@ -95,7 +97,7 @@ python -m cyberlens.report
 
 Run preparation before training and do not change processed splits during an experiment. All fitted vocabularies and classifiers use the training split only. Models are saved under `models/`; reports under `reports/`. For larger embedding experiments, increase `--max-pairs` and `--epochs`, compare validation results, and use a fresh final test set after extensive tuning.
 
-`best` is the default inference backend. After generating reports, it selects the backend for each task using clean and noisy validation macro-F1. Explicit `baseline`, `word2vec`, `subword` and `transformer` options remain available for comparison. Transformer inputs are truncated at 192 subword tokens; this can miss evidence in long complaints.
+`best` is the default inference backend. After generating reports, it selects the backend for each task using clean and noisy validation macro-F1. Explicit `baseline`, `word2vec`, `subword`, `transformer` and `hierarchical` options remain available for comparison. The financial expert did not beat the baseline's selection score, so it is not the default. Transformer inputs are truncated at 192 subword tokens; this can miss evidence in long complaints.
 
 Alternatively, `.\reproduce.ps1` runs these dependent steps in order and saves a complete console transcript to `reports/reproduction.log`.
 
@@ -108,6 +110,7 @@ For an alternative environment, install `requirements.txt` into your own virtual
 - `reports/data_audit.json`: row counts, exclusions, labels, source hashes and mapping.
 - `reports/call_label_conflicts.csv`: hashed template IDs and conflicting label sets; no message text.
 - `reports/manual_challenge.json`: hand-authored diagnostic examples and predictions, including failures.
+- `reports/call_family_evaluation.json`: the harder grouped call evaluation, family counts and fold coverage.
 
 ## Repository map
 
@@ -126,3 +129,5 @@ RAG and grounded report generation are future work; the current milestone is tex
 Processing and inference are local. Rule masking handles selected structured identifiers, not all names/addresses or all identifier formats. Copied raw files and reference notebooks remain sensitive. Never upload this folder as a public dataset. Original text and unsafe Python serialization artifacts are excluded by `.gitignore`. Only load trusted local `.joblib` models.
 
 Scores are uncalibrated. `needs_review` uses a heuristic 0.55 threshold and feature coverage; it does not reliably detect all out-of-distribution input. Placeholder replacement is not certified anonymization. There is no RAG or automatic reporting in this version.
+
+The review flag also checks class-level evaluation evidence. Weak or sparsely evaluated complaint subtypes fall back to a broad suggested category with a review note. This is a practical triage rule, not calibrated certainty. The complaint test contains three label combinations absent from training; those remain in the reported test metrics as unsupported classes.

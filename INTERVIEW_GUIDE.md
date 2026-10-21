@@ -85,6 +85,10 @@ INFERENCE
 
 The call source uses an internal 60/20/20 split after template deduplication. The complaint source uses an 80/20 training/validation split of eligible `train.csv` examples and the supplied `test.csv` for final testing. These percentages refer to eligible deduplicated training data, not the raw source row counts.
 
+That original call split turned out to be too easy. Exact deduplication removed identical messages, but greeting variations and related scripts still crossed the boundary. I added a harder five-fold group evaluation: character 3–5-gram TF-IDF cosine similarity at 0.80 defines near-duplicate links, and connected components form 77 families. A whole family stays on one side of each fold. Every message is evaluated once, and all four classes remain represented in training in every fold. The frozen word baseline scores about **0.631 macro-F1**, compared with 1.000 on the earlier split. The README now uses this grouped result.
+
+I use all texts to identify related groups, but those grouping features never enter the classifier. Each fold fits its own vocabulary and classifier only on its training families. The threshold is a heuristic, not a human annotation of semantic similarity; some related paraphrases can still be missed, and chains of links can join different-looking examples. I recorded family-count sensitivity at 0.75, 0.80, 0.85 and 0.90 without choosing a threshold based on classifier accuracy. The deployed call checkpoint remains the original training artifact; the grouped score estimates the frozen baseline method across fresh fold models, not a separate independent test of that exact checkpoint.
+
 The test file arrived after initial internal-split experiments. Those earlier artifacts were superseded; the final complaint experiments are rerun with the official test policy. `reports/superseded/` contains exploratory reports, not final comparison evidence. No test examples are added to the training vocabulary or training corpus.
 
 ## 5. What preprocessing does, and deliberately avoids
@@ -242,6 +246,11 @@ Do not say “transformers failed” based on a download or environment error. C
 9. Subword pooling repeats many token lookups. A bounded per-call cache reuses token representations without changing results; unused hash buckets are explicitly zeroed on export.
 10. An early integration-test run started before complaint baseline training had saved its model. Preprocessing, grouping and gradient tests passed, but inference raised `FileNotFoundError` for the missing artifact. This was an execution-order problem, not a passing end-to-end check; the final test run is performed after all artifacts exist.
 11. A source-inspection command hit Windows CP1252 encoding limits on the rupee sign. Data stayed intact; the problem was console encoding. CLI output is explicitly UTF-8 so English, Hinglish, Hindi and currency symbols can be displayed without that failure.
+12. Three labels appear only in the complaint test file. I initially included them in the validation reporting vocabulary too, which lowered validation macro-F1 by adding zero-support classes. I corrected validation to use the training label vocabulary and retained unsupported labels in test metrics. The correction uses saved confusion counts, so predictions do not change. A regression test checks this boundary.
+13. Exact duplicate checks were not sufficient for the call data. The family-held-out evaluation exposed the gap between recognizing familiar scripts and generalizing to a new script. This changed the headline result, not just a footnote.
+14. The financial-expert trial hit a Windows/joblib shared-array error (`WRITEBACKIFCOPY base is read-only`) when the one-versus-rest heads ran in separate workers. I switched those heads to one worker. This changed the execution path, not the intended classifier objective.
+
+The complaint failure analysis also explains why more model capacity did not automatically help. The baseline gets roughly 70% parent-category accuracy, but several attack subtypes have almost indistinguishable generic narratives. Their parent is easy to recognize while the specific subtype is close to guessing. I should not claim the classifier can infer SQL injection or ransomware from a story that gives no distinguishing technical evidence. The three test-only categories are another limit: no supervised model trained on the current label set can output those new labels correctly.
 
 ## 12. How to interpret evaluation
 
@@ -254,6 +263,8 @@ I left duplicates and contradictory labels in the supplied test set. I also repo
 The manually authored challenge includes English transfer, informal Hinglish, benign conversations, security warnings and negation. It is tiny and diagnostic. It is never added to fitting or used for model selection. Inspect failures, particularly high-confidence ones. If you start iterating against this challenge, it becomes development data and you need a fresh challenge set.
 
 Review threshold: the default flag is set when the top score is below 0.55 or the representation has no known features. That value is a heuristic, not a validated operating point. A high score does not prove that an unfamiliar or benign input is in scope. Future work should calibrate probabilities, plot precision/recall at thresholds and add real out-of-domain examples.
+
+I also added a class-level evidence check. The app flags a subtype if its evaluation F1 is below 0.5 or support is below 20. For the default call baseline it uses the harder family-CV summary; other models use validation. These are conservative heuristics, not calibrated confidence. For complaints, weak subtype evidence or disagreement between the top subtype and aggregated parent causes the suggested type to fall back to the broad category with a review note. The original ranked alternatives remain visible.
 
 ## 13. Why the current approach can be valuable
 
@@ -335,6 +346,10 @@ Thirty percent of training examples receive deterministic synthetic typo augment
 
 If the contextual model completes, it is eligible for `best` backend selection using the same clean/noisy validation macro-F1 rule. Otherwise the completed local baselines remain usable and no transformer performance is invented. The model card is [here](https://huggingface.co/distilbert/distilbert-base-multilingual-cased).
 
+I also tried a smaller, targeted change: a dedicated financial-fraud head. It learns the seven financial subtypes using training complaints from that parent category. At inference I keep the base model's total probability mass for financial fraud and redistribute it using the specialist's conditional probabilities. Other categories keep their original mass. Three regularization/weighting choices are compared using the full validation taxonomy, not just financial examples. The test report uses the same full complaint taxonomy as the other models, so this is not an accuracy gain created by silently dropping hard classes. The app keeps this experiment only if it wins the existing validation rule.
+
+That experiment did not win. Its best clean validation macro-F1 was about 0.264, but the typo result was lower, leaving the combined selection score below the existing baseline. Its supplied-test macro-F1 was about 0.231 versus 0.234 for the baseline. I kept the simpler model as the default. That is the outcome I should explain, rather than calling the extra head an improvement just because it adds another model.
+
 The initial Hugging Face helper fetched small files but stalled on the large weight file. A separate HTTPS probe confirmed the public model file was reachable. The project includes `download_encoder.py`, which downloads only the public assets into the new folder, pins the publisher's revision and validates the weight file against the publisher's LFS SHA-256. Fine-tuning then loads that local directory. The fallback is an infrastructure workaround, not a change of model or an accuracy comparison.
 
 <!-- GENERATED RESULTS -->
@@ -370,17 +385,27 @@ All scores below are fractions, not percentages. Typo tests use synthetic intern
 | call_scam | word2vec | 1.0000 | 1.0000 | 0.9935 | 1.0000 | 12.7 |
 | call_scam | subword | 1.0000 | 1.0000 | 0.9935 | 1.0000 | 6.6 |
 | call_scam | multilingual DistilBERT | 1.0000 | 1.0000 | 1.0000 | 1.0000 | 39.7 |
-| complaint | TF-IDF word | 0.2310 | 0.2259 | 0.2186 | 0.4952 | 114.8 |
-| complaint | TF-IDF char | 0.2333 | 0.2193 | 0.2189 | 0.4793 | 376.2 |
-| complaint | TF-IDF hybrid (selected baseline) | 0.2443 | 0.2345 | 0.2269 | 0.5014 | 399.8 |
-| complaint | word2vec | 0.1198 | 0.1205 | 0.1115 | 0.2918 | 116.3 |
-| complaint | subword | 0.1233 | 0.1210 | 0.1095 | 0.3002 | 203.2 |
-| complaint | multilingual DistilBERT | 0.1558 | 0.1609 | 0.1578 | 0.4883 | 973.9 |
+| complaint | TF-IDF word | 0.2488 | 0.2259 | 0.2186 | 0.4952 | 114.8 |
+| complaint | TF-IDF char | 0.2512 | 0.2193 | 0.2189 | 0.4793 | 376.2 |
+| complaint | TF-IDF hybrid (selected baseline) | 0.2631 | 0.2345 | 0.2269 | 0.5014 | 399.8 |
+| complaint | word2vec | 0.1290 | 0.1205 | 0.1115 | 0.2918 | 116.3 |
+| complaint | subword | 0.1328 | 0.1210 | 0.1095 | 0.3002 | 203.2 |
+| complaint | multilingual DistilBERT | 0.1677 | 0.1609 | 0.1578 | 0.4883 | 973.9 |
+| complaint | financial expert + baseline | 0.2639 | 0.2311 | 0.2253 | 0.5028 | 187.6 |
+
+## Harder call evaluation: template families
+
+I grouped the 743 messages into **77** near-duplicate families before evaluating the frozen baseline with five-fold group cross-validation.
+Family-held-out macro-F1: **0.6308**; typo macro-F1: **0.6337**; accuracy: **0.7416**.
+
+Each message is evaluated exactly once; no family crosses a fold's training and test sets. All four classes are represented in training for each recorded fold.
+The 1.0000 call scores above came from the earlier exact-deduplicated split. They were too optimistic because related templates remained on both sides. I keep them for comparison, but use the family-held-out result in the README headline.
+Family grouping uses a 0.80 character-TF-IDF cosine threshold and connected components. This is a heuristic stress test, not a human-verified semantic split or an independent real-world benchmark.
 
 Default inference uses validation-selected backends:
 
 - call_scam: **baseline** (selection score 1.0000).
-- complaint: **baseline** (selection score 0.2395).
+- complaint: **baseline** (selection score 0.2579).
 
 Additional word-feature optimizer checks (validation only):
 
@@ -413,6 +438,7 @@ A perfect result on the small templated call dataset does not establish real-wor
 - word2vec: deduplicated (template, label) test macro-F1 **0.1222** on 27296 examples. Contradictory labels are retained.
 - subword: deduplicated (template, label) test macro-F1 **0.1227** on 27296 examples. Contradictory labels are retained.
 - transformer: deduplicated (template, label) test macro-F1 **0.1614** on 27296 examples. Contradictory labels are retained.
+- hierarchical: deduplicated (template, label) test macro-F1 **0.2350** on 27296 examples. Contradictory labels are retained.
 
 ## Small manual diagnostic
 

@@ -243,5 +243,6 @@
     "seed": 42
   },
   "seconds": 39.716071799999554,
-  "cuda_peak_mb": 2599.37109375
+  "cuda_peak_mb": 2599.37109375,
+  "validation_label_policy": "Training label vocabulary only; unsupported official-test labels remain in test metrics"
 }

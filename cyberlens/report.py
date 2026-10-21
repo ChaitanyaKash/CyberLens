@@ -61,6 +61,8 @@ def main():
               "", "| Task | Model | Validation macro-F1 | Test macro-F1 | Typo test macro-F1 | Test accuracy | Seconds |",
               "|---|---|---:|---:|---:|---:|---:|"]
     measured = {}
+    family_path = reports/"call_family_evaluation.json"
+    family = json.loads(family_path.read_text()) if family_path.exists() else None
     for task in TASKS:
         baseline = json.loads((reports / f"{task}_baseline.json").read_text())
         for mode in ("word", "char", "hybrid"):
@@ -72,17 +74,25 @@ def main():
             r = json.loads((reports / f"{task}_{mode}.json").read_text())
             measured[task][mode] = r
             lines.append(f"| {task} | {mode} | {r['validation']['macro_f1']:.4f} | {r['test']['macro_f1']:.4f} | {r['test_typos']['macro_f1']:.4f} | {r['test']['accuracy']:.4f} | {r['seconds']:.1f} |")
-        transformer_path = reports / f"{task}_transformer.json"
-        if transformer_path.exists():
-            r = json.loads(transformer_path.read_text())
-            measured[task]["transformer"] = r
-            lines.append(f"| {task} | multilingual DistilBERT | {r['validation']['macro_f1']:.4f} | {r['test']['macro_f1']:.4f} | {r['test_typos']['macro_f1']:.4f} | {r['test']['accuracy']:.4f} | {r['seconds']:.1f} |")
+        for mode,title in (("transformer","multilingual DistilBERT"),("hierarchical","financial expert + baseline")):
+            extra_path = reports / f"{task}_{mode}.json"
+            if extra_path.exists():
+                r = json.loads(extra_path.read_text())
+                measured[task][mode] = r
+                lines.append(f"| {task} | {title} | {r['validation']['macro_f1']:.4f} | {r['test']['macro_f1']:.4f} | {r['test_typos']['macro_f1']:.4f} | {r['test']['accuracy']:.4f} | {r['seconds']:.1f} |")
     champions = {}
     for task, candidates in measured.items():
         best = max(candidates, key=lambda k:(candidates[k]["validation"]["macro_f1"] + candidates[k]["validation_typos"]["macro_f1"])/2)
         champions[task] = {"backend":best,"selection":"mean clean + synthetic-typo validation macro-F1",
                            "score":(candidates[best]["validation"]["macro_f1"]+candidates[best]["validation_typos"]["macro_f1"])/2}
     (ROOT/"models/champions.json").write_text(json.dumps(champions,indent=2),encoding="utf-8")
+    if family:
+        lines += ["", "## Harder call evaluation: template families", "",
+                  f"I grouped the 743 messages into **{family['families']}** near-duplicate families before evaluating the frozen baseline with five-fold group cross-validation.",
+                  f"Family-held-out macro-F1: **{family['oof']['macro_f1']:.4f}**; typo macro-F1: **{family['oof_typos']['macro_f1']:.4f}**; accuracy: **{family['oof']['accuracy']:.4f}**.",
+                  "", "Each message is evaluated exactly once; no family crosses a fold's training and test sets. All four classes are represented in training for each recorded fold.",
+                  "The 1.0000 call scores above came from the earlier exact-deduplicated split. They were too optimistic because related templates remained on both sides. I keep them for comparison, but use the family-held-out result in the README headline.",
+                  "Family grouping uses a 0.80 character-TF-IDF cosine threshold and connected components. This is a heuristic stress test, not a human-verified semantic split or an independent real-world benchmark."]
     lines += ["", "Default inference uses validation-selected backends:", ""]
     for task, info in champions.items():
         lines.append(f"- {task}: **{info['backend']}** (selection score {info['score']:.4f}).")
@@ -126,12 +136,15 @@ def main():
     readme_text = readme.read_text(encoding="utf-8")
     start_marker, end_marker = "<!-- RESULTS SUMMARY START -->", "<!-- RESULTS SUMMARY END -->"
     if start_marker in readme_text and end_marker in readme_text:
-        summary_lines = ["", "I selected these backends using validation results. The test set was kept out of fitting and selection.", "",
-                         "| Task | Selected backend | Test macro-F1 | Typo-test macro-F1 | Test accuracy |",
-                         "|---|---|---:|---:|---:|"]
+        summary_lines = ["", "The protocols differ, so I list them explicitly. The call result uses the harder family split; the complaint result uses the supplied test file.", "",
+                         "| Task | Backend | Evaluation protocol | Macro-F1 | Typo macro-F1 | Accuracy |",
+                         "|---|---|---|---:|---:|---:|"]
         for task,info in champions.items():
             r = measured[task][info["backend"]]
-            summary_lines.append(f"| {task} | {info['backend']} | {r['test']['macro_f1']:.4f} | {r['test_typos']['macro_f1']:.4f} | {r['test']['accuracy']:.4f} |")
+            clean, noisy, protocol = r["test"],r["test_typos"],"Supplied test.csv"
+            if task == "call_scam" and family:
+                clean,noisy,protocol = family["oof"],family["oof_typos"],"5-fold template-family CV (frozen baseline)"
+            summary_lines.append(f"| {task} | {info['backend']} | {protocol} | {clean['macro_f1']:.4f} | {noisy['macro_f1']:.4f} | {clean['accuracy']:.4f} |")
         summary_lines += ["", "[Full comparisons and failure cases](reports/RESULTS.md). Scores are fractions, not percentages.", ""]
         before, after = readme_text.split(start_marker,1)
         _, after = after.split(end_marker,1)

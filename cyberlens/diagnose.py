@@ -24,7 +24,7 @@ def parent_metrics(report):
 def main():
     base = json.loads((ROOT/"reports/complaint_baseline.json").read_text())
     models = {"baseline":base[base["selected"]]}
-    for name in ("word2vec","subword","transformer"):
+    for name in ("word2vec","subword","transformer","hierarchical"):
         file = ROOT/"reports"/f"complaint_{name}.json"
         if file.exists():
             models[name] = json.loads(file.read_text())

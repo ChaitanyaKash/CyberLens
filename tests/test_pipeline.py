@@ -5,6 +5,26 @@ from cyberlens.data import ROOT, TASKS, load
 
 
 class PreprocessingTests(unittest.TestCase):
+    def test_expert_preserves_parent_mass_and_class_order(self):
+        from types import SimpleNamespace
+        from cyberlens.hierarchical import FinancialExpert
+        base = SimpleNamespace(classes_=np.array(["Other :: Other","Online Financial Fraud :: A","Online Financial Fraud :: B"]))
+        expert = SimpleNamespace(classes_=np.array(["Online Financial Fraud :: B","Online Financial Fraud :: A"]))
+        result = FinancialExpert(base,expert).combine(np.array([[.2,.3,.5]]),np.array([[.75,.25]]))
+        np.testing.assert_allclose(result,[[.2,.2,.6]])
+        self.assertAlmostEqual(result.sum(),1.)
+
+    def test_test_only_labels_do_not_change_validation_macro(self):
+        import pandas as pd
+        from cyberlens.metrics import evaluate
+        df = pd.DataFrame({"text":["alpha", "beta", "alpha", "beta", "alpha", "charlie"],
+                           "label":["a","b","a","b","a","c"],
+                           "split":["train","train","validation","validation","test","test"]})
+        result = evaluate(lambda texts:["a" if t.startswith("a") else "b" for t in texts],df,["a","b","c"])
+        self.assertEqual(result["validation"]["confusion_labels"],["a","b"])
+        self.assertEqual(result["validation"]["macro_f1"],1.)
+        self.assertEqual(result["test"]["confusion_labels"],["a","b","c"])
+
     def test_language_not_spellcorrected(self):
         text = "is account mein pese nhi aaye; bank is closed"
         self.assertEqual(normalize(text), text)

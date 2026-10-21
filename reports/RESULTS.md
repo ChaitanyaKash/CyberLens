@@ -29,17 +29,27 @@ All scores below are fractions, not percentages. Typo tests use synthetic intern
 | call_scam | word2vec | 1.0000 | 1.0000 | 0.9935 | 1.0000 | 12.7 |
 | call_scam | subword | 1.0000 | 1.0000 | 0.9935 | 1.0000 | 6.6 |
 | call_scam | multilingual DistilBERT | 1.0000 | 1.0000 | 1.0000 | 1.0000 | 39.7 |
-| complaint | TF-IDF word | 0.2310 | 0.2259 | 0.2186 | 0.4952 | 114.8 |
-| complaint | TF-IDF char | 0.2333 | 0.2193 | 0.2189 | 0.4793 | 376.2 |
-| complaint | TF-IDF hybrid (selected baseline) | 0.2443 | 0.2345 | 0.2269 | 0.5014 | 399.8 |
-| complaint | word2vec | 0.1198 | 0.1205 | 0.1115 | 0.2918 | 116.3 |
-| complaint | subword | 0.1233 | 0.1210 | 0.1095 | 0.3002 | 203.2 |
-| complaint | multilingual DistilBERT | 0.1558 | 0.1609 | 0.1578 | 0.4883 | 973.9 |
+| complaint | TF-IDF word | 0.2488 | 0.2259 | 0.2186 | 0.4952 | 114.8 |
+| complaint | TF-IDF char | 0.2512 | 0.2193 | 0.2189 | 0.4793 | 376.2 |
+| complaint | TF-IDF hybrid (selected baseline) | 0.2631 | 0.2345 | 0.2269 | 0.5014 | 399.8 |
+| complaint | word2vec | 0.1290 | 0.1205 | 0.1115 | 0.2918 | 116.3 |
+| complaint | subword | 0.1328 | 0.1210 | 0.1095 | 0.3002 | 203.2 |
+| complaint | multilingual DistilBERT | 0.1677 | 0.1609 | 0.1578 | 0.4883 | 973.9 |
+| complaint | financial expert + baseline | 0.2639 | 0.2311 | 0.2253 | 0.5028 | 187.6 |
+
+## Harder call evaluation: template families
+
+I grouped the 743 messages into **77** near-duplicate families before evaluating the frozen baseline with five-fold group cross-validation.
+Family-held-out macro-F1: **0.6308**; typo macro-F1: **0.6337**; accuracy: **0.7416**.
+
+Each message is evaluated exactly once; no family crosses a fold's training and test sets. All four classes are represented in training for each recorded fold.
+The 1.0000 call scores above came from the earlier exact-deduplicated split. They were too optimistic because related templates remained on both sides. I keep them for comparison, but use the family-held-out result in the README headline.
+Family grouping uses a 0.80 character-TF-IDF cosine threshold and connected components. This is a heuristic stress test, not a human-verified semantic split or an independent real-world benchmark.
 
 Default inference uses validation-selected backends:
 
 - call_scam: **baseline** (selection score 1.0000).
-- complaint: **baseline** (selection score 0.2395).
+- complaint: **baseline** (selection score 0.2579).
 
 Additional word-feature optimizer checks (validation only):
 
@@ -72,6 +82,7 @@ A perfect result on the small templated call dataset does not establish real-wor
 - word2vec: deduplicated (template, label) test macro-F1 **0.1222** on 27296 examples. Contradictory labels are retained.
 - subword: deduplicated (template, label) test macro-F1 **0.1227** on 27296 examples. Contradictory labels are retained.
 - transformer: deduplicated (template, label) test macro-F1 **0.1614** on 27296 examples. Contradictory labels are retained.
+- hierarchical: deduplicated (template, label) test macro-F1 **0.2350** on 27296 examples. Contradictory labels are retained.
 
 ## Small manual diagnostic
 

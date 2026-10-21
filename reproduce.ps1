@@ -21,6 +21,8 @@ try {
             & $taskPython -m cyberlens.cli train --backend $backend
             if ($LASTEXITCODE -ne 0) { throw "$backend training failed" }
         }
+        & $taskPython -m cyberlens.cli train --backend hierarchical --task complaint
+        if ($LASTEXITCODE -ne 0) { throw 'Financial expert experiment failed' }
         if (-not (Test-Path "$PSScriptRoot/.cache/pretrained/distilmbert/model.safetensors")) {
             & $taskPython -m cyberlens.download_encoder
             if ($LASTEXITCODE -ne 0) { throw 'Public encoder download failed' }
@@ -29,6 +31,10 @@ try {
         if ($LASTEXITCODE -ne 0) { throw 'Call encoder training failed' }
         & $taskPython -m cyberlens.cli train --backend transformer --task complaint --epochs 1 --batch-size 32 --accumulation 1
         if ($LASTEXITCODE -ne 0) { throw 'Complaint encoder training failed' }
+        & $taskPython -m cyberlens.template_evaluation
+        if ($LASTEXITCODE -ne 0) { throw 'Template-family evaluation failed' }
+        & $taskPython -m cyberlens.diagnose
+        if ($LASTEXITCODE -ne 0) { throw 'Parent-category diagnostic failed' }
         & $taskPython -m cyberlens.report
         if ($LASTEXITCODE -ne 0) { throw 'Initial model selection/reporting failed' }
         & $taskPython -m unittest discover -s tests -v

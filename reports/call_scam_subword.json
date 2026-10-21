@@ -245,5 +245,6 @@
   "vocabulary": 242,
   "sampled_pairs": 300000,
   "seconds": 6.628893899999639,
-  "cuda_peak_mb": 139.291015625
+  "cuda_peak_mb": 139.291015625,
+  "validation_label_policy": "Training label vocabulary only; unsupported official-test labels remain in test metrics"
 }

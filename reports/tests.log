@@ -3,13 +3,15 @@ test_no_duplicate_leakage_and_label_coverage (test_pipeline.DataTests.test_no_du
 test_subword_hash_and_gradient (test_pipeline.DataTests.test_subword_hash_and_gradient) ... ok
 test_corruption_does_not_touch_entities (test_pipeline.PreprocessingTests.test_corruption_does_not_touch_entities) ... ok
 test_duplicate_templates (test_pipeline.PreprocessingTests.test_duplicate_templates) ... ok
+test_expert_preserves_parent_mass_and_class_order (test_pipeline.PreprocessingTests.test_expert_preserves_parent_mass_and_class_order) ... ok
 test_language_not_spellcorrected (test_pipeline.PreprocessingTests.test_language_not_spellcorrected) ... ok
 test_mask_idempotence (test_pipeline.PreprocessingTests.test_mask_idempotence) ... ok
 test_names_not_claimed_masked (test_pipeline.PreprocessingTests.test_names_not_claimed_masked) ... ok
 test_negation_and_money_preserved (test_pipeline.PreprocessingTests.test_negation_and_money_preserved) ... ok
 test_specific_masks_and_clues (test_pipeline.PreprocessingTests.test_specific_masks_and_clues) ... ok
+test_test_only_labels_do_not_change_validation_macro (test_pipeline.PreprocessingTests.test_test_only_labels_do_not_change_validation_macro) ... ok
 
 ----------------------------------------------------------------------
-Ran 10 tests in 16.822s
+Ran 12 tests in 12.154s
 
 OK

@@ -1,0 +1,203 @@
+{
+  "protocol": "Five-fold stratified group CV, near-duplicate family connected components; frozen previously selected estimator",
+  "threshold": 0.8,
+  "group_features": "Character 3-5-gram TF-IDF cosine; grouping only",
+  "estimator": "word",
+  "rows": 743,
+  "families": 77,
+  "sensitivity": {
+    "0.75": {
+      "families": 48,
+      "families_per_class": {
+        "none": 10,
+        "other_scam": 5,
+        "police_blackmail": 6,
+        "police_digital_arrest": 27
+      }
+    },
+    "0.8": {
+      "families": 77,
+      "families_per_class": {
+        "none": 11,
+        "other_scam": 6,
+        "police_blackmail": 6,
+        "police_digital_arrest": 54
+      }
+    },
+    "0.85": {
+      "families": 155,
+      "families_per_class": {
+        "none": 14,
+        "other_scam": 12,
+        "police_blackmail": 13,
+        "police_digital_arrest": 116
+      }
+    },
+    "0.9": {
+      "families": 343,
+      "families_per_class": {
+        "none": 24,
+        "other_scam": 33,
+        "police_blackmail": 38,
+        "police_digital_arrest": 248
+      }
+    }
+  },
+  "folds": [
+    {
+      "fold": 0,
+      "train_rows": 598,
+      "test_rows": 145,
+      "train_families": 62,
+      "test_families": 15,
+      "test_labels_absent_from_training": []
+    },
+    {
+      "fold": 1,
+      "train_rows": 598,
+      "test_rows": 145,
+      "train_families": 62,
+      "test_families": 15,
+      "test_labels_absent_from_training": []
+    },
+    {
+      "fold": 2,
+      "train_rows": 578,
+      "test_rows": 165,
+      "train_families": 60,
+      "test_families": 17,
+      "test_labels_absent_from_training": []
+    },
+    {
+      "fold": 3,
+      "train_rows": 599,
+      "test_rows": 144,
+      "train_families": 62,
+      "test_families": 15,
+      "test_labels_absent_from_training": []
+    },
+    {
+      "fold": 4,
+      "train_rows": 599,
+      "test_rows": 144,
+      "train_families": 62,
+      "test_families": 15,
+      "test_labels_absent_from_training": []
+    }
+  ],
+  "oof": {
+    "n": 743,
+    "accuracy": 0.7415881561238223,
+    "macro_f1": 0.6308192447266142,
+    "weighted_f1": 0.7056941750926276,
+    "per_class": {
+      "none": {
+        "precision": 0.95,
+        "recall": 0.6909090909090909,
+        "f1-score": 0.8,
+        "support": 110.0
+      },
+      "other_scam": {
+        "precision": 0.7105263157894737,
+        "recall": 0.2571428571428571,
+        "f1-score": 0.3776223776223776,
+        "support": 105.0
+      },
+      "police_blackmail": {
+        "precision": 0.92,
+        "recall": 0.36507936507936506,
+        "f1-score": 0.5227272727272727,
+        "support": 126.0
+      },
+      "police_digital_arrest": {
+        "precision": 0.6991304347826087,
+        "recall": 1.0,
+        "f1-score": 0.8229273285568065,
+        "support": 402.0
+      },
+      "accuracy": 0.7415881561238223,
+      "macro avg": {
+        "precision": 0.8199141876430206,
+        "recall": 0.5782828282828283,
+        "f1-score": 0.6308192447266142,
+        "support": 743.0
+      },
+      "weighted avg": {
+        "precision": 0.7753374131096951,
+        "recall": 0.7415881561238223,
+        "f1-score": 0.7056941750926276,
+        "support": 743.0
+      }
+    },
+    "confusion_labels": [
+      "none",
+      "other_scam",
+      "police_blackmail",
+      "police_digital_arrest"
+    ],
+    "confusion_matrix": [
+      [76, 11, 4, 19],
+      [4, 27, 0, 74],
+      [0, 0, 46, 80],
+      [0, 0, 0, 402]
+    ]
+  },
+  "oof_typos": {
+    "n": 743,
+    "accuracy": 0.7442799461641992,
+    "macro_f1": 0.633731316813222,
+    "weighted_f1": 0.7091056689513844,
+    "per_class": {
+      "none": {
+        "precision": 0.926829268292683,
+        "recall": 0.6909090909090909,
+        "f1-score": 0.7916666666666666,
+        "support": 110.0
+      },
+      "other_scam": {
+        "precision": 0.7105263157894737,
+        "recall": 0.2571428571428571,
+        "f1-score": 0.3776223776223776,
+        "support": 105.0
+      },
+      "police_blackmail": {
+        "precision": 0.9230769230769231,
+        "recall": 0.38095238095238093,
+        "f1-score": 0.5393258426966292,
+        "support": 126.0
+      },
+      "police_digital_arrest": {
+        "precision": 0.7040280210157618,
+        "recall": 1.0,
+        "f1-score": 0.8263103802672148,
+        "support": 402.0
+      },
+      "accuracy": 0.7442799461641992,
+      "macro avg": {
+        "precision": 0.8161151320437103,
+        "recall": 0.5822510822510822,
+        "f1-score": 0.633731316813222,
+        "support": 743.0
+      },
+      "weighted avg": {
+        "precision": 0.7750786533325955,
+        "recall": 0.7442799461641992,
+        "f1-score": 0.7091056689513844,
+        "support": 743.0
+      }
+    },
+    "confusion_labels": [
+      "none",
+      "other_scam",
+      "police_blackmail",
+      "police_digital_arrest"
+    ],
+    "confusion_matrix": [
+      [76, 11, 4, 19],
+      [5, 27, 0, 73],
+      [1, 0, 48, 77],
+      [0, 0, 0, 402]
+    ]
+  },
+  "limitation": "Heuristic text similarity groups, not human-verified semantic families. Some classes may have too few independent families; fold coverage is disclosed. Not a real-world benchmark."
+}

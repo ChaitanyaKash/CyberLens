@@ -1,0 +1,652 @@
+{
+  "baseline": {
+    "validation": {
+      "accuracy": 0.6775045068246202,
+      "macro_f1": 0.34629186379580107,
+      "classes": {
+        "Any Other Cyber Crime": {
+          "f1": 0.3581191908146528,
+          "support": 2119
+        },
+        "Child Pornography CPChild Sexual Abuse Material CSAM": {
+          "f1": 0.302158273381295,
+          "support": 68
+        },
+        "Cryptocurrency Crime": {
+          "f1": 0.4946236559139785,
+          "support": 92
+        },
+        "Cyber Attack/ Dependent Crimes": {
+          "f1": 1.0,
+          "support": 722
+        },
+        "Cyber Terrorism": {
+          "f1": 0.07692307692307693,
+          "support": 32
+        },
+        "Hacking  Damage to computercomputer system etc": {
+          "f1": 0.3646659116647792,
+          "support": 334
+        },
+        "Online Cyber Trafficking": {
+          "f1": 0.0,
+          "support": 36
+        },
+        "Online Financial Fraud": {
+          "f1": 0.8301608882846137,
+          "support": 9028
+        },
+        "Online Gambling  Betting": {
+          "f1": 0.13973799126637554,
+          "support": 87
+        },
+        "Online and Social Media Related Crime": {
+          "f1": 0.5364573570759138,
+          "support": 2341
+        },
+        "Ransomware": {
+          "f1": 0.25,
+          "support": 11
+        },
+        "RapeGang Rape RGRSexually Abusive Content": {
+          "f1": 0.1592920353982301,
+          "support": 46
+        },
+        "Sexually Explicit Act": {
+          "f1": 0.11372549019607843,
+          "support": 283
+        },
+        "Sexually Obscene material": {
+          "f1": 0.2222222222222222,
+          "support": 333
+        }
+      }
+    },
+    "test": {
+      "accuracy": 0.700724708329271,
+      "macro_f1": 0.3470696530677227,
+      "classes": {
+        "Any Other Cyber Crime": {
+          "f1": 0.36917562724014336,
+          "support": 3610
+        },
+        "Child Pornography CPChild Sexual Abuse Material CSAM": {
+          "f1": 0.4048582995951417,
+          "support": 118
+        },
+        "Crime Against Women & Children": {
+          "f1": 0.0,
+          "support": 4
+        },
+        "Cryptocurrency Crime": {
+          "f1": 0.5490981963927856,
+          "support": 165
+        },
+        "Cyber Attack/ Dependent Crimes": {
+          "f1": 0.9984164687252574,
+          "support": 1261
+        },
+        "Cyber Terrorism": {
+          "f1": 0.0547945205479452,
+          "support": 51
+        },
+        "Hacking  Damage to computercomputer system etc": {
+          "f1": 0.34782608695652173,
+          "support": 577
+        },
+        "Online Cyber Trafficking": {
+          "f1": 0.0,
+          "support": 61
+        },
+        "Online Financial Fraud": {
+          "f1": 0.8664628487197685,
+          "support": 18623
+        },
+        "Online Gambling  Betting": {
+          "f1": 0.16893732970027248,
+          "support": 133
+        },
+        "Online and Social Media Related Crime": {
+          "f1": 0.5497427101200686,
+          "support": 4055
+        },
+        "Ransomware": {
+          "f1": 0.5555555555555556,
+          "support": 18
+        },
+        "RapeGang Rape RGRSexually Abusive Content": {
+          "f1": 0.031714568880079286,
+          "support": 911
+        },
+        "Sexually Explicit Act": {
+          "f1": 0.0715909090909091,
+          "support": 527
+        },
+        "Sexually Obscene material": {
+          "f1": 0.2378716744913928,
+          "support": 657
+        }
+      }
+    }
+  },
+  "word2vec": {
+    "validation": {
+      "accuracy": 0.5186711305691476,
+      "macro_f1": 0.20035191205350242,
+      "classes": {
+        "Any Other Cyber Crime": {
+          "f1": 0.09876543209876543,
+          "support": 2119
+        },
+        "Child Pornography CPChild Sexual Abuse Material CSAM": {
+          "f1": 0.0761904761904762,
+          "support": 68
+        },
+        "Cryptocurrency Crime": {
+          "f1": 0.11127819548872181,
+          "support": 92
+        },
+        "Cyber Attack/ Dependent Crimes": {
+          "f1": 0.9986168741355463,
+          "support": 722
+        },
+        "Cyber Terrorism": {
+          "f1": 0.006688963210702341,
+          "support": 32
+        },
+        "Hacking  Damage to computercomputer system etc": {
+          "f1": 0.18017057569296374,
+          "support": 334
+        },
+        "Online Cyber Trafficking": {
+          "f1": 0.006666666666666667,
+          "support": 36
+        },
+        "Online Financial Fraud": {
+          "f1": 0.7322493565195556,
+          "support": 9028
+        },
+        "Online Gambling  Betting": {
+          "f1": 0.04633204633204633,
+          "support": 87
+        },
+        "Online and Social Media Related Crime": {
+          "f1": 0.3846550834336831,
+          "support": 2341
+        },
+        "Ransomware": {
+          "f1": 0.0,
+          "support": 11
+        },
+        "RapeGang Rape RGRSexually Abusive Content": {
+          "f1": 0.05583756345177665,
+          "support": 46
+        },
+        "Sexually Explicit Act": {
+          "f1": 0.06167400881057269,
+          "support": 283
+        },
+        "Sexually Obscene material": {
+          "f1": 0.04580152671755725,
+          "support": 333
+        }
+      }
+    },
+    "test": {
+      "accuracy": 0.5509083227714406,
+      "macro_f1": 0.18765282891495702,
+      "classes": {
+        "Any Other Cyber Crime": {
+          "f1": 0.1046617915904936,
+          "support": 3610
+        },
+        "Child Pornography CPChild Sexual Abuse Material CSAM": {
+          "f1": 0.03961848862802641,
+          "support": 118
+        },
+        "Crime Against Women & Children": {
+          "f1": 0.0,
+          "support": 4
+        },
+        "Cryptocurrency Crime": {
+          "f1": 0.11504424778761062,
+          "support": 165
+        },
+        "Cyber Attack/ Dependent Crimes": {
+          "f1": 0.998021369212505,
+          "support": 1261
+        },
+        "Cyber Terrorism": {
+          "f1": 0.0148975791433892,
+          "support": 51
+        },
+        "Hacking  Damage to computercomputer system etc": {
+          "f1": 0.16563513115237252,
+          "support": 577
+        },
+        "Online Cyber Trafficking": {
+          "f1": 0.010714285714285714,
+          "support": 61
+        },
+        "Online Financial Fraud": {
+          "f1": 0.7785588226496366,
+          "support": 18623
+        },
+        "Online Gambling  Betting": {
+          "f1": 0.0326975476839237,
+          "support": 133
+        },
+        "Online and Social Media Related Crime": {
+          "f1": 0.3919291338582677,
+          "support": 4055
+        },
+        "Ransomware": {
+          "f1": 0.011004126547455296,
+          "support": 18
+        },
+        "RapeGang Rape RGRSexually Abusive Content": {
+          "f1": 0.025174825174825177,
+          "support": 911
+        },
+        "Sexually Explicit Act": {
+          "f1": 0.08450704225352113,
+          "support": 527
+        },
+        "Sexually Obscene material": {
+          "f1": 0.042328042328042326,
+          "support": 657
+        }
+      }
+    }
+  },
+  "subword": {
+    "validation": {
+      "accuracy": 0.5141643059490085,
+      "macro_f1": 0.2003764118726917,
+      "classes": {
+        "Any Other Cyber Crime": {
+          "f1": 0.06833333333333333,
+          "support": 2119
+        },
+        "Child Pornography CPChild Sexual Abuse Material CSAM": {
+          "f1": 0.07971014492753623,
+          "support": 68
+        },
+        "Cryptocurrency Crime": {
+          "f1": 0.1188118811881188,
+          "support": 92
+        },
+        "Cyber Attack/ Dependent Crimes": {
+          "f1": 0.9986168741355463,
+          "support": 722
+        },
+        "Cyber Terrorism": {
+          "f1": 0.01680672268907563,
+          "support": 32
+        },
+        "Hacking  Damage to computercomputer system etc": {
+          "f1": 0.17391304347826086,
+          "support": 334
+        },
+        "Online Cyber Trafficking": {
+          "f1": 0.00684931506849315,
+          "support": 36
+        },
+        "Online Financial Fraud": {
+          "f1": 0.731027492715064,
+          "support": 9028
+        },
+        "Online Gambling  Betting": {
+          "f1": 0.031180400890868598,
+          "support": 87
+        },
+        "Online and Social Media Related Crime": {
+          "f1": 0.3992939099735216,
+          "support": 2341
+        },
+        "Ransomware": {
+          "f1": 0.004761904761904762,
+          "support": 11
+        },
+        "RapeGang Rape RGRSexually Abusive Content": {
+          "f1": 0.05699481865284974,
+          "support": 46
+        },
+        "Sexually Explicit Act": {
+          "f1": 0.030864197530864196,
+          "support": 283
+        },
+        "Sexually Obscene material": {
+          "f1": 0.0881057268722467,
+          "support": 333
+        }
+      }
+    },
+    "test": {
+      "accuracy": 0.5516232816613045,
+      "macro_f1": 0.18908837645464308,
+      "classes": {
+        "Any Other Cyber Crime": {
+          "f1": 0.08019441069258809,
+          "support": 3610
+        },
+        "Child Pornography CPChild Sexual Abuse Material CSAM": {
+          "f1": 0.12184873949579832,
+          "support": 118
+        },
+        "Crime Against Women & Children": {
+          "f1": 0.0,
+          "support": 4
+        },
+        "Cryptocurrency Crime": {
+          "f1": 0.10602094240837696,
+          "support": 165
+        },
+        "Cyber Attack/ Dependent Crimes": {
+          "f1": 0.9960505529225908,
+          "support": 1261
+        },
+        "Cyber Terrorism": {
+          "f1": 0.013245033112582781,
+          "support": 51
+        },
+        "Hacking  Damage to computercomputer system etc": {
+          "f1": 0.1684334511189635,
+          "support": 577
+        },
+        "Online Cyber Trafficking": {
+          "f1": 0.008528784648187633,
+          "support": 61
+        },
+        "Online Financial Fraud": {
+          "f1": 0.7823108814516614,
+          "support": 18623
+        },
+        "Online Gambling  Betting": {
+          "f1": 0.05420827389443652,
+          "support": 133
+        },
+        "Online and Social Media Related Crime": {
+          "f1": 0.3796484736355227,
+          "support": 4055
+        },
+        "Ransomware": {
+          "f1": 0.008097165991902834,
+          "support": 18
+        },
+        "RapeGang Rape RGRSexually Abusive Content": {
+          "f1": 0.024275118004045852,
+          "support": 911
+        },
+        "Sexually Explicit Act": {
+          "f1": 0.03361344537815126,
+          "support": 527
+        },
+        "Sexually Obscene material": {
+          "f1": 0.059850374064837904,
+          "support": 657
+        }
+      }
+    }
+  },
+  "transformer": {
+    "validation": {
+      "accuracy": 0.6769894411537472,
+      "macro_f1": 0.26874047151788955,
+      "classes": {
+        "Any Other Cyber Crime": {
+          "f1": 0.2974251182343668,
+          "support": 2119
+        },
+        "Child Pornography CPChild Sexual Abuse Material CSAM": {
+          "f1": 0.30927835051546393,
+          "support": 68
+        },
+        "Cryptocurrency Crime": {
+          "f1": 0.26576576576576577,
+          "support": 92
+        },
+        "Cyber Attack/ Dependent Crimes": {
+          "f1": 1.0,
+          "support": 722
+        },
+        "Cyber Terrorism": {
+          "f1": 0.0,
+          "support": 32
+        },
+        "Hacking  Damage to computercomputer system etc": {
+          "f1": 0.32083333333333336,
+          "support": 334
+        },
+        "Online Cyber Trafficking": {
+          "f1": 0.0,
+          "support": 36
+        },
+        "Online Financial Fraud": {
+          "f1": 0.8305817174515235,
+          "support": 9028
+        },
+        "Online Gambling  Betting": {
+          "f1": 0.0,
+          "support": 87
+        },
+        "Online and Social Media Related Crime": {
+          "f1": 0.5551113649343232,
+          "support": 2341
+        },
+        "Ransomware": {
+          "f1": 0.0,
+          "support": 11
+        },
+        "RapeGang Rape RGRSexually Abusive Content": {
+          "f1": 0.0,
+          "support": 46
+        },
+        "Sexually Explicit Act": {
+          "f1": 0.013745704467353952,
+          "support": 283
+        },
+        "Sexually Obscene material": {
+          "f1": 0.16962524654832348,
+          "support": 333
+        }
+      }
+    },
+    "test": {
+      "accuracy": 0.6944850671086412,
+      "macro_f1": 0.25461577188244566,
+      "classes": {
+        "Any Other Cyber Crime": {
+          "f1": 0.28336946423041187,
+          "support": 3610
+        },
+        "Child Pornography CPChild Sexual Abuse Material CSAM": {
+          "f1": 0.36649214659685864,
+          "support": 118
+        },
+        "Crime Against Women & Children": {
+          "f1": 0.0,
+          "support": 4
+        },
+        "Cryptocurrency Crime": {
+          "f1": 0.3333333333333333,
+          "support": 165
+        },
+        "Cyber Attack/ Dependent Crimes": {
+          "f1": 0.9984164687252574,
+          "support": 1261
+        },
+        "Cyber Terrorism": {
+          "f1": 0.0,
+          "support": 51
+        },
+        "Hacking  Damage to computercomputer system etc": {
+          "f1": 0.3201911589008363,
+          "support": 577
+        },
+        "Online Cyber Trafficking": {
+          "f1": 0.0,
+          "support": 61
+        },
+        "Online Financial Fraud": {
+          "f1": 0.8644439687466553,
+          "support": 18623
+        },
+        "Online Gambling  Betting": {
+          "f1": 0.0,
+          "support": 133
+        },
+        "Online and Social Media Related Crime": {
+          "f1": 0.5597602929752524,
+          "support": 4055
+        },
+        "Ransomware": {
+          "f1": 0.0,
+          "support": 18
+        },
+        "RapeGang Rape RGRSexually Abusive Content": {
+          "f1": 0.0,
+          "support": 911
+        },
+        "Sexually Explicit Act": {
+          "f1": 0.0,
+          "support": 527
+        },
+        "Sexually Obscene material": {
+          "f1": 0.0932297447280799,
+          "support": 657
+        }
+      }
+    }
+  },
+  "hierarchical": {
+    "validation": {
+      "accuracy": 0.6796935359258306,
+      "macro_f1": 0.34767742849027,
+      "classes": {
+        "Any Other Cyber Crime": {
+          "f1": 0.37310195227765725,
+          "support": 2119
+        },
+        "Child Pornography CPChild Sexual Abuse Material CSAM": {
+          "f1": 0.30434782608695654,
+          "support": 68
+        },
+        "Cryptocurrency Crime": {
+          "f1": 0.4825174825174825,
+          "support": 92
+        },
+        "Cyber Attack/ Dependent Crimes": {
+          "f1": 1.0,
+          "support": 722
+        },
+        "Cyber Terrorism": {
+          "f1": 0.0784313725490196,
+          "support": 32
+        },
+        "Hacking  Damage to computercomputer system etc": {
+          "f1": 0.3646288209606987,
+          "support": 334
+        },
+        "Online Cyber Trafficking": {
+          "f1": 0.0,
+          "support": 36
+        },
+        "Online Financial Fraud": {
+          "f1": 0.8328670130760006,
+          "support": 9028
+        },
+        "Online Gambling  Betting": {
+          "f1": 0.14847161572052403,
+          "support": 87
+        },
+        "Online and Social Media Related Crime": {
+          "f1": 0.5405004633920296,
+          "support": 2341
+        },
+        "Ransomware": {
+          "f1": 0.25,
+          "support": 11
+        },
+        "RapeGang Rape RGRSexually Abusive Content": {
+          "f1": 0.15517241379310345,
+          "support": 46
+        },
+        "Sexually Explicit Act": {
+          "f1": 0.11741682974559686,
+          "support": 283
+        },
+        "Sexually Obscene material": {
+          "f1": 0.22002820874471085,
+          "support": 333
+        }
+      }
+    },
+    "test": {
+      "accuracy": 0.6996197718631179,
+      "macro_f1": 0.3445276435996801,
+      "classes": {
+        "Any Other Cyber Crime": {
+          "f1": 0.3736901499274545,
+          "support": 3610
+        },
+        "Child Pornography CPChild Sexual Abuse Material CSAM": {
+          "f1": 0.4048582995951417,
+          "support": 118
+        },
+        "Crime Against Women & Children": {
+          "f1": 0.0,
+          "support": 4
+        },
+        "Cryptocurrency Crime": {
+          "f1": 0.5220729366602687,
+          "support": 165
+        },
+        "Cyber Attack/ Dependent Crimes": {
+          "f1": 0.9984164687252574,
+          "support": 1261
+        },
+        "Cyber Terrorism": {
+          "f1": 0.05555555555555555,
+          "support": 51
+        },
+        "Hacking  Damage to computercomputer system etc": {
+          "f1": 0.34615384615384615,
+          "support": 577
+        },
+        "Online Cyber Trafficking": {
+          "f1": 0.0,
+          "support": 61
+        },
+        "Online Financial Fraud": {
+          "f1": 0.8671370912385712,
+          "support": 18623
+        },
+        "Online Gambling  Betting": {
+          "f1": 0.16886543535620052,
+          "support": 133
+        },
+        "Online and Social Media Related Crime": {
+          "f1": 0.5495678156013233,
+          "support": 4055
+        },
+        "Ransomware": {
+          "f1": 0.5405405405405406,
+          "support": 18
+        },
+        "RapeGang Rape RGRSexually Abusive Content": {
+          "f1": 0.031714568880079286,
+          "support": 911
+        },
+        "Sexually Explicit Act": {
+          "f1": 0.07231638418079096,
+          "support": 527
+        },
+        "Sexually Obscene material": {
+          "f1": 0.2370255615801704,
+          "support": 657
+        }
+      }
+    }
+  }
+}

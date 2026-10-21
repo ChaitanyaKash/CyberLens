@@ -693,5 +693,6 @@
     "seconds": 0.5728421000003436
   },
   "selected": "word",
-  "selection_rule": "Mean clean + synthetic-typo validation macro-F1; test never used for selection"
+  "selection_rule": "Mean clean + synthetic-typo validation macro-F1; test never used for selection",
+  "validation_label_policy": "Training label vocabulary only; unsupported official-test labels remain in test metrics"
 }

@@ -10,6 +10,7 @@ class Predictor:
         self.root = root
         self.backend = backend
         self.models = {}
+        self.quality = {}
 
     def predict(self, text, task="both", top_k=3, threshold=.55):
         if not str(text).strip():
@@ -26,20 +27,28 @@ class Predictor:
                 import json
                 registry = self.root / "models/champions.json"
                 backend = json.loads(registry.read_text())[name]["backend"] if registry.exists() else "baseline"
-            if name not in self.models:
+            if backend == "hierarchical" and name == "call_scam":
+                backend = "baseline"
+            cache_key = (name,backend)
+            if cache_key not in self.models:
                 if backend == "transformer":
                     from .transformer import TransformerPredictor
-                    self.models[name] = {"model": TransformerPredictor(self.root/"models"/f"{name}_transformer"), "mode":"transformer"}
+                    self.models[cache_key] = {"model": TransformerPredictor(self.root/"models"/f"{name}_transformer"), "mode":"transformer"}
                 else:
                     path = self.root / "models" / f"{name}_{backend}.joblib"
-                    self.models[name] = joblib.load(path)
-            bundle = self.models[name]
+                    self.models[cache_key] = joblib.load(path)
+            bundle = self.models[cache_key]
             if backend == "baseline":
                 model = bundle["model"]
                 features = model.named_steps["features"].transform([cleaned])
                 probs = model.named_steps["classifier"].predict_proba(features)[0]
                 labels = model.classes_
                 coverage = features.nnz > 0
+            elif backend == "hierarchical":
+                model = bundle["model"]
+                probs = model.predict_proba([cleaned])[0]
+                labels = model.classes_
+                coverage = model.base.named_steps["features"].transform([cleaned]).nnz > 0
             elif backend == "transformer":
                 probs = bundle["model"].predict_proba([cleaned])[0]
                 labels = bundle["model"].classes_
@@ -53,10 +62,30 @@ class Predictor:
                 coverage = bool(np.any(x))
             order = np.argsort(probs)[::-1][:top_k]
             top = [{"label": str(labels[i]), "score": float(probs[i])} for i in order]
+            if cache_key not in self.quality:
+                import json
+                report_path = self.root/"reports"/f"{name}_{backend}.json"
+                family_path = self.root/"reports/call_family_evaluation.json"
+                if name == "call_scam" and backend == "baseline" and family_path.exists():
+                    quality = json.loads(family_path.read_text())["oof"]["per_class"]
+                    source = "template-family cross-validation"
+                elif report_path.exists():
+                    report = json.loads(report_path.read_text())
+                    if backend == "baseline":
+                        report = report[report["selected"]]
+                    quality,source = report["validation"]["per_class"],"validation"
+                else:
+                    quality,source = {},"unavailable"
+                self.quality[cache_key] = quality,source
+            quality,source = self.quality[cache_key]
+            evidence = quality.get(top[0]["label"],{})
+            weak_class = evidence.get("f1-score",0) < .5 or evidence.get("support",0) < 20
             result["predictions"][name] = {
                 "model": bundle.get("mode", backend), "top": top,
-                "needs_review": bool(not coverage or top[0]["score"] < threshold),
+                "needs_review": bool(not coverage or top[0]["score"] < threshold or weak_class),
                 "has_known_features": bool(coverage),
+                "class_evidence": {"source":source,"f1":evidence.get("f1-score"),"support":evidence.get("support"),
+                                   "notice":"Class-level evaluation summary, not this message's probability of correctness"},
                 "score_notice": "Uncalibrated model scores; threshold is a heuristic, not a safety guarantee.",
                 "scope": "Hinglish call labels; English transfer unvalidated" if name == "call_scam" else
                          "English complaint taxonomy; Hinglish transfer unvalidated; no benign class",
@@ -69,4 +98,10 @@ class Predictor:
                 result["predictions"][name]["category_top"] = [
                     {"label":label,"score":value} for label,value in
                     sorted(parents.items(), key=lambda x:x[1], reverse=True)[:top_k]]
+                broad = result["predictions"][name]["category_top"][0]["label"]
+                parent_mismatch = not top[0]["label"].startswith(broad+" :: ")
+                result["predictions"][name]["needs_review"] |= parent_mismatch
+                result["predictions"][name]["suggested_type"] = broad+" (subtype needs review)" if weak_class or parent_mismatch else top[0]["label"]
+            else:
+                result["predictions"][name]["suggested_type"] = top[0]["label"]
         return result

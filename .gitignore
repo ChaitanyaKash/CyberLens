@@ -13,6 +13,9 @@ reports/*
 !reports/*_word2vec.json
 !reports/*_subword.json
 !reports/*_transformer.json
+!reports/*_hierarchical.json
+!reports/parent_diagnostic.json
+!reports/call_family_evaluation.json
 !reports/optimizer_validation.json
 !reports/manual_challenge.json
 !reports/tests.log
