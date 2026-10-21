@@ -29,7 +29,7 @@ class Predictor:
                 backend = json.loads(registry.read_text())[name]["backend"] if registry.exists() else "baseline"
             if backend == "hierarchical" and name == "call_scam":
                 backend = "baseline"
-            if (backend == "robust" and name == "complaint") or (backend in ("regularized","margin","semantic","ensemble","continued","improved","supervised") and name == "call_scam"):
+            if (backend == "robust" and name == "complaint") or (backend in ("regularized","margin","semantic","ensemble","continued","improved","supervised","adjusted") and name == "call_scam"):
                 backend = "baseline"
             cache_key = (name,backend)
             if cache_key not in self.models:
@@ -48,7 +48,13 @@ class Predictor:
                         raise ValueError("No improved deployment model is available. Rejected internal experiments do not create one; use best or baseline.")
                     self.models[cache_key] = joblib.load(path)
             bundle = self.models[cache_key]
-            if backend in ("baseline","regularized","margin","improved"):
+            if backend == "adjusted":
+                model = bundle["model"]
+                features = model.named_steps["features"].transform([cleaned])
+                probs = model.predict_proba_features(features)[0]
+                labels = model.classes_
+                coverage = features.nnz > 0
+            elif backend in ("baseline","regularized","margin","improved"):
                 model = bundle["model"]
                 features = model.named_steps["features"].transform([cleaned])
                 probs = model.named_steps["classifier"].predict_proba(features)[0]
@@ -94,7 +100,7 @@ class Predictor:
                     if backend == "baseline":
                         report = report[report["selected"]]
                     quality,source = report.get("validation",{}).get("per_class",{}),"validation"
-                    experimental = backend in ("regularized","margin","semantic","ensemble","continued","improved","supervised") and not report.get("adopt",False)
+                    experimental = backend in ("regularized","margin","semantic","ensemble","continued","improved","supervised","adjusted") and not report.get("adopt",False)
                 else:
                     quality,source = {},"unavailable"
                 self.quality[cache_key] = quality,source,experimental
