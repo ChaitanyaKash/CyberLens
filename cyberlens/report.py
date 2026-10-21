@@ -53,6 +53,8 @@ def main():
     margin = json.loads(margin_path.read_text()) if margin_path.exists() else None
     continued_path = reports/"complaint_continued.json"
     continued = json.loads(continued_path.read_text()) if continued_path.exists() else None
+    adjusted_path = reports/"complaint_adjusted.json"
+    adjusted = json.loads(adjusted_path.read_text()) if adjusted_path.exists() else None
     improved_path = reports/"complaint_improved.json"
     improved = json.loads(improved_path.read_text()) if improved_path.exists() else None
     supervised_path = reports/"complaint_supervised.json"
@@ -106,7 +108,37 @@ def main():
     if robust and robust["adopt"]:
         champions["call_scam"] = {"backend":"robust","selection":"nested family CV with fixed uncertainty/promotion rule",
                                   "score":(robust["nested"]["macro_f1"]+robust["nested_typos"]["macro_f1"])/2}
+    if adjusted and adjusted["adopt"]:
+        # Its validation set comes from a different training pool, so it is promoted by its own
+        # predeclared test rule rather than by comparing validation scores across protocols.
+        champions["complaint"] = {"backend":"adjusted","selection":"official-train protocol; validation grid; predeclared adoption rule",
+                                  "score":adjusted["selected_validation"]["selection"]}
     (ROOT/"models/champions.json").write_text(json.dumps(champions,indent=2),encoding="utf-8")
+    if adjusted:
+        old, ref, new = adjusted["default_slices"], adjusted["reference_refit"], adjusted["selected_refit"]
+        cfg = adjusted["selected"]
+        lines += ["", "## Official-train protocol and class-prior correction", "",
+                  "The earlier preparation removed every training row whose normalized template also occurs in `test.csv`. That removal consults the test file and discards 12,778 rows (13.6% of `train.csv`); one subtype kept 8% of its rows. In the official-train protocol, training uses all of `train.csv` and `test.csv` is not consulted. Validation remains a template-disjoint 20% of the training pool. Conflicting training templates keep their plurality label when it covers at least 60% of rows; others are excluded.",
+                  "Balanced class weights left rare subtypes with low precision. A post-hoc correction adds tau times the log training prior to log-probabilities. SGD alpha and tau were selected from a fixed 4 x 5 grid by mean clean/noisy validation macro-F1, then refitted on training plus validation.",
+                  "", "| Alpha | Tau | Clean validation macro-F1 | Typo validation macro-F1 | Clean validation accuracy |", "|---:|---:|---:|---:|---:|"]
+        for row in adjusted["grid"]:
+            mark = " (selected)" if (row["alpha"], row["tau"]) == (cfg["alpha"], cfg["tau"]) else ""
+            lines.append(f"| {row['alpha']:g} | {row['tau']:g}{mark} | {row['clean_macro_f1']:.4f} | {row['typo_macro_f1']:.4f} | {row['clean_accuracy']:.4f} |")
+        lines += ["", "Validation sets differ between protocols, so these validation scores are not comparable with earlier sections. The test comparison below uses identical test rows.",
+                  "", "| Test slice | Rows | Previous default macro-F1 | Same model, official-train | Selected macro-F1 | Previous accuracy | Selected accuracy |", "|---|---:|---:|---:|---:|---:|---:|"]
+        names = {"test":"Full official test","test_typos":"Full test, synthetic typos","test_unique_examples":"Unique test templates","test_novel_templates":"Templates absent from train.csv"}
+        for key,title in names.items():
+            lines.append(f"| {title} | {old[key]['n']} | {old[key]['macro_f1']:.4f} | {ref[key]['macro_f1']:.4f} | {new[key]['macro_f1']:.4f} | {old[key]['accuracy']:.4f} | {new[key]['accuracy']:.4f} |")
+        u = adjusted["uncertainty_vs_default"]
+        lines += ["", f"Paired normalized-template bootstrap 95% intervals against the previous default ({u['test']['repetitions']} resamples): full-test macro-F1 gain [{u['test']['lower_95']:.4f}, {u['test']['upper_95']:.4f}], accuracy gain [{u['test']['accuracy_lower_95']:.4f}, {u['test']['accuracy_upper_95']:.4f}]; novel-template macro-F1 gain [{u['test_novel_templates']['lower_95']:.4f}, {u['test_novel_templates']['upper_95']:.4f}], accuracy gain [{u['test_novel_templates']['accuracy_lower_95']:.4f}, {u['test_novel_templates']['accuracy_upper_95']:.4f}].",
+                  f"Adoption rule (declared before evaluation): {adjusted['adoption_rule']}. Passed: **{adjusted['adopt']}**.",
+                  "Most of the full-test macro-F1 gain comes from subtypes dominated by recurring templates; macro-F1 on templates absent from `train.csv` is unchanged within uncertainty, while accuracy there improves through the prior correction. Some small subtypes decline. The test file has been inspected in earlier development and is not fresh independent evidence."]
+        diffs = sorted(((k, old_f, new["test"]["per_class"][k]["f1-score"]) for k, old_f in
+                        ((k, v["f1-score"]) for k, v in adjusted["default_slices_per_class"].items())), key=lambda x: x[2]-x[1])
+        lines += ["", "| Subtype | Test support | Previous F1 | Selected F1 |", "|---|---:|---:|---:|"]
+        for k, a, b in diffs[-5:][::-1]+diffs[:5]:
+            lines.append(f"| {k} | {int(new['test']['per_class'][k]['support'])} | {a:.4f} | {b:.4f} |")
+        lines += ["", "The table lists the five largest per-subtype gains and declines."]
     if family:
         lines += ["", "## Harder call evaluation: template families", "",
                   f"The 743 messages form **{family['families']}** near-duplicate families. The fixed baseline is evaluated with five-fold group cross-validation.",
@@ -259,11 +291,17 @@ def main():
                 clean,noisy,protocol = robust["nested"],robust["nested_typos"],"Nested template-family CV"
             elif task == "call_scam" and family:
                 clean,noisy,protocol = family["oof"],family["oof_typos"],"5-fold template-family CV (frozen baseline)"
+            elif task == "complaint" and info["backend"] == "adjusted":
+                r = adjusted["selected_refit"]
+                clean,noisy,protocol = r["test"],r["test_typos"],"Supplied test.csv (official-train protocol)"
             else:
                 r = measured[task][info["backend"]]
                 clean,noisy,protocol = r["test"],r["test_typos"],"Supplied test.csv"
             summary_lines.append(f"| {task} | {info['backend']} | {protocol} | {clean['macro_f1']:.4f} | {noisy['macro_f1']:.4f} | {clean['accuracy']:.4f} |")
         summary_lines += ["", "[Full comparisons and failure cases](reports/RESULTS.md). Scores are fractions, not percentages.", ""]
+        if adjusted and adjusted["adopt"]:
+            old, new = adjusted["default_slices"], adjusted["selected_refit"]
+            summary_lines += [f"On complaint test messages whose normalized template does not occur in `train.csv`, macro-F1 is **{new['test_novel_templates']['macro_f1']:.4f}** versus **{old['test_novel_templates']['macro_f1']:.4f}** for the previous default and accuracy **{new['test_novel_templates']['accuracy']:.4f}** versus **{old['test_novel_templates']['accuracy']:.4f}**. Most of the full-test macro-F1 gain comes from recurring complaint templates; see the results for the breakdown.", ""]
         if robust and not robust["adopt"]:
             summary_lines += [f"The experimental `robust` call model reached **{robust['nested']['macro_f1']:.4f}** clean / **{robust['nested_typos']['macro_f1']:.4f}** typo macro-F1 in nested family CV. It remains experimental because the paired family-bootstrap interval for clean improvement includes zero. Independent confirmation is required.", ""]
         before, after = readme_text.split(start_marker,1)

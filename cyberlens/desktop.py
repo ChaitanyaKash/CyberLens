@@ -22,6 +22,8 @@ def main():
     backend = tk.StringVar(value="best")
     ttk.Label(controls, text="Model:").pack(side="left")
     available = ["best", "baseline", "word2vec", "subword", "transformer", "hierarchical", "robust", "regularized", "margin", "semantic", "ensemble", "continued"]
+    if (ROOT/"models/complaint_adjusted.joblib").exists():
+        available.append("adjusted")
     if (ROOT/"models/complaint_improved.joblib").exists():
         available.append("improved")
     if (ROOT/"models/complaint_supervised/metadata.json").exists():

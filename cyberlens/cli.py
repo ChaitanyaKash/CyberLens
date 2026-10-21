@@ -9,9 +9,11 @@ def main():
         sys.stdout.reconfigure(encoding="utf-8")
     parser = argparse.ArgumentParser(description="CyberLens: local English/Hinglish scam experiments")
     commands = parser.add_subparsers(dest="command", required=True)
-    commands.add_parser("prepare")
+    prep = commands.add_parser("prepare")
+    prep.add_argument("--protocol", choices=["overlap_removed", "official"], default="overlap_removed",
+                      help="official: train on all of train.csv without consulting test.csv")
     train = commands.add_parser("train")
-    train.add_argument("--backend", choices=["baseline", "word2vec", "subword", "transformer", "hierarchical", "robust", "regularized", "margin", "semantic", "ensemble", "continued", "improved", "supervised"], default="baseline")
+    train.add_argument("--backend", choices=["baseline", "word2vec", "subword", "transformer", "hierarchical", "robust", "regularized", "margin", "semantic", "ensemble", "continued", "improved", "supervised", "adjusted"], default="baseline")
     train.add_argument("--task", choices=["both", *TASKS], default="both")
     train.add_argument("--epochs", type=int)
     train.add_argument("--max-pairs", type=int, default=300000)
@@ -20,11 +22,11 @@ def main():
     pred = commands.add_parser("predict")
     pred.add_argument("--text")
     pred.add_argument("--task", choices=["both", *TASKS], default="both")
-    pred.add_argument("--backend", choices=["best", "baseline", "word2vec", "subword", "transformer", "hierarchical", "robust", "regularized", "margin", "semantic", "ensemble", "continued", "improved", "supervised"], default="best")
+    pred.add_argument("--backend", choices=["best", "baseline", "word2vec", "subword", "transformer", "hierarchical", "robust", "regularized", "margin", "semantic", "ensemble", "continued", "improved", "supervised", "adjusted"], default="best")
     pred.add_argument("--interactive", action="store_true")
     args = parser.parse_args()
     if args.command == "prepare":
-        prepare()
+        prepare(protocol=args.protocol, tasks=TASKS if args.protocol == "overlap_removed" else ("complaint",))
     elif args.command == "train":
         tasks = TASKS if args.task == "both" else (args.task,)
         if args.backend == "baseline":
@@ -39,6 +41,11 @@ def main():
             if args.task == "call_scam":
                 parser.error("The supervised subword experiment requires --task complaint")
             from .train_supervised import train
+            train()
+        elif args.backend == "adjusted":
+            if args.task == "call_scam":
+                parser.error("The prior-adjusted official-protocol model requires --task complaint")
+            from .adjusted import train
             train()
         elif args.backend == "improved":
             if args.task == "call_scam":

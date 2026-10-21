@@ -229,6 +229,20 @@ In the recorded run, training loss fell from 2.9044 to 0.6811 while selection me
 
 The weighting/NB comparison likewise retained its reference. Square-root weighting increased inner-selection accuracy from 0.4839 to 0.5083 but reduced mean F1 from 0.2634 to 0.2501. The NB-ratio configuration reached 0.1698 mean F1; some heads recorded fitting warnings, limiting conclusions about the wider model family. These results do not establish an English benchmark improvement.
 
+## Official-train protocol and class-prior correction
+
+The earlier complaint preparation removed every training row whose normalized template also occurs in `test.csv`. This removed 12,778 rows, 13.6% of the training file, and its definition depends on the test file. The effect was uneven. One sexual-abuse-content subtype kept 232 of 2,822 training rows because a single bulk-submitted template accounted for 2,342 of them; 753 of its 912 test rows share that template. The previous model had no training example of it and reached a test recall of 0.02 for the subtype.
+
+The `official` protocol (`prepare --protocol official`) trains on all of `train.csv` with the same normalization, masking, within-training deduplication and rare-label rule. `test.csv` is read only to build the unchanged test partition and to mark which test rows share a template with `train.csv`. The validation split stays template-disjoint from training. Repeated training templates with conflicting labels keep their plurality label when it covers at least 60% of their rows; the remainder are still excluded. This uses training labels only.
+
+Recurring templates are a real property of the complaint stream, but learning them is different from generalizing to new wording. Results are therefore reported for the full test set and for the 25,757 test rows whose template does not occur in `train.csv`. The second slice shows what the model learns beyond repeated templates.
+
+Balanced class weights make rare subtypes cheap to predict, which lowered their precision well below their recall. The `adjusted` backend adds `tau * log(prior)` to the classifier's log-probabilities, where the prior is the training label distribution. `tau = 0` is the balanced classifier and `tau = 1` approximately removes the balancing. SGD alpha (2e-6, 5e-6, 1e-5, 2e-5) and tau (0, 0.25, 0.5, 0.75, 1) form a fixed grid. The setting with the best mean clean/noisy validation macro-F1 is refitted on training plus validation. The selected setting was alpha 5e-6 and tau 0.25. Higher tau values raised validation accuracy further but lowered macro-F1, so they were not selected.
+
+The plan, grid and adoption rule were fixed before any official-protocol result was observed. Test evaluation was limited to the selected model and one ablation: the previous configuration trained under the new protocol, which separates the protocol effect from the model change. Adoption required full-test macro-F1 and accuracy at least equal to the previous default, and a macro-F1 drop of no more than 0.005 on the novel-template slice.
+
+On the full test set, the protocol change alone raises macro-F1 from 0.2345 to 0.2600 and accuracy from 0.5014 to 0.5296; the selected prior correction adds a further 0.0020 macro-F1 and 0.0216 accuracy. On novel templates, macro-F1 is unchanged (paired template-bootstrap interval spans zero) and accuracy rises by about two points with an interval excluding zero. Some small subtypes, notably the 18-message `Ransomware` category, decline. The test set has been used in earlier development, so these numbers support the change but do not replace an independent evaluation.
+
 <!-- GENERATED RESULTS -->
 
 ## Evaluation reference

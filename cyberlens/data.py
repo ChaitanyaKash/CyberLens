@@ -8,6 +8,8 @@ from .preprocessing import normalize, fingerprint
 
 ROOT = Path(__file__).resolve().parents[1]
 TASKS = ("call_scam", "complaint")
+PROTOCOLS = ("overlap_removed", "official")
+MAJORITY_SHARE = 0.6
 AMBIGUOUS_CALL_LABELS = {"aadhaar", "amazon", "bank_kyc", "lottery", "relative"}
 
 
@@ -25,7 +27,11 @@ def frame(raw, task):
     return df
 
 
-def prepare(root=ROOT):
+def prepare(root=ROOT, protocol="overlap_removed", tasks=TASKS):
+    """protocol="official" trains on the whole supplied train.csv without consulting test.csv;
+    "overlap_removed" (historical) drops training templates that also occur in test.csv."""
+    if protocol not in PROTOCOLS:
+        raise ValueError(protocol)
     root = Path(root)
     for directory in ("models", "reports", "data/processed"):
         (root/directory).mkdir(parents=True, exist_ok=True)
@@ -34,6 +40,8 @@ def prepare(root=ROOT):
     summary = {}
     sources = {"call_scam": "India_Cyber_Scam_Hinglish_Dataset.csv", "complaint": "train.csv"}
     for task, filename in sources.items():
+        if task not in tasks:
+            continue
         path = root / "data/raw" / filename
         raw = pd.read_csv(path)
         df = frame(raw, task)
@@ -62,10 +70,24 @@ def prepare(root=ROOT):
                          "train_rows_removed_due_to_test_overlap": int(overlap.sum()),
                          "overlapping_templates": int(df.loc[overlap, "group"].nunique()),
                          "test_repeated_templates": int(official_test.group.duplicated().sum()),
-                         "test_conflicting_templates": int((official_test.groupby("group").label.nunique()>1).sum())})
-            df = df.loc[~overlap].copy()
+                         "test_conflicting_templates": int((official_test.groupby("group").label.nunique()>1).sum()),
+                         "training_protocol": protocol})
+            official_test["seen_template"] = official_test.group.isin(set(df.group))
+            if protocol == "overlap_removed":
+                df = df.loc[~overlap].copy()
+            else:
+                info["train_rows_removed_due_to_test_overlap"] = 0
         contradictory = df.groupby("group").label.nunique()
         bad_groups = set(contradictory[contradictory > 1].index)
+        if protocol == "official" and official_test is not None:
+            # A repeated template with a clear training majority keeps that label; others are dropped.
+            shares = df[df.group.isin(bad_groups)].groupby("group").label.agg(
+                lambda s: (s.value_counts().index[0], s.value_counts().iloc[0]/len(s)))
+            resolved = {g: lab for g, (lab, share) in shares.items() if share >= MAJORITY_SHARE}
+            info["conflicting_groups_resolved_by_majority"] = len(resolved)
+            info["conflicting_rows_resolved_by_majority"] = int(df.group.isin(set(resolved)).sum())
+            df["label"] = df.group.map(resolved).fillna(df.label)
+            bad_groups -= set(resolved)
         info["conflicting_rows_excluded"] = int(df.group.isin(bad_groups).sum())
         info["conflicting_groups"] = len(bad_groups)
         df = df.loc[~df.group.isin(bad_groups)].copy()
@@ -74,7 +96,8 @@ def prepare(root=ROOT):
         info["duplicate_rows_removed"] = before-len(df)
         counts = df.label.value_counts()
         rare = counts[counts < 10].to_dict()
-        df.loc[df.label.isin(rare)].to_csv(out / f"{task}_rare_excluded.csv", index=False)
+        name = task if protocol == "overlap_removed" or task == "call_scam" else f"{task}_{protocol}"
+        df.loc[df.label.isin(rare)].to_csv(out / f"{name}_rare_excluded.csv", index=False)
         df = df.loc[~df.label.isin(rare)].reset_index(drop=True)
         if official_test is None:
             tr, rest = train_test_split(df, test_size=.4, stratify=df.label, random_state=42)
@@ -87,11 +110,13 @@ def prepare(root=ROOT):
             tr["split"], va["split"] = "train", "validation"
             te = official_test
         combined = pd.concat([tr, va, te], ignore_index=True)
-        if combined.groupby("group").split.nunique().max() > 1:
+        # Under the official protocol, test templates may repeat training templates by design.
+        checked = combined if protocol == "overlap_removed" or official_test is None else combined[combined.split != "test"]
+        if checked.groupby("group").split.nunique().max() > 1:
             raise RuntimeError("A template leaked between splits")
         if set(tr.label) != set(va.label):
             raise RuntimeError("Validation label coverage differs from training")
-        combined.to_csv(out / f"{task}.csv", index=False)
+        combined.to_csv(out / f"{name}.csv", index=False)
         info.update({"rare_labels_excluded": rare, "rows": len(combined),
                      "labels": int(tr.label.nunique()), "splits": combined.split.value_counts().to_dict(),
                      "training_label_counts": tr.label.value_counts().to_dict(),
@@ -99,13 +124,15 @@ def prepare(root=ROOT):
                      "near_duplicate_limit": "Normalized template equality only; paraphrases may cross splits.",
                      "test_policy": "Official test unchanged except missing/short texts; duplicates and label conflicts retained"
                      if task == "complaint" else "60/20/20 deduplicated stratified internal split"})
-        summary[task] = info
+        summary[name] = info
         print(task, info["splits"], info["labels"], "trainable labels", flush=True)
-    (root / "reports/data_audit.json").write_text(json.dumps(summary, indent=2), encoding="utf-8")
+    audit = root / ("reports/data_audit.json" if protocol == "overlap_removed" else f"reports/data_audit_{protocol}.json")
+    audit.write_text(json.dumps(summary, indent=2), encoding="utf-8")
     return summary
 
 
-def load(task, root=ROOT):
-    if task not in TASKS:
+def load(task, root=ROOT, protocol="overlap_removed"):
+    if task not in TASKS or protocol not in PROTOCOLS:
         raise ValueError(task)
-    return pd.read_csv(Path(root) / "data/processed" / f"{task}.csv")
+    name = task if protocol == "overlap_removed" else f"{task}_{protocol}"
+    return pd.read_csv(Path(root) / "data/processed" / f"{name}.csv")

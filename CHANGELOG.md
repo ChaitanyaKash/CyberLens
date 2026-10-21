@@ -1,5 +1,12 @@
 # Changelog
 
+## 2026-10-21 (complaint model update)
+
+- Added the `official` complaint training protocol, which trains on all of `train.csv` without consulting `test.csv`, and keeps plurality labels for repeated training templates with at least 60% label agreement.
+- Added the `adjusted` complaint backend: hybrid TF-IDF SGD with a validation-selected class-prior correction, refitted on training plus validation.
+- Promoted `adjusted` as the default complaint model under a predeclared rule. Official-test macro-F1 0.2345 to 0.2620, accuracy 0.5014 to 0.5512; novel-template macro-F1 unchanged within uncertainty.
+- Added reporting for test templates absent from `train.csv` and paired template-bootstrap intervals against the previous default.
+
 ## 2026-10-21
 
 ### Classification pipeline

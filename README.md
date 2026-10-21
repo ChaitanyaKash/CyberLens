@@ -24,16 +24,20 @@ Call classification uses template-family evaluation. Complaint classification us
 | Task | Backend | Evaluation protocol | Macro-F1 | Typo macro-F1 | Accuracy |
 |---|---|---|---:|---:|---:|
 | call_scam | baseline | 5-fold template-family CV (frozen baseline) | 0.6308 | 0.6337 | 0.7416 |
-| complaint | baseline | Supplied test.csv | 0.2345 | 0.2269 | 0.5014 |
+| complaint | adjusted | Supplied test.csv (official-train protocol) | 0.2620 | 0.2573 | 0.5512 |
 
 [Full comparisons and failure cases](reports/RESULTS.md). Scores are fractions, not percentages.
+
+On complaint test messages whose normalized template does not occur in `train.csv`, macro-F1 is **0.2362** versus **0.2376** for the previous default and accuracy **0.4962** versus **0.4745**. Most of the full-test macro-F1 gain comes from recurring complaint templates; see the results for the breakdown.
 
 The experimental `robust` call model reached **0.8256** clean / **0.7709** typo macro-F1 in nested family CV. It remains experimental because the paired family-bootstrap interval for clean improvement includes zero. Independent confirmation is required.
 <!-- RESULTS SUMMARY END -->
 
 The initial exact-deduplicated call split produced macro-F1 of 1.0000. Related templates still crossed that split, so the primary result uses the stricter template-family protocol. Earlier scores remain in the evaluation report for comparison.
 
-Complaint classification remains challenging. Baseline test accuracy is 0.5014 and weighted F1 is 0.5081, compared with macro-F1 of 0.2345. Training support ranges from 23 to 15,162 examples per class. Three test labels have no trained class, and 130 normalized test templates carry conflicting labels. These cases remain in the reported test evaluation.
+The default complaint model (`adjusted`) trains on the whole supplied `train.csv` without consulting `test.csv` and applies a validation-selected class-prior correction to the hybrid TF-IDF classifier. Compared with the previous default, official-test macro-F1 rises from 0.2345 to 0.2620 and accuracy from 0.5014 to 0.5512. The gain is concentrated in subtypes dominated by recurring complaint templates; on test templates absent from `train.csv`, macro-F1 is unchanged within uncertainty and accuracy improves by about two points. The [results](reports/RESULTS.md) give the per-slice and per-class breakdown.
+
+Complaint classification remains challenging. Training support ranges from 23 to 15,162 examples per class. Three test labels have no trained class, and 130 normalized test templates carry conflicting labels. These cases remain in the reported test evaluation.
 
 ## Tasks and datasets
 
@@ -42,7 +46,7 @@ Complaint classification remains challenging. Baseline test accuracy is 0.5014 a
 | `call_scam` | `India_Cyber_Scam_Hinglish_Dataset.csv` | `none`, `police_digital_arrest`, `police_blackmail`, `other_scam` |
 | `complaint` | `train.csv` | 39 category/subcategory combinations |
 
-`test.csv` is the supplied complaint test set. Training templates overlapping this set are excluded from training.
+`test.csv` is the supplied complaint test set. The default `official` training protocol uses all of `train.csv` and never reads `test.csv` during training. The historical protocol excluded training templates that also occur in `test.csv`; its models and reports are retained for comparison. Test messages whose template occurs in `train.csv` are reported separately from those that do not.
 
 The Hinglish dataset contains 10,000 rows but only 743 distinct texts. Identical messages carry conflicting labels among `aadhaar`, `amazon`, `bank_kyc`, `lottery` and `relative`; these labels map explicitly to `other_scam`. The mapping reduces subtype granularity rather than establishing equivalence between the underlying scam mechanisms.
 
@@ -68,6 +72,9 @@ Datasets and trained weights are not distributed in the repository. Place the th
 ```powershell
 .\run.ps1 prepare
 .\run.ps1 train --backend baseline
+# Default complaint model: official-train protocol with class-prior correction
+.\run.ps1 prepare --protocol official
+.\run.ps1 train --backend adjusted --task complaint
 
 # Desktop interface
 .\classify.ps1

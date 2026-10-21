@@ -37,6 +37,62 @@ All scores below are fractions, not percentages. Typo tests use synthetic intern
 | complaint | multilingual DistilBERT | 0.1677 | 0.1609 | 0.1578 | 0.4883 | 973.9 |
 | complaint | financial expert + baseline | 0.2639 | 0.2311 | 0.2253 | 0.5028 | 187.6 |
 
+## Official-train protocol and class-prior correction
+
+The earlier preparation removed every training row whose normalized template also occurs in `test.csv`. That removal consults the test file and discards 12,778 rows (13.6% of `train.csv`); one subtype kept 8% of its rows. In the official-train protocol, training uses all of `train.csv` and `test.csv` is not consulted. Validation remains a template-disjoint 20% of the training pool. Conflicting training templates keep their plurality label when it covers at least 60% of rows; others are excluded.
+Balanced class weights left rare subtypes with low precision. A post-hoc correction adds tau times the log training prior to log-probabilities. SGD alpha and tau were selected from a fixed 4 x 5 grid by mean clean/noisy validation macro-F1, then refitted on training plus validation.
+
+| Alpha | Tau | Clean validation macro-F1 | Typo validation macro-F1 | Clean validation accuracy |
+|---:|---:|---:|---:|---:|
+| 2e-06 | 0 | 0.2671 | 0.2550 | 0.5009 |
+| 2e-06 | 0.25 | 0.2661 | 0.2547 | 0.5139 |
+| 2e-06 | 0.5 | 0.2516 | 0.2344 | 0.5210 |
+| 2e-06 | 0.75 | 0.2111 | 0.2045 | 0.5246 |
+| 2e-06 | 1 | 0.1846 | 0.1730 | 0.5208 |
+| 5e-06 | 0 | 0.2651 | 0.2568 | 0.4955 |
+| 5e-06 | 0.25 (selected) | 0.2706 | 0.2593 | 0.5153 |
+| 5e-06 | 0.5 | 0.2583 | 0.2454 | 0.5281 |
+| 5e-06 | 0.75 | 0.2071 | 0.2040 | 0.5310 |
+| 5e-06 | 1 | 0.1814 | 0.1685 | 0.5273 |
+| 1e-05 | 0 | 0.2638 | 0.2573 | 0.4899 |
+| 1e-05 | 0.25 | 0.2655 | 0.2599 | 0.5138 |
+| 1e-05 | 0.5 | 0.2597 | 0.2532 | 0.5309 |
+| 1e-05 | 0.75 | 0.2046 | 0.1964 | 0.5296 |
+| 1e-05 | 1 | 0.1757 | 0.1645 | 0.5249 |
+| 2e-05 | 0 | 0.2602 | 0.2525 | 0.4812 |
+| 2e-05 | 0.25 | 0.2655 | 0.2618 | 0.5127 |
+| 2e-05 | 0.5 | 0.2592 | 0.2557 | 0.5271 |
+| 2e-05 | 0.75 | 0.2015 | 0.1939 | 0.5268 |
+| 2e-05 | 1 | 0.1661 | 0.1615 | 0.5185 |
+
+Validation sets differ between protocols, so these validation scores are not comparable with earlier sections. The test comparison below uses identical test rows.
+
+| Test slice | Rows | Previous default macro-F1 | Same model, official-train | Selected macro-F1 | Previous accuracy | Selected accuracy |
+|---|---:|---:|---:|---:|---:|---:|
+| Full official test | 30771 | 0.2345 | 0.2600 | 0.2620 | 0.5014 | 0.5512 |
+| Full test, synthetic typos | 30771 | 0.2269 | 0.2490 | 0.2573 | 0.4950 | 0.5471 |
+| Unique test templates | 27296 | 0.2384 | 0.2430 | 0.2451 | 0.4884 | 0.5130 |
+| Templates absent from train.csv | 25757 | 0.2376 | 0.2364 | 0.2362 | 0.4745 | 0.4962 |
+
+Paired normalized-template bootstrap 95% intervals against the previous default (500 resamples): full-test macro-F1 gain [0.0022, 0.0373], accuracy gain [0.0224, 0.0961]; novel-template macro-F1 gain [-0.0108, 0.0083], accuracy gain [0.0186, 0.0252].
+Adoption rule (declared before evaluation): Full-test macro-F1 and accuracy >= current default; novel-template macro-F1 drop <= 0.005. Passed: **True**.
+Most of the full-test macro-F1 gain comes from subtypes dominated by recurring templates; macro-F1 on templates absent from `train.csv` is unchanged within uncertainty, while accuracy there improves through the prior correction. Some small subtypes decline. The test file has been inspected in earlier development and is not fresh independent evidence.
+
+| Subtype | Test support | Previous F1 | Selected F1 |
+|---|---:|---:|---:|
+| RapeGang Rape RGRSexually Abusive Content :: Unspecified | 911 | 0.0317 | 0.9441 |
+| Sexually Explicit Act :: Unspecified | 527 | 0.0716 | 0.2056 |
+| Hacking  Damage to computercomputer system etc :: Damage to computer computer systems etc | 35 | 0.0377 | 0.1111 |
+| Child Pornography CPChild Sexual Abuse Material CSAM :: Unspecified | 118 | 0.4049 | 0.4667 |
+| Sexually Obscene material :: Unspecified | 657 | 0.2379 | 0.2956 |
+| Ransomware :: Ransomware | 18 | 0.5556 | 0.2400 |
+| Cyber Attack/ Dependent Crimes :: Tampering with computer source documents | 180 | 0.1530 | 0.1003 |
+| Online Financial Fraud :: Business Email CompromiseEmail Takeover | 89 | 0.1781 | 0.1419 |
+| Cyber Attack/ Dependent Crimes :: Denial of Service (DoS)/Distributed Denial of Service (DDOS) attacks | 187 | 0.1305 | 0.0980 |
+| Cyber Attack/ Dependent Crimes :: Malware Attack | 170 | 0.1006 | 0.0760 |
+
+The table lists the five largest per-subtype gains and declines.
+
 ## Harder call evaluation: template families
 
 The 743 messages form **77** near-duplicate families. The fixed baseline is evaluated with five-fold group cross-validation.
@@ -158,7 +214,7 @@ No additional test evaluation was performed. Declining training loss without suf
 Default inference uses validation-selected backends:
 
 - call_scam: **baseline** (primary family-held-out macro-F1 0.6308; legacy exact-template validation selection score 1.0000).
-- complaint: **baseline** (selection score 0.2579).
+- complaint: **adjusted** (selection score 0.2650).
 
 Additional word-feature optimizer checks (validation only):
 
