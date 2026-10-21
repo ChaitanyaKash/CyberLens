@@ -1,0 +1,17 @@
+{
+  "sgd_balanced_1e4": {
+    "validation_macro_f1": 0.21634914899019633,
+    "validation_accuracy": 0.4173963430337368,
+    "seconds": 16.810393400000066
+  },
+  "sgd_unweighted_1e5": {
+    "validation_macro_f1": 0.18873256173409,
+    "validation_accuracy": 0.5066958537213495,
+    "seconds": 22.12075939999977
+  },
+  "linear_svc_balanced": {
+    "validation_macro_f1": 0.22379653406660638,
+    "validation_accuracy": 0.4531290239505537,
+    "seconds": 53.506383500000084
+  }
+}

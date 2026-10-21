@@ -1,0 +1,249 @@
+{
+  "validation": {
+    "n": 149,
+    "accuracy": 1.0,
+    "macro_f1": 1.0,
+    "weighted_f1": 1.0,
+    "per_class": {
+      "none": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 22.0
+      },
+      "other_scam": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 21.0
+      },
+      "police_blackmail": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 25.0
+      },
+      "police_digital_arrest": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 81.0
+      },
+      "accuracy": 1.0,
+      "macro avg": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 149.0
+      },
+      "weighted avg": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 149.0
+      }
+    },
+    "confusion_labels": [
+      "none",
+      "other_scam",
+      "police_blackmail",
+      "police_digital_arrest"
+    ],
+    "confusion_matrix": [
+      [22, 0, 0, 0],
+      [0, 21, 0, 0],
+      [0, 0, 25, 0],
+      [0, 0, 0, 81]
+    ]
+  },
+  "validation_typos": {
+    "n": 149,
+    "accuracy": 1.0,
+    "macro_f1": 1.0,
+    "weighted_f1": 1.0,
+    "per_class": {
+      "none": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 22.0
+      },
+      "other_scam": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 21.0
+      },
+      "police_blackmail": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 25.0
+      },
+      "police_digital_arrest": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 81.0
+      },
+      "accuracy": 1.0,
+      "macro avg": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 149.0
+      },
+      "weighted avg": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 149.0
+      }
+    },
+    "confusion_labels": [
+      "none",
+      "other_scam",
+      "police_blackmail",
+      "police_digital_arrest"
+    ],
+    "confusion_matrix": [
+      [22, 0, 0, 0],
+      [0, 21, 0, 0],
+      [0, 0, 25, 0],
+      [0, 0, 0, 81]
+    ]
+  },
+  "test": {
+    "n": 149,
+    "accuracy": 1.0,
+    "macro_f1": 1.0,
+    "weighted_f1": 1.0,
+    "per_class": {
+      "none": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 22.0
+      },
+      "other_scam": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 21.0
+      },
+      "police_blackmail": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 26.0
+      },
+      "police_digital_arrest": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 80.0
+      },
+      "accuracy": 1.0,
+      "macro avg": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 149.0
+      },
+      "weighted avg": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 149.0
+      }
+    },
+    "confusion_labels": [
+      "none",
+      "other_scam",
+      "police_blackmail",
+      "police_digital_arrest"
+    ],
+    "confusion_matrix": [
+      [22, 0, 0, 0],
+      [0, 21, 0, 0],
+      [0, 0, 26, 0],
+      [0, 0, 0, 80]
+    ]
+  },
+  "test_typos": {
+    "n": 149,
+    "accuracy": 0.9932885906040269,
+    "macro_f1": 0.9935452441846304,
+    "weighted_f1": 0.9932436353590166,
+    "per_class": {
+      "none": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 22.0
+      },
+      "other_scam": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 21.0
+      },
+      "police_blackmail": {
+        "precision": 1.0,
+        "recall": 0.9615384615384616,
+        "f1-score": 0.9803921568627451,
+        "support": 26.0
+      },
+      "police_digital_arrest": {
+        "precision": 0.9876543209876543,
+        "recall": 1.0,
+        "f1-score": 0.9937888198757764,
+        "support": 80.0
+      },
+      "accuracy": 0.9932885906040269,
+      "macro avg": {
+        "precision": 0.9969135802469136,
+        "recall": 0.9903846153846154,
+        "f1-score": 0.9935452441846304,
+        "support": 149.0
+      },
+      "weighted avg": {
+        "precision": 0.99337144751015,
+        "recall": 0.9932885906040269,
+        "f1-score": 0.9932436353590166,
+        "support": 149.0
+      }
+    },
+    "confusion_labels": [
+      "none",
+      "other_scam",
+      "police_blackmail",
+      "police_digital_arrest"
+    ],
+    "confusion_matrix": [
+      [22, 0, 0, 0],
+      [0, 21, 0, 0],
+      [0, 0, 25, 1],
+      [0, 0, 0, 80]
+    ]
+  },
+  "mode": "word2vec",
+  "config": {
+    "dim": 96,
+    "buckets": 50000,
+    "max_grams": 24,
+    "negative_samples": 5,
+    "window": 4,
+    "seed": 42,
+    "max_pairs": 300000,
+    "epochs": 3,
+    "min_count": 2,
+    "word_subsampling": false
+  },
+  "sgns_loss": [2.9014743638865155, 2.186847622388204, 1.634489424502055],
+  "device": "cuda",
+  "vocabulary": 242,
+  "sampled_pairs": 300000,
+  "seconds": 12.673151899999539,
+  "cuda_peak_mb": 38.03564453125
+}

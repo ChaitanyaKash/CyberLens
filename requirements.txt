@@ -1,0 +1,9 @@
+numpy>=1.26
+pandas>=2.2
+scikit-learn>=1.5
+joblib>=1.4
+# Optional for from-scratch GPU embedding experiments:
+torch>=2.4
+# Optional multilingual encoder comparison:
+transformers>=4.45
+safetensors>=0.4

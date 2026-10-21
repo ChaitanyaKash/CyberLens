@@ -1,0 +1,667 @@
+{
+  "baseline": {
+    "notice": "Small manually authored diagnostic; not a benchmark or training source. Police/relative arrest threats use the broad source label police_digital_arrest; obscene-content threats use police_blackmail. Gold labels were revised after source-semantic inspection; this is development data.",
+    "correct": 11,
+    "total": 18,
+    "records": [
+      {
+        "text": "This is the police. You are under digital arrest. Transfer money now or we will arrest you.",
+        "expected": "police_digital_arrest",
+        "predicted": "police_blackmail",
+        "score": 0.6694793105125427,
+        "needs_review": false
+      },
+      {
+        "text": "mai police se bol rha hu tum digital arrest mein ho turant paise transfer kro",
+        "expected": "police_digital_arrest",
+        "predicted": "police_blackmail",
+        "score": 0.8589476943016052,
+        "needs_review": false
+      },
+      {
+        "text": "CBI officer bol raha hun. Video call pe raho, digital arrest se bachne ko payment karo.",
+        "expected": "police_digital_arrest",
+        "predicted": "police_blackmail",
+        "score": 0.5838024616241455,
+        "needs_review": false
+      },
+      {
+        "text": "Your son has been arrested by police. Send money immediately to release him.",
+        "expected": "police_digital_arrest",
+        "predicted": "police_digital_arrest",
+        "score": 0.7578416466712952,
+        "needs_review": false
+      },
+      {
+        "text": "apka beta police custody me hai paise bhejo warna usko jail bhej denge",
+        "expected": "police_digital_arrest",
+        "predicted": "other_scam",
+        "score": 0.46388059854507446,
+        "needs_review": true
+      },
+      {
+        "text": "tumhare bete ko drugs case me pakda hai. Abhi paise do toh chhod denge",
+        "expected": "police_digital_arrest",
+        "predicted": "none",
+        "score": 0.626982569694519,
+        "needs_review": false
+      },
+      {
+        "text": "Your phone number has been used to share obscene videos. Pay us to avoid a police case.",
+        "expected": "police_blackmail",
+        "predicted": "police_blackmail",
+        "score": 0.8913162350654602,
+        "needs_review": false
+      },
+      {
+        "text": "aapke number se gande videos share hue hain turant paise bhejo warna case hoga",
+        "expected": "police_blackmail",
+        "predicted": "police_blackmail",
+        "score": 0.9654557704925537,
+        "needs_review": false
+      },
+      {
+        "text": "Your bank account will be blocked. Share your OTP to update KYC immediately.",
+        "expected": "other_scam",
+        "predicted": "other_scam",
+        "score": 0.6450759172439575,
+        "needs_review": false
+      },
+      {
+        "text": "aapki bank kyc expire ho gayi otp batao warna account band ho jayega",
+        "expected": "other_scam",
+        "predicted": "other_scam",
+        "score": 0.6283512115478516,
+        "needs_review": false
+      },
+      {
+        "text": "You won a lottery. Pay a processing fee to claim your prize.",
+        "expected": "other_scam",
+        "predicted": "other_scam",
+        "score": 0.8281117081642151,
+        "needs_review": false
+      },
+      {
+        "text": "amazon prize jeet gaye ho delivery fees pehle pay karo",
+        "expected": "other_scam",
+        "predicted": "other_scam",
+        "score": 0.4032561779022217,
+        "needs_review": true
+      },
+      {
+        "text": "Your Aadhaar is blocked. Give me your OTP to reactivate it.",
+        "expected": "other_scam",
+        "predicted": "other_scam",
+        "score": 0.7206283211708069,
+        "needs_review": false
+      },
+      {
+        "text": "Hello beta ghar aa gaya hoon darwaza khol do",
+        "expected": "none",
+        "predicted": "none",
+        "score": 0.9851158261299133,
+        "needs_review": false
+      },
+      {
+        "text": "Your order is out for delivery. I will reach your gate in ten minutes.",
+        "expected": "none",
+        "predicted": "none",
+        "score": 0.7248229384422302,
+        "needs_review": false
+      },
+      {
+        "text": "kal class ke baad library mein milte hain",
+        "expected": "none",
+        "predicted": "none",
+        "score": 0.9204006195068359,
+        "needs_review": false
+      },
+      {
+        "text": "Never share your OTP with anyone. This is a bank security awareness message.",
+        "expected": "none",
+        "predicted": "other_scam",
+        "score": 0.4921063780784607,
+        "needs_review": true
+      },
+      {
+        "text": "Police issued a warning about digital arrest scams. Do not send money to callers.",
+        "expected": "none",
+        "predicted": "police_blackmail",
+        "score": 0.6139281988143921,
+        "needs_review": false
+      }
+    ]
+  },
+  "word2vec": {
+    "notice": "Small manually authored diagnostic; not a benchmark or training source. Police/relative arrest threats use the broad source label police_digital_arrest; obscene-content threats use police_blackmail. Gold labels were revised after source-semantic inspection; this is development data.",
+    "correct": 10,
+    "total": 18,
+    "records": [
+      {
+        "text": "This is the police. You are under digital arrest. Transfer money now or we will arrest you.",
+        "expected": "police_digital_arrest",
+        "predicted": "police_blackmail",
+        "score": 0.9937093257904053,
+        "needs_review": false
+      },
+      {
+        "text": "mai police se bol rha hu tum digital arrest mein ho turant paise transfer kro",
+        "expected": "police_digital_arrest",
+        "predicted": "police_blackmail",
+        "score": 0.965892493724823,
+        "needs_review": false
+      },
+      {
+        "text": "CBI officer bol raha hun. Video call pe raho, digital arrest se bachne ko payment karo.",
+        "expected": "police_digital_arrest",
+        "predicted": "police_blackmail",
+        "score": 0.8994882702827454,
+        "needs_review": false
+      },
+      {
+        "text": "Your son has been arrested by police. Send money immediately to release him.",
+        "expected": "police_digital_arrest",
+        "predicted": "police_digital_arrest",
+        "score": 0.9999545812606812,
+        "needs_review": false
+      },
+      {
+        "text": "apka beta police custody me hai paise bhejo warna usko jail bhej denge",
+        "expected": "police_digital_arrest",
+        "predicted": "other_scam",
+        "score": 0.9797382354736328,
+        "needs_review": false
+      },
+      {
+        "text": "tumhare bete ko drugs case me pakda hai. Abhi paise do toh chhod denge",
+        "expected": "police_digital_arrest",
+        "predicted": "police_blackmail",
+        "score": 0.35276803374290466,
+        "needs_review": true
+      },
+      {
+        "text": "Your phone number has been used to share obscene videos. Pay us to avoid a police case.",
+        "expected": "police_blackmail",
+        "predicted": "police_blackmail",
+        "score": 0.9998090863227844,
+        "needs_review": false
+      },
+      {
+        "text": "aapke number se gande videos share hue hain turant paise bhejo warna case hoga",
+        "expected": "police_blackmail",
+        "predicted": "police_blackmail",
+        "score": 0.9942061901092529,
+        "needs_review": false
+      },
+      {
+        "text": "Your bank account will be blocked. Share your OTP to update KYC immediately.",
+        "expected": "other_scam",
+        "predicted": "other_scam",
+        "score": 0.9999440908432007,
+        "needs_review": false
+      },
+      {
+        "text": "aapki bank kyc expire ho gayi otp batao warna account band ho jayega",
+        "expected": "other_scam",
+        "predicted": "other_scam",
+        "score": 0.9604800343513489,
+        "needs_review": false
+      },
+      {
+        "text": "You won a lottery. Pay a processing fee to claim your prize.",
+        "expected": "other_scam",
+        "predicted": "other_scam",
+        "score": 0.9999966621398926,
+        "needs_review": false
+      },
+      {
+        "text": "amazon prize jeet gaye ho delivery fees pehle pay karo",
+        "expected": "other_scam",
+        "predicted": "police_blackmail",
+        "score": 0.6205028891563416,
+        "needs_review": false
+      },
+      {
+        "text": "Your Aadhaar is blocked. Give me your OTP to reactivate it.",
+        "expected": "other_scam",
+        "predicted": "other_scam",
+        "score": 0.9992256164550781,
+        "needs_review": false
+      },
+      {
+        "text": "Hello beta ghar aa gaya hoon darwaza khol do",
+        "expected": "none",
+        "predicted": "none",
+        "score": 0.9761151671409607,
+        "needs_review": false
+      },
+      {
+        "text": "Your order is out for delivery. I will reach your gate in ten minutes.",
+        "expected": "none",
+        "predicted": "none",
+        "score": 0.9999723434448242,
+        "needs_review": false
+      },
+      {
+        "text": "kal class ke baad library mein milte hain",
+        "expected": "none",
+        "predicted": "none",
+        "score": 0.775686502456665,
+        "needs_review": false
+      },
+      {
+        "text": "Never share your OTP with anyone. This is a bank security awareness message.",
+        "expected": "none",
+        "predicted": "other_scam",
+        "score": 0.7252281308174133,
+        "needs_review": false
+      },
+      {
+        "text": "Police issued a warning about digital arrest scams. Do not send money to callers.",
+        "expected": "none",
+        "predicted": "police_blackmail",
+        "score": 0.820472240447998,
+        "needs_review": false
+      }
+    ]
+  },
+  "subword": {
+    "notice": "Small manually authored diagnostic; not a benchmark or training source. Police/relative arrest threats use the broad source label police_digital_arrest; obscene-content threats use police_blackmail. Gold labels were revised after source-semantic inspection; this is development data.",
+    "correct": 8,
+    "total": 18,
+    "records": [
+      {
+        "text": "This is the police. You are under digital arrest. Transfer money now or we will arrest you.",
+        "expected": "police_digital_arrest",
+        "predicted": "police_blackmail",
+        "score": 0.9554729461669922,
+        "needs_review": false
+      },
+      {
+        "text": "mai police se bol rha hu tum digital arrest mein ho turant paise transfer kro",
+        "expected": "police_digital_arrest",
+        "predicted": "police_blackmail",
+        "score": 0.9145398736000061,
+        "needs_review": false
+      },
+      {
+        "text": "CBI officer bol raha hun. Video call pe raho, digital arrest se bachne ko payment karo.",
+        "expected": "police_digital_arrest",
+        "predicted": "police_blackmail",
+        "score": 0.9095175862312317,
+        "needs_review": false
+      },
+      {
+        "text": "Your son has been arrested by police. Send money immediately to release him.",
+        "expected": "police_digital_arrest",
+        "predicted": "police_digital_arrest",
+        "score": 0.961711585521698,
+        "needs_review": false
+      },
+      {
+        "text": "apka beta police custody me hai paise bhejo warna usko jail bhej denge",
+        "expected": "police_digital_arrest",
+        "predicted": "police_blackmail",
+        "score": 0.4247833788394928,
+        "needs_review": true
+      },
+      {
+        "text": "tumhare bete ko drugs case me pakda hai. Abhi paise do toh chhod denge",
+        "expected": "police_digital_arrest",
+        "predicted": "police_blackmail",
+        "score": 0.691059947013855,
+        "needs_review": false
+      },
+      {
+        "text": "Your phone number has been used to share obscene videos. Pay us to avoid a police case.",
+        "expected": "police_blackmail",
+        "predicted": "police_blackmail",
+        "score": 0.9914155602455139,
+        "needs_review": false
+      },
+      {
+        "text": "aapke number se gande videos share hue hain turant paise bhejo warna case hoga",
+        "expected": "police_blackmail",
+        "predicted": "police_blackmail",
+        "score": 0.984188973903656,
+        "needs_review": false
+      },
+      {
+        "text": "Your bank account will be blocked. Share your OTP to update KYC immediately.",
+        "expected": "other_scam",
+        "predicted": "other_scam",
+        "score": 0.9475104212760925,
+        "needs_review": false
+      },
+      {
+        "text": "aapki bank kyc expire ho gayi otp batao warna account band ho jayega",
+        "expected": "other_scam",
+        "predicted": "other_scam",
+        "score": 0.7034410238265991,
+        "needs_review": false
+      },
+      {
+        "text": "You won a lottery. Pay a processing fee to claim your prize.",
+        "expected": "other_scam",
+        "predicted": "other_scam",
+        "score": 0.7177097797393799,
+        "needs_review": false
+      },
+      {
+        "text": "amazon prize jeet gaye ho delivery fees pehle pay karo",
+        "expected": "other_scam",
+        "predicted": "police_blackmail",
+        "score": 0.728294312953949,
+        "needs_review": false
+      },
+      {
+        "text": "Your Aadhaar is blocked. Give me your OTP to reactivate it.",
+        "expected": "other_scam",
+        "predicted": "police_blackmail",
+        "score": 0.5947453379631042,
+        "needs_review": false
+      },
+      {
+        "text": "Hello beta ghar aa gaya hoon darwaza khol do",
+        "expected": "none",
+        "predicted": "none",
+        "score": 0.880445659160614,
+        "needs_review": false
+      },
+      {
+        "text": "Your order is out for delivery. I will reach your gate in ten minutes.",
+        "expected": "none",
+        "predicted": "police_digital_arrest",
+        "score": 0.5412968993186951,
+        "needs_review": true
+      },
+      {
+        "text": "kal class ke baad library mein milte hain",
+        "expected": "none",
+        "predicted": "none",
+        "score": 0.48379579186439514,
+        "needs_review": true
+      },
+      {
+        "text": "Never share your OTP with anyone. This is a bank security awareness message.",
+        "expected": "none",
+        "predicted": "police_blackmail",
+        "score": 0.9292588233947754,
+        "needs_review": false
+      },
+      {
+        "text": "Police issued a warning about digital arrest scams. Do not send money to callers.",
+        "expected": "none",
+        "predicted": "police_blackmail",
+        "score": 0.5230748653411865,
+        "needs_review": true
+      }
+    ]
+  },
+  "transformer": {
+    "notice": "Small manually authored diagnostic; not a benchmark or training source. Police/relative arrest threats use the broad source label police_digital_arrest; obscene-content threats use police_blackmail. Gold labels were revised after source-semantic inspection; this is development data.",
+    "correct": 5,
+    "total": 18,
+    "records": [
+      {
+        "text": "This is the police. You are under digital arrest. Transfer money now or we will arrest you.",
+        "expected": "police_digital_arrest",
+        "predicted": "police_blackmail",
+        "score": 0.32385343313217163,
+        "needs_review": true
+      },
+      {
+        "text": "mai police se bol rha hu tum digital arrest mein ho turant paise transfer kro",
+        "expected": "police_digital_arrest",
+        "predicted": "none",
+        "score": 0.4019644856452942,
+        "needs_review": true
+      },
+      {
+        "text": "CBI officer bol raha hun. Video call pe raho, digital arrest se bachne ko payment karo.",
+        "expected": "police_digital_arrest",
+        "predicted": "police_digital_arrest",
+        "score": 0.7010511755943298,
+        "needs_review": false
+      },
+      {
+        "text": "Your son has been arrested by police. Send money immediately to release him.",
+        "expected": "police_digital_arrest",
+        "predicted": "police_digital_arrest",
+        "score": 0.40138012170791626,
+        "needs_review": true
+      },
+      {
+        "text": "apka beta police custody me hai paise bhejo warna usko jail bhej denge",
+        "expected": "police_digital_arrest",
+        "predicted": "none",
+        "score": 0.5051741600036621,
+        "needs_review": true
+      },
+      {
+        "text": "tumhare bete ko drugs case me pakda hai. Abhi paise do toh chhod denge",
+        "expected": "police_digital_arrest",
+        "predicted": "none",
+        "score": 0.5442285537719727,
+        "needs_review": true
+      },
+      {
+        "text": "Your phone number has been used to share obscene videos. Pay us to avoid a police case.",
+        "expected": "police_blackmail",
+        "predicted": "police_digital_arrest",
+        "score": 0.3137282729148865,
+        "needs_review": true
+      },
+      {
+        "text": "aapke number se gande videos share hue hain turant paise bhejo warna case hoga",
+        "expected": "police_blackmail",
+        "predicted": "none",
+        "score": 0.31499460339546204,
+        "needs_review": true
+      },
+      {
+        "text": "Your bank account will be blocked. Share your OTP to update KYC immediately.",
+        "expected": "other_scam",
+        "predicted": "police_blackmail",
+        "score": 0.30512046813964844,
+        "needs_review": true
+      },
+      {
+        "text": "aapki bank kyc expire ho gayi otp batao warna account band ho jayega",
+        "expected": "other_scam",
+        "predicted": "police_digital_arrest",
+        "score": 0.3589697778224945,
+        "needs_review": true
+      },
+      {
+        "text": "You won a lottery. Pay a processing fee to claim your prize.",
+        "expected": "other_scam",
+        "predicted": "police_digital_arrest",
+        "score": 0.27029675245285034,
+        "needs_review": true
+      },
+      {
+        "text": "amazon prize jeet gaye ho delivery fees pehle pay karo",
+        "expected": "other_scam",
+        "predicted": "police_digital_arrest",
+        "score": 0.371287077665329,
+        "needs_review": true
+      },
+      {
+        "text": "Your Aadhaar is blocked. Give me your OTP to reactivate it.",
+        "expected": "other_scam",
+        "predicted": "none",
+        "score": 0.3384583592414856,
+        "needs_review": true
+      },
+      {
+        "text": "Hello beta ghar aa gaya hoon darwaza khol do",
+        "expected": "none",
+        "predicted": "none",
+        "score": 0.5789350271224976,
+        "needs_review": false
+      },
+      {
+        "text": "Your order is out for delivery. I will reach your gate in ten minutes.",
+        "expected": "none",
+        "predicted": "none",
+        "score": 0.39591649174690247,
+        "needs_review": true
+      },
+      {
+        "text": "kal class ke baad library mein milte hain",
+        "expected": "none",
+        "predicted": "none",
+        "score": 0.5009461641311646,
+        "needs_review": true
+      },
+      {
+        "text": "Never share your OTP with anyone. This is a bank security awareness message.",
+        "expected": "none",
+        "predicted": "police_digital_arrest",
+        "score": 0.38376209139823914,
+        "needs_review": true
+      },
+      {
+        "text": "Police issued a warning about digital arrest scams. Do not send money to callers.",
+        "expected": "none",
+        "predicted": "police_digital_arrest",
+        "score": 0.4935357868671417,
+        "needs_review": true
+      }
+    ]
+  },
+  "best": {
+    "notice": "Small manually authored diagnostic; not a benchmark or training source. Police/relative arrest threats use the broad source label police_digital_arrest; obscene-content threats use police_blackmail. Gold labels were revised after source-semantic inspection; this is development data.",
+    "correct": 11,
+    "total": 18,
+    "records": [
+      {
+        "text": "This is the police. You are under digital arrest. Transfer money now or we will arrest you.",
+        "expected": "police_digital_arrest",
+        "predicted": "police_blackmail",
+        "score": 0.6694793105125427,
+        "needs_review": false
+      },
+      {
+        "text": "mai police se bol rha hu tum digital arrest mein ho turant paise transfer kro",
+        "expected": "police_digital_arrest",
+        "predicted": "police_blackmail",
+        "score": 0.8589476943016052,
+        "needs_review": false
+      },
+      {
+        "text": "CBI officer bol raha hun. Video call pe raho, digital arrest se bachne ko payment karo.",
+        "expected": "police_digital_arrest",
+        "predicted": "police_blackmail",
+        "score": 0.5838024616241455,
+        "needs_review": false
+      },
+      {
+        "text": "Your son has been arrested by police. Send money immediately to release him.",
+        "expected": "police_digital_arrest",
+        "predicted": "police_digital_arrest",
+        "score": 0.7578416466712952,
+        "needs_review": false
+      },
+      {
+        "text": "apka beta police custody me hai paise bhejo warna usko jail bhej denge",
+        "expected": "police_digital_arrest",
+        "predicted": "other_scam",
+        "score": 0.46388059854507446,
+        "needs_review": true
+      },
+      {
+        "text": "tumhare bete ko drugs case me pakda hai. Abhi paise do toh chhod denge",
+        "expected": "police_digital_arrest",
+        "predicted": "none",
+        "score": 0.626982569694519,
+        "needs_review": false
+      },
+      {
+        "text": "Your phone number has been used to share obscene videos. Pay us to avoid a police case.",
+        "expected": "police_blackmail",
+        "predicted": "police_blackmail",
+        "score": 0.8913162350654602,
+        "needs_review": false
+      },
+      {
+        "text": "aapke number se gande videos share hue hain turant paise bhejo warna case hoga",
+        "expected": "police_blackmail",
+        "predicted": "police_blackmail",
+        "score": 0.9654557704925537,
+        "needs_review": false
+      },
+      {
+        "text": "Your bank account will be blocked. Share your OTP to update KYC immediately.",
+        "expected": "other_scam",
+        "predicted": "other_scam",
+        "score": 0.6450759172439575,
+        "needs_review": false
+      },
+      {
+        "text": "aapki bank kyc expire ho gayi otp batao warna account band ho jayega",
+        "expected": "other_scam",
+        "predicted": "other_scam",
+        "score": 0.6283512115478516,
+        "needs_review": false
+      },
+      {
+        "text": "You won a lottery. Pay a processing fee to claim your prize.",
+        "expected": "other_scam",
+        "predicted": "other_scam",
+        "score": 0.8281117081642151,
+        "needs_review": false
+      },
+      {
+        "text": "amazon prize jeet gaye ho delivery fees pehle pay karo",
+        "expected": "other_scam",
+        "predicted": "other_scam",
+        "score": 0.4032561779022217,
+        "needs_review": true
+      },
+      {
+        "text": "Your Aadhaar is blocked. Give me your OTP to reactivate it.",
+        "expected": "other_scam",
+        "predicted": "other_scam",
+        "score": 0.7206283211708069,
+        "needs_review": false
+      },
+      {
+        "text": "Hello beta ghar aa gaya hoon darwaza khol do",
+        "expected": "none",
+        "predicted": "none",
+        "score": 0.9851158261299133,
+        "needs_review": false
+      },
+      {
+        "text": "Your order is out for delivery. I will reach your gate in ten minutes.",
+        "expected": "none",
+        "predicted": "none",
+        "score": 0.7248229384422302,
+        "needs_review": false
+      },
+      {
+        "text": "kal class ke baad library mein milte hain",
+        "expected": "none",
+        "predicted": "none",
+        "score": 0.9204006195068359,
+        "needs_review": false
+      },
+      {
+        "text": "Never share your OTP with anyone. This is a bank security awareness message.",
+        "expected": "none",
+        "predicted": "other_scam",
+        "score": 0.4921063780784607,
+        "needs_review": true
+      },
+      {
+        "text": "Police issued a warning about digital arrest scams. Do not send money to callers.",
+        "expected": "none",
+        "predicted": "police_blackmail",
+        "score": 0.6139281988143921,
+        "needs_review": false
+      }
+    ]
+  }
+}

@@ -1,0 +1,697 @@
+{
+  "word": {
+    "validation": {
+      "n": 149,
+      "accuracy": 1.0,
+      "macro_f1": 1.0,
+      "weighted_f1": 1.0,
+      "per_class": {
+        "none": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 22.0
+        },
+        "other_scam": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 21.0
+        },
+        "police_blackmail": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 25.0
+        },
+        "police_digital_arrest": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 81.0
+        },
+        "accuracy": 1.0,
+        "macro avg": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 149.0
+        },
+        "weighted avg": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 149.0
+        }
+      },
+      "confusion_labels": [
+        "none",
+        "other_scam",
+        "police_blackmail",
+        "police_digital_arrest"
+      ],
+      "confusion_matrix": [
+        [22, 0, 0, 0],
+        [0, 21, 0, 0],
+        [0, 0, 25, 0],
+        [0, 0, 0, 81]
+      ]
+    },
+    "validation_typos": {
+      "n": 149,
+      "accuracy": 1.0,
+      "macro_f1": 1.0,
+      "weighted_f1": 1.0,
+      "per_class": {
+        "none": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 22.0
+        },
+        "other_scam": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 21.0
+        },
+        "police_blackmail": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 25.0
+        },
+        "police_digital_arrest": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 81.0
+        },
+        "accuracy": 1.0,
+        "macro avg": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 149.0
+        },
+        "weighted avg": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 149.0
+        }
+      },
+      "confusion_labels": [
+        "none",
+        "other_scam",
+        "police_blackmail",
+        "police_digital_arrest"
+      ],
+      "confusion_matrix": [
+        [22, 0, 0, 0],
+        [0, 21, 0, 0],
+        [0, 0, 25, 0],
+        [0, 0, 0, 81]
+      ]
+    },
+    "test": {
+      "n": 149,
+      "accuracy": 1.0,
+      "macro_f1": 1.0,
+      "weighted_f1": 1.0,
+      "per_class": {
+        "none": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 22.0
+        },
+        "other_scam": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 21.0
+        },
+        "police_blackmail": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 26.0
+        },
+        "police_digital_arrest": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 80.0
+        },
+        "accuracy": 1.0,
+        "macro avg": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 149.0
+        },
+        "weighted avg": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 149.0
+        }
+      },
+      "confusion_labels": [
+        "none",
+        "other_scam",
+        "police_blackmail",
+        "police_digital_arrest"
+      ],
+      "confusion_matrix": [
+        [22, 0, 0, 0],
+        [0, 21, 0, 0],
+        [0, 0, 26, 0],
+        [0, 0, 0, 80]
+      ]
+    },
+    "test_typos": {
+      "n": 149,
+      "accuracy": 1.0,
+      "macro_f1": 1.0,
+      "weighted_f1": 1.0,
+      "per_class": {
+        "none": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 22.0
+        },
+        "other_scam": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 21.0
+        },
+        "police_blackmail": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 26.0
+        },
+        "police_digital_arrest": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 80.0
+        },
+        "accuracy": 1.0,
+        "macro avg": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 149.0
+        },
+        "weighted avg": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 149.0
+        }
+      },
+      "confusion_labels": [
+        "none",
+        "other_scam",
+        "police_blackmail",
+        "police_digital_arrest"
+      ],
+      "confusion_matrix": [
+        [22, 0, 0, 0],
+        [0, 21, 0, 0],
+        [0, 0, 26, 0],
+        [0, 0, 0, 80]
+      ]
+    },
+    "seconds": 0.3610900000003312
+  },
+  "char": {
+    "validation": {
+      "n": 149,
+      "accuracy": 1.0,
+      "macro_f1": 1.0,
+      "weighted_f1": 1.0,
+      "per_class": {
+        "none": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 22.0
+        },
+        "other_scam": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 21.0
+        },
+        "police_blackmail": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 25.0
+        },
+        "police_digital_arrest": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 81.0
+        },
+        "accuracy": 1.0,
+        "macro avg": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 149.0
+        },
+        "weighted avg": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 149.0
+        }
+      },
+      "confusion_labels": [
+        "none",
+        "other_scam",
+        "police_blackmail",
+        "police_digital_arrest"
+      ],
+      "confusion_matrix": [
+        [22, 0, 0, 0],
+        [0, 21, 0, 0],
+        [0, 0, 25, 0],
+        [0, 0, 0, 81]
+      ]
+    },
+    "validation_typos": {
+      "n": 149,
+      "accuracy": 1.0,
+      "macro_f1": 1.0,
+      "weighted_f1": 1.0,
+      "per_class": {
+        "none": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 22.0
+        },
+        "other_scam": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 21.0
+        },
+        "police_blackmail": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 25.0
+        },
+        "police_digital_arrest": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 81.0
+        },
+        "accuracy": 1.0,
+        "macro avg": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 149.0
+        },
+        "weighted avg": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 149.0
+        }
+      },
+      "confusion_labels": [
+        "none",
+        "other_scam",
+        "police_blackmail",
+        "police_digital_arrest"
+      ],
+      "confusion_matrix": [
+        [22, 0, 0, 0],
+        [0, 21, 0, 0],
+        [0, 0, 25, 0],
+        [0, 0, 0, 81]
+      ]
+    },
+    "test": {
+      "n": 149,
+      "accuracy": 1.0,
+      "macro_f1": 1.0,
+      "weighted_f1": 1.0,
+      "per_class": {
+        "none": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 22.0
+        },
+        "other_scam": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 21.0
+        },
+        "police_blackmail": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 26.0
+        },
+        "police_digital_arrest": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 80.0
+        },
+        "accuracy": 1.0,
+        "macro avg": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 149.0
+        },
+        "weighted avg": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 149.0
+        }
+      },
+      "confusion_labels": [
+        "none",
+        "other_scam",
+        "police_blackmail",
+        "police_digital_arrest"
+      ],
+      "confusion_matrix": [
+        [22, 0, 0, 0],
+        [0, 21, 0, 0],
+        [0, 0, 26, 0],
+        [0, 0, 0, 80]
+      ]
+    },
+    "test_typos": {
+      "n": 149,
+      "accuracy": 1.0,
+      "macro_f1": 1.0,
+      "weighted_f1": 1.0,
+      "per_class": {
+        "none": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 22.0
+        },
+        "other_scam": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 21.0
+        },
+        "police_blackmail": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 26.0
+        },
+        "police_digital_arrest": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 80.0
+        },
+        "accuracy": 1.0,
+        "macro avg": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 149.0
+        },
+        "weighted avg": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 149.0
+        }
+      },
+      "confusion_labels": [
+        "none",
+        "other_scam",
+        "police_blackmail",
+        "police_digital_arrest"
+      ],
+      "confusion_matrix": [
+        [22, 0, 0, 0],
+        [0, 21, 0, 0],
+        [0, 0, 26, 0],
+        [0, 0, 0, 80]
+      ]
+    },
+    "seconds": 0.4785487999997713
+  },
+  "hybrid": {
+    "validation": {
+      "n": 149,
+      "accuracy": 1.0,
+      "macro_f1": 1.0,
+      "weighted_f1": 1.0,
+      "per_class": {
+        "none": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 22.0
+        },
+        "other_scam": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 21.0
+        },
+        "police_blackmail": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 25.0
+        },
+        "police_digital_arrest": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 81.0
+        },
+        "accuracy": 1.0,
+        "macro avg": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 149.0
+        },
+        "weighted avg": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 149.0
+        }
+      },
+      "confusion_labels": [
+        "none",
+        "other_scam",
+        "police_blackmail",
+        "police_digital_arrest"
+      ],
+      "confusion_matrix": [
+        [22, 0, 0, 0],
+        [0, 21, 0, 0],
+        [0, 0, 25, 0],
+        [0, 0, 0, 81]
+      ]
+    },
+    "validation_typos": {
+      "n": 149,
+      "accuracy": 1.0,
+      "macro_f1": 1.0,
+      "weighted_f1": 1.0,
+      "per_class": {
+        "none": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 22.0
+        },
+        "other_scam": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 21.0
+        },
+        "police_blackmail": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 25.0
+        },
+        "police_digital_arrest": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 81.0
+        },
+        "accuracy": 1.0,
+        "macro avg": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 149.0
+        },
+        "weighted avg": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 149.0
+        }
+      },
+      "confusion_labels": [
+        "none",
+        "other_scam",
+        "police_blackmail",
+        "police_digital_arrest"
+      ],
+      "confusion_matrix": [
+        [22, 0, 0, 0],
+        [0, 21, 0, 0],
+        [0, 0, 25, 0],
+        [0, 0, 0, 81]
+      ]
+    },
+    "test": {
+      "n": 149,
+      "accuracy": 1.0,
+      "macro_f1": 1.0,
+      "weighted_f1": 1.0,
+      "per_class": {
+        "none": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 22.0
+        },
+        "other_scam": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 21.0
+        },
+        "police_blackmail": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 26.0
+        },
+        "police_digital_arrest": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 80.0
+        },
+        "accuracy": 1.0,
+        "macro avg": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 149.0
+        },
+        "weighted avg": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 149.0
+        }
+      },
+      "confusion_labels": [
+        "none",
+        "other_scam",
+        "police_blackmail",
+        "police_digital_arrest"
+      ],
+      "confusion_matrix": [
+        [22, 0, 0, 0],
+        [0, 21, 0, 0],
+        [0, 0, 26, 0],
+        [0, 0, 0, 80]
+      ]
+    },
+    "test_typos": {
+      "n": 149,
+      "accuracy": 1.0,
+      "macro_f1": 1.0,
+      "weighted_f1": 1.0,
+      "per_class": {
+        "none": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 22.0
+        },
+        "other_scam": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 21.0
+        },
+        "police_blackmail": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 26.0
+        },
+        "police_digital_arrest": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 80.0
+        },
+        "accuracy": 1.0,
+        "macro avg": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 149.0
+        },
+        "weighted avg": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 149.0
+        }
+      },
+      "confusion_labels": [
+        "none",
+        "other_scam",
+        "police_blackmail",
+        "police_digital_arrest"
+      ],
+      "confusion_matrix": [
+        [22, 0, 0, 0],
+        [0, 21, 0, 0],
+        [0, 0, 26, 0],
+        [0, 0, 0, 80]
+      ]
+    },
+    "seconds": 0.5728421000003436
+  },
+  "selected": "word",
+  "selection_rule": "Mean clean + synthetic-typo validation macro-F1; test never used for selection"
+}
