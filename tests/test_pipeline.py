@@ -56,6 +56,17 @@ class PreprocessingTests(unittest.TestCase):
 
 
 class DataTests(unittest.TestCase):
+    @unittest.skipUnless(all((ROOT/"models"/f"{task}_baseline.joblib").exists() for task in TASKS),
+                         "Local model artifacts are unavailable")
+    def test_all_available_saved_backends_load_and_predict(self):
+        from cyberlens.predict import Predictor
+        for backend in ("baseline","word2vec","subword","hierarchical","transformer"):
+            path = ROOT/"models"/("complaint_transformer" if backend == "transformer" else f"complaint_{backend}.joblib")
+            if path.exists():
+                result = Predictor(backend=backend).predict("Someone asked for my UPI PIN 1234","complaint")
+                self.assertNotIn("1234",result["masked_text"])
+                self.assertTrue(result["predictions"]["complaint"]["top"])
+
     @unittest.skipUnless(all((ROOT/"data/processed"/f"{task}.csv").exists() for task in TASKS),
                          "Private processed datasets are not available (expected in public CI)")
     def test_no_duplicate_leakage_and_label_coverage(self):

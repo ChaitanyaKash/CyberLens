@@ -1,5 +1,7 @@
 # CyberLens: local English / Hinglish scam classification
 
+[![Core tests](https://github.com/ChaitanyaKash/CyberLens/actions/workflows/ci.yml/badge.svg)](https://github.com/ChaitanyaKash/CyberLens/actions/workflows/ci.yml)
+
 I’m building CyberLens to classify suspicious messages written in English or Hinglish, including messages with spelling mistakes. This version focuses on text classification; I plan to add retrieval-based guidance and report drafting later.
 
 The main challenge started with preprocessing: an English spellchecker can damage valid Hinglish words. I compared word and character TF-IDF, **Skip-gram with negative sampling implemented in PyTorch**, a custom subword extension, and a fine-tuned multilingual encoder. I also found duplicate messages and contradictory labels, which turned out to matter as much as the choice of model.

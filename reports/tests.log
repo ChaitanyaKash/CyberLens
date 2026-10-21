@@ -1,3 +1,7 @@
+test_all_available_saved_backends_load_and_predict (test_pipeline.DataTests.test_all_available_saved_backends_load_and_predict) ...
+Loading weights:   0%|          | 0/104 [00:00<?, ?it/s]
+Loading weights: 100%|##########| 104/104 [00:00<00:00, 5122.45it/s]
+ok
 test_inference (test_pipeline.DataTests.test_inference) ... ok
 test_no_duplicate_leakage_and_label_coverage (test_pipeline.DataTests.test_no_duplicate_leakage_and_label_coverage) ... ok
 test_subword_hash_and_gradient (test_pipeline.DataTests.test_subword_hash_and_gradient) ... ok
@@ -12,6 +16,6 @@ test_specific_masks_and_clues (test_pipeline.PreprocessingTests.test_specific_ma
 test_test_only_labels_do_not_change_validation_macro (test_pipeline.PreprocessingTests.test_test_only_labels_do_not_change_validation_macro) ... ok
 
 ----------------------------------------------------------------------
-Ran 12 tests in 12.154s
+Ran 13 tests in 27.092s
 
 OK

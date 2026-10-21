@@ -24,3 +24,5 @@ The initial call split had no normalized duplicate overlap, but that was not eno
 I also fixed a reporting issue: three complaint labels occur only in the supplied test file. They should count as unsupported classes in test results, but should not add zero-support classes to the validation macro-F1 denominator. The fix recomputes metrics from saved confusion counts without changing predictions or fitting on test data.
 
 I tried a dedicated financial-fraud expert as well. It did not improve the combined clean/noisy validation score, so I kept the simpler baseline as the default and saved the experiment for comparison. The app now shows class-level evaluation evidence and marks weak subtype suggestions for review rather than treating a high model score as sufficient evidence.
+
+I checked every saved backend in a fresh inference path and fixed the custom estimator's module entry point so its model can be loaded outside the training command. All 13 local tests pass, including model loading, split checks and the validation-report regression test.

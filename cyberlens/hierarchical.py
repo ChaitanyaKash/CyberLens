@@ -73,4 +73,6 @@ def train(root=ROOT):
 
 
 if __name__ == "__main__":
-    train()
+    # Serialize custom estimator classes under an importable module, not __main__.
+    from .hierarchical import train as train_from_module
+    train_from_module()
