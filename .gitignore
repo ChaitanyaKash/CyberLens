@@ -29,6 +29,7 @@ reports/*
 !reports/complaint_supervised_plan.json
 !reports/complaint_error_audit.json
 !reports/complaint_adjusted.json
+!reports/complaint_fusion.json
 !reports/complaint_baseline_slices.json
 !reports/data_audit_official.json
 !reports/optimizer_validation.json
