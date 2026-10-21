@@ -1,0 +1,493 @@
+{
+  "target_macro_f1": 0.5,
+  "validation_curve": [
+    {
+      "target_coverage": 0.05,
+      "threshold": 0.9746250467711564,
+      "clean": {
+        "coverage": 0.050053719269417936,
+        "n": 792,
+        "macro_f1": 0.5559123991488796,
+        "accuracy": 0.9785353535353535,
+        "weighted_f1": 0.974318363374902
+      },
+      "typo": {
+        "coverage": 0.03159957024584466,
+        "n": 500,
+        "macro_f1": 0.7047504604777834,
+        "accuracy": 0.982,
+        "weighted_f1": 0.9798810227478344
+      },
+      "selection": 0.6303314298133316
+    },
+    {
+      "target_coverage": 0.1,
+      "threshold": 0.9300917394755861,
+      "clean": {
+        "coverage": 0.10004423939834418,
+        "n": 1583,
+        "macro_f1": 0.36289514289843844,
+        "accuracy": 0.9583070120025269,
+        "weighted_f1": 0.9504560043324971
+      },
+      "typo": {
+        "coverage": 0.07659735827592745,
+        "n": 1212,
+        "macro_f1": 0.3731041707834131,
+        "accuracy": 0.9587458745874587,
+        "weighted_f1": 0.9507802554850204
+      },
+      "selection": 0.3679996568409258
+    },
+    {
+      "target_coverage": 0.15,
+      "threshold": 0.875738875820098,
+      "clean": {
+        "coverage": 0.15003475952727044,
+        "n": 2374,
+        "macro_f1": 0.3730163023792194,
+        "accuracy": 0.9267059814658803,
+        "weighted_f1": 0.9166931402603881
+      },
+      "typo": {
+        "coverage": 0.12108955318207672,
+        "n": 1916,
+        "macro_f1": 0.35027028152426437,
+        "accuracy": 0.9352818371607515,
+        "weighted_f1": 0.9260149274910795
+      },
+      "selection": 0.3616432919517419
+    },
+    {
+      "target_coverage": 0.2,
+      "threshold": 0.8142347641294101,
+      "clean": {
+        "coverage": 0.20002527965619668,
+        "n": 3165,
+        "macro_f1": 0.3237637243164955,
+        "accuracy": 0.8963665086887835,
+        "weighted_f1": 0.8869230640205117
+      },
+      "typo": {
+        "coverage": 0.16627693863363457,
+        "n": 2631,
+        "macro_f1": 0.34124541331122304,
+        "accuracy": 0.9042189281641961,
+        "weighted_f1": 0.8957087869026875
+      },
+      "selection": 0.33250456881385926
+    },
+    {
+      "target_coverage": 0.25,
+      "threshold": 0.7452228670261856,
+      "clean": {
+        "coverage": 0.25001579978512295,
+        "n": 3956,
+        "macro_f1": 0.34003766340356983,
+        "accuracy": 0.8660262891809909,
+        "weighted_f1": 0.8524823517257537
+      },
+      "typo": {
+        "coverage": 0.21620425962206913,
+        "n": 3421,
+        "macro_f1": 0.36596040649528405,
+        "accuracy": 0.8763519438760596,
+        "weighted_f1": 0.8650920949449729
+      },
+      "selection": 0.35299903494942697
+    },
+    {
+      "target_coverage": 0.3,
+      "threshold": 0.6833098555987479,
+      "clean": {
+        "coverage": 0.3000063199140492,
+        "n": 4747,
+        "macro_f1": 0.3540431763311363,
+        "accuracy": 0.8369496524120497,
+        "weighted_f1": 0.8220572288073101
+      },
+      "typo": {
+        "coverage": 0.26215003475952725,
+        "n": 4148,
+        "macro_f1": 0.3870716318615521,
+        "accuracy": 0.849566055930569,
+        "weighted_f1": 0.834953649419646
+      },
+      "selection": 0.3705574040963442
+    },
+    {
+      "target_coverage": 0.35,
+      "threshold": 0.6238206206251229,
+      "clean": {
+        "coverage": 0.34999684004297543,
+        "n": 5538,
+        "macro_f1": 0.3757027754396055,
+        "accuracy": 0.8084145901047309,
+        "weighted_f1": 0.7930290175113897
+      },
+      "typo": {
+        "coverage": 0.3079062124755103,
+        "n": 4872,
+        "macro_f1": 0.37428302229162036,
+        "accuracy": 0.8191707717569786,
+        "weighted_f1": 0.8035516391197608
+      },
+      "selection": 0.37499289886561293
+    },
+    {
+      "target_coverage": 0.4,
+      "threshold": 0.5742430123176009,
+      "clean": {
+        "coverage": 0.3999873601719017,
+        "n": 6329,
+        "macro_f1": 0.35077748469677406,
+        "accuracy": 0.7761099699794596,
+        "weighted_f1": 0.7587954278776224
+      },
+      "typo": {
+        "coverage": 0.3529040005055931,
+        "n": 5584,
+        "macro_f1": 0.3936871876091411,
+        "accuracy": 0.7936962750716332,
+        "weighted_f1": 0.7771995988406063
+      },
+      "selection": 0.3722323361529576
+    },
+    {
+      "target_coverage": 0.45,
+      "threshold": 0.5280428586538267,
+      "clean": {
+        "coverage": 0.4499778803008279,
+        "n": 7120,
+        "macro_f1": 0.3788939551899284,
+        "accuracy": 0.7469101123595505,
+        "weighted_f1": 0.7292344789564504
+      },
+      "typo": {
+        "coverage": 0.40055615243632686,
+        "n": 6338,
+        "macro_f1": 0.390129087504679,
+        "accuracy": 0.7636478384348375,
+        "weighted_f1": 0.7463585637541894
+      },
+      "selection": 0.3845115213473037
+    },
+    {
+      "target_coverage": 0.5,
+      "threshold": 0.4853012945195468,
+      "clean": {
+        "coverage": 0.5000315995702459,
+        "n": 7912,
+        "macro_f1": 0.38125976445114323,
+        "accuracy": 0.7204246713852376,
+        "weighted_f1": 0.7037165871179089
+      },
+      "typo": {
+        "coverage": 0.4524426467800038,
+        "n": 7159,
+        "macro_f1": 0.39710721541578275,
+        "accuracy": 0.7348791730688644,
+        "weighted_f1": 0.7183901847231272
+      },
+      "selection": 0.38918348993346297
+    },
+    {
+      "target_coverage": 0.55,
+      "threshold": 0.4489181751050058,
+      "clean": {
+        "coverage": 0.5500221196991721,
+        "n": 8703,
+        "macro_f1": 0.37302033179352223,
+        "accuracy": 0.6963116166839021,
+        "weighted_f1": 0.6806623951257836
+      },
+      "typo": {
+        "coverage": 0.49946280730582066,
+        "n": 7903,
+        "macro_f1": 0.3836381786093926,
+        "accuracy": 0.7080855371377958,
+        "weighted_f1": 0.6921486554599744
+      },
+      "selection": 0.37832925520145744
+    },
+    {
+      "target_coverage": 0.6,
+      "threshold": 0.41646843879639195,
+      "clean": {
+        "coverage": 0.6000126398280984,
+        "n": 9494,
+        "macro_f1": 0.3666767673809401,
+        "accuracy": 0.6685274910469771,
+        "weighted_f1": 0.6539346134357943
+      },
+      "typo": {
+        "coverage": 0.5450293876003286,
+        "n": 8624,
+        "macro_f1": 0.37789909006985484,
+        "accuracy": 0.6856447124304267,
+        "weighted_f1": 0.6703046299395008
+      },
+      "selection": 0.3722879287253975
+    },
+    {
+      "target_coverage": 0.65,
+      "threshold": 0.38472425722003295,
+      "clean": {
+        "coverage": 0.6500031599570246,
+        "n": 10285,
+        "macro_f1": 0.35924460300364847,
+        "accuracy": 0.6478366553232864,
+        "weighted_f1": 0.6340959571513544
+      },
+      "typo": {
+        "coverage": 0.5957782974151552,
+        "n": 9427,
+        "macro_f1": 0.36679965184008195,
+        "accuracy": 0.6623528163784873,
+        "weighted_f1": 0.6479325298552113
+      },
+      "selection": 0.36302212742186524
+    },
+    {
+      "target_coverage": 0.7,
+      "threshold": 0.3543914837010609,
+      "clean": {
+        "coverage": 0.6999936800859509,
+        "n": 11076,
+        "macro_f1": 0.34727935161100054,
+        "accuracy": 0.6269411339833875,
+        "weighted_f1": 0.6141706452292387
+      },
+      "typo": {
+        "coverage": 0.6498135625355496,
+        "n": 10282,
+        "macro_f1": 0.3508097574705086,
+        "accuracy": 0.6388834857031706,
+        "weighted_f1": 0.6252934951864723
+      },
+      "selection": 0.34904455454075456
+    },
+    {
+      "target_coverage": 0.75,
+      "threshold": 0.3265879533835191,
+      "clean": {
+        "coverage": 0.7499842002148771,
+        "n": 11867,
+        "macro_f1": 0.33859542847152246,
+        "accuracy": 0.6064717283222382,
+        "weighted_f1": 0.5948535462598057
+      },
+      "typo": {
+        "coverage": 0.7032168362510269,
+        "n": 11127,
+        "macro_f1": 0.3445486662135846,
+        "accuracy": 0.6157095353644289,
+        "weighted_f1": 0.6026900263276042
+      },
+      "selection": 0.34157204734255353
+    },
+    {
+      "target_coverage": 0.8,
+      "threshold": 0.2972422472858171,
+      "clean": {
+        "coverage": 0.7999747203438033,
+        "n": 12658,
+        "macro_f1": 0.33868578687140705,
+        "accuracy": 0.5885605940906936,
+        "weighted_f1": 0.5781723872549118
+      },
+      "typo": {
+        "coverage": 0.760980850660431,
+        "n": 12041,
+        "macro_f1": 0.3384336576613759,
+        "accuracy": 0.5952993937380616,
+        "weighted_f1": 0.5838735105352331
+      },
+      "selection": 0.33855972226639147
+    },
+    {
+      "target_coverage": 0.85,
+      "threshold": 0.2654639133888524,
+      "clean": {
+        "coverage": 0.8499652404727296,
+        "n": 13449,
+        "macro_f1": 0.2977555133685373,
+        "accuracy": 0.5717153691724292,
+        "weighted_f1": 0.5629025164125172
+      },
+      "typo": {
+        "coverage": 0.8239271945901536,
+        "n": 13037,
+        "macro_f1": 0.27854159941174544,
+        "accuracy": 0.5737516299762215,
+        "weighted_f1": 0.5639254634948945
+      },
+      "selection": 0.28814855639014136
+    },
+    {
+      "target_coverage": 0.9,
+      "threshold": 0.2320218459979351,
+      "clean": {
+        "coverage": 0.8999557606016558,
+        "n": 14240,
+        "macro_f1": 0.2776192373202946,
+        "accuracy": 0.5528089887640449,
+        "weighted_f1": 0.5450356948454972
+      },
+      "typo": {
+        "coverage": 0.8847247677431587,
+        "n": 13999,
+        "macro_f1": 0.2737972520088138,
+        "accuracy": 0.5508250589327809,
+        "weighted_f1": 0.542286086704976
+      },
+      "selection": 0.2757082446645542
+    },
+    {
+      "target_coverage": 0.95,
+      "threshold": 0.2002708766379201,
+      "clean": {
+        "coverage": 0.9499462807305821,
+        "n": 15031,
+        "macro_f1": 0.27166718930155276,
+        "accuracy": 0.5338300844920497,
+        "weighted_f1": 0.5269315640587013
+      },
+      "typo": {
+        "coverage": 0.9429943752764962,
+        "n": 14921,
+        "macro_f1": 0.2689512480682503,
+        "accuracy": 0.5295891696267007,
+        "weighted_f1": 0.5219066356596233
+      },
+      "selection": 0.27030921868490154
+    },
+    {
+      "target_coverage": 1.0,
+      "threshold": 0.0,
+      "clean": {
+        "coverage": 1.0,
+        "n": 15823,
+        "macro_f1": 0.2706429199069304,
+        "accuracy": 0.5153257915692346,
+        "weighted_f1": 0.5090671585775938
+      },
+      "typo": {
+        "coverage": 1.0,
+        "n": 15823,
+        "macro_f1": 0.2593263200851357,
+        "accuracy": 0.5092586740820325,
+        "weighted_f1": 0.5022528704105425
+      },
+      "selection": 0.26498461999603307
+    }
+  ],
+  "selected": {
+    "target_coverage": 0.05,
+    "threshold": 0.9746250467711564,
+    "clean": {
+      "coverage": 0.050053719269417936,
+      "n": 792,
+      "macro_f1": 0.5559123991488796,
+      "accuracy": 0.9785353535353535,
+      "weighted_f1": 0.974318363374902
+    },
+    "typo": {
+      "coverage": 0.03159957024584466,
+      "n": 500,
+      "macro_f1": 0.7047504604777834,
+      "accuracy": 0.982,
+      "weighted_f1": 0.9798810227478344
+    },
+    "selection": 0.6303314298133316
+  },
+  "target_reached_on_validation": true,
+  "rule": "Largest validation coverage with mean clean/typo answered macro-F1 >= target; else max F1 x coverage",
+  "macro_definition": "Macro-F1 over labels present among answered rows' true or predicted labels",
+  "test": {
+    "coverage": 0.08943485749569399,
+    "n": 2752,
+    "macro_f1": 0.5639345665519576,
+    "accuracy": 0.984375,
+    "weighted_f1": 0.9822643786258759,
+    "full_taxonomy": {
+      "coverage": 1.0,
+      "n": 30771,
+      "macro_f1": 0.2620050684880092,
+      "accuracy": 0.5512008059536576,
+      "weighted_f1": 0.5481113581190814
+    }
+  },
+  "test_per_class_answered_share": {
+    "Any Other Cyber Crime :: Other": 0.00110803324099723,
+    "Child Pornography CPChild Sexual Abuse Material CSAM :: Unspecified": 0.0,
+    "Crime Against Women & Children :: Computer Generated CSAM/CSEM": 0.0,
+    "Crime Against Women & Children :: Cyber Blackmailing & Threatening": 0.0,
+    "Crime Against Women & Children :: Sexual Harassment": 0.0,
+    "Cryptocurrency Crime :: Cryptocurrency Fraud": 0.0,
+    "Cyber Attack/ Dependent Crimes :: Data Breach/Theft": 0.0,
+    "Cyber Attack/ Dependent Crimes :: Denial of Service (DoS)/Distributed Denial of Service (DDOS) attacks": 0.0,
+    "Cyber Attack/ Dependent Crimes :: Hacking/Defacement": 0.0,
+    "Cyber Attack/ Dependent Crimes :: Malware Attack": 0.0,
+    "Cyber Attack/ Dependent Crimes :: Ransomware Attack": 0.0,
+    "Cyber Attack/ Dependent Crimes :: SQL Injection": 0.0,
+    "Cyber Attack/ Dependent Crimes :: Tampering with computer source documents": 0.0,
+    "Cyber Terrorism :: Cyber Terrorism": 0.0,
+    "Hacking  Damage to computercomputer system etc :: Damage to computer computer systems etc": 0.0,
+    "Hacking  Damage to computercomputer system etc :: Email Hacking": 0.0,
+    "Hacking  Damage to computercomputer system etc :: Tampering with computer source documents": 0.0,
+    "Hacking  Damage to computercomputer system etc :: Unauthorised AccessData Breach": 0.0,
+    "Hacking  Damage to computercomputer system etc :: Website DefacementHacking": 0.0,
+    "Online Cyber Trafficking :: Online Trafficking": 0.0,
+    "Online Financial Fraud :: Business Email CompromiseEmail Takeover": 0.0,
+    "Online Financial Fraud :: DebitCredit Card FraudSim Swap Fraud": 0.12208309618668184,
+    "Online Financial Fraud :: DematDepository Fraud": 0.0,
+    "Online Financial Fraud :: EWallet Related Fraud": 0.010687022900763359,
+    "Online Financial Fraud :: Fraud CallVishing": 0.0011160714285714285,
+    "Online Financial Fraud :: Internet Banking Related Fraud": 0.09868198715782359,
+    "Online Financial Fraud :: UPI Related Frauds": 0.23011786245565855,
+    "Online Gambling  Betting :: Online Gambling  Betting": 0.0,
+    "Online and Social Media Related Crime :: Cheating by Impersonation": 0.0,
+    "Online and Social Media Related Crime :: Cyber Bullying  Stalking  Sexting": 0.0,
+    "Online and Social Media Related Crime :: EMail Phishing": 0.0,
+    "Online and Social Media Related Crime :: FakeImpersonating Profile": 0.0,
+    "Online and Social Media Related Crime :: Impersonating Email": 0.0,
+    "Online and Social Media Related Crime :: Intimidating Email": 0.0,
+    "Online and Social Media Related Crime :: Online Job Fraud": 0.0,
+    "Online and Social Media Related Crime :: Online Matrimonial Fraud": 0.0,
+    "Online and Social Media Related Crime :: Profile Hacking Identity Theft": 0.0,
+    "Online and Social Media Related Crime :: Provocative Speech for unlawful acts": 0.0,
+    "Ransomware :: Ransomware": 0.0,
+    "RapeGang Rape RGRSexually Abusive Content :: Unspecified": 0.0,
+    "Sexually Explicit Act :: Unspecified": 0.0,
+    "Sexually Obscene material :: Unspecified": 0.0
+  },
+  "test_typos": {
+    "coverage": 0.06099899255792792,
+    "n": 1877,
+    "macro_f1": 0.6232427792145698,
+    "accuracy": 0.9861481086840703,
+    "weighted_f1": 0.983568225217582,
+    "full_taxonomy": {
+      "coverage": 1.0,
+      "n": 30771,
+      "macro_f1": 0.2572795907798485,
+      "accuracy": 0.5470735432712619,
+      "weighted_f1": 0.5435267621894083
+    }
+  },
+  "test_novel_templates": {
+    "coverage": 0.03758201653919323,
+    "n": 968,
+    "macro_f1": 0.7306711362891138,
+    "accuracy": 0.9865702479338843,
+    "weighted_f1": 0.9850924158195028,
+    "full_taxonomy": {
+      "coverage": 1.0,
+      "n": 25757,
+      "macro_f1": 0.23621570293351488,
+      "accuracy": 0.4962146212680048,
+      "weighted_f1": 0.49196637804859406
+    }
+  }
+}
