@@ -11,7 +11,7 @@ def main():
     commands = parser.add_subparsers(dest="command", required=True)
     commands.add_parser("prepare")
     train = commands.add_parser("train")
-    train.add_argument("--backend", choices=["baseline", "word2vec", "subword", "transformer", "hierarchical", "robust", "regularized", "margin", "semantic", "ensemble", "continued"], default="baseline")
+    train.add_argument("--backend", choices=["baseline", "word2vec", "subword", "transformer", "hierarchical", "robust", "regularized", "margin", "semantic", "ensemble", "continued", "improved", "supervised"], default="baseline")
     train.add_argument("--task", choices=["both", *TASKS], default="both")
     train.add_argument("--epochs", type=int)
     train.add_argument("--max-pairs", type=int, default=300000)
@@ -20,7 +20,7 @@ def main():
     pred = commands.add_parser("predict")
     pred.add_argument("--text")
     pred.add_argument("--task", choices=["both", *TASKS], default="both")
-    pred.add_argument("--backend", choices=["best", "baseline", "word2vec", "subword", "transformer", "hierarchical", "robust", "regularized", "margin", "semantic", "ensemble", "continued"], default="best")
+    pred.add_argument("--backend", choices=["best", "baseline", "word2vec", "subword", "transformer", "hierarchical", "robust", "regularized", "margin", "semantic", "ensemble", "continued", "improved", "supervised"], default="best")
     pred.add_argument("--interactive", action="store_true")
     args = parser.parse_args()
     if args.command == "prepare":
@@ -34,6 +34,16 @@ def main():
             if args.task == "complaint":
                 parser.error("The nested robust experiment is for --task call_scam")
             from .robust import train
+            train()
+        elif args.backend == "supervised":
+            if args.task == "call_scam":
+                parser.error("The supervised subword experiment requires --task complaint")
+            from .train_supervised import train
+            train()
+        elif args.backend == "improved":
+            if args.task == "call_scam":
+                parser.error("The training-internal complaint experiment requires --task complaint")
+            from .improve import train
             train()
         elif args.backend == "continued":
             if args.task == "call_scam":

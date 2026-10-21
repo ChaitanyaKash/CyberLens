@@ -100,6 +100,8 @@ Predictions include ranked alternatives, class-level evaluation evidence and a r
 | `semantic` | Frozen multilingual features with an inner-selected regularized head |
 | `ensemble` | Fixed equal-weight sparse/semantic score average |
 | `continued` | Bounded continuation of the one-epoch complaint transformer |
+| `improved` | Training-internal weighting and NB-ratio feature comparison with confirmation gates |
+| `supervised` | Jointly learned word/character embedding bags and a regularized nonlinear head |
 
 Examples:
 
@@ -116,13 +118,15 @@ Examples:
 .\run.ps1 train --backend semantic --task complaint
 .\run.ps1 train --backend ensemble --task complaint
 .\run.ps1 train --backend continued --task complaint
+.\run.ps1 train --backend improved --task complaint
+.\run.ps1 train --backend supervised --task complaint
 python -m cyberlens.report
 python -m unittest discover -s tests -v
 ```
 
-The ensemble requires trained baseline and semantic artifacts. Continuation requires the saved one-epoch complaint transformer. Full reproduction, including public encoder acquisition when required, is available through `reproduce.ps1`.
+The ensemble requires trained baseline and semantic artifacts. Continuation requires the saved one-epoch complaint transformer. The supervised experiment requires the completed `improved` reference comparison to verify matched training-internal partitions. Experiments rejected before full-training refit do not create inference artifacts. Full reproduction, including public encoder acquisition when required, is available through `reproduce.ps1`.
 
-The default backend follows the recorded promotion criteria. Complaint candidates require a clean/noisy validation macro-F1 gain of at least 0.02 before an additional official-test evaluation. The call candidate also requires a positive lower confidence bound for its family-held-out improvement. Validation has been reused during development; independent evaluation remains necessary.
+The default backend follows the recorded promotion criteria. Historical complaint comparisons require a clean/noisy validation macro-F1 gain of at least 0.02 before an additional official-test evaluation. The `improved` experiment instead uses separate training-internal selection and confirmation partitions, followed by a validation gain of at least 0.01 and accuracy/robustness constraints. Release also requires a positive paired-bootstrap lower bound on the final test gain. Its complete criteria are recorded before training in `reports/complaint_improved_plan.json`. The call candidate has its own family-held-out uncertainty criterion. Validation has been reused during development; independent evaluation remains necessary.
 
 ## Documentation
 

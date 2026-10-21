@@ -45,6 +45,10 @@ try {
         if ($LASTEXITCODE -ne 0) { throw 'Fixed ensemble experiment failed' }
         & $taskPython -m cyberlens.cli train --backend continued --task complaint
         if ($LASTEXITCODE -ne 0) { throw 'Bounded encoder continuation failed' }
+        & $taskPython -m cyberlens.cli train --backend improved --task complaint
+        if ($LASTEXITCODE -ne 0) { throw 'Training-internal improvement experiment failed' }
+        & $taskPython -m cyberlens.cli train --backend supervised --task complaint
+        if ($LASTEXITCODE -ne 0) { throw 'Supervised subword experiment failed' }
         & $taskPython -m cyberlens.diagnose
         if ($LASTEXITCODE -ne 0) { throw 'Parent-category diagnostic failed' }
         & $taskPython -m cyberlens.report

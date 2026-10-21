@@ -120,9 +120,44 @@ Selected total epoch: **3**. Validation mean: **0.2192**, versus baseline **0.25
 Not evaluated: bounded continuation did not pass validation promotion rule.
 The original validation set has been reused; this bounded budget and stopping rule reduce some risks but do not establish absence of overfitting or independent generalisation.
 
+## Training-internal weighting and NB-ratio comparison
+
+A predeclared 70/15/15 split of the training partition separates fitting, candidate selection and confirmation. The selected candidate is refitted before each subsequent assessment. Fitted vocabularies and class-specific feature ratios exclude their assessment partitions.
+The candidates compare balanced SGD, normalized square-root class weighting, a fixed lower-regularization variant, and one-versus-rest linear SVMs with binary word/bigram NB log-count ratios.
+
+| Candidate | Selection clean/noisy mean F1 | Selection accuracy |
+|---|---:|---:|
+| reference | 0.2634 | 0.4839 |
+| sqrt_weights | 0.2501 | 0.5083 |
+| sqrt_less_regularized | 0.2470 | 0.4934 |
+| nb_ratio_svm | 0.1698 | 0.4254 |
+
+Selected candidate: **reference**. Final status: **selection_gain_not_confirmed**. Promotion passed: **False**.
+No additional official-test evaluation was run because an earlier gate did not qualify the candidate.
+
+The revised criteria were recorded before training in `complaint_improved_plan.json`. Confirmation and existing-validation require a mean F1 gain of 0.01, nonnegative clean F1 gain, and accuracy/typo-F1 declines no larger than 0.005. Release additionally requires positive benchmark F1 gain and a positive paired-bootstrap lower bound. The benchmark remains development-exposed; independent confirmation is still required.
+
+## Label-supervised word/character network
+
+This experiment learns hashed word/bigram and character embeddings jointly with a nonlinear classifier. It uses a six-epoch cap, dropout 0.4, AdamW weight decay 0.01, inverse-frequency loss weights and training-only typo augmentation.
+Epoch selection uses the fitting/selection partitions from the preceding experiment; a qualified network would require a fresh refit and separate confirmation before existing validation or test evaluation.
+
+| Epoch | Training loss | Selection clean/noisy mean F1 | Selection accuracy |
+|---|---:|---:|---:|
+| 1 | 2.9044 | 0.1576 | 0.3595 |
+| 2 | 2.0807 | 0.1730 | 0.3772 |
+| 3 | 1.4036 | 0.1866 | 0.4051 |
+| 4 | 0.9998 | 0.1905 | 0.4294 |
+| 5 | 0.8029 | 0.1919 | 0.4123 |
+| 6 | 0.6811 | 0.1849 | 0.4010 |
+
+Selected epoch: **5**. Final status: **selection_gate_failed**. Promotion passed: **False**.
+Selected-network mean F1: **0.1919**, compared with reference **0.2634** on the same selection partition.
+No additional test evaluation was performed. Declining training loss without sufficient held-out improvement does not justify deployment.
+
 Default inference uses validation-selected backends:
 
-- call_scam: **baseline** (selection score 1.0000).
+- call_scam: **baseline** (primary family-held-out macro-F1 0.6308; legacy exact-template validation selection score 1.0000).
 - complaint: **baseline** (selection score 0.2579).
 
 Additional word-feature optimizer checks (validation only):

@@ -23,6 +23,10 @@ reports/*
 !reports/complaint_semantic.json
 !reports/complaint_ensemble.json
 !reports/complaint_continued.json
+!reports/complaint_improved.json
+!reports/complaint_improved_plan.json
+!reports/complaint_supervised.json
+!reports/complaint_supervised_plan.json
 !reports/complaint_error_audit.json
 !reports/optimizer_validation.json
 !reports/manual_challenge.json

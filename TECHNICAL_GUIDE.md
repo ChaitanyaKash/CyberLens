@@ -199,6 +199,36 @@ The next evaluation milestone is an independently collected, reviewed English/Hi
 
 A future RAG layer can retrieve reviewed guidance using the message and classification evidence. Retrieval must preserve uncertainty rather than turn a tentative category into a fact. Report drafting should distinguish supplied evidence from missing information and retain user review before external use.
 
+## Training-internal class-weight and feature-scaling experiment
+
+The `improved` backend isolates two mechanisms: class-weight strength and class-specific feature scaling. Its candidate set is fixed before training: the balanced hybrid SGD reference, normalized square-root class weights at alpha `1e-5`, the same weights at alpha `3e-6`, and a binary word/bigram NB-ratio linear classifier.
+
+Square-root weights moderate the influence of rare classes. Weights are normalized to unit sample-weighted mean so the overall loss scale remains comparable. This can change the accuracy/rare-class trade-off; a higher accuracy alone does not qualify a candidate with lower macro-F1.
+
+The feature-scaling variant is inspired by [Wang and Manning (2012)](https://aclanthology.org/P12-2018/). For each class, smoothed positive and negative feature counts produce normalized log-count ratios. Binary word/bigram features are multiplied by those ratios before fitting a balanced one-versus-rest linear SVM at C=1. The resulting coefficients are collapsed into a single matrix for efficient inference. This is a multiclass variant without the paper's NB/SVM interpolation; softmax-converted margins remain uncalibrated.
+
+The training partition is divided into 43,488 fitting, 9,319 selection and 9,319 confirmation messages, with stratification and fixed seeds. Learned features and class ratios exclude the partition used to assess them. A single selection winner is refitted on fitting plus selection data, then assessed against a similarly refitted reference on confirmation data.
+
+Confirmation requires mean clean/noisy macro-F1 gain of at least 0.01, nonnegative clean F1 gain, and accuracy/typo-F1 declines no larger than 0.005. Only a qualified candidate is refitted on full training and checked against the saved baseline on the existing validation set using the same criteria. Selection additionally requires mean gain of at least 0.005 and accuracy retention.
+
+Only after these gates pass is one additional official-test evaluation performed. Release requires positive clean test F1 gain, accuracy/typo retention and a positive lower bound from a paired normalized-template cluster bootstrap. Test predictions do not select among hyperparameters. The benchmark is already development-exposed, and these gates do not replace fresh independent validation.
+
+These prospective criteria differ from earlier experiments: the smaller minimum validation gain is paired with an additional training-internal confirmation stage and a final uncertainty gate. The full plan is saved before model fitting. Metrics and any unsuccessful gate appear in the evaluation report.
+
+## Jointly supervised word and character representations
+
+The supervised experiment learns its text representations from the category labels, unlike the frozen document-vector approach. Embedding-bag classification draws inspiration from [Joulin et al. (2016)](https://arxiv.org/abs/1607.01759); the separate character channel and nonlinear head are project-specific choices rather than a reproduction of fastText.
+
+Stable hashing maps word unigrams/bigrams into 65,536 buckets and character 3–5-grams into 32,768 buckets. Each channel learns 96-dimensional embeddings, mean-pooled separately and concatenated. Layer normalization, dropout 0.4, a 128-unit GELU layer, further dropout and a class head produce logits. Hash collisions and loss of longer-range order remain limitations. Up to 256 word tokens and twelve character grams per token bound computation.
+
+AdamW uses learning rate 0.002, weight decay 0.01, batch size 128, inverse-frequency loss weights and gradient clipping at 1. Training augmentation affects only training inputs. A six-epoch cap, patience two and minimum selection gain 0.005 control checkpoint selection. Fixed hashing can be computed across partitions because it learns no corpus statistics; embedding parameters learn only from the fitting partition.
+
+The network shares the preceding experiment's 70/15/15 training-internal boundaries. A selected checkpoint must beat the same-split reference before a fresh model is fitted on 85% of training for a fixed selected epoch count and assessed on the separate confirmation partition. Further full-training refit, existing validation and final test-release gates follow only when earlier stages qualify.
+
+In the recorded run, training loss fell from 2.9044 to 0.6811 while selection mean F1 peaked at 0.1919, below the reference's 0.2634. The selected fifth epoch did not qualify. This training/selection divergence is consistent with overfitting and supports rejection of the configuration. Neither confirmation nor another official-test evaluation was run, and no deployment artifact was created.
+
+The weighting/NB comparison likewise retained its reference. Square-root weighting increased inner-selection accuracy from 0.4839 to 0.5083 but reduced mean F1 from 0.2634 to 0.2501. The NB-ratio configuration reached 0.1698 mean F1; some heads recorded fitting warnings, limiting conclusions about the wider model family. These results do not establish an English benchmark improvement.
+
 <!-- GENERATED RESULTS -->
 
 ## Evaluation reference

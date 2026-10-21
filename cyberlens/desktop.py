@@ -4,6 +4,7 @@ import threading
 import tkinter as tk
 from tkinter import ttk
 from .predict import Predictor
+from .data import ROOT
 
 
 def main():
@@ -20,7 +21,12 @@ def main():
     controls.pack(fill="x", padx=20, pady=10)
     backend = tk.StringVar(value="best")
     ttk.Label(controls, text="Model:").pack(side="left")
-    ttk.Combobox(controls, textvariable=backend, values=("best", "baseline", "word2vec", "subword", "transformer", "hierarchical", "robust", "regularized", "margin", "semantic", "ensemble", "continued"),
+    available = ["best", "baseline", "word2vec", "subword", "transformer", "hierarchical", "robust", "regularized", "margin", "semantic", "ensemble", "continued"]
+    if (ROOT/"models/complaint_improved.joblib").exists():
+        available.append("improved")
+    if (ROOT/"models/complaint_supervised/metadata.json").exists():
+        available.append("supervised")
+    ttk.Combobox(controls, textvariable=backend, values=available,
                  state="readonly", width=16).pack(side="left", padx=8)
     output = tk.Text(window, wrap="word", font=("Consolas", 11), state="disabled")
     output.pack(fill="both", expand=True, padx=20, pady=(0,20))

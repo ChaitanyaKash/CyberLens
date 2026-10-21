@@ -91,8 +91,8 @@ class DataTests(unittest.TestCase):
                          "Local model artifacts are unavailable")
     def test_all_available_saved_backends_load_and_predict(self):
         from cyberlens.predict import Predictor
-        for backend in ("baseline","word2vec","subword","hierarchical","transformer","regularized","margin","semantic","ensemble","continued"):
-            path = ROOT/"models"/(f"complaint_{backend}" if backend in ("transformer","continued") else f"complaint_{backend}.joblib")
+        for backend in ("baseline","word2vec","subword","hierarchical","transformer","regularized","margin","semantic","ensemble","continued","improved","supervised"):
+            path = ROOT/"models"/(f"complaint_{backend}" if backend in ("transformer","continued","supervised") else f"complaint_{backend}.joblib")
             if path.exists():
                 result = Predictor(backend=backend).predict("Someone asked for my UPI PIN 1234","complaint")
                 self.assertNotIn("1234",result["masked_text"])

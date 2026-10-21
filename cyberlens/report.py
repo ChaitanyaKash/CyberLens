@@ -53,6 +53,10 @@ def main():
     margin = json.loads(margin_path.read_text()) if margin_path.exists() else None
     continued_path = reports/"complaint_continued.json"
     continued = json.loads(continued_path.read_text()) if continued_path.exists() else None
+    improved_path = reports/"complaint_improved.json"
+    improved = json.loads(improved_path.read_text()) if improved_path.exists() else None
+    supervised_path = reports/"complaint_supervised.json"
+    supervised = json.loads(supervised_path.read_text()) if supervised_path.exists() else None
     semantic_experiments = {}
     for name in ("semantic","ensemble"):
         path = reports/f"complaint_{name}.json"
@@ -88,6 +92,12 @@ def main():
     if continued and continued["adopt"]:
         measured["complaint"]["continued"] = continued
         lines.append(f"| complaint | continued encoder | {continued['validation']['macro_f1']:.4f} | {continued['test']['macro_f1']:.4f} | {continued['test_typos']['macro_f1']:.4f} | {continued['test']['accuracy']:.4f} | {continued['seconds']:.1f} |")
+    if improved and improved["adopt"]:
+        measured["complaint"]["improved"] = improved
+        lines.append(f"| complaint | confirmed {improved['selected']} | {improved['validation']['macro_f1']:.4f} | {improved['test']['macro_f1']:.4f} | {improved['test_typos']['macro_f1']:.4f} | {improved['test']['accuracy']:.4f} | {improved['seconds']:.1f} |")
+    if supervised and supervised["adopt"]:
+        measured["complaint"]["supervised"] = supervised
+        lines.append(f"| complaint | supervised word/character network | {supervised['validation']['macro_f1']:.4f} | {supervised['test']['macro_f1']:.4f} | {supervised['test_typos']['macro_f1']:.4f} | {supervised['test']['accuracy']:.4f} | {supervised['seconds']:.1f} |")
     champions = {}
     for task, candidates in measured.items():
         best = max(candidates, key=lambda k:(candidates[k]["validation"]["macro_f1"] + candidates[k]["validation_typos"]["macro_f1"])/2)
@@ -155,9 +165,54 @@ def main():
         lines += ["", f"Selected total epoch: **{continued['selected_total_epoch']}**. Validation mean: **{continued['selection_score']:.4f}**, versus baseline **{continued['reference_selection_score']:.4f}**. Promotion rule passed: **{continued['adopt']}**.",
                   continued.get("test_policy","Only the selected checkpoint was evaluated on test after passing the validation rule."),
                   "The original validation set has been reused; this bounded budget and stopping rule reduce some risks but do not establish absence of overfitting or independent generalisation."]
+    if improved:
+        lines += ["", "## Training-internal weighting and NB-ratio comparison", "",
+                  "A predeclared 70/15/15 split of the training partition separates fitting, candidate selection and confirmation. The selected candidate is refitted before each subsequent assessment. Fitted vocabularies and class-specific feature ratios exclude their assessment partitions.",
+                  "The candidates compare balanced SGD, normalized square-root class weighting, a fixed lower-regularization variant, and one-versus-rest linear SVMs with binary word/bigram NB log-count ratios.",
+                  "", "| Candidate | Selection clean/noisy mean F1 | Selection accuracy |", "|---|---:|---:|"]
+        for name,row in improved["search"].items():
+            lines.append(f"| {name} | {row['mean']:.4f} | {row['clean']['accuracy']:.4f} |")
+        lines += ["",f"Selected candidate: **{improved.get('selected','none')}**. Final status: **{improved['status']}**. Promotion passed: **{improved['adopt']}**."]
+        if "confirmation" in improved:
+            c = improved["confirmation"]
+            lines += [f"Training-internal confirmation mean F1: candidate **{c['candidate']['mean']:.4f}**, reference **{c['reference']['mean']:.4f}**. Passed: **{c['passed']}**."]
+        if "validation" in improved:
+            lines += [f"Existing-validation mean F1: candidate **{improved['selection_score']:.4f}**, reference **{improved['reference_selection_score']:.4f}**."]
+        if "test" in improved:
+            interval = improved["test_uncertainty"]
+            lines += [f"Official-test macro-F1 **{improved['test']['macro_f1']:.4f}**, typo macro-F1 **{improved['test_typos']['macro_f1']:.4f}**, accuracy **{improved['test']['accuracy']:.4f}**.",
+                      f"Paired normalized-template bootstrap 95% interval for clean F1 gain: **[{interval['lower_95']:.4f}, {interval['upper_95']:.4f}]**."]
+        else:
+            lines += ["No additional official-test evaluation was run because an earlier gate did not qualify the candidate."]
+        lines += ["", "The revised criteria were recorded before training in `complaint_improved_plan.json`. Confirmation and existing-validation require a mean F1 gain of 0.01, nonnegative clean F1 gain, and accuracy/typo-F1 declines no larger than 0.005. Release additionally requires positive benchmark F1 gain and a positive paired-bootstrap lower bound. The benchmark remains development-exposed; independent confirmation is still required."]
+    if supervised:
+        lines += ["", "## Label-supervised word/character network", "",
+                  "This experiment learns hashed word/bigram and character embeddings jointly with a nonlinear classifier. It uses a six-epoch cap, dropout 0.4, AdamW weight decay 0.01, inverse-frequency loss weights and training-only typo augmentation.",
+                  "Epoch selection uses the fitting/selection partitions from the preceding experiment; a qualified network would require a fresh refit and separate confirmation before existing validation or test evaluation.",
+                  "", "| Epoch | Training loss | Selection clean/noisy mean F1 | Selection accuracy |", "|---|---:|---:|---:|"]
+        for row in supervised["history"]:
+            lines.append(f"| {row['epoch']} | {row['training_loss']:.4f} | {row['assessment']['mean']:.4f} | {row['assessment']['clean']['accuracy']:.4f} |")
+        lines += ["",f"Selected epoch: **{supervised['selected_epoch']}**. Final status: **{supervised['status']}**. Promotion passed: **{supervised['adopt']}**."]
+        if "selection" in supervised:
+            s = supervised["selection"]
+            lines += [f"Selected-network mean F1: **{s['candidate']['mean']:.4f}**, compared with reference **{s['reference']['mean']:.4f}** on the same selection partition."]
+        if "confirmation" in supervised:
+            c = supervised["confirmation"]
+            lines += [f"Confirmation mean F1: candidate **{c['candidate']['mean']:.4f}**, reference **{c['reference']['mean']:.4f}**. Passed: **{c['passed']}**."]
+        if "validation" in supervised:
+            lines += [f"Existing-validation mean F1: **{supervised['selection_score']:.4f}**, reference **{supervised['reference_selection_score']:.4f}**."]
+        if "test" in supervised:
+            interval = supervised["test_uncertainty"]
+            lines += [f"Official-test macro-F1 **{supervised['test']['macro_f1']:.4f}**, typo macro-F1 **{supervised['test_typos']['macro_f1']:.4f}**, accuracy **{supervised['test']['accuracy']:.4f}**.",
+                      f"Paired-template bootstrap 95% interval for F1 gain: **[{interval['lower_95']:.4f}, {interval['upper_95']:.4f}]**."]
+        else:
+            lines += ["No additional test evaluation was performed. Declining training loss without sufficient held-out improvement does not justify deployment."]
     lines += ["", "Default inference uses validation-selected backends:", ""]
     for task, info in champions.items():
-        lines.append(f"- {task}: **{info['backend']}** (selection score {info['score']:.4f}).")
+        if task == "call_scam" and info["backend"] == "baseline" and family:
+            lines.append(f"- {task}: **baseline** (primary family-held-out macro-F1 {family['oof']['macro_f1']:.4f}; legacy exact-template validation selection score {info['score']:.4f}).")
+        else:
+            lines.append(f"- {task}: **{info['backend']}** (selection score {info['score']:.4f}).")
     optimization = reports/"optimizer_validation.json"
     if optimization.exists():
         lines += ["", "Additional word-feature optimizer checks (validation only):", ""]

@@ -1,0 +1,47 @@
+{
+  "declared_utc": "2026-10-21T15:29:01.594965+00:00",
+  "config": {
+    "word_buckets": 65536,
+    "char_buckets": 32768,
+    "dimensions": 96,
+    "hidden": 128,
+    "dropout": 0.4,
+    "max_tokens": 256,
+    "max_char_grams": 12,
+    "feature_version": 1
+  },
+  "training": {
+    "max_selection_epochs": 6,
+    "patience": 2,
+    "min_delta": 0.005,
+    "batch_size": 128,
+    "learning_rate": 0.002,
+    "weight_decay": 0.01,
+    "class_weights": "inverse frequency within fitting partition",
+    "gradient_clip": 1.0,
+    "augmentation_probability": 0.3,
+    "augmentation_rate": 0.12,
+    "seed": 20261021
+  },
+  "partitions": {
+    "fit": {
+      "rows": 43488,
+      "group_digest": "ab879e4257b971af7f94619584207e5e3acc90c582ff2c57f098d95a63d938f1"
+    },
+    "selection": {
+      "rows": 9319,
+      "group_digest": "eabc693373f5bbfada66cfb78e90a1109bfea72dd59ee37450968140d882a328"
+    },
+    "confirmation": {
+      "rows": 9319,
+      "group_digest": "4f9687fa6c6dc3988365f4c5b59d1f282dcb4242cbedee5ef07ab9df3f0599e9"
+    }
+  },
+  "split_seeds": [20261021, 20261022],
+  "selection_rule": "Mean clean/noisy F1 gain >=0.005, nonnegative clean F1 gain, accuracy/typo F1 drop <=0.005 against same-split reference",
+  "confirmation_rule": "Refit fresh model on 85% for fixed selected epoch count; mean F1 gain >=0.01 and same nonregression limits against refitted reference",
+  "validation_rule": "Fresh refit on full training for selected epoch count; same >=0.01 mean F1 and nonregression criteria against saved baseline",
+  "test_rule": "Only a validation-qualified checkpoint is evaluated; release requires positive F1 gain, positive paired-template bootstrap lower bound and accuracy/typo declines <=0.005",
+  "limits": "Previously explored development corpus; hash collisions and mean-pooling limits remain; original benchmark is not new external confirmation",
+  "source": "https://arxiv.org/abs/1607.01759"
+}

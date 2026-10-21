@@ -1,0 +1,32 @@
+{
+  "declared_utc": "2026-10-21T15:16:30.013014+00:00",
+  "candidates": [
+    "reference",
+    "sqrt_weights",
+    "sqrt_less_regularized",
+    "nb_ratio_svm"
+  ],
+  "split_seeds": [20261021, 20261022],
+  "partitions": {
+    "fit": {
+      "rows": 43488,
+      "group_digest": "ab879e4257b971af7f94619584207e5e3acc90c582ff2c57f098d95a63d938f1"
+    },
+    "selection": {
+      "rows": 9319,
+      "group_digest": "eabc693373f5bbfada66cfb78e90a1109bfea72dd59ee37450968140d882a328"
+    },
+    "confirmation": {
+      "rows": 9319,
+      "group_digest": "4f9687fa6c6dc3988365f4c5b59d1f282dcb4242cbedee5ef07ab9df3f0599e9"
+    }
+  },
+  "selection": "Maximum clean/noisy mean macro-F1, clean accuracy no worse than reference by 0.005; minimum mean gain 0.005",
+  "confirmation": "One selected candidate refit on fit+selection; mean macro-F1 gain >=0.01, nonnegative clean F1 gain, accuracy and typo F1 drops <=0.005",
+  "validation": "Selected candidate refit on full training; same fixed confirmation criteria against saved baseline on existing validation",
+  "test_release": "Only after validation passes: one benchmark evaluation; positive clean F1 gain, accuracy/typo F1 drops <=0.005 and paired normalized-template bootstrap lower bound >0",
+  "limits": "Repeatedly explored development corpus; split fingerprints control normalized equality, not all paraphrases; existing test is not fresh independent evidence",
+  "source": "https://aclanthology.org/P12-2018/",
+  "nb_variant": "Balanced one-versus-rest SVM on binary word/bigram NB ratios; C=1; no NB/SVM interpolation",
+  "class_weights": "Balanced exponent 1 versus normalized square-root exponent 0.5; reference alpha 1e-5 versus fixed 3e-6 alternative"
+}

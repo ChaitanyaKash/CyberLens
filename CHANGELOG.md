@@ -19,6 +19,9 @@
 
 ### Model comparisons
 
+- Added a predeclared training-internal weighting/NB-ratio comparison and a label-supervised word/character network, with separate selection and confirmation boundaries, accuracy retention and final paired-bootstrap release criteria.
+- Rejected both new experiments at selection. Square-root weighting improved selection accuracy but reduced macro-F1; the supervised network's falling training loss did not transfer to sufficient held-out F1. No additional official-test evaluation was performed.
+
 - Nested call candidate selection reached clean macro-F1 0.8256 and typo macro-F1 0.7709, compared with 0.6308 and 0.6337 for the reference. The improvement interval includes zero, so the candidate remains experimental.
 - Regularized, margin, frozen-semantic and fixed-ensemble complaint candidates did not exceed the sparse baseline's validation criterion.
 - Bounded transformer continuation improved validation mean macro-F1 from 0.1659 to 0.2192, below the baseline's 0.2579. No additional official-test evaluation was run for rejected candidates.
