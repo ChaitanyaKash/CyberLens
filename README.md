@@ -96,7 +96,8 @@ A browser interface for classifying new complaints and messages runs entirely on
 
 ```powershell
 .\.venv\Scripts\python -m pip install -e '.[ui]'
-.\run_ui.ps1   # equivalent to: streamlit run app.py, then open http://localhost:8501
+.\run_ui.ps1        # simple layout: streamlit run app.py, then open http://localhost:8501
+.\run_ui_saas.ps1   # product-page layout: streamlit run app_saas.py, then open http://localhost:8502
 ```
 
 It gives a plain-language verdict that combines the complaint and call-scam models, with safety tips and the national cybercrime helpline. A collapsed details section shows the top three labels of each model, the masked text, timing and the sparse model's n-gram evidence. The champion fusion model is used when `models/complaint_fusion.joblib` is present; fast mode uses the sparse `adjusted` model on CPU. The complaint confidence threshold is read from `reports/complaint_selective.json` when available. Usage statistics collection is disabled in `.streamlit/config.toml`, and input text is not stored.

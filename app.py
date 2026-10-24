@@ -8,13 +8,14 @@ import streamlit as st
 from cyberlens.data import ROOT
 from cyberlens.predict import Predictor
 from cyberlens.ui_helpers import (CALL_THRESHOLD, CONFIDENT_THRESHOLD, EXAMPLES, HELPLINE, THRESHOLD_SOURCE,
-                                  friendly, parent_category, sparse_explanation, tips, verdict)
+                                  classify_both, friendly, parent_category, sparse_explanation, sparse_model,
+                                  tips, verdict)
 
 st.set_page_config(page_title="CyberLens", page_icon=":material/shield:", layout="centered",
                    initial_sidebar_state="collapsed")
 
 st.html("""<style>
-html, body, [class*="st-"], .stMarkdown, button, textarea {
+html, body, p, li, label, h1, h2, h3, h4, textarea, input, button {
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif !important; }
 header[data-testid="stHeader"], footer, #MainMenu, [data-testid="stToolbar"], [data-testid="stSidebar"],
 [data-testid="stSidebarCollapsedControl"], [data-testid="stDecoration"] { display: none !important; }
@@ -48,20 +49,8 @@ def encoder_device():
     return f"GPU ({torch.cuda.get_device_name(0)})" if torch.cuda.is_available() else "CPU"
 
 
-def sparse_model(predictor, task):
-    for (name, _), bundle in predictor.models.items():
-        if name == task:
-            model = bundle["model"] if isinstance(bundle, dict) else bundle
-            return getattr(model, "sparse", None) or model
-    return None
-
-
 def classify(backend, text):
-    predictor = get_predictor(backend)
-    complaint = predictor.predict(text, task="complaint", threshold=CONFIDENT_THRESHOLD)
-    call = predictor.predict(text, task="call_scam", threshold=CALL_THRESHOLD)
-    return {"masked": complaint["masked_text"], "complaint": complaint["predictions"]["complaint"],
-            "call_scam": call["predictions"]["call_scam"]}
+    return classify_both(get_predictor(backend), text)
 
 
 def load_example(example):

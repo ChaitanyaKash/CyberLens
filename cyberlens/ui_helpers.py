@@ -132,6 +132,23 @@ def verdict(complaint, call, threshold=FALLBACK_THRESHOLD, call_threshold=CALL_T
             "benign": False}
 
 
+def classify_both(predictor, text):
+    """Run the complaint and call-scam models on one text."""
+    complaint = predictor.predict(text, task="complaint", threshold=CONFIDENT_THRESHOLD)
+    call = predictor.predict(text, task="call_scam", threshold=CALL_THRESHOLD)
+    return {"masked": complaint["masked_text"], "complaint": complaint["predictions"]["complaint"],
+            "call_scam": call["predictions"]["call_scam"]}
+
+
+def sparse_model(predictor, task):
+    """The loaded linear sparse model behind a task (the sparse member for fusion), or None."""
+    for (name, _), bundle in predictor.models.items():
+        if name == task:
+            model = bundle["model"] if isinstance(bundle, dict) else bundle
+            return getattr(model, "sparse", None) or model
+    return None
+
+
 def sparse_explanation(model, cleaned, label, top_k=8):
     """Word/char n-grams with the largest coefficient x tf-idf toward `label` for a linear sparse pipeline.
 
