@@ -9,6 +9,10 @@ from .data import ROOT
 FALLBACK_THRESHOLD = 0.975
 # Call-scam scores are sharper (four labels including `none`); fixed heuristic, not validated.
 CALL_THRESHOLD = 0.55
+# The call model was trained on Hinglish police-scam calls and is overconfident elsewhere (bank OTP and
+# hacked-account texts scored 0.84 and 0.58 for digital arrest), so it decides the verdict only for
+# police labels at or above this score. Heuristic, set from a handful of examples.
+CALL_OVERRIDE = 0.85
 # Below this complaint score, a confident `none` from the call model is shown as "no clear sign".
 # Heuristic and deliberately low: wrongly reassuring a victim is worse than a vague answer.
 BENIGN_CEILING = 0.25
@@ -117,7 +121,7 @@ def verdict(complaint, call, threshold=FALLBACK_THRESHOLD, call_threshold=CALL_T
     if call is not None:
         top = call["top"][0]
         if top["score"] >= call_threshold:
-            if top["label"] != "none":
+            if top["label"].startswith("police") and top["score"] >= CALL_OVERRIDE:
                 return {"task": "call_scam", "label": top["label"], "score": top["score"], "confident": True,
                         "headline": friendly(top["label"]), "benign": False}
             if complaint_top is None or complaint_top["score"] < BENIGN_CEILING:

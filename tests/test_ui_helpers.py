@@ -38,8 +38,10 @@ class UiHelperTests(unittest.TestCase):
         self.assertEqual(verdict(upi, call_none, .975)["task"], "complaint")
         self.assertFalse(verdict(upi, call_none, .975)["confident"])
         self.assertTrue(verdict(prediction(upi["top"][0]["label"], .99), call_none, .975)["confident"])
-        police = verdict(upi, prediction("police_blackmail", .8), .975)
+        police = verdict(upi, prediction("police_blackmail", .9), .975)
         self.assertEqual((police["task"], police["confident"]), ("call_scam", True))
+        self.assertEqual(verdict(upi, prediction("police_digital_arrest", .84), .975)["task"], "complaint")
+        self.assertEqual(verdict(upi, prediction("other_scam", .95), .975)["task"], "complaint")
         self.assertTrue(verdict(prediction("Any Other Cyber Crime :: Other", .2), call_none, .975)["benign"])
         self.assertFalse(verdict(prediction("Any Other Cyber Crime :: Other", .3), call_none, .975)["benign"])
 
