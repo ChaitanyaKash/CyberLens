@@ -166,8 +166,8 @@ with right:
 st.html('<div class="features">'
         '<div class="feature"><b>English &amp; Hinglish</b><span>Understands everyday writing, typos and mixed language.</span></div>'
         '<div class="feature"><b>Nothing leaves your device</b><span>No uploads, no accounts, nothing is saved.</span></div>'
-        '<div class="feature"><b>Built from 100,000+ real records</b><span>93,686 cybercrime complaints and 10,000 Hinglish '
-        'scam-call scripts, covering 39 kinds of cybercrime.</span></div>'
+        '<div class="feature"><b>Built from 93,000+ real complaint reports</b><span>79,000+ unique after cleaning · '
+        '39 kinds of cybercrime</span></div>'
         '</div>')
 
 with st.expander("Details for experts"):
