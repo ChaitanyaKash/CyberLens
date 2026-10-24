@@ -1,65 +1,85 @@
-"""Helpers for the local Streamlit interface: confidence thresholds, sparse explanations, examples."""
+"""Helpers for the local Streamlit interface: confidence tiers, plain-language labels, explanations."""
 import json
 import numpy as np
 from .data import ROOT
 
-# Complaint threshold from the selective-prediction experiment (validation-selected on the sparse
-# `adjusted` scores, about 5% validation coverage). Used when reports/complaint_selective.json is absent.
-DEFAULT_COMPLAINT_THRESHOLD = 0.975
-# Call-scam scores are much more peaked (four labels including `none`); this matches Predictor's default.
+# Complaint "Very likely" threshold: derived on validation by the selective-prediction rule (largest
+# coverage with answered macro-F1 >= 0.5), read from reports/complaint_selective.json; 0.975 otherwise.
+# Measured on the sparse `adjusted` model, so it is an approximation for the fusion model.
+FALLBACK_THRESHOLD = 0.975
+# Call-scam scores are sharper (four labels including `none`); fixed heuristic, not validated.
 CALL_THRESHOLD = 0.55
+# Below this complaint score, a confident `none` from the call model is shown as "no clear sign".
+# Heuristic and deliberately low: wrongly reassuring a victim is worse than a vague answer.
+BENIGN_CEILING = 0.25
+
+HELPLINE = "If you lost money or shared details, call **1930** at once or report at **cybercrime.gov.in**."
+
+FRIENDLY = {
+    "UPI Related Frauds": "UPI payment fraud",
+    "Internet Banking Related Fraud": "Net banking fraud",
+    "DebitCredit Card FraudSim Swap Fraud": "Debit or credit card fraud",
+    "EWallet Related Fraud": "Mobile wallet fraud",
+    "Fraud CallVishing": "Fraud phone call",
+    "DematDepository Fraud": "Investment or share trading fraud",
+    "Business Email CompromiseEmail Takeover": "Fake business email",
+    "Cryptocurrency Fraud": "Cryptocurrency fraud",
+    "Online Job Fraud": "Fake job offer",
+    "Online Matrimonial Fraud": "Marriage website fraud",
+    "Cheating by Impersonation": "Someone pretending to be another person",
+    "FakeImpersonating Profile": "Fake social media profile",
+    "Profile Hacking Identity Theft": "Hacked account or identity theft",
+    "Cyber Bullying  Stalking  Sexting": "Online harassment or blackmail",
+    "EMail Phishing": "Fake email to steal details",
+    "Impersonating Email": "Fake email from a known name",
+    "Intimidating Email": "Threatening email",
+    "Email Hacking": "Hacked email account",
+    "Unauthorised AccessData Breach": "Unauthorised access to an account",
+    "Online Gambling  Betting": "Online betting or gambling",
+    "Ransomware": "Ransomware (files locked for money)",
+    "police_digital_arrest": "Fake police or “digital arrest” call",
+    "police_blackmail": "Fake police blackmail call",
+    "other_scam": "Scam call",
+    "none": "No clear sign of a scam call",
+}
+
+TIPS = {
+    "money": "Never share your OTP, UPI PIN, card number or password. Your bank will never ask for them.",
+    "collect": "To receive money you never need to enter your UPI PIN.",
+    "job": "Real employers do not ask you to pay a fee to get a job.",
+    "invest": "Do not trust apps or groups that promise sure profits. Check SEBI registration.",
+    "account": "Change your password now, turn on two-step login, and tell your contacts not to send money.",
+    "harass": "Do not pay. Save the messages as proof and block the person.",
+    "police": "Real police never arrest anyone on a video call or ask for money. Hang up.",
+    "general": "Do not click unknown links or install apps a stranger asks for.",
+}
 
 EXAMPLES = [
-    {"title": "UPI collect request", "task": "complaint", "expected": "UPI Related Frauds",
-     "text": "A buyer on OLX sent me a payment request on PhonePe saying I would receive the amount for my sofa. "
-             "I entered my UPI PIN and Rs 18,500 was debited from my account instead."},
-    {"title": "UPI refund (Hinglish)", "task": "complaint", "expected": "UPI Related Frauds",
-     "text": "Kisi ne Google Pay pe collect request bheja aur bola refund aa raha hai. Maine PIN daala "
-             "aur mere account se 12000 rupaye kat gaye."},
-    {"title": "KYC update SMS", "task": "complaint", "expected": "Internet Banking / phishing",
-     "text": "Got an SMS that my SBI account will be blocked today unless I update KYC. I opened the link, "
-             "entered my net banking login and the OTP, and 40,000 was transferred out."},
-    {"title": "Card OTP call (Hinglish)", "task": "complaint", "expected": "Debit/Credit Card Fraud",
-     "text": "Bank ke naam se call aaya ki credit card ke reward points expire ho rahe hain, OTP bata do. "
-             "OTP batate hi card se 25,000 ki shopping ho gayi."},
-    {"title": "Fake work-from-home job", "task": "complaint", "expected": "Online Job Fraud",
-     "text": "I applied for a work from home data entry job on Telegram. They took Rs 3,000 as registration "
-             "fee and then asked for more money for tasks. Now they have blocked my number."},
-    {"title": "Sextortion video call", "task": "complaint", "expected": "Sextortion / blackmail",
-     "text": "A woman video called me on WhatsApp and recorded the call. Now they are threatening to send an "
-             "edited obscene video to my family unless I pay Rs 50,000."},
-    {"title": "Instagram account hacked", "task": "complaint", "expected": "Profile Hacking Identity Theft",
-     "text": "My Instagram account was hacked last night. The password and recovery email were changed and "
-             "the hacker is messaging my friends asking for money."},
-    {"title": "Trading app investment", "task": "complaint", "expected": "Investment fraud",
-     "text": "I joined a WhatsApp group for share market tips. They made me install a trading app and invest "
-             "4 lakh. The app shows profit but does not allow any withdrawal."},
-    {"title": "Lottery prize SMS", "task": "complaint", "expected": "Lottery / other fraud",
-     "text": "I received a message that I won 25 lakh in a KBC lottery. To claim the prize they asked me to "
-             "pay GST and processing charges of Rs 15,000, which I paid."},
-    {"title": "Loan app harassment (Hinglish)", "task": "complaint", "expected": "Loan app harassment",
-     "text": "Instant loan app se 5000 ka loan liya tha, ab woh 20000 maang rahe hain aur meri photo morph "
-             "karke mere contacts ko bhej rahe hain."},
-    {"title": "Digital arrest call (Hinglish)", "task": "call_scam", "expected": "police_digital_arrest",
-     "text": "Main CBI officer bol raha hoon, aapke naam ke parcel mein drugs mile hain. Video call pe bane "
-             "rahiye, aap digital arrest mein hain, warna police ghar aayegi."},
-    {"title": "Police blackmail call (Hinglish)", "task": "call_scam", "expected": "police_blackmail",
-     "text": "Hello, main police station se bol raha hoon. Aapke bete ko pakda hai, case band karwana hai to "
-             "abhi 50 hazaar transfer karo."},
-    {"title": "Harmless message", "task": "both", "expected": "Not a scam (no benign complaint class)",
-     "text": "Hi Rahul, are we still meeting for lunch tomorrow at 1 pm? Let me know if the time works."},
+    {"title": "Bank OTP call", "text": "Bank ke naam se call aaya ki credit card ke reward points expire ho "
+     "rahe hain, OTP bata do. OTP batate hi card se 25,000 ki shopping ho gayi.", "expected": "Card fraud"},
+    {"title": "UPI refund", "text": "A buyer on OLX sent me a payment request on PhonePe saying I would "
+     "receive money for my sofa. I entered my UPI PIN and Rs 18,500 was debited instead.", "expected": "UPI fraud"},
+    {"title": "Job offer", "text": "I applied for a work from home data entry job on Telegram. They took "
+     "Rs 3,000 as registration fee and then asked for more money. Now they have blocked me.", "expected": "Job fraud"},
+    {"title": "Lottery SMS", "text": "I received a message that I won 25 lakh in a KBC lottery. To claim "
+     "the prize they asked me to pay GST and processing charges of Rs 15,000.", "expected": "Lottery fraud"},
+    {"title": "Account hacked", "text": "My Instagram account was hacked last night. The password and "
+     "recovery email were changed and the hacker is asking my friends for money.", "expected": "Hacked account"},
+    {"title": "Police call", "text": "Main CBI officer bol raha hoon, aapke naam ke parcel mein drugs mile "
+     "hain. Video call pe bane rahiye, aap digital arrest mein hain.", "expected": "police_digital_arrest"},
 ]
 
 
-def complaint_threshold(root=ROOT):
-    """Return (threshold, source) for the complaint confidence badge."""
-    path = root/"reports/complaint_selective.json"
-    if path.exists():
-        try:
-            return float(json.loads(path.read_text())["selected"]["threshold"]), "reports/complaint_selective.json"
-        except (KeyError, TypeError, ValueError):
-            pass
-    return DEFAULT_COMPLAINT_THRESHOLD, "default from the selective-prediction experiment"
+def confident_threshold(root=ROOT):
+    """Return (threshold, source) for the complaint "Very likely" verdict."""
+    try:
+        report = json.loads((root/"reports/complaint_selective.json").read_text())
+        return float(report["selected"]["threshold"]), "reports/complaint_selective.json"
+    except (OSError, KeyError, TypeError, ValueError):
+        return FALLBACK_THRESHOLD, "fallback"
+
+
+CONFIDENT_THRESHOLD, THRESHOLD_SOURCE = confident_threshold()
 
 
 def parent_category(label):
@@ -70,6 +90,42 @@ def subtype(label):
     """Readable short name; generic subtypes ("Unspecified", "Other") fall back to the parent category."""
     parts = str(label).split(" :: ", 1)
     return parts[0] if parts[-1] in ("Unspecified", "Other") else parts[-1]
+
+
+def friendly(label):
+    short = subtype(label)
+    return FRIENDLY.get(short, " ".join(short.split()))
+
+
+def tips(label):
+    text = str(label)
+    keys = (("police", ("police",)), ("collect", ("UPI",)), ("money", ("Fraud", "Card", "Banking", "Wallet", "UPI")),
+            ("job", ("Job",)), ("invest", ("Demat", "Crypto")), ("account", ("Hacking", "Hacked", "Access", "Profile")),
+            ("harass", ("Bullying", "Sexual", "Intimidating", "Blackmail", "Obscene")))
+    out = [TIPS[key] for key, words in keys if any(w in text for w in words)]
+    return (out or [TIPS["general"]])[:2]
+
+
+def verdict(complaint, call, threshold=FALLBACK_THRESHOLD, call_threshold=CALL_THRESHOLD):
+    """Combine both models into one plain-language verdict.
+
+    `complaint` and `call` are Predictor prediction dicts. The call model wins when it confidently
+    finds a scam call; it also marks the text as benign when it says `none` and the complaint model
+    is not confident. Returns {"task", "label", "score", "confident", "headline", "benign"}.
+    """
+    complaint_top = complaint["top"][0] if complaint else None
+    if call is not None:
+        top = call["top"][0]
+        if top["score"] >= call_threshold:
+            if top["label"] != "none":
+                return {"task": "call_scam", "label": top["label"], "score": top["score"], "confident": True,
+                        "headline": friendly(top["label"]), "benign": False}
+            if complaint_top is None or complaint_top["score"] < BENIGN_CEILING:
+                return {"task": "call_scam", "label": "none", "score": top["score"], "confident": False,
+                        "headline": "No clear sign of a common scam", "benign": True}
+    return {"task": "complaint", "label": complaint_top["label"], "score": complaint_top["score"],
+            "confident": complaint_top["score"] >= threshold, "headline": friendly(complaint_top["label"]),
+            "benign": False}
 
 
 def sparse_explanation(model, cleaned, label, top_k=8):
