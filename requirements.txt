@@ -7,3 +7,5 @@ torch>=2.4
 # Optional multilingual encoder comparison:
 transformers>=4.45
 safetensors>=0.4
+# Local web interface:
+streamlit>=1.50

@@ -24,6 +24,8 @@ def main():
     available = ["best", "baseline", "word2vec", "subword", "transformer", "hierarchical", "robust", "regularized", "margin", "semantic", "ensemble", "continued"]
     if (ROOT/"models/complaint_adjusted.joblib").exists():
         available.append("adjusted")
+    if (ROOT/"models/complaint_fusion.joblib").exists():
+        available.append("fusion")
     if (ROOT/"models/complaint_improved.joblib").exists():
         available.append("improved")
     if (ROOT/"models/complaint_supervised/metadata.json").exists():

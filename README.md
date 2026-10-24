@@ -90,6 +90,17 @@ Datasets and trained weights are not distributed in the repository. Place the th
 
 PowerShell launchers resolve Python through `CYBERLENS_PYTHON`, a project `.venv`, an available NLP conda environment, or `python`. The `cyberlens` console command is also available after installation.
 
+### Local UI
+
+A browser interface for classifying new complaints and messages runs entirely on the local machine:
+
+```powershell
+.\.venv\Scripts\python -m pip install -e '.[ui]'
+.\run_ui.ps1   # equivalent to: streamlit run app.py, then open http://localhost:8501
+```
+
+It offers single-message classification with the top three labels, a confidence badge, the masked text and the sparse model's n-gram evidence, plus batch classification of a CSV with a `text` column and an optional `expected_label` column. The champion fusion model is used when `models/complaint_fusion.joblib` is present; fast mode uses the sparse `adjusted` model on CPU. The complaint confidence threshold is read from `reports/complaint_selective.json` when available. Usage statistics collection is disabled in `.streamlit/config.toml`, and input text is not stored.
+
 Predictions include ranked alternatives, class-level evaluation evidence and a review flag. Scores are uncalibrated. An experimental model that has not passed its promotion rule always requires review. Weak complaint-subtype evidence can produce a broader category suggestion.
 
 ## Experiments

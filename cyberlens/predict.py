@@ -29,7 +29,7 @@ class Predictor:
                 backend = json.loads(registry.read_text())[name]["backend"] if registry.exists() else "baseline"
             if backend == "hierarchical" and name == "call_scam":
                 backend = "baseline"
-            if (backend == "robust" and name == "complaint") or (backend in ("regularized","margin","semantic","ensemble","continued","improved","supervised","adjusted") and name == "call_scam"):
+            if (backend == "robust" and name == "complaint") or (backend in ("regularized","margin","semantic","ensemble","continued","improved","supervised","adjusted","fusion") and name == "call_scam"):
                 backend = "baseline"
             cache_key = (name,backend)
             if cache_key not in self.models:
@@ -60,7 +60,7 @@ class Predictor:
                 probs = model.named_steps["classifier"].predict_proba(features)[0]
                 labels = model.classes_
                 coverage = features.nnz > 0
-            elif backend in ("robust","semantic","ensemble","supervised"):
+            elif backend in ("robust","semantic","ensemble","supervised","fusion"):
                 probs = bundle["model"].predict_proba([cleaned])[0]
                 labels = bundle["model"].classes_
                 coverage = True
@@ -95,6 +95,11 @@ class Predictor:
                     quality = report["nested"]["per_class"]
                     experimental = not report.get("adopt",False)
                     source = "nested template-family cross-validation"
+                elif backend == "fusion" and report_path.exists():
+                    # The fusion report keeps per-class scores only for the single official-test evaluation.
+                    report = json.loads(report_path.read_text())
+                    quality,source = report["test_results"]["test"]["per_class"],"official test"
+                    experimental = not report.get("adopt",False)
                 elif report_path.exists():
                     report = json.loads(report_path.read_text())
                     if backend == "baseline":
