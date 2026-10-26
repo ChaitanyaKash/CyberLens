@@ -22,7 +22,7 @@ def main():
     pred = commands.add_parser("predict")
     pred.add_argument("--text")
     pred.add_argument("--task", choices=["both", *TASKS], default="both")
-    pred.add_argument("--backend", choices=["best", "baseline", "word2vec", "subword", "transformer", "hierarchical", "robust", "regularized", "margin", "semantic", "ensemble", "continued", "improved", "supervised", "adjusted"], default="best")
+    pred.add_argument("--backend", choices=["best", "baseline", "word2vec", "subword", "transformer", "hierarchical", "robust", "regularized", "margin", "semantic", "ensemble", "continued", "improved", "supervised", "adjusted", "fusion"], default="best")
     pred.add_argument("--interactive", action="store_true")
     args = parser.parse_args()
     if args.command == "prepare":

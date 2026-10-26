@@ -289,6 +289,40 @@ Hand-authored mixed-language development examples, not a representative benchmar
   - Expected `police_digital_arrest`, predicted `none` (score 0.627): tumhare bete ko drugs case me pakda hai. Abhi paise do toh chhod denge
   - Expected `none`, predicted `other_scam` (score 0.492): Never share your OTP with anyone. This is a bank security awareness message.
 
+## Scam vs not-scam message classifier
+
+A separate binary classifier decides whether an SMS-style message is a scam. It covers English, romanised Hinglish and Devanagari Hindi and is trained on public Hugging Face datasets: `anmolshrivastav/scam_ham_india_14_languages` (MIT; English, Hinglish and Hindi rows only), `bolewara/hinglish-scam-text-dataset` (CC-BY-4.0) and, from v2, `Shade63/scam-classification-multiclass`. Every split is grouped by normalised text (lowercased, digits removed). shade63 is split by template: amounts, tokens containing digits and capitalised words are masked, and rows sharing the masked text or its first eight masked words form one group (534 groups). One third of the groups, stratified by category, form stress set D2 and are never used for training. Hyperparameters, digit handling and the encoder epoch are selected on validation only.
+
+| Set | Rows | Description |
+|---|---:|---|
+| Test A | 300 | india14 separate test suite, English/Hinglish/Hindi (100 each) |
+| Test B | 751 | 20% grouped slice of bolewara English |
+| Test C | 35 | bolewara hand-written Hinglish rows (never trained on) |
+| D2 | 4,681 | Unseen shade63 templates (1,866 legitimate alerts, 2,815 scams) |
+
+| Model | Validation | Test A | Test B | Test C | D2 macro-F1 | D2 legitimate FPR | D2 scam recall |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| TF-IDF v1 (no shade63) | 0.857 | 0.933 | 0.975 | 0.971 | 0.687 | 0.565 | 0.932 |
+| TF-IDF v2 | 0.990 | 0.973 | 0.981 | 1.000 | 0.978 | 0.008 | 0.970 |
+| xlm-roberta-base v2 (epoch 3) | 0.996 | 0.967 | 0.975 | 1.000 | 0.990 | 0.009 | 0.991 |
+
+Macro-F1 unless stated. v1 is evaluated on the v2 validation set, which contains shade63 templates it never saw. Adding legitimate bank, UPI and OTP alerts was the decisive change: v1 flagged 56.5% of unseen legitimate alerts. On Test A, v2 TF-IDF scores 0.970 (English), 1.000 (Hinglish) and 0.950 (Hindi); the encoder scores 1.000, 0.980 and 0.920. The encoder is stronger on unseen scam wording (romance/parcel/sextortion recall 1.000 versus 0.566) and weaker on Hindi. Test C has only 35 rows, and 0 errors in 100 Hinglish Test A rows remains compatible with an error rate of about 3%.
+
+### Use in the product-page interface
+
+`app_saas.py` uses TF-IDF v2 as the only scam/not-scam decision. Band edges were checked on the v2 validation set:
+
+| Scam probability | Displayed verdict | Validation rows | Share legitimate |
+|---|---|---:|---:|
+| < 0.10 | Not a scam | 890 | 99.9% |
+| 0.10–0.30 | Probably not a scam | 88 | 96.6% |
+| 0.30–0.60 | Unclear | 59 | 71.2% |
+| ≥ 0.60 | Scam type from the complaint or call model | 755 | 0.1% |
+
+The model was trained on messages, not on victims' descriptions of incidents. Without safeguards it placed 43.4% of 500 random complaint test texts in the two "not a scam" bands. Texts that describe an incident, name the offence (for example "fraud", "hacked", "cheated") or contain fewer than four words are therefore never shown as "not a scam". With these rules, designed on complaint validation texts, 4.6% of the 500 complaint test texts still reach a "not a scam" band, mostly fragments. About 7% of legitimate validation messages lose the "not a scam" wording and receive the complaint-model result instead. The call model can change "not a scam" to "Unclear" only when it is at least 0.95 confident in a scam label; a police verdict additionally requires police or authority wording in the text.
+
+The `Hinglish/` subset of `M-Arjun/SpamShield-Datasets` was inspected and not used. It is machine-translated UCI SMS spam in Devanagari script, not romanised Hinglish, and probably overlaps bolewara across languages.
+
 ## Limitations
 
 - English and Hinglish label vocabularies differ; cross-language transfer is not independently validated.
@@ -297,3 +331,5 @@ Hand-authored mixed-language development examples, not a representative benchmar
 - Confidence scores and review threshold are uncalibrated; unknown scams can receive high scores.
 - Final reports supersede internal-test exploratory artifacts under `superseded/`.
 - No RAG layer, live-call integration, or automatic complaint submission is included.
+- The scam/not-scam data is largely synthetic and templated; real SMS from outside these datasets has not been evaluated, so the reported scores are likely upper bounds.
+- The scam/not-scam model is trained on SMS-style messages; incident descriptions are handled by rules, not by the model. A legitimate-looking link can still lower the scam score (an Amazon-style delivery message with a tracking link scored 0.155).

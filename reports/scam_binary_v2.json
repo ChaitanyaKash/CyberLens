@@ -1,0 +1,1132 @@
+{
+  "best_by_validation": "xlm-roberta-base (v2 data)",
+  "models": {
+    "TF-IDF v1": {
+      "note": "v1 model as saved, trained without shade63",
+      "results": {
+        "validation": {
+          "n": 2189,
+          "n_scam": 1096,
+          "n_ham": 1093,
+          "confusion_labels": [
+            "ham",
+            "scam"
+          ],
+          "confusion_matrix": [
+            [893, 200],
+            [113, 983]
+          ],
+          "macro_f1": 0.8567702165368034,
+          "scam_precision": 0.830938292476754,
+          "scam_recall": 0.8968978102189781,
+          "ham_false_positive_rate": 0.18298261665141813
+        },
+        "test_a_india14_suite": {
+          "n": 300,
+          "n_scam": 150,
+          "n_ham": 150,
+          "confusion_labels": [
+            "ham",
+            "scam"
+          ],
+          "confusion_matrix": [
+            [131, 19],
+            [1, 149]
+          ],
+          "macro_f1": 0.9330924662116955,
+          "scam_precision": 0.8869047619047619,
+          "scam_recall": 0.9933333333333333,
+          "ham_false_positive_rate": 0.12666666666666668,
+          "per_language": {
+            "English": {
+              "n": 100,
+              "n_scam": 50,
+              "n_ham": 50,
+              "confusion_labels": [
+                "ham",
+                "scam"
+              ],
+              "confusion_matrix": [
+                [42, 8],
+                [0, 50]
+              ],
+              "macro_f1": 0.9194847020933977,
+              "scam_precision": 0.8620689655172413,
+              "scam_recall": 1.0,
+              "ham_false_positive_rate": 0.16
+            },
+            "Hinglish": {
+              "n": 100,
+              "n_scam": 50,
+              "n_ham": 50,
+              "confusion_labels": [
+                "ham",
+                "scam"
+              ],
+              "confusion_matrix": [
+                [45, 5],
+                [0, 50]
+              ],
+              "macro_f1": 0.949874686716792,
+              "scam_precision": 0.9090909090909091,
+              "scam_recall": 1.0,
+              "ham_false_positive_rate": 0.1
+            },
+            "Hindi": {
+              "n": 100,
+              "n_scam": 50,
+              "n_ham": 50,
+              "confusion_labels": [
+                "ham",
+                "scam"
+              ],
+              "confusion_matrix": [
+                [44, 6],
+                [1, 49]
+              ],
+              "macro_f1": 0.9298245614035088,
+              "scam_precision": 0.8909090909090909,
+              "scam_recall": 0.98,
+              "ham_false_positive_rate": 0.12
+            }
+          }
+        },
+        "test_b_bolewara_english": {
+          "n": 751,
+          "n_scam": 147,
+          "n_ham": 604,
+          "confusion_labels": [
+            "ham",
+            "scam"
+          ],
+          "confusion_matrix": [
+            [597, 7],
+            [5, 142]
+          ],
+          "macro_f1": 0.9747546053516203,
+          "scam_precision": 0.9530201342281879,
+          "scam_recall": 0.9659863945578231,
+          "ham_false_positive_rate": 0.011589403973509934
+        },
+        "test_c_bolewara_hinglish": {
+          "n": 35,
+          "n_scam": 14,
+          "n_ham": 21,
+          "confusion_labels": [
+            "ham",
+            "scam"
+          ],
+          "confusion_matrix": [
+            [20, 1],
+            [0, 14]
+          ],
+          "macro_f1": 0.9705634987384357,
+          "scam_precision": 0.9333333333333333,
+          "scam_recall": 1.0,
+          "ham_false_positive_rate": 0.047619047619047616
+        },
+        "stress_d2_shade63_templates": {
+          "n": 4681,
+          "n_scam": 2815,
+          "n_ham": 1866,
+          "confusion_labels": [
+            "ham",
+            "scam"
+          ],
+          "confusion_matrix": [
+            [812, 1054],
+            [191, 2624]
+          ],
+          "macro_f1": 0.6871529663524281,
+          "scam_precision": 0.713431212615552,
+          "scam_recall": 0.9321492007104796,
+          "ham_false_positive_rate": 0.564844587352626,
+          "per_category": {
+            "legit": {
+              "n": 1866,
+              "n_scam": 0,
+              "n_ham": 1866,
+              "confusion_labels": [
+                "ham",
+                "scam"
+              ],
+              "confusion_matrix": [
+                [812, 1054],
+                [0, 0]
+              ],
+              "ham_false_positive_rate": 0.564844587352626
+            },
+            "government_impersonation": {
+              "n": 983,
+              "n_scam": 983,
+              "n_ham": 0,
+              "confusion_labels": [
+                "ham",
+                "scam"
+              ],
+              "confusion_matrix": [
+                [0, 0],
+                [36, 947]
+              ],
+              "scam_precision": 1.0,
+              "scam_recall": 0.9633774160732451
+            },
+            "financial_fraud": {
+              "n": 1001,
+              "n_scam": 1001,
+              "n_ham": 0,
+              "confusion_labels": [
+                "ham",
+                "scam"
+              ],
+              "confusion_matrix": [
+                [0, 0],
+                [37, 964]
+              ],
+              "scam_precision": 1.0,
+              "scam_recall": 0.9630369630369631
+            },
+            "bank_phishing": {
+              "n": 635,
+              "n_scam": 635,
+              "n_ham": 0,
+              "confusion_labels": [
+                "ham",
+                "scam"
+              ],
+              "confusion_matrix": [
+                [0, 0],
+                [1, 634]
+              ],
+              "scam_precision": 1.0,
+              "scam_recall": 0.9984251968503937
+            },
+            "romance_parcel_sextortion": {
+              "n": 196,
+              "n_scam": 196,
+              "n_ham": 0,
+              "confusion_labels": [
+                "ham",
+                "scam"
+              ],
+              "confusion_matrix": [
+                [0, 0],
+                [117, 79]
+              ],
+              "scam_precision": 1.0,
+              "scam_recall": 0.4030612244897959
+            }
+          }
+        }
+      },
+      "errors": {
+        "false_positives": [
+          {
+            "test": "stress_d2_shade63_templates",
+            "language": "English",
+            "category": "legit",
+            "text": "Bank of India SMS: Your net banking OTP is 889334. Valid for 10 minutes. Entering this OTP confirms your transaction. Guard your OTP like your password."
+          },
+          {
+            "test": "stress_d2_shade63_templates",
+            "language": "English",
+            "category": "legit",
+            "text": "AJIO: Rate your recent purchase from order #723578057. Your honest review helps millions of shoppers make better decisions. Takes only 30 seconds to submit."
+          },
+          {
+            "test": "stress_d2_shade63_templates",
+            "language": "English",
+            "category": "legit",
+            "text": "Money sent successfully! Rs 250 transferred to Reliance Fresh using Google Pay UPI. Your bank account ending 8901 has been debited. Ref: TXN8277261655."
+          },
+          {
+            "test": "stress_d2_shade63_templates",
+            "language": "English",
+            "category": "legit",
+            "text": "Your Union Bank of India account has been successfully linked with your Aadhaar number as per NPCI mandate. This service is provided by your bank free of charge."
+          },
+          {
+            "test": "stress_d2_shade63_templates",
+            "language": "English",
+            "category": "legit",
+            "text": "Cash withdrawn: Rs 4,999 from IndusInd Bank ATM at Jaipur on 06-May-2026. A/c: **4821. Balance: Rs 45,670. If not done by you, block card immediately via IndusInd Bank app."
+          },
+          {
+            "test": "stress_d2_shade63_templates",
+            "language": "English",
+            "category": "legit",
+            "text": "ICICI Bank: INR 120 credited to your a/c **1234 on 12-May-2026 by NEFT from Blinkit. Updated bal: Rs 56,200. Ref: TXN9585852308. For details visit ICICI Bank mobile app."
+          },
+          {
+            "test": "stress_d2_shade63_templates",
+            "language": "English",
+            "category": "legit",
+            "text": "Axis Bank Savings Interest: Rs 999 credited to your account ending 7832 as quarterly interest. Your balance is now Rs Rs 1,02,340. Visit our app for full statement."
+          },
+          {
+            "test": "stress_d2_shade63_templates",
+            "language": "English",
+            "category": "legit",
+            "text": "593651 is your Kotak Bank ATM PIN reset verification code. Valid 10 minutes. Do not share. If you did not request this, please block your card via the Kotak Bank app immediately."
+          }
+        ],
+        "false_negatives": [
+          {
+            "test": "stress_d2_shade63_templates",
+            "language": "English",
+            "category": "romance_parcel_sextortion",
+            "text": "My love, I am a widow living in London with assets worth crores. I want to relocate to India and be with you. I just need Rs 1 lakh to complete legal formalities. Please trust me."
+          },
+          {
+            "test": "stress_d2_shade63_templates",
+            "language": "English",
+            "category": "financial_fraud",
+            "text": "Get paid Rs 999 for every product review you submit on our platform. Reviews take 5 minutes. Earn Rs 10,000 working just 2 hours a day from the comfort of your home."
+          },
+          {
+            "test": "stress_d2_shade63_templates",
+            "language": "English",
+            "category": "financial_fraud",
+            "text": "Get paid Rs 1,999 for every product review you submit on our platform. Reviews take 5 minutes. Earn Rs 8,000 working just 2 hours a day from the comfort of your home."
+          },
+          {
+            "test": "stress_d2_shade63_templates",
+            "language": "English",
+            "category": "financial_fraud",
+            "text": "Get paid Rs 2,999 for every product review you submit on our platform. Reviews take 5 minutes. Earn Rs 8,000 working just 2 hours a day from the comfort of your home."
+          },
+          {
+            "test": "stress_d2_shade63_templates",
+            "language": "English",
+            "category": "romance_parcel_sextortion",
+            "text": "My name is Divya. I am a doctor working with the UN in Saudi Arabia. I am alone and looking for a genuine partner. I feel we have a special connection. Can I trust you with something?"
+          },
+          {
+            "test": "stress_d2_shade63_templates",
+            "language": "English",
+            "category": "romance_parcel_sextortion",
+            "text": "My love, I am a widow living in USA with assets worth crores. I want to relocate to India and be with you. I just need Rs 20,000 to complete legal formalities. Please trust me."
+          },
+          {
+            "test": "stress_d2_shade63_templates",
+            "language": "English",
+            "category": "government_impersonation",
+            "text": "You are being investigated for cybercrime by the RBI Cybercrime Division. This is your final opportunity to cooperate before a non-bailable warrant is served at your registered address."
+          },
+          {
+            "test": "stress_d2_shade63_templates",
+            "language": "English",
+            "category": "romance_parcel_sextortion",
+            "text": "My love, I am a widow living in Saudi Arabia with assets worth crores. I want to relocate to India and be with you. I just need Rs 40,000 to complete legal formalities. Please trust me."
+          }
+        ],
+        "false_positive_total": 1081,
+        "false_negative_total": 197
+      }
+    },
+    "TF-IDF v2": {
+      "selected": {
+        "digits": "mask",
+        "C": 10.0,
+        "validation_macro_f1": 0.98994914255279
+      },
+      "grid": [
+        {
+          "digits": "keep",
+          "C": 0.3,
+          "validation_macro_f1": 0.9817226620621247
+        },
+        {
+          "digits": "keep",
+          "C": 1.0,
+          "validation_macro_f1": 0.9890354282394074
+        },
+        {
+          "digits": "keep",
+          "C": 3.0,
+          "validation_macro_f1": 0.9890355746931647
+        },
+        {
+          "digits": "keep",
+          "C": 10.0,
+          "validation_macro_f1": 0.9894924893431631
+        },
+        {
+          "digits": "mask",
+          "C": 0.3,
+          "validation_macro_f1": 0.9853792283518736
+        },
+        {
+          "digits": "mask",
+          "C": 1.0,
+          "validation_macro_f1": 0.9885783064837443
+        },
+        {
+          "digits": "mask",
+          "C": 3.0,
+          "validation_macro_f1": 0.9894922086397766
+        },
+        {
+          "digits": "mask",
+          "C": 10.0,
+          "validation_macro_f1": 0.98994914255279
+        }
+      ],
+      "results": {
+        "validation": {
+          "n": 2189,
+          "n_scam": 1096,
+          "n_ham": 1093,
+          "confusion_labels": [
+            "ham",
+            "scam"
+          ],
+          "confusion_matrix": [
+            [1092, 1],
+            [21, 1075]
+          ],
+          "macro_f1": 0.98994914255279,
+          "scam_precision": 0.9990706319702602,
+          "scam_recall": 0.9808394160583942,
+          "ham_false_positive_rate": 0.0009149130832570906
+        },
+        "test_a_india14_suite": {
+          "n": 300,
+          "n_scam": 150,
+          "n_ham": 150,
+          "confusion_labels": [
+            "ham",
+            "scam"
+          ],
+          "confusion_matrix": [
+            [145, 5],
+            [3, 147]
+          ],
+          "macro_f1": 0.9733321480954709,
+          "scam_precision": 0.9671052631578947,
+          "scam_recall": 0.98,
+          "ham_false_positive_rate": 0.03333333333333333,
+          "per_language": {
+            "English": {
+              "n": 100,
+              "n_scam": 50,
+              "n_ham": 50,
+              "confusion_labels": [
+                "ham",
+                "scam"
+              ],
+              "confusion_matrix": [
+                [47, 3],
+                [0, 50]
+              ],
+              "macro_f1": 0.9699729756781104,
+              "scam_precision": 0.9433962264150944,
+              "scam_recall": 1.0,
+              "ham_false_positive_rate": 0.06
+            },
+            "Hinglish": {
+              "n": 100,
+              "n_scam": 50,
+              "n_ham": 50,
+              "confusion_labels": [
+                "ham",
+                "scam"
+              ],
+              "confusion_matrix": [
+                [50, 0],
+                [0, 50]
+              ],
+              "macro_f1": 1.0,
+              "scam_precision": 1.0,
+              "scam_recall": 1.0,
+              "ham_false_positive_rate": 0.0
+            },
+            "Hindi": {
+              "n": 100,
+              "n_scam": 50,
+              "n_ham": 50,
+              "confusion_labels": [
+                "ham",
+                "scam"
+              ],
+              "confusion_matrix": [
+                [48, 2],
+                [3, 47]
+              ],
+              "macro_f1": 0.9499949994999499,
+              "scam_precision": 0.9591836734693877,
+              "scam_recall": 0.94,
+              "ham_false_positive_rate": 0.04
+            }
+          }
+        },
+        "test_b_bolewara_english": {
+          "n": 751,
+          "n_scam": 147,
+          "n_ham": 604,
+          "confusion_labels": [
+            "ham",
+            "scam"
+          ],
+          "confusion_matrix": [
+            [601, 3],
+            [6, 141]
+          ],
+          "macro_f1": 0.980820145232278,
+          "scam_precision": 0.9791666666666666,
+          "scam_recall": 0.9591836734693877,
+          "ham_false_positive_rate": 0.004966887417218543
+        },
+        "test_c_bolewara_hinglish": {
+          "n": 35,
+          "n_scam": 14,
+          "n_ham": 21,
+          "confusion_labels": [
+            "ham",
+            "scam"
+          ],
+          "confusion_matrix": [
+            [21, 0],
+            [0, 14]
+          ],
+          "macro_f1": 1.0,
+          "scam_precision": 1.0,
+          "scam_recall": 1.0,
+          "ham_false_positive_rate": 0.0
+        },
+        "stress_d2_shade63_templates": {
+          "n": 4681,
+          "n_scam": 2815,
+          "n_ham": 1866,
+          "confusion_labels": [
+            "ham",
+            "scam"
+          ],
+          "confusion_matrix": [
+            [1852, 14],
+            [85, 2730]
+          ],
+          "macro_f1": 0.9780794808086722,
+          "scam_precision": 0.9948979591836735,
+          "scam_recall": 0.9698046181172292,
+          "ham_false_positive_rate": 0.007502679528403001,
+          "per_category": {
+            "legit": {
+              "n": 1866,
+              "n_scam": 0,
+              "n_ham": 1866,
+              "confusion_labels": [
+                "ham",
+                "scam"
+              ],
+              "confusion_matrix": [
+                [1852, 14],
+                [0, 0]
+              ],
+              "ham_false_positive_rate": 0.007502679528403001
+            },
+            "government_impersonation": {
+              "n": 983,
+              "n_scam": 983,
+              "n_ham": 0,
+              "confusion_labels": [
+                "ham",
+                "scam"
+              ],
+              "confusion_matrix": [
+                [0, 0],
+                [0, 983]
+              ],
+              "scam_precision": 1.0,
+              "scam_recall": 1.0
+            },
+            "financial_fraud": {
+              "n": 1001,
+              "n_scam": 1001,
+              "n_ham": 0,
+              "confusion_labels": [
+                "ham",
+                "scam"
+              ],
+              "confusion_matrix": [
+                [0, 0],
+                [0, 1001]
+              ],
+              "scam_precision": 1.0,
+              "scam_recall": 1.0
+            },
+            "bank_phishing": {
+              "n": 635,
+              "n_scam": 635,
+              "n_ham": 0,
+              "confusion_labels": [
+                "ham",
+                "scam"
+              ],
+              "confusion_matrix": [
+                [0, 0],
+                [0, 635]
+              ],
+              "scam_precision": 1.0,
+              "scam_recall": 1.0
+            },
+            "romance_parcel_sextortion": {
+              "n": 196,
+              "n_scam": 196,
+              "n_ham": 0,
+              "confusion_labels": [
+                "ham",
+                "scam"
+              ],
+              "confusion_matrix": [
+                [0, 0],
+                [85, 111]
+              ],
+              "scam_precision": 1.0,
+              "scam_recall": 0.5663265306122449
+            }
+          }
+        }
+      },
+      "errors": {
+        "false_positives": [
+          {
+            "test": "test_a_india14_suite",
+            "language": "English",
+            "category": null,
+            "text": "Reminder: Pay your electricity bill of Rs 1,420 for consumer number 883921 before 5th October to avoid disconnection."
+          },
+          {
+            "test": "stress_d2_shade63_templates",
+            "language": "English",
+            "category": "legit",
+            "text": "Your Yes Bank account has been successfully linked with your Aadhaar number as per NPCI mandate. This service is provided by your bank free of charge."
+          },
+          {
+            "test": "stress_d2_shade63_templates",
+            "language": "English",
+            "category": "legit",
+            "text": "Jio Alert: Your mobile number ending 9871 has been successfully ported. Your new Jio SIM is now active. Please restart your phone to start using Jio services."
+          },
+          {
+            "test": "test_a_india14_suite",
+            "language": "English",
+            "category": null,
+            "text": "Your Netflix monthly membership fee of Rs 649 will be automatically charged to your registered card tomorrow."
+          },
+          {
+            "test": "stress_d2_shade63_templates",
+            "language": "English",
+            "category": "legit",
+            "text": "Vi Alert: Your mobile number ending 9871 has been successfully ported. Your new Vi SIM is now active. Please restart your phone to start using Vi services."
+          },
+          {
+            "test": "test_b_bolewara_english",
+            "language": "English",
+            "category": null,
+            "text": "I (Career Tel) have added u as a contact on INDYAROCKS.COM to send FREE SMS. To remove from phonebook - sms NO to  &lt;#&gt;"
+          },
+          {
+            "test": "stress_d2_shade63_templates",
+            "language": "English",
+            "category": "legit",
+            "text": "Your Bank of Baroda account has been successfully linked with your Aadhaar number as per NPCI mandate. This service is provided by your bank free of charge."
+          },
+          {
+            "test": "stress_d2_shade63_templates",
+            "language": "English",
+            "category": "legit",
+            "text": "Your Axis Bank account has been successfully linked with your Aadhaar number as per NPCI mandate. This service is provided by your bank free of charge."
+          }
+        ],
+        "false_negatives": [
+          {
+            "test": "stress_d2_shade63_templates",
+            "language": "English",
+            "category": "romance_parcel_sextortion",
+            "text": "Hi Neha, I am an international model based in Australia. Your profile impressed me. Let us video call. I have a business proposal that can make us both very wealthy. Interested?"
+          },
+          {
+            "test": "stress_d2_shade63_templates",
+            "language": "English",
+            "category": "romance_parcel_sextortion",
+            "text": "My name is Riya. I am a doctor working with the UN in Australia. I am alone and looking for a genuine partner. I feel we have a special connection. Can I trust you with something?"
+          },
+          {
+            "test": "stress_d2_shade63_templates",
+            "language": "English",
+            "category": "romance_parcel_sextortion",
+            "text": "My name is Divya. I am a doctor working with the UN in Australia. I am alone and looking for a genuine partner. I feel we have a special connection. Can I trust you with something?"
+          },
+          {
+            "test": "stress_d2_shade63_templates",
+            "language": "English",
+            "category": "romance_parcel_sextortion",
+            "text": "My name is Divya. I am a doctor working with the UN in USA. I am alone and looking for a genuine partner. I feel we have a special connection. Can I trust you with something?"
+          },
+          {
+            "test": "test_a_india14_suite",
+            "language": "Hindi",
+            "category": null,
+            "text": "प्रिय ग्राहक, आपका यूपीआई आईडी एक्सपायर हो गया है। नया बनाने के लिए नीचे दिए गए लिंक पर अपनी डिटेल्स भरें।"
+          },
+          {
+            "test": "stress_d2_shade63_templates",
+            "language": "English",
+            "category": "romance_parcel_sextortion",
+            "text": "My name is Aditi. I am a doctor working with the UN in Dubai. I am alone and looking for a genuine partner. I feel we have a special connection. Can I trust you with something?"
+          },
+          {
+            "test": "stress_d2_shade63_templates",
+            "language": "English",
+            "category": "romance_parcel_sextortion",
+            "text": "My name is Vikram. I am a doctor working with the UN in Germany. I am alone and looking for a genuine partner. I feel we have a special connection. Can I trust you with something?"
+          },
+          {
+            "test": "stress_d2_shade63_templates",
+            "language": "English",
+            "category": "romance_parcel_sextortion",
+            "text": "Hi Pooja, I am an international model based in Singapore. Your profile impressed me. Let us video call. I have a business proposal that can make us both very wealthy. Interested?"
+          }
+        ],
+        "false_positive_total": 22,
+        "false_negative_total": 94
+      }
+    },
+    "xlm-roberta-base (v2 data)": {
+      "config": {
+        "model_id": "xlm-roberta-base",
+        "epochs_max": 4,
+        "epochs_run": 3,
+        "best_epoch": 3,
+        "batch_size": 16,
+        "max_length": 128,
+        "lr": 2e-05,
+        "precision": "float16 autocast + GradScaler",
+        "class_weights": "balanced",
+        "seed": 42,
+        "training_rows": 13131,
+        "stopped_early": "validation macro-F1 stopped improving; best checkpoint by validation"
+      },
+      "history": [
+        {
+          "epoch": 1,
+          "train_loss": 0.1269338454484492,
+          "validation_macro_f1": 0.9904062900377057
+        },
+        {
+          "epoch": 2,
+          "train_loss": 0.019162497001030964,
+          "validation_macro_f1": 0.9940611953365243
+        },
+        {
+          "epoch": 3,
+          "train_loss": 0.010015812070186514,
+          "validation_macro_f1": 0.9963453624168357
+        }
+      ],
+      "seconds": 1756.0,
+      "cuda_peak_mb": 1060.73388671875,
+      "results": {
+        "validation": {
+          "n": 2189,
+          "n_scam": 1096,
+          "n_ham": 1093,
+          "confusion_labels": [
+            "ham",
+            "scam"
+          ],
+          "confusion_matrix": [
+            [1090, 3],
+            [5, 1091]
+          ],
+          "macro_f1": 0.9963453624168357,
+          "scam_precision": 0.9972577696526508,
+          "scam_recall": 0.9954379562043796,
+          "ham_false_positive_rate": 0.0027447392497712718
+        },
+        "test_a_india14_suite": {
+          "n": 300,
+          "n_scam": 150,
+          "n_ham": 150,
+          "confusion_labels": [
+            "ham",
+            "scam"
+          ],
+          "confusion_matrix": [
+            [147, 3],
+            [7, 143]
+          ],
+          "macro_f1": 0.9666607396870555,
+          "scam_precision": 0.9794520547945206,
+          "scam_recall": 0.9533333333333334,
+          "ham_false_positive_rate": 0.02,
+          "per_language": {
+            "English": {
+              "n": 100,
+              "n_scam": 50,
+              "n_ham": 50,
+              "confusion_labels": [
+                "ham",
+                "scam"
+              ],
+              "confusion_matrix": [
+                [50, 0],
+                [0, 50]
+              ],
+              "macro_f1": 1.0,
+              "scam_precision": 1.0,
+              "scam_recall": 1.0,
+              "ham_false_positive_rate": 0.0
+            },
+            "Hinglish": {
+              "n": 100,
+              "n_scam": 50,
+              "n_ham": 50,
+              "confusion_labels": [
+                "ham",
+                "scam"
+              ],
+              "confusion_matrix": [
+                [48, 2],
+                [0, 50]
+              ],
+              "macro_f1": 0.9799919967987194,
+              "scam_precision": 0.9615384615384616,
+              "scam_recall": 1.0,
+              "ham_false_positive_rate": 0.04
+            },
+            "Hindi": {
+              "n": 100,
+              "n_scam": 50,
+              "n_ham": 50,
+              "confusion_labels": [
+                "ham",
+                "scam"
+              ],
+              "confusion_matrix": [
+                [49, 1],
+                [7, 43]
+              ],
+              "macro_f1": 0.9197109594540345,
+              "scam_precision": 0.9772727272727273,
+              "scam_recall": 0.86,
+              "ham_false_positive_rate": 0.02
+            }
+          }
+        },
+        "test_b_bolewara_english": {
+          "n": 751,
+          "n_scam": 147,
+          "n_ham": 604,
+          "confusion_labels": [
+            "ham",
+            "scam"
+          ],
+          "confusion_matrix": [
+            [594, 10],
+            [2, 145]
+          ],
+          "macro_f1": 0.9751324503311258,
+          "scam_precision": 0.9354838709677419,
+          "scam_recall": 0.9863945578231292,
+          "ham_false_positive_rate": 0.016556291390728478
+        },
+        "test_c_bolewara_hinglish": {
+          "n": 35,
+          "n_scam": 14,
+          "n_ham": 21,
+          "confusion_labels": [
+            "ham",
+            "scam"
+          ],
+          "confusion_matrix": [
+            [21, 0],
+            [0, 14]
+          ],
+          "macro_f1": 1.0,
+          "scam_precision": 1.0,
+          "scam_recall": 1.0,
+          "ham_false_positive_rate": 0.0
+        },
+        "stress_d2_shade63_templates": {
+          "n": 4681,
+          "n_scam": 2815,
+          "n_ham": 1866,
+          "confusion_labels": [
+            "ham",
+            "scam"
+          ],
+          "confusion_matrix": [
+            [1849, 17],
+            [26, 2789]
+          ],
+          "macro_f1": 0.9904279313821118,
+          "scam_precision": 0.9939415538132573,
+          "scam_recall": 0.9907637655417407,
+          "ham_false_positive_rate": 0.009110396570203644,
+          "per_category": {
+            "legit": {
+              "n": 1866,
+              "n_scam": 0,
+              "n_ham": 1866,
+              "confusion_labels": [
+                "ham",
+                "scam"
+              ],
+              "confusion_matrix": [
+                [1849, 17],
+                [0, 0]
+              ],
+              "ham_false_positive_rate": 0.009110396570203644
+            },
+            "government_impersonation": {
+              "n": 983,
+              "n_scam": 983,
+              "n_ham": 0,
+              "confusion_labels": [
+                "ham",
+                "scam"
+              ],
+              "confusion_matrix": [
+                [0, 0],
+                [0, 983]
+              ],
+              "scam_precision": 1.0,
+              "scam_recall": 1.0
+            },
+            "financial_fraud": {
+              "n": 1001,
+              "n_scam": 1001,
+              "n_ham": 0,
+              "confusion_labels": [
+                "ham",
+                "scam"
+              ],
+              "confusion_matrix": [
+                [0, 0],
+                [26, 975]
+              ],
+              "scam_precision": 1.0,
+              "scam_recall": 0.974025974025974
+            },
+            "bank_phishing": {
+              "n": 635,
+              "n_scam": 635,
+              "n_ham": 0,
+              "confusion_labels": [
+                "ham",
+                "scam"
+              ],
+              "confusion_matrix": [
+                [0, 0],
+                [0, 635]
+              ],
+              "scam_precision": 1.0,
+              "scam_recall": 1.0
+            },
+            "romance_parcel_sextortion": {
+              "n": 196,
+              "n_scam": 196,
+              "n_ham": 0,
+              "confusion_labels": [
+                "ham",
+                "scam"
+              ],
+              "confusion_matrix": [
+                [0, 0],
+                [0, 196]
+              ],
+              "scam_precision": 1.0,
+              "scam_recall": 1.0
+            }
+          }
+        }
+      },
+      "errors": {
+        "false_positives": [
+          {
+            "test": "stress_d2_shade63_templates",
+            "language": "English",
+            "category": "legit",
+            "text": "Jio: Your roaming pack is now active for USA. Enjoy 100 MB/day data and 100 minutes of incoming calls at no extra charge for the next 7 days. Safe travels!"
+          },
+          {
+            "test": "stress_d2_shade63_templates",
+            "language": "English",
+            "category": "legit",
+            "text": "Jio: Your roaming pack is now active for Australia. Enjoy 100 MB/day data and 100 minutes of incoming calls at no extra charge for the next 7 days. Safe travels!"
+          },
+          {
+            "test": "stress_d2_shade63_templates",
+            "language": "English",
+            "category": "legit",
+            "text": "Jio: Your roaming pack is now active for Germany. Enjoy 100 MB/day data and 100 minutes of incoming calls at no extra charge for the next 7 days. Safe travels!"
+          },
+          {
+            "test": "stress_d2_shade63_templates",
+            "language": "English",
+            "category": "legit",
+            "text": "Vi: Your roaming pack is now active for USA. Enjoy 100 MB/day data and 100 minutes of incoming calls at no extra charge for the next 7 days. Safe travels!"
+          },
+          {
+            "test": "test_b_bolewara_english",
+            "language": "English",
+            "category": null,
+            "text": "Yun ah.the ubi one say if ü wan call by tomorrow.call 67441233 look for irene.ere only got bus8,22,65,61,66,382. Ubi cres,ubi tech park.6ph for 1st 5wkg days.èn"
+          },
+          {
+            "test": "test_b_bolewara_english",
+            "language": "English",
+            "category": null,
+            "text": "This message is from a great Doctor in India:-): 1) Do not drink APPY FIZZ. It contains Cancer causing age"
+          },
+          {
+            "test": "stress_d2_shade63_templates",
+            "language": "English",
+            "category": "legit",
+            "text": "BSNL: Your roaming pack is now active for Japan. Enjoy 100 MB/day data and 100 minutes of incoming calls at no extra charge for the next 7 days. Safe travels!"
+          },
+          {
+            "test": "stress_d2_shade63_templates",
+            "language": "English",
+            "category": "legit",
+            "text": "Jio: Your roaming pack is now active for Japan. Enjoy 100 MB/day data and 100 minutes of incoming calls at no extra charge for the next 7 days. Safe travels!"
+          }
+        ],
+        "false_negatives": [
+          {
+            "test": "stress_d2_shade63_templates",
+            "language": "English",
+            "category": "financial_fraud",
+            "text": "Our Binance managed fund returned 30% to all investors last quarter. Minimum deposit: Rs 50,000. Your crypto is stored in cold storage and insured against hacks."
+          },
+          {
+            "test": "stress_d2_shade63_templates",
+            "language": "English",
+            "category": "financial_fraud",
+            "text": "IRCTC Refund Department: Your refund of Rs 10,000 is ready. To receive it, enter your card CVV and expiry date on the refund portal link we just sent you."
+          },
+          {
+            "test": "stress_d2_shade63_templates",
+            "language": "English",
+            "category": "financial_fraud",
+            "text": "Our Binance managed fund returned 30% to all investors last quarter. Minimum deposit: Rs 25,000. Your crypto is stored in cold storage and insured against hacks."
+          },
+          {
+            "test": "stress_d2_shade63_templates",
+            "language": "English",
+            "category": "financial_fraud",
+            "text": "Our Bybit managed fund returned 40% to all investors last quarter. Minimum deposit: Rs 50,000. Your crypto is stored in cold storage and insured against hacks."
+          },
+          {
+            "test": "stress_d2_shade63_templates",
+            "language": "English",
+            "category": "financial_fraud",
+            "text": "Our KuCoin managed fund returned 20% to all investors last quarter. Minimum deposit: Rs 5,000. Your crypto is stored in cold storage and insured against hacks."
+          },
+          {
+            "test": "stress_d2_shade63_templates",
+            "language": "English",
+            "category": "financial_fraud",
+            "text": "Our WazirX managed fund returned 200% to all investors last quarter. Minimum deposit: Rs 25,000. Your crypto is stored in cold storage and insured against hacks."
+          },
+          {
+            "test": "stress_d2_shade63_templates",
+            "language": "English",
+            "category": "financial_fraud",
+            "text": "Our Bybit managed fund returned 30% to all investors last quarter. Minimum deposit: Rs 10,000. Your crypto is stored in cold storage and insured against hacks."
+          },
+          {
+            "test": "stress_d2_shade63_templates",
+            "language": "English",
+            "category": "financial_fraud",
+            "text": "Our WazirX managed fund returned 15% to all investors last quarter. Minimum deposit: Rs 20,000. Your crypto is stored in cold storage and insured against hacks."
+          }
+        ],
+        "false_positive_total": 30,
+        "false_negative_total": 35
+      }
+    }
+  },
+  "splits": {
+    "dropped_train_rows_matching_tests": 0,
+    "shade63_template_groups": 534,
+    "d2_template_groups": 177,
+    "groups_with_both_labels": 0,
+    "train_validation_shared_groups": 0
+  },
+  "data": {
+    "train": {
+      "rows": 13131,
+      "scam": 6575,
+      "by_language": {
+        "English": 11446,
+        "Hinglish": 843,
+        "Hindi": 842
+      },
+      "by_source": {
+        "shade63": 7998,
+        "bolewara": 2573,
+        "india14": 2560
+      }
+    },
+    "validation": {
+      "rows": 2189,
+      "scam": 1096,
+      "by_language": {
+        "English": 1874,
+        "Hindi": 158,
+        "Hinglish": 157
+      },
+      "by_source": {
+        "shade63": 1321,
+        "india14": 440,
+        "bolewara": 428
+      }
+    },
+    "test_a_india14_suite": {
+      "rows": 300,
+      "scam": 150,
+      "by_language": {
+        "English": 100,
+        "Hindi": 100,
+        "Hinglish": 100
+      },
+      "by_source": {
+        "india14_suite": 300
+      }
+    },
+    "test_b_bolewara_english": {
+      "rows": 751,
+      "scam": 147,
+      "by_language": {
+        "English": 751
+      },
+      "by_source": {
+        "bolewara": 751
+      }
+    },
+    "test_c_bolewara_hinglish": {
+      "rows": 35,
+      "scam": 14,
+      "by_language": {
+        "Hinglish": 35
+      },
+      "by_source": {
+        "bolewara": 35
+      }
+    },
+    "stress_d2_shade63_templates": {
+      "rows": 4681,
+      "scam": 2815,
+      "by_language": {
+        "English": 4681
+      },
+      "by_source": {
+        "shade63": 4681
+      }
+    }
+  },
+  "peaks": "TF-IDF v2 (CPU): first run peaked at 97.9 C (old guard polled too slowly for 1 s turbo spikes); after the guard rewrite (idle priority, EcoQoS, 100 ms run / 100-150 ms pause slices) the final re-run peaked at 80.9 C. xlm-roberta-base (GPU): GPU peak 63 C. CPU readings mostly 55-70 C, with full pauses at 83.9 C, 86.9 C, 85.9 C and three 1-second spikes (96.9, 97.9 C earlier on TF-IDF, 99.9 C) caused by extra processes I started or restarted around the runs. At 85.9 C (11:34, during epoch 4) I stopped training as agreed and kept the epoch-3 checkpoint, which was already the best on validation. Scoring on the GPU afterwards peaked at 61.9 C CPU / 46 C GPU."
+}

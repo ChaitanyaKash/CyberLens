@@ -12,6 +12,7 @@ dependencies = ["numpy>=1.26", "pandas>=2.2", "scikit-learn>=1.5", "joblib>=1.4"
 
 [project.optional-dependencies]
 neural = ["torch>=2.4", "transformers>=4.45", "safetensors>=0.4"]
+ui = ["streamlit>=1.50"]
 
 [project.scripts]
 cyberlens = "cyberlens.cli:main"

@@ -1,0 +1,490 @@
+{
+  "selected": {
+    "digits": "keep",
+    "C": 10.0,
+    "validation_macro_f1": 0.9896511796207845
+  },
+  "selection_rule": "Highest validation macro-F1 over digits x C; tests never used for selection",
+  "grid": [
+    {
+      "digits": "keep",
+      "C": 0.3,
+      "validation_macro_f1": 0.9831417624521073,
+      "seconds": 3.853718200000003
+    },
+    {
+      "digits": "keep",
+      "C": 1.0,
+      "validation_macro_f1": 0.9857353374594754,
+      "seconds": 3.709439800000382
+    },
+    {
+      "digits": "keep",
+      "C": 3.0,
+      "validation_macro_f1": 0.9870427980307469,
+      "seconds": 3.586142799999834
+    },
+    {
+      "digits": "keep",
+      "C": 10.0,
+      "validation_macro_f1": 0.9896511796207845,
+      "seconds": 3.7089720999997553
+    },
+    {
+      "digits": "mask",
+      "C": 0.3,
+      "validation_macro_f1": 0.9896511796207845,
+      "seconds": 3.323614400000224
+    },
+    {
+      "digits": "mask",
+      "C": 1.0,
+      "validation_macro_f1": 0.9896511796207845,
+      "seconds": 3.563969299999826
+    },
+    {
+      "digits": "mask",
+      "C": 3.0,
+      "validation_macro_f1": 0.9896511796207845,
+      "seconds": 3.5269608000003245
+    },
+    {
+      "digits": "mask",
+      "C": 10.0,
+      "validation_macro_f1": 0.9896511796207845,
+      "seconds": 3.6185144999999466
+    }
+  ],
+  "results": {
+    "validation": {
+      "n": 858,
+      "n_scam": 298,
+      "n_ham": 560,
+      "confusion_labels": [
+        "ham",
+        "scam"
+      ],
+      "confusion_matrix": [
+        [560, 0],
+        [8, 290]
+      ],
+      "macro_f1": 0.9896511796207845,
+      "scam_precision": 1.0,
+      "scam_recall": 0.9731543624161074,
+      "ham_false_positive_rate": 0.0
+    },
+    "test_a_india14_suite": {
+      "n": 300,
+      "n_scam": 150,
+      "n_ham": 150,
+      "confusion_labels": [
+        "ham",
+        "scam"
+      ],
+      "confusion_matrix": [
+        [131, 19],
+        [1, 149]
+      ],
+      "macro_f1": 0.9330924662116955,
+      "scam_precision": 0.8869047619047619,
+      "scam_recall": 0.9933333333333333,
+      "ham_false_positive_rate": 0.12666666666666668,
+      "per_language": {
+        "English": {
+          "n": 100,
+          "n_scam": 50,
+          "n_ham": 50,
+          "confusion_labels": [
+            "ham",
+            "scam"
+          ],
+          "confusion_matrix": [
+            [42, 8],
+            [0, 50]
+          ],
+          "macro_f1": 0.9194847020933977,
+          "scam_precision": 0.8620689655172413,
+          "scam_recall": 1.0,
+          "ham_false_positive_rate": 0.16
+        },
+        "Hinglish": {
+          "n": 100,
+          "n_scam": 50,
+          "n_ham": 50,
+          "confusion_labels": [
+            "ham",
+            "scam"
+          ],
+          "confusion_matrix": [
+            [45, 5],
+            [0, 50]
+          ],
+          "macro_f1": 0.949874686716792,
+          "scam_precision": 0.9090909090909091,
+          "scam_recall": 1.0,
+          "ham_false_positive_rate": 0.1
+        },
+        "Hindi": {
+          "n": 100,
+          "n_scam": 50,
+          "n_ham": 50,
+          "confusion_labels": [
+            "ham",
+            "scam"
+          ],
+          "confusion_matrix": [
+            [44, 6],
+            [1, 49]
+          ],
+          "macro_f1": 0.9298245614035088,
+          "scam_precision": 0.8909090909090909,
+          "scam_recall": 0.98,
+          "ham_false_positive_rate": 0.12
+        }
+      }
+    },
+    "test_b_bolewara_english": {
+      "n": 751,
+      "n_scam": 147,
+      "n_ham": 604,
+      "confusion_labels": [
+        "ham",
+        "scam"
+      ],
+      "confusion_matrix": [
+        [597, 7],
+        [5, 142]
+      ],
+      "macro_f1": 0.9747546053516203,
+      "scam_precision": 0.9530201342281879,
+      "scam_recall": 0.9659863945578231,
+      "ham_false_positive_rate": 0.011589403973509934
+    },
+    "test_c_bolewara_hinglish": {
+      "n": 35,
+      "n_scam": 14,
+      "n_ham": 21,
+      "confusion_labels": [
+        "ham",
+        "scam"
+      ],
+      "confusion_matrix": [
+        [20, 1],
+        [0, 14]
+      ],
+      "macro_f1": 0.9705634987384357,
+      "scam_precision": 0.9333333333333333,
+      "scam_recall": 1.0,
+      "ham_false_positive_rate": 0.047619047619047616
+    },
+    "stress_d_shade63_legit": {
+      "n": 5600,
+      "n_scam": 0,
+      "n_ham": 5600,
+      "confusion_labels": [
+        "ham",
+        "scam"
+      ],
+      "confusion_matrix": [
+        [2823, 2777],
+        [0, 0]
+      ],
+      "ham_false_positive_rate": 0.49589285714285714
+    },
+    "stress_d_shade63_scams": {
+      "n": 1000,
+      "n_scam": 1000,
+      "n_ham": 0,
+      "confusion_labels": [
+        "ham",
+        "scam"
+      ],
+      "confusion_matrix": [
+        [0, 0],
+        [50, 950]
+      ],
+      "scam_precision": 1.0,
+      "scam_recall": 0.95
+    }
+  },
+  "examples": {
+    "tests_abc": {
+      "false_positives": [
+        {
+          "test": "test_a_india14_suite",
+          "language": "Hindi",
+          "text": "कृपया ध्यान दें, आज कार्यालय में सभी कर्मचारियों के लिए लंच के बाद एक छोटी गोष्ठी आयोजित की गई है."
+        },
+        {
+          "test": "test_a_india14_suite",
+          "language": "Hindi",
+          "text": "मम्मी, मैं अपने दोस्त के घर पढ़ाई करने जा रहा हूँ, डिनर पर थोड़ा लेट आऊंगा।"
+        },
+        {
+          "test": "test_a_india14_suite",
+          "language": "Hindi",
+          "text": "प्रिय ग्राहक, आपके एसबीआई खाते में वेतन (Salary) के रूप में ₹45,000 जमा किए गए हैं।"
+        },
+        {
+          "test": "test_b_bolewara_english",
+          "language": "English",
+          "text": "what is your account number?"
+        },
+        {
+          "test": "test_a_india14_suite",
+          "language": "English",
+          "text": "Reminder: Pay your electricity bill of Rs 1,420 for consumer number 883921 before 5th October to avoid disconnection."
+        },
+        {
+          "test": "test_a_india14_suite",
+          "language": "Hindi",
+          "text": "डियर यूजर, आपके इंटरनेट ब्रॉडबैंड प्लान का 80% डेटा समाप्त हो गया है।"
+        },
+        {
+          "test": "test_a_india14_suite",
+          "language": "Hinglish",
+          "text": "Aapka recharge successfully ho gaya hai. Naya balance dekhne ke liye app open karein."
+        },
+        {
+          "test": "test_a_india14_suite",
+          "language": "Hinglish",
+          "text": "Agar tumhara phone charge par hai to thodi der baad mujhe call karna."
+        },
+        {
+          "test": "test_a_india14_suite",
+          "language": "Hindi",
+          "text": "बेटा, रात का खाना बन गया है, जल्दी से हाथ-पैर धोकर डाइनिंग टेबल पर आ जाओ।"
+        },
+        {
+          "test": "test_b_bolewara_english",
+          "language": "English",
+          "text": "We have sent JD for Customer Service cum Accounts Executive to ur mail id, For details contact us"
+        }
+      ],
+      "false_negatives": [
+        {
+          "test": "test_a_india14_suite",
+          "language": "Hindi",
+          "text": "रेलवे टिकट बुकिंग फ्रॉड अलर्ट: आपकी आईआरसीटीसी आईडी ब्लॉक हो गई है। अनब्लॉक करने के लिए लिंक खोलें।"
+        },
+        {
+          "test": "test_b_bolewara_english",
+          "language": "English",
+          "text": "Your PayPal account has been limited. Log in to resolve this issue using this official-looking link."
+        },
+        {
+          "test": "test_b_bolewara_english",
+          "language": "English",
+          "text": "In The Simpsons Movie released in July 2007 name the band that died at the start of the film? A-Green Day, B-Blue Day, C-Red Day. (Send A, B or C)"
+        },
+        {
+          "test": "test_b_bolewara_english",
+          "language": "English",
+          "text": "INTERFLORA - It's not too late to order Interflora flowers for christmas call 0800 505060 to place your order before Midnight tomorrow."
+        },
+        {
+          "test": "test_b_bolewara_english",
+          "language": "English",
+          "text": "Guess who am I?This is the first time I created a web page WWW.ASJESUS.COM read all I wrote. I'm waiting for your opinions. I want to be your friend 1/1"
+        },
+        {
+          "test": "test_b_bolewara_english",
+          "language": "English",
+          "text": "LookAtMe!: Thanks for your purchase of a video clip from LookAtMe!, you've been charged 35p. Think you can do better? Why not send a video in a MMSto 32323."
+        }
+      ],
+      "false_positive_total": 27,
+      "false_negative_total": 6
+    },
+    "stress_d": {
+      "false_positives": [
+        {
+          "test": "stress_d_shade63_legit",
+          "language": "English",
+          "text": "Money sent successfully! Rs 250 transferred to BigBasket using BHIM UPI UPI. Your bank account ending 0001 has been debited. Ref: TXN2652535604."
+        },
+        {
+          "test": "stress_d_shade63_legit",
+          "language": "English",
+          "text": "Naukri.com: Your profile matches a Marketing Manager job at Ola in Hyderabad. Salary: up to Rs 18 LPA. Apply now before the deadline on 15-May-2026. Easy apply with your saved resume."
+        },
+        {
+          "test": "stress_d_shade63_legit",
+          "language": "English",
+          "text": "HDFC Bank Alert: Rs 380 debited from account ending 6789 at Amazon on 07-May. Available balance: Rs Rs 12,450. If not done by you, call HDFC Bank helpline immediately."
+        },
+        {
+          "test": "stress_d_shade63_legit",
+          "language": "English",
+          "text": "Your vehicle insurance policy has been renewed for one year. Policy number: TXN2587004417. Sum insured: Rs 5 lakh. For claims, call the official insurer helpline. Drive safe!"
+        },
+        {
+          "test": "stress_d_shade63_legit",
+          "language": "English",
+          "text": "Bank of Baroda Alert: Rs 3,500 debited from account ending 3421 at Myntra on 03-May. Available balance: Rs Rs 56,200. If not done by you, call Bank of Baroda helpline immediately."
+        },
+        {
+          "test": "stress_d_shade63_legit",
+          "language": "English",
+          "text": "Dear customer, your Bank of Baroda credit card bill payment of Rs 250 is due on the 5th. Auto-pay is enabled. No action needed. For details, visit the Bank of Baroda mobile app."
+        },
+        {
+          "test": "stress_d_shade63_legit",
+          "language": "English",
+          "text": "Yes Bank credit card: Rs 1,500 billed at Flipkart on 07-May-2026. Total outstanding: Rs 45,670. Min due: Rs 500. Due date: 5th of next month. Pay via Yes Bank app or website."
+        },
+        {
+          "test": "stress_d_shade63_legit",
+          "language": "English",
+          "text": "Cashback of Rs 30 credited to your BHIM UPI wallet for your transaction at Blinkit. Valid for 30 days. View offers in the BHIM UPI Rewards section."
+        },
+        {
+          "test": "stress_d_shade63_legit",
+          "language": "English",
+          "text": "HDFC Bank: OTP for your UPI registration is 566937. Valid for 5 minutes. Do not share with anyone. If not requested by you, your number is safe — no action needed."
+        },
+        {
+          "test": "stress_d_shade63_legit",
+          "language": "English",
+          "text": "Money sent successfully! Rs 450 transferred to Swiggy using Paytm UPI. Your bank account ending 8901 has been debited. Ref: TXN2942302789."
+        }
+      ],
+      "false_negatives": [
+        {
+          "test": "stress_d_shade63_scams",
+          "language": "English",
+          "text": "I am Neha, a nurse working in Canada. I found your profile online. I have valuable assets worth crores I wish to transfer to India. Help me and I will share 40% with you."
+        },
+        {
+          "test": "stress_d_shade63_scams",
+          "language": "English",
+          "text": "My love, I am a widow living in London with assets worth crores. I want to relocate to India and be with you. I just need Rs 1 lakh to complete legal formalities. Please trust me."
+        },
+        {
+          "test": "stress_d_shade63_scams",
+          "language": "English",
+          "text": "My love, I am a widow living in USA with assets worth crores. I want to relocate to India and be with you. I just need Rs 15,000 to complete legal formalities. Please trust me."
+        },
+        {
+          "test": "stress_d_shade63_scams",
+          "language": "English",
+          "text": "I have sent you a gift package from Germany full of expensive items. The courier is holding it and asking for Rs 2 lakh in customs fees. Please pay it and I will reimburse you fully."
+        },
+        {
+          "test": "stress_d_shade63_scams",
+          "language": "English",
+          "text": "Your webcam was hacked using a RAT installed 3 months ago. We have intimate footage of you. Transfer Rs 75,000 via PhonePe within 90 minutes or it goes viral on social media."
+        },
+        {
+          "test": "stress_d_shade63_scams",
+          "language": "English",
+          "text": "I am Pooja, an army officer deployed abroad in Australia. I have discovered Rs 20,000 in gold and cash here. Help me transfer it to India safely and I will give you 30% of everything."
+        },
+        {
+          "test": "stress_d_shade63_scams",
+          "language": "English",
+          "text": "Urgent notice: TRAI has registered a First Information Report against you for drug trafficking. Sub-Inspector Suresh Kumar is handling your case. Do not inform family or it will be treated as obstruction."
+        },
+        {
+          "test": "stress_d_shade63_scams",
+          "language": "English",
+          "text": "I have sent you a gift package from Canada full of expensive items. The courier is holding it and asking for Rs 30,000 in customs fees. Please pay it and I will reimburse you fully."
+        },
+        {
+          "test": "stress_d_shade63_scams",
+          "language": "English",
+          "text": "My dear, I am in hospital in Canada after an accident. I have no family here. Please send Rs 2 lakh for my treatment and I promise to repay you as soon as I recover and return."
+        },
+        {
+          "test": "stress_d_shade63_scams",
+          "language": "English",
+          "text": "Your webcam was hacked using a RAT installed 3 months ago. We have intimate footage of you. Transfer Rs 10,000 via PhonePe within 1 hour or it goes viral on social media."
+        }
+      ],
+      "false_positive_total": 2777,
+      "false_negative_total": 50
+    }
+  },
+  "data": {
+    "train": {
+      "rows": 5143,
+      "scam": 1788,
+      "by_language": {
+        "English": 3397,
+        "Hinglish": 875,
+        "Hindi": 871
+      },
+      "by_source": {
+        "india14": 2594,
+        "bolewara": 2549
+      }
+    },
+    "validation": {
+      "rows": 858,
+      "scam": 298,
+      "by_language": {
+        "English": 604,
+        "Hindi": 129,
+        "Hinglish": 125
+      },
+      "by_source": {
+        "bolewara": 452,
+        "india14": 406
+      }
+    },
+    "test_a_india14_suite": {
+      "rows": 300,
+      "scam": 150,
+      "by_language": {
+        "English": 100,
+        "Hindi": 100,
+        "Hinglish": 100
+      },
+      "by_source": {
+        "india14_suite": 300
+      }
+    },
+    "test_b_bolewara_english": {
+      "rows": 751,
+      "scam": 147,
+      "by_language": {
+        "English": 751
+      },
+      "by_source": {
+        "bolewara": 751
+      }
+    },
+    "test_c_bolewara_hinglish": {
+      "rows": 35,
+      "scam": 14,
+      "by_language": {
+        "Hinglish": 35
+      },
+      "by_source": {
+        "bolewara": 35
+      }
+    },
+    "stress_d_shade63_legit": {
+      "rows": 5600,
+      "scam": 0,
+      "by_language": {
+        "English": 5600
+      },
+      "by_source": {
+        "shade63": 5600
+      }
+    },
+    "stress_d_shade63_scams": {
+      "rows": 1000,
+      "scam": 1000,
+      "by_language": {
+        "English": 1000
+      },
+      "by_source": {
+        "shade63": 1000
+      }
+    }
+  },
+  "dropped_train_rows_matching_tests": 0,
+  "fitted_on": "train split only (validation kept out so its score stays honest)"
+}
