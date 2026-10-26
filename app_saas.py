@@ -8,8 +8,10 @@ import pandas as pd
 import streamlit as st
 from cyberlens.data import ROOT
 from cyberlens.predict import Predictor
-from cyberlens.ui_helpers import (CALL_THRESHOLD, CONFIDENT_THRESHOLD, EXAMPLES, THRESHOLD_SOURCE, classify_both,
-                                  friendly, parent_category, sparse_explanation, sparse_model, tips, verdict)
+from cyberlens.ui_helpers import (CALL_THRESHOLD, CONFIDENT_THRESHOLD, EXAMPLES, GATE_DISCLAIMER, NOT_SCAM_BELOW,
+                                  PROBABLY_NOT_BELOW, THRESHOLD_SOURCE, UNCLEAR_BELOW, classify_both, friendly,
+                                  gate_band, load_scam_gate, parent_category, scam_probability, sparse_explanation,
+                                  sparse_model, tips, verdict)
 
 st.set_page_config(page_title="CyberLens", page_icon=":material/shield:", layout="wide",
                    initial_sidebar_state="collapsed")
@@ -60,7 +62,12 @@ textarea { font-size: 1.15rem !important; line-height: 1.55 !important; }
 .conf { align-self: flex-start; display: inline-flex; align-items: center; gap: 0.45rem; padding: 0.4rem 0.85rem; border-radius: 999px;
   font-weight: 600; font-size: 0.95rem; }
 .conf.sure { background: #DCFCE7; color: #166534; } .conf.maybe { background: #F1F5F9; color: #475569; }
-.conf.safe { background: #DCFCE7; color: #166534; }
+.conf.safe { background: #DCFCE7; color: #166534; } .conf.lean { background: #ECFDF5; color: #047857; }
+.conf.unsure { background: #FEF3C7; color: #92400E; }
+.disclaimer { margin: 1rem 0 0; padding: 0.8rem 1rem; border-radius: 12px; background: #F8FAFC; border: 1px solid #E2E8F0;
+  color: #475569; font-size: 0.95rem; }
+.closest { margin: 0.9rem 0 0; color: #64748B; font-size: 0.95rem; }
+.closest summary { cursor: pointer; font-weight: 600; }
 .conf i { width: 8px; height: 8px; border-radius: 50%; background: currentColor; display: inline-block; }
 .note { color: #475569; font-size: 1.05rem; margin: 0.9rem 0 0; }
 .tips { list-style: none; padding: 0; margin: 1.2rem 0 0; }
@@ -88,6 +95,12 @@ def get_predictor(backend):
     return Predictor(backend=backend)
 
 
+@st.cache_resource(show_spinner=False)
+def get_scam_gate():
+    # TF-IDF scam/not-scam model (CPU); None if the model file is missing, and then the old verdict is used.
+    return load_scam_gate()
+
+
 def encoder_device():
     import torch
     return f"GPU ({torch.cuda.get_device_name(0)})" if torch.cuda.is_available() else "CPU"
@@ -103,7 +116,23 @@ def result_card(final):
         return (f'<div class="card result"><div class="label">Result</div><div class="empty">'
                 f'<div class="ring">{SHIELD}</div><div>Your result will appear here</div>'
                 f'<div class="small">Paste a message on the left and press <b>Check message</b>.</div></div></div>')
-    if final["benign"]:
+    closest = final.get("closest")
+    closest_html = (f'<details class="closest"><summary>Model&#39;s closest category (low relevance)</summary>'
+                    f'{html.escape(friendly(closest["label"]))} ({closest["score"]:.0%})</details>') if closest else ""
+    disclaimer = f'<p class="disclaimer">{html.escape(GATE_DISCLAIMER)}</p>'
+    if final.get("tier") in ("not", "probably_not"):
+        sure = final["tier"] == "not"
+        pill = ('<span class="conf safe"><i></i>Looks safe</span>' if sure else
+                '<span class="conf lean"><i></i>Probably safe</span>')
+        body = (f'<div class="kicker">Result</div><div class="verdict">{html.escape(final["headline"])}</div>{pill}'
+                '<p class="note">If anyone asks for an OTP, PIN, password or money, stop and check with someone you '
+                f'trust.</p>{disclaimer}{closest_html}')
+    elif final.get("tier") == "unclear":
+        body = (f'<div class="kicker">Result</div><div class="verdict">{html.escape(final["headline"])}</div>'
+                '<span class="conf unsure"><i></i>Not sure</span>'
+                '<p class="note">Some signs point both ways. Do not click links, share codes or send money until you '
+                f'have checked through official channels.</p>{disclaimer}{closest_html}')
+    elif final["benign"]:
         body = ('<div class="kicker">Result</div><div class="verdict">No clear sign of a common scam</div>'
                 '<span class="conf safe"><i></i>Looks safe</span>'
                 '<p class="note">Still be careful: if anyone asks for an OTP, PIN, password or money, stop and check '
@@ -155,11 +184,15 @@ if submitted:
                 st.session_state.loaded.add(backend)
             start = time.perf_counter()
             result = classify_both(predictor, st.session_state.text)
+            gate = get_scam_gate()
+            result["scam_p"] = scam_probability(gate, st.session_state.text) if gate is not None else None
+            result["raw"] = st.session_state.text
             result["ms"], result["backend"] = (time.perf_counter()-start)*1000, backend
         st.session_state.result = result
 
 result = st.session_state.get("result")
-final = verdict(result["complaint"], result["call_scam"], CONFIDENT_THRESHOLD, text=result["masked"]) if result else None
+final = verdict(result["complaint"], result["call_scam"], CONFIDENT_THRESHOLD, text=result["masked"],
+                scam_p=result.get("scam_p"), raw_text=result.get("raw")) if result else None
 with right:
     st.html(result_card(final))
 
@@ -174,7 +207,12 @@ with st.expander("Details for experts"):
     st.selectbox("Model", list(MODELS), key="model", help="Fast mode skips the transformer encoder.")
     if result:
         device = encoder_device() if result["backend"] == "fusion" else "CPU"
-        st.caption(f"Inference time {result['ms']:.0f} ms (both models) · encoder on {device}")
+        st.caption(f"Inference time {result['ms']:.0f} ms (all models) · encoder on {device}")
+        if result.get("scam_p") is not None:
+            st.markdown(f"**Scam / not-scam gate** · TF-IDF v2 · scam probability {result['scam_p']:.1%} "
+                        f"(band: {gate_band(result['scam_p']).replace('_', ' ')})"
+                        + (" · *decides scam vs not-scam*" if not final.get("narrative") else
+                           " · *not applied: the text reads like a description of an incident*"))
         st.markdown("**Masked text that was classified**")
         st.code(result["masked"], language=None, wrap_lines=True)
         predictor = get_predictor(result["backend"])
@@ -198,7 +236,11 @@ with st.expander("Details for experts"):
     st.html(f"""<p class="small">Complaint model: 39 subtypes, official test macro-F1 0.2745 and accuracy 0.56
 (fast mode 0.264 / 0.55); most reliable on UPI, card and net-banking fraud. It has no "not a scam" class.
 "Very likely" needs a complaint score of at least {CONFIDENT_THRESHOLD:.3f} ({THRESHOLD_SOURCE}; selective-prediction
-rule on validation, measured on the sparse model) or a strong police-scam call score. Scores are uncalibrated.</p>""")
+rule on validation, measured on the sparse model) or a strong police-scam call score. Scores are uncalibrated.
+Scam vs not-scam is decided by a separate TF-IDF model trained on English, Hinglish and Hindi SMS-style messages:
+below {NOT_SCAM_BELOW:.2f} "Not a scam", below {PROBABLY_NOT_BELOW:.2f} "Probably not", below {UNCLEAR_BELOW:.2f}
+"Unclear" (bands checked on its validation set). Descriptions of an incident ("I lost…", "my account was hacked")
+and texts under four words are never called "not a scam".</p>""")
 
 st.html('<div class="foot">CyberLens is a research prototype and can be wrong. It is not legal or financial advice. '
         'For help, call the national cyber fraud helpline 1930.</div>')

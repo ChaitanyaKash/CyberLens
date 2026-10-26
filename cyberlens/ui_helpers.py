@@ -26,6 +26,45 @@ POLICE_CUES = re.compile(r"\b(?:police|cbi|ncb|ed|acp|dcp|cyber ?cell|crime bran
 # Heuristic and deliberately low: wrongly reassuring a victim is worse than a vague answer.
 BENIGN_CEILING = 0.25
 
+# Scam/not-scam gate: TF-IDF v2 (cyberlens/scam_binary_v2.py), trained on SMS-style messages.
+# Band edges on its scam probability; tuned on the v2 validation set (see reports/scam_gate_bands.json).
+SCAM_GATE_PATH = ROOT / "models/scam_binary_v2_tfidf.joblib"
+NOT_SCAM_BELOW = 0.10
+PROBABLY_NOT_BELOW = 0.30
+UNCLEAR_BELOW = 0.60
+GATE_DISCLAIMER = ("This is an automated estimate from a model trained mostly on SMS-style messages. It can be wrong. "
+                   "Never share OTPs, PINs or passwords, and if in doubt, verify through official channels or call "
+                   "1930 / cybercrime.gov.in.")
+# The gate only knows messages, not victims describing what happened ("I lost 5000 via UPI…"), and it scores
+# most of those as harmless. A first-person or third-person account of an incident is therefore never told
+# "not a scam"; it keeps the complaint-model result.
+NARRATIVE_CUES = re.compile(
+    r"\b(?:i|we)\s+(?:have\s+|had\s+|was\s+|were\s+|am\s+|just\s+)?(?:received|got|lost|paid|sent|transferred|"
+    r"clicked|shared|gave|given|installed|downloaded|applied|invested|ordered|bought|registered|entered|"
+    r"asked|told|cheated|scammed|duped|tricked|blackmailed|threatened|harassed|hacked|blocked|called|contacted)\b"
+    r"|\b(?:my|our)\b(?:\s+\S+){0,4}\s+(?:was|were|has been|have been|got|is|are)\s+(?:hacked|blocked|debited|"
+    r"deducted|stolen|misused|compromised|frozen|withdrawn|transferred|changed|taken|used|leaked)\b"
+    r"|\b(?:someone|somebody|a person|a man|a woman|a lady|a guy|the caller|caller|fraudster|scammer|they|he|she|"
+    r"unknown number|unknown person)\s+(?:has\s+|had\s+|then\s+)?(?:called|messaged|texted|asked|told|said|sent|"
+    r"took|cheated|threatened|blackmailed|hacked|deducted|debited|withdrew|transferred|claimed|pretended)\b"
+    r"|\b(?:asked|told|forced|convinced|tricked|cheated)\s+me\b|\bfrom my\s+(?:\S+\s+){0,2}(?:account|card|wallet)\b"
+    r"|\b(?:mujhe|mujhko|humein|hume|hamein)\b.{0,50}?\b(?:call|phone|message|msg|sms|link|otp)\b"
+    r"|\b(?:maine|mene|humne|hamne)\b"
+    r"|\b(?:mere|mera|meri|hamare|hamara)\s+(?:\S+\s+){0,3}(?:account|khata|khate|card|paise|paisa|number|"
+    r"id|whatsapp|instagram|facebook|upi)\b"
+    r"|\bcall\s+(?:aaya|aya|aayi|ayi)\b|\b(?:ho gaye|ho gayi|kat gaye|kat gaya|nikal gaye|chale gaye)\b"
+    # Naming the crime itself: short complaints ("TOTAL INTERNET BANKING FRAUD OF RS") have no pronoun.
+    r"|\b(?:fraud\w*|scam(?:med|mer|mers)?|cheat\w*|hack(?:ed|er|ers|ing)?|stolen|victim|complain\w*|blackmail\w*|"
+    r"harass\w*|abus\w*|extort\w*|fake|impersonat\w*|caller informed|dhokha\w*|thagi|fir|stole|theft|thief|"
+    r"took away|money debited|amount debited)\b"
+    # Introductions and help requests typical of complaints, not of the scam messages themselves.
+    r"|\bmy name is\b|\bi am\s+\w+(?:\s+\w+)?\s+from\b|\b(?:contacted|approached|called|messaged|threatened)\s+me\b"
+    r"|\b(?:please\s+)?help me\b", re.I)
+# A message the gate calls harmless still reads "Unclear" when the call model is this sure of a scam type.
+CALL_STRONG = 0.95
+# Fragments ("OTP l", "Credit card no") are too short to call harmless; they read "Unclear" at best.
+MIN_WORDS_NOT_SCAM = 4
+
 HELPLINE = "If you lost money or shared details, call **1930** at once or report at **cybercrime.gov.in**."
 
 FRIENDLY = {
@@ -119,7 +158,82 @@ def tips(label):
     return (out or [TIPS["general"]])[:2]
 
 
-def verdict(complaint, call, threshold=FALLBACK_THRESHOLD, call_threshold=CALL_THRESHOLD, text=None):
+def load_scam_gate(path=SCAM_GATE_PATH):
+    """The TF-IDF scam/not-scam pipeline, or None when the model file is missing."""
+    import joblib
+    try:
+        return joblib.load(path)["model"]
+    except (OSError, KeyError, EOFError):
+        return None
+
+
+def scam_probability(gate, text):
+    return float(gate.predict_proba([text])[0, 1])
+
+
+def is_narrative(text):
+    """True when the text reads like someone describing an incident rather than the message itself."""
+    return bool(NARRATIVE_CUES.search(str(text)))
+
+
+def gate_band(p):
+    if p < NOT_SCAM_BELOW:
+        return "not"
+    if p < PROBABLY_NOT_BELOW:
+        return "probably_not"
+    return "unclear" if p < UNCLEAR_BELOW else "scam"
+
+
+def verdict(complaint, call, threshold=FALLBACK_THRESHOLD, call_threshold=CALL_THRESHOLD, text=None,
+            scam_p=None, raw_text=None):
+    """Combine the models into one plain-language verdict.
+
+    Without `scam_p` this is the two-model verdict below. With `scam_p` (the gate's scam probability for
+    `raw_text`) a message can also read "Not a scam" / "Probably not a scam" / "Unclear"; see gated_verdict.
+    """
+    base = _two_model_verdict(complaint, call, threshold, call_threshold, text)
+    if scam_p is None:
+        return {**base, "tier": None, "scam_p": None}
+    return gated_verdict(base, complaint, call, scam_p, raw_text if raw_text is not None else text,
+                         threshold, call_threshold)
+
+
+def gated_verdict(base, complaint, call, scam_p, raw_text, threshold=FALLBACK_THRESHOLD, call_threshold=CALL_THRESHOLD):
+    """The gate alone decides scam vs not-scam; the other models only pick the scam type.
+
+    - Victim narratives are never told "not a scam": they get the scam-type result, without the old
+      "no clear sign" reassurance (the gate replaces that logic).
+    - Gate >= UNCLEAR_BELOW: scam. The type is the police call label when the police override holds
+      (confident police call + police wording), otherwise the complaint subtype.
+    - UNCLEAR_BELOW > gate >= PROBABLY_NOT_BELOW: "Unclear".
+    - Gate below PROBABLY_NOT_BELOW: "Not a scam" / "Probably not a scam", unless the call model is at
+      least CALL_STRONG sure of a scam label or the text has fewer than MIN_WORDS_NOT_SCAM words ("Unclear").
+    """
+    complaint_top = complaint["top"][0] if complaint else None
+    closest = {"label": complaint_top["label"], "score": complaint_top["score"]} if complaint_top else None
+    if base["task"] == "call_scam" and not base["benign"]:
+        scam_type = base
+    else:
+        scam_type = {"task": "complaint", "label": complaint_top["label"], "score": complaint_top["score"],
+                     "confident": complaint_top["score"] >= threshold, "headline": friendly(complaint_top["label"]),
+                     "benign": False}
+    if is_narrative(raw_text):
+        return {**scam_type, "tier": None, "scam_p": scam_p, "narrative": True}
+    band = gate_band(scam_p)
+    if band == "scam":
+        return {**scam_type, "tier": None, "scam_p": scam_p}
+    unclear = {"task": "scam_gate", "label": "unclear", "score": scam_p, "confident": False, "benign": False,
+               "headline": "Unclear — please review carefully", "tier": "unclear", "scam_p": scam_p, "closest": closest}
+    call_top = call["top"][0] if call else None
+    too_short = len(str(raw_text).split()) < MIN_WORDS_NOT_SCAM
+    if band == "unclear" or too_short or (call_top and call_top["label"] != "none" and call_top["score"] >= CALL_STRONG):
+        return unclear
+    return {"task": "scam_gate", "label": "not_scam", "score": 1 - scam_p, "confident": band == "not",
+            "benign": True, "headline": "Not a scam" if band == "not" else "Probably not a scam",
+            "tier": band, "scam_p": scam_p, "closest": closest}
+
+
+def _two_model_verdict(complaint, call, threshold=FALLBACK_THRESHOLD, call_threshold=CALL_THRESHOLD, text=None):
     """Combine both models into one plain-language verdict.
 
     `complaint` and `call` are Predictor prediction dicts. The call model wins when it confidently

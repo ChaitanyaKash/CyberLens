@@ -5,8 +5,9 @@ from pathlib import Path
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
 from sklearn.pipeline import FeatureUnion, Pipeline
-from cyberlens.ui_helpers import (EXAMPLES, FALLBACK_THRESHOLD, confident_threshold, friendly, parent_category,
-                                  sparse_explanation, subtype, tips, verdict)
+from cyberlens.ui_helpers import (EXAMPLES, FALLBACK_THRESHOLD, SCAM_GATE_PATH, confident_threshold, friendly,
+                                  is_narrative, load_scam_gate, parent_category, scam_probability, sparse_explanation,
+                                  subtype, tips, verdict)
 
 
 def prediction(label, score):
@@ -55,6 +56,62 @@ class UiHelperTests(unittest.TestCase):
         cbi = "Main CBI officer bol raha hoon, aap digital arrest mein hain."
         self.assertEqual(verdict(card, arrest, .975, text=cbi)["task"], "call_scam")
         self.assertEqual(verdict(card, arrest, .975)["task"], "call_scam")
+
+    def test_gate_decides_scam_or_not(self):
+        other = prediction("Any Other Cyber Crime :: Other", .2)
+        call_none = prediction("none", .9)
+        chat = "Kal office nahi aa paunga, tabiyat theek nahi hai."
+        sure = verdict(other, call_none, .975, text=chat, scam_p=.02, raw_text=chat)
+        self.assertEqual((sure["tier"], sure["headline"], sure["benign"]), ("not", "Not a scam", True))
+        self.assertEqual(sure["closest"]["label"], other["top"][0]["label"])
+        self.assertEqual(verdict(other, call_none, .975, scam_p=.2, raw_text=chat)["tier"], "probably_not")
+        self.assertEqual(verdict(other, call_none, .975, scam_p=.45, raw_text=chat)["tier"], "unclear")
+        # The gate replaces the call model's `none` reassurance: gate says scam, so no "no clear sign".
+        scam = verdict(other, call_none, .975, scam_p=.9, raw_text=chat)
+        self.assertEqual((scam["task"], scam["benign"], scam["tier"]), ("complaint", False, None))
+        # A very sure scam call turns "not a scam" into "unclear"; a merely likely one does not.
+        self.assertEqual(verdict(other, prediction("other_scam", .96), .975, scam_p=.02, raw_text=chat)["tier"], "unclear")
+        self.assertEqual(verdict(other, prediction("other_scam", .9), .975, scam_p=.02, raw_text=chat)["tier"], "not")
+        # Fragments are never called harmless.
+        self.assertEqual(verdict(other, call_none, .975, scam_p=.02, raw_text="Credit card no")["tier"], "unclear")
+
+    def test_gate_never_reassures_a_victim_narrative(self):
+        upi = prediction("Online Financial Fraud :: UPI Related Frauds", .6)
+        story = "I entered my UPI PIN on a payment request and Rs 18,500 was debited from my account."
+        self.assertTrue(is_narrative(story))
+        result = verdict(upi, prediction("none", .9), .975, scam_p=.05, raw_text=story)
+        self.assertFalse(result["benign"])
+        self.assertEqual((result["task"], result["tier"]), ("complaint", None))
+        for text in ("Mujhe bank ke naam se call aaya, OTP bata diya", "My Instagram account was hacked last night",
+                     "TOTAL INTERNET BANKING FRAUD OF RS"):
+            self.assertTrue(is_narrative(text), text)
+        for text in ("Mummy, main 8 baje tak ghar aa jaunga.", "Your OTP for Flipkart login is 482913.",
+                     "HDFC Bank: Rs 500 debited from a/c XX1234. Avl bal Rs 12,300."):
+            self.assertFalse(is_narrative(text), text)
+
+    def test_police_type_only_after_gate_says_scam(self):
+        card = prediction("Online Financial Fraud :: DebitCredit Card FraudSim Swap Fraud", .9)
+        arrest = prediction("police_digital_arrest", .87)
+        cbi = "Main CBI officer bol raha hoon, aap digital arrest mein hain, video call pe rahiye."
+        self.assertEqual(verdict(card, arrest, .975, text=cbi, scam_p=.9, raw_text=cbi)["task"], "call_scam")
+        otp = "Credit card ke reward points expire ho rahe hain, OTP bata do abhi."
+        self.assertEqual(verdict(card, arrest, .975, text=otp, scam_p=.9, raw_text=otp)["task"], "complaint")
+
+    @unittest.skipUnless(SCAM_GATE_PATH.exists(), "scam gate model not trained on this machine")
+    def test_saved_gate_on_typical_messages(self):
+        gate = load_scam_gate()
+        other, call_none = prediction("Any Other Cyber Crime :: Other", .2), prediction("none", .9)
+        def tier(text):
+            return verdict(other, call_none, .975, scam_p=scam_probability(gate, text), raw_text=text)
+        self.assertIn(tier("Kal office nahi aa paunga, tabiyat theek nahi hai.")["tier"], ("not", "probably_not"))
+        self.assertIn(tier("HDFC Bank: Rs 500 debited from a/c XX1234 on 26-Oct. Avl bal Rs 12,300. "
+                           "Not you? Call 18002586161.")["tier"], ("not", "probably_not"))
+        kyc = tier("Dear customer your SBI KYC has expired, update now at sbi-kyc-update.in or account will be "
+                   "blocked today")
+        self.assertEqual((kyc["tier"], kyc["benign"]), (None, False))
+        story = tier("A buyer on OLX sent me a payment request on PhonePe. I entered my UPI PIN and Rs 18,500 was "
+                     "debited instead.")
+        self.assertFalse(story["benign"])
 
     def test_explanation_ranks_class_specific_ngrams(self):
         texts = ["upi pin debited money", "upi request pin", "instagram hacked password", "account hacked login"] * 3
