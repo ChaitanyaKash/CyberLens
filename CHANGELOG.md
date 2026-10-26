@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026-10-26 (scam/not-scam classifier and interfaces)
+
+- Added local Streamlit interfaces: a simple layout (`app.py`) and a product-page layout (`app_saas.py`), with plain-language verdicts, safety tips and the national helpline.
+- Restricted the call model's police verdict to confident matches whose text contains police or authority wording.
+- Added a walkthrough notebook for the complaint and call classifiers.
+- Added a binary scam/not-scam classifier for English, Hinglish and Hindi SMS-style messages (`cyberlens/scam_binary.py`, `cyberlens/scam_binary_v2.py`), with grouped splits and a template-grouped stress set. v2 reduced false alarms on unseen legitimate bank and OTP alerts from 56.5% to 0.8%.
+- The product-page interface now uses this classifier as the sole scam/not-scam decision, with confidence-graded wording, a disclaimer and safeguards that prevent incident descriptions from being shown as "not a scam".
+
 ## 2026-10-21 (complaint model update)
 
 - Added the `official` complaint training protocol, which trains on all of `train.csv` without consulting `test.csv`, and keeps plurality labels for repeated training templates with at least 60% label agreement.

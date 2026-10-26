@@ -11,6 +11,7 @@ reports/*
 !reports/RESULTS.md
 !reports/data_audit.json
 !reports/*_baseline.json
+!reports/scam_binary_v2.json
 !reports/*_word2vec.json
 !reports/*_subword.json
 !reports/*_transformer.json

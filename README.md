@@ -102,6 +102,16 @@ A browser interface for classifying new complaints and messages runs entirely on
 
 It gives a plain-language verdict that combines the complaint and call-scam models, with safety tips and the national cybercrime helpline. A collapsed details section shows the top three labels of each model, the masked text, timing and the sparse model's n-gram evidence. The champion fusion model is used when `models/complaint_fusion.joblib` is present; fast mode uses the sparse `adjusted` model on CPU. The complaint confidence threshold is read from `reports/complaint_selective.json` when available. Usage statistics collection is disabled in `.streamlit/config.toml`, and input text is not stored.
 
+In the product-page layout, a separate scam/not-scam classifier (TF-IDF v2) decides whether a message is a scam. Messages it considers legitimate are shown as "Not a scam", "Probably not a scam" or "Unclear" with a disclaimer; the complaint model's closest category remains available but collapsed. Descriptions of an incident, texts naming the offence and texts under four words are never shown as "not a scam". Train the classifier with:
+
+```powershell
+python -m cyberlens.scam_binary_v2 tfidf     # TF-IDF v2, CPU
+python -m cyberlens.scam_binary_v2 encoder   # optional xlm-roberta-base, CUDA
+python -m cyberlens.scam_binary_v2 report
+```
+
+The raw datasets are expected under `data/raw/scam_binary/`; see [the results](reports/RESULTS.md#scam-vs-not-scam-message-classifier).
+
 Predictions include ranked alternatives, class-level evaluation evidence and a review flag. Scores are uncalibrated. An experimental model that has not passed its promotion rule always requires review. Weak complaint-subtype evidence can produce a broader category suggestion.
 
 ## Experiments
