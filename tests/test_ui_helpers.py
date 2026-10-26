@@ -44,6 +44,17 @@ class UiHelperTests(unittest.TestCase):
         self.assertEqual(verdict(upi, prediction("other_scam", .95), .975)["task"], "complaint")
         self.assertTrue(verdict(prediction("Any Other Cyber Crime :: Other", .2), call_none, .975)["benign"])
         self.assertFalse(verdict(prediction("Any Other Cyber Crime :: Other", .3), call_none, .975)["benign"])
+        # Only a confident `none` reassures; a confident other_scam must not read as benign.
+        self.assertFalse(verdict(prediction("Any Other Cyber Crime :: Other", .2), prediction("other_scam", .9), .975)["benign"])
+
+    def test_police_override_needs_police_wording(self):
+        card = prediction("Online Financial Fraud :: DebitCredit Card FraudSim Swap Fraud", .9)
+        arrest = prediction("police_digital_arrest", .87)
+        bank = "Bank ke naam se call aaya ki credit card ke reward points expire ho rahe hain, OTP bata do."
+        self.assertEqual(verdict(card, arrest, .975, text=bank)["task"], "complaint")
+        cbi = "Main CBI officer bol raha hoon, aap digital arrest mein hain."
+        self.assertEqual(verdict(card, arrest, .975, text=cbi)["task"], "call_scam")
+        self.assertEqual(verdict(card, arrest, .975)["task"], "call_scam")
 
     def test_explanation_ranks_class_specific_ngrams(self):
         texts = ["upi pin debited money", "upi request pin", "instagram hacked password", "account hacked login"] * 3

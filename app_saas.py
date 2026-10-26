@@ -159,7 +159,7 @@ if submitted:
         st.session_state.result = result
 
 result = st.session_state.get("result")
-final = verdict(result["complaint"], result["call_scam"], CONFIDENT_THRESHOLD) if result else None
+final = verdict(result["complaint"], result["call_scam"], CONFIDENT_THRESHOLD, text=result["masked"]) if result else None
 with right:
     st.html(result_card(final))
 

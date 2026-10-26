@@ -92,7 +92,7 @@ if submitted:
 
 result = st.session_state.get("result")
 if result:
-    final = verdict(result["complaint"], result["call_scam"], CONFIDENT_THRESHOLD)
+    final = verdict(result["complaint"], result["call_scam"], CONFIDENT_THRESHOLD, text=result["masked"])
     with st.container(border=True):
         st.html('<span class="result-card"></span>')
         if final["benign"]:

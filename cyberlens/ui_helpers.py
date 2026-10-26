@@ -1,5 +1,6 @@
 """Helpers for the local Streamlit interface: confidence tiers, plain-language labels, explanations."""
 import json
+import re
 import numpy as np
 from .data import ROOT
 
@@ -13,6 +14,14 @@ CALL_THRESHOLD = 0.55
 # hacked-account texts scored 0.84 and 0.58 for digital arrest), so it decides the verdict only for
 # police labels at or above this score. Heuristic, set from a handful of examples.
 CALL_OVERRIDE = 0.85
+# Everyday words ("ke", "naam", "bank", "aaya", "card") also push that model to digital arrest: a bank
+# reward-points OTP call scored 0.87 without any police wording. The override therefore also needs an
+# authority or police-case word in the text. These words occur in 96% of the police training calls
+# (the rest are Aadhaar/SIM misuse lines) and in 23% of the others.
+POLICE_CUES = re.compile(r"\b(?:police|cbi|ncb|ed|acp|dcp|cyber ?cell|crime branch|cyber crime|investigation|"
+                         r"arrest(?:ed)?|warrant|fir|case|criminal|officer|inspector|thana|station|court|customs|"
+                         r"narcotics|enforcement|suspect|khilaaf|jail|giraftaar|drugs?|illegal|misuse|gande|asleel|"
+                         r"morphed|pornographic|objectionable)\b", re.I)
 # Below this complaint score, a confident `none` from the call model is shown as "no clear sign".
 # Heuristic and deliberately low: wrongly reassuring a victim is worse than a vague answer.
 BENIGN_CEILING = 0.25
@@ -110,21 +119,23 @@ def tips(label):
     return (out or [TIPS["general"]])[:2]
 
 
-def verdict(complaint, call, threshold=FALLBACK_THRESHOLD, call_threshold=CALL_THRESHOLD):
+def verdict(complaint, call, threshold=FALLBACK_THRESHOLD, call_threshold=CALL_THRESHOLD, text=None):
     """Combine both models into one plain-language verdict.
 
     `complaint` and `call` are Predictor prediction dicts. The call model wins when it confidently
-    finds a scam call; it also marks the text as benign when it says `none` and the complaint model
-    is not confident. Returns {"task", "label", "score", "confident", "headline", "benign"}.
+    finds a police scam call and `text` (the classified text, when given) contains a police cue; it
+    also marks the text as benign when it says `none` and the complaint model is not confident.
+    Returns {"task", "label", "score", "confident", "headline", "benign"}.
     """
     complaint_top = complaint["top"][0] if complaint else None
     if call is not None:
         top = call["top"][0]
         if top["score"] >= call_threshold:
-            if top["label"].startswith("police") and top["score"] >= CALL_OVERRIDE:
+            police_cue = text is None or bool(POLICE_CUES.search(text))
+            if top["label"].startswith("police") and top["score"] >= CALL_OVERRIDE and police_cue:
                 return {"task": "call_scam", "label": top["label"], "score": top["score"], "confident": True,
                         "headline": friendly(top["label"]), "benign": False}
-            if complaint_top is None or complaint_top["score"] < BENIGN_CEILING:
+            if top["label"] == "none" and (complaint_top is None or complaint_top["score"] < BENIGN_CEILING):
                 return {"task": "call_scam", "label": "none", "score": top["score"], "confident": False,
                         "headline": "No clear sign of a common scam", "benign": True}
     return {"task": "complaint", "label": complaint_top["label"], "score": complaint_top["score"],
