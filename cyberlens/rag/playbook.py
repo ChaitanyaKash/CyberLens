@@ -32,7 +32,9 @@ def immediate_steps(subtype, regime):
             steps.append(step("Report the unauthorised transaction to your bank through its official app, website, "
                               "toll-free number or branch, and keep the complaint number. Reported within 3 working days, "
                               "a third-party fraud means zero liability; within 4-7 working days your loss is capped "
-                              "(Rs 5,000 / 10,000 / 25,000 depending on the account).", "rbi_liability_2017", "rbi_liability_coop_2017"))
+                              "(Rs 5,000 for basic savings (BSBD) accounts, Rs 10,000 for other savings accounts and most "
+                              "others, Rs 25,000 for other current accounts and high-limit cards).",
+                              "rbi_liability_2017", "rbi_liability_coop_2017"))
             steps.append(step("The bank must credit the disputed amount to your account within 10 working days of your "
                               "report and settle the complaint within 90 days. If you shared your OTP or PIN, you carry "
                               "the loss only until you report it.", "rbi_liability_2017"))

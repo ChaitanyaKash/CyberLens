@@ -3,7 +3,7 @@ import datetime as dt
 from ..preprocessing import mask_sensitive
 from .config import CORPUS, INDEX
 from .embed import get_embedder
-from .generate import build_prompt, parse_answer
+from .generate import build_prompt, detect_language, parse_answer
 from .index import Index
 from .playbook import immediate_steps
 from .retrieve import DocFilter, parse_date
@@ -31,6 +31,14 @@ def expand_query(text, subtype):
         return text
     parent, _, sub = subtype.replace(" (subtype needs review)", "").partition(" :: ")
     return f"{text} ({sub or parent}; {HINTS.get(parent, '')})"
+
+
+FALLBACK_SUMMARY = {  # Used when no summary sentence from the LLM had a valid citation.
+    "en": "This looks like {fraud} on {date}. The steps and sources below follow the {rules}.",
+    "hinglish": "Yeh {fraud} ka case lagta hai ({date}). Neeche diye steps aur sources {rules} ke hisaab se hain.",
+    "hi": "यह {fraud} का मामला लगता है ({date})। "
+          "नीचे दिए गए कदम और स्रोत {rules} के अनुसार हैं।",
+}
 
 
 class GuidanceAgent:
@@ -96,18 +104,23 @@ class GuidanceAgent:
         regime = self.filter.regime(date)
         steps = immediate_steps(subtype, regime)
         hits = self.retrieve(query or expand_query(masked, subtype), subtype, date)
-        result = {"masked_text": masked, "subtype": subtype, "incident_date": date.isoformat(),
+        language = detect_language(masked)
+        result = {"masked_text": masked, "subtype": subtype, "incident_date": date.isoformat(), "language": language,
                   "liability_rules": "RBI July 2017 circular" if regime == "2017" else "RBI 2026 amendment (from 1 Jan 2027)",
                   "immediate_steps": steps, "guidance": None, "llm": None, "warnings": [],
                   "passages": [{"n": i, "chunk_id": h["chunk_id"], "text": h["text"]} for i, h in enumerate(hits, 1)]}
         narrative = None
         if self.llm is not None:
-            prompt = build_prompt(masked, subtype, date, hits, steps)
+            prompt = build_prompt(masked, subtype, date, hits, steps, language)
             try:
                 with span("llm", "LLM", llm__model_name=self.llm.name, input__value=prompt) as s:
                     raw = self.llm(prompt)
                     record(s, output__value=raw)
                 guidance, warnings = parse_answer(raw, len(hits))
+                if guidance is not None and not guidance["summary"]:
+                    guidance["summary"] = FALLBACK_SUMMARY[language].format(
+                        fraud=(subtype or "cyber fraud").split(" :: ")[-1], date=date.isoformat(),
+                        rules=result["liability_rules"])
                 result.update(guidance=guidance, llm=self.llm.name)
                 result["warnings"] += warnings
                 narrative = (guidance or {}).get("complaint_narrative")

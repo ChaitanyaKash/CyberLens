@@ -153,3 +153,43 @@ def test_tracing_records_retrieval_and_llm_spans(index, corpus, tmp_path, monkey
     assert spans["retrieve"].attributes["openinference.span.kind"] == "RETRIEVER"
     assert "retrieval.documents.0.document.id" in spans["retrieve"].attributes
     assert all("9876543210" not in str(v) for s in spans.values() for v in s.attributes.values())
+
+
+def test_summary_and_narrative_tags_are_checked():
+    raw = json.dumps({"summary": "Report in 3 days [S1, S76L]. Banks are usually kind. Refund comes in 10 days [Already Shown] [S2].",
+                      "what_to_do": ["Tell the bank [S1], [S2]", "Wait [S7]"],
+                      "complaint_narrative": "On [date] Rs [amount] left my account [S1]. I received a compensation of 85%. "
+                                             "The bank froze the money before it was moved. I request a refund."})
+    data, warnings = parse_answer(raw, n_sources=3)
+    assert data["summary"] == "Report in 3 days [S1]. Refund comes in 10 days [S2]."
+    assert data["what_to_do"] == ["Tell the bank [S1][S2]"]
+    assert data["complaint_narrative"] == "On [date] Rs [amount] left my account. I request a refund."
+    assert "dropped uncited sentence in summary" in warnings
+    assert warnings.count("dropped narrative sentence claiming money was returned") == 2
+    assert parse_answer(json.dumps({"summary": "No source here."}), 3)[0]["summary"] == ""
+
+
+def test_reply_language_is_detected_and_pinned_in_prompt():
+    from cyberlens.rag.generate import build_prompt, detect_language
+    assert detect_language("मेरे खाते से बिना अनुमति पैसे कट गए") == "hi"
+    assert detect_language("UPI se mere account se 20000 nikal gaye bina OTP ke") == "hinglish"
+    assert detect_language("Someone took money from my account through UPI") == "en"
+    prompt = build_prompt("मेरे खाते से पैसे कट गए", UPI, "2026-11-01", [], [])
+    assert "Reply in Hindi using Devanagari script." in prompt
+    assert "Reply in Hinglish (Hindi in Latin script)." in build_prompt("paise kat gaye bina OTP ke", UPI, "2026-11-01", [], [])
+    assert "[date], [amount]" in prompt
+
+
+def test_agent_reports_language_and_falls_back_to_template_summary(index, corpus, tmp_path):
+    from cyberlens.rag.agent import GuidanceAgent
+    index.save(tmp_path / "idx")
+    llm = lambda prompt: json.dumps({"summary": "Uncited claim [Already Shown].", "what_to_do": ["Report [S1]"]})
+    llm.name = "fake"
+    out = GuidanceAgent(tmp_path / "idx", corpus, llm=llm).answer("मेरे खाते से पैसे कट गए", UPI, "2026-11-01")
+    assert out["language"] == "hi" and "UPI Related Frauds" in out["guidance"]["summary"]
+    assert "है" in out["guidance"]["summary"]  # template in Devanagari
+
+
+def test_playbook_states_2017_caps_per_account_type():
+    text = " ".join(s["text"] for s in immediate_steps(UPI, "2017"))
+    assert "Rs 5,000 for basic savings (BSBD)" in text and "Rs 10,000 for other savings" in text and "Rs 25,000" in text
