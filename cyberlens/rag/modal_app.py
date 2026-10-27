@@ -17,13 +17,13 @@ image = (modal.Image.debian_slim(python_version="3.11")
 app = modal.App("cyberlens-rag", image=image)
 
 
-@app.function(gpu="T4", timeout=1200)
+@app.function(gpu="T4", timeout=900)
 def embed(texts):
     from cyberlens.rag.embed import E5Embedder
     return E5Embedder().passages(texts).tobytes()
 
 
-@app.cls(gpu="L4", timeout=1800, scaledown_window=120)
+@app.cls(gpu="T4", timeout=900, scaledown_window=60)
 class Runner:
     model: str = modal.parameter(default=LLM_MODEL)
 
