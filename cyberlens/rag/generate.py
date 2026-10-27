@@ -117,7 +117,8 @@ def parse_answer(raw, n_sources):
     data["summary"] = " ".join(summary)
     narrative = []  # The complaint goes to the police, who don't see the [S#] sources, so tags are removed.
     for sentence in SENTENCE.split(str(data.get("complaint_narrative") or "")):
-        sentence = clean_tags(CITE.sub("", sentence), n_sources, keep_placeholders=True)
+        sentence = CITE.sub("", clean_tags(sentence, n_sources, keep_placeholders=True))
+        sentence = clean_tags(sentence, n_sources, keep_placeholders=True)  # tidy the gaps left behind
         if MONEY_BACK.search(sentence) and RECEIVED.search(sentence):
             warnings.append("dropped narrative sentence claiming money was returned")
         elif sentence:

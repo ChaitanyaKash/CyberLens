@@ -36,7 +36,7 @@ class Runner:
 
     @modal.method()
     def run(self, chunks, vectors, meta, corpus_files, questions):
-        import numpy as np, pathlib, tempfile
+        import numpy as np, pathlib, tempfile, time
         from cyberlens.rag.agent import GuidanceAgent
         from cyberlens.rag.generate import OllamaLLM
         from cyberlens.rag.index import Index
@@ -46,7 +46,12 @@ class Runner:
             (tmp / "corpus" / name).write_text(text)
         Index(chunks, np.frombuffer(vectors, dtype=np.float16).reshape(len(chunks), -1).astype(np.float32), meta).save(tmp / "index")
         agent = GuidanceAgent(tmp / "index", tmp / "corpus", llm=OllamaLLM(self.model, timeout=300))
-        return [{"question": q["question"], **agent.answer(q["question"], q["subtype"], q["date"])} for q in questions]
+        out = []
+        for q in questions:
+            start = time.perf_counter()
+            answer = agent.answer(q["question"], q["subtype"], q["date"])
+            out.append({"question": q["question"], "seconds": round(time.perf_counter() - start, 1), **answer})
+        return out
 
 
 @app.local_entrypoint()

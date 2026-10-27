@@ -158,7 +158,7 @@ def test_tracing_records_retrieval_and_llm_spans(index, corpus, tmp_path, monkey
 def test_summary_and_narrative_tags_are_checked():
     raw = json.dumps({"summary": "Report in 3 days [S1, S76L]. Banks are usually kind. Refund comes in 10 days [Already Shown] [S2].",
                       "what_to_do": ["Tell the bank [S1], [S2]", "Wait [S7]"],
-                      "complaint_narrative": "On [date] Rs [amount] left my account [S1]. I received a compensation of 85%. "
+                      "complaint_narrative": "On [date] Rs [amount] left my account [S1, S2]. I received a compensation of 85%. "
                                              "The bank froze the money before it was moved. I request a refund."})
     data, warnings = parse_answer(raw, n_sources=3)
     assert data["summary"] == "Report in 3 days [S1]. Refund comes in 10 days [S2]."
