@@ -9,7 +9,8 @@ Rules:
 - Every point must end with the source number(s) it comes from, like [S2].
 - If the sources do not answer something, say so. Never guess deadlines, amounts or section numbers.
 - Never promise a refund or that money will be recovered.
-- Use simple words.
+- Use simple words. Write every list point in the same language as the summary.
+- Do not state liability cap amounts; they are shown separately.
 Return JSON only, with keys:
   "summary": one or two sentences on what happened, each ending with its source number(s),
   "your_rights": list of strings,
@@ -68,6 +69,9 @@ class OllamaLLM:
 
 TAG = re.compile(r"\[([^\[\]]*)\]")
 CITE = re.compile(r"\[S(\d+)\]")
+# The playbook states the 2017/2027 caps correctly; small models mix them up, so the LLM may not restate them.
+CAP = re.compile(r"(?:rs\.?|₹|inr|cap|limit|liabilit|रुप)[^.\n]{0,40}?\b(?:5|10|25),?000\b|"
+                 r"\b(?:5|10|25),?000\b[^.\n]{0,40}?(?:cap|limit|liabilit)", re.I)
 PLACEHOLDERS = {"date", "time", "amount", "transaction id", "complaint number", "bank", "phone number", "upi id"}
 SENTENCE = re.compile(r"(?<=[.!?।])\s+(?!\[)")
 # A narrative sentence that claims money came back is made up: the victim is still asking for help.
@@ -102,7 +106,9 @@ def parse_answer(raw, n_sources):
         kept = []
         for item in data.get(key) or []:
             item = clean_tags(item, n_sources)
-            if CITE.search(item):
+            if CAP.search(item):
+                warnings.append(f"dropped cap amount in {key}")
+            elif CITE.search(item):
                 kept.append(item)
             else:
                 warnings.append(f"dropped uncited or invalid point in {key}")
@@ -110,7 +116,9 @@ def parse_answer(raw, n_sources):
     summary = []
     for sentence in SENTENCE.split(str(data.get("summary") or "")):
         sentence = clean_tags(sentence, n_sources)
-        if CITE.search(sentence):
+        if CAP.search(sentence):
+            warnings.append("dropped cap amount in summary")
+        elif CITE.search(sentence):
             summary.append(sentence)
         elif sentence:
             warnings.append("dropped uncited sentence in summary")

@@ -193,3 +193,13 @@ def test_agent_reports_language_and_falls_back_to_template_summary(index, corpus
 def test_playbook_states_2017_caps_per_account_type():
     text = " ".join(s["text"] for s in immediate_steps(UPI, "2017"))
     assert "Rs 5,000 for basic savings (BSBD)" in text and "Rs 10,000 for other savings" in text and "Rs 25,000" in text
+
+
+def test_llm_may_not_restate_liability_caps():
+    raw = json.dumps({"summary": "Report within 3 working days [S1]. For savings accounts the cap is ₹5,000 [S1].",
+                      "your_rights": ["Your liability is limited to Rs 10000 [S2]", "Liability capped at 25,000 [S2]",
+                                      "The bank credits Rs 20,000 back within 10 working days [S2]"]})
+    data, warnings = parse_answer(raw, n_sources=3)
+    assert data["summary"] == "Report within 3 working days [S1]."
+    assert data["your_rights"] == ["The bank credits Rs 20,000 back within 10 working days [S2]"]
+    assert warnings.count("dropped cap amount in your_rights") == 2 and "dropped cap amount in summary" in warnings
