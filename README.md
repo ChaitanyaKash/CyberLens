@@ -25,10 +25,13 @@ Call classification uses template-family evaluation. Complaint classification us
 |---|---|---|---:|---:|---:|
 | call_scam | baseline | 5-fold template-family CV (frozen baseline) | 0.6308 | 0.6337 | 0.7416 |
 | complaint | adjusted | Supplied test.csv (official-train protocol) | 0.2620 | 0.2573 | 0.5512 |
+| complaint | XLM-R + sparse fusion | Supplied test.csv (official-train protocol) | 0.2745 | 0.2701 | 0.5617 |
 
 [Full comparisons and failure cases](reports/RESULTS.md). Scores are fractions, not percentages.
 
 On complaint test messages whose normalized template does not occur in `train.csv`, macro-F1 is **0.2362** versus **0.2376** for the previous default and accuracy **0.4962** versus **0.4745**. Most of the full-test macro-F1 gain comes from recurring complaint templates; see the results for the breakdown.
+
+Fusing a fine-tuned `xlm-roberta-base` encoder with the sparse `adjusted` model (`python -m cyberlens.fusion`, weight 0.4 chosen on validation) reached complaint macro-F1 **0.2745** and accuracy **0.5617** on the supplied test set. Against the `adjusted` model in the same run (0.2640 / 0.5514), the paired template-cluster bootstrap 95% interval for the macro-F1 gain is [0.0003, 0.0212] and for accuracy [0.0076, 0.0134]; on test templates absent from `train.csv` the macro-F1 gain interval is [0.0040, 0.0225]. The fusion needs encoder weights and a GPU, so `adjusted` stays the default CPU model. Details are in `reports/complaint_fusion.json`.
 
 The experimental `robust` call model reached **0.8256** clean / **0.7709** typo macro-F1 in nested family CV. It remains experimental because the paired family-bootstrap interval for clean improvement includes zero. Independent confirmation is required.
 <!-- RESULTS SUMMARY END -->
@@ -38,6 +41,10 @@ The initial exact-deduplicated call split produced macro-F1 of 1.0000. Related t
 The default complaint model (`adjusted`) trains on the whole supplied `train.csv` without consulting `test.csv` and applies a validation-selected class-prior correction to the hybrid TF-IDF classifier. Compared with the previous default, official-test macro-F1 rises from 0.2345 to 0.2620 and accuracy from 0.5014 to 0.5512. The gain is concentrated in subtypes dominated by recurring complaint templates; on test templates absent from `train.csv`, macro-F1 is unchanged within uncertainty and accuracy improves by about two points. The [results](reports/RESULTS.md) give the per-slice and per-class breakdown.
 
 Complaint classification remains challenging. Training support ranges from 23 to 15,162 examples per class. Three test labels have no trained class, and 130 normalized test templates carry conflicting labels. These cases remain in the reported test evaluation.
+
+## Guidance retrieval (RAG)
+
+After classification, a guidance agent retrieves official reporting and recovery steps from a local corpus (`rag_corpus/`). Retrieval is hybrid: BM25 and `intfloat/multilingual-e5-small` vectors fused with Reciprocal Rank Fusion, filtered by subtype and date. On 40 evaluation questions it reaches **Recall@5 0.975** and **MRR 0.907**. Answers are written by Gemma 4 E2B, cite the retrieved passages, and drop uncited points; sensitive identifiers are masked before retrieval and generation. See [docs/RAG.md](docs/RAG.md).
 
 ## Tasks and datasets
 
@@ -146,4 +153,4 @@ The default backend follows the recorded promotion criteria. Historical complain
 
 Structured masking covers selected URL, email, phone, payment and identifier patterns. Names, addresses and contextual identifiers may remain; masked text is not guaranteed anonymous. Processing and inference run locally. Raw datasets and model artifacts are excluded from version control; only trusted serialized models should be loaded.
 
-Synthetic typo tests cover a limited corruption pattern. Template-family grouping is heuristic. Performance on new scam scenarios, languages and label taxonomies requires independent data. The current scope is text classification; retrieval-based guidance and report drafting are planned extensions.
+Synthetic typo tests cover a limited corruption pattern. Template-family grouping is heuristic. Performance on new scam scenarios, languages and label taxonomies requires independent data. Retrieval scores come from 40 hand-written questions and are a sanity check, not a benchmark. Report drafting is not implemented.
