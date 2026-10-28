@@ -1,0 +1,10 @@
+Title: Unified Payments Interface Safety Shield - Safety Instructions
+Issuer: NPCI
+URL: https://www.npci.org.in/safety-feature
+Retrieved: 2026-10-27
+
+Point 1: Enter UPI PIN ONLY to deduct money from your account. UPI PIN is NOT required for receiving money.
+Point 2: Check the receiver's name on verifying the UPI ID. Do NOT pay without verification.
+Point 3: Enter UPI PIN ONLY on the app's UPI PIN page. Do NOT share UPI PIN with anyone.
+Point 4: Scan QR ONLY for making payment and NOT for receiving money.
+Point 5: Do not download any screen sharing or SMS forwarding apps when asked upon by any unknown person and without understanding its utility.

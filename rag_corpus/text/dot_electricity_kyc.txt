@@ -1,0 +1,21 @@
+Title: DoT takes action against Electricity KYC Update Scam
+Subtitle: DoT directs Pan India IMEI based blocking of 392 mobile handsets misused in cybercrime, financial frauds. Re-verification of 31,740 mobile connections linked to these mobile handsets.
+Issuer: Department of Telecommunications, Ministry of Communications (via PIB Delhi)
+Date: 17 June 2024
+URL: https://www.pib.gov.in/PressReleasePage.aspx?PRID=2025970
+Release ID: 2025970
+Transcribed from a screenshot on 2026-10-27.
+
+Department of Telecommunications (DoT) has initiated targeted actions to protect citizens in response to reports of fraudulent activities involving mobile numbers in electricity KYC update scams.
+
+[Image: two examples marked FAKE. An SMS: "Dear Consumer Your electricity power will be Disconnect At9:30PM from Office Because your last Bill Not update please call, 9831579733". A WhatsApp chat from "+91 86393...561, BSES Electricity Office, Mukesh Sharma" sending "Hello sir" and a forwarded file "BSES_Power_App.apk, 7.0 MB".]
+
+Here are the key details:
+Vigilant and alert citizens have been proactive in reporting of suspected fraud communications via the 'Chakshu-Report Suspected Fraud Communications' facility on the Sanchar Saathi portal of DoT. This helps the DoT in combating and preventing cybercrimes and financial frauds.
+Citizens reported some cases of fraudsters using SMS & WhatsApp messages related to electricity KYC updates and malicious APK files to manipulate and gain control over victims' devices.
+The DoT utilized the Chakshu portal for reporting and analyzing fraudulent activities, initially identifying five suspect numbers. The portal's AI-driven analysis revealed that 392 handsets linked to 31,740 mobile numbers were involved in such fraudulent activities.
+The DoT has directed all Telecom Service Providers (TSPs) for Pan India IMEI based blocking of 392 mobile handsets misused in cybercrime, financial frauds. It also directed them for re-verification of 31,740 mobile connections linked to these mobile handsets. Failure in re-verification will result in immediate disconnection of reported numbers and blocking of associated handsets.
+This initiative underscores the DoT's commitment to enhancing the security of Telecommunications networks and safeguarding citizens from digital frauds.
+
+About Chakshu facility on Sanchar Saathi portal:
+Chakshu is the latest addition to the citizen centric facilities already available on the Sanchar Saathi portal (www.Sancharsaathi.gov.in) of DoT. 'Chakshu' facilitates citizens report suspected fraud communication received over call, SMS, or WhatsApp with the intention of defrauding like KYC expiry or update of bank account/payment wallet/SIM/gas connection/electricity connection, sextortion, impersonation as government official/relative for sending money, disconnection of all mobile numbers by the DoT, etc.

@@ -38,3 +38,8 @@ reports/*
 *.egg-info/
 build/
 dist/
+rag_corpus/pdf/
+rag_corpus/html/
+rag_corpus/*_downloads.csv
+rag_corpus/download_status.csv
+rag_corpus/failed_links.html

@@ -1,0 +1,239 @@
+{
+  "_applies_to_every_subtype": [
+    "i4c_portal_manual",
+    "it_act_2000",
+    "bns_2023",
+    "bnss_2023",
+    "pib_ncrp_1930"
+  ],
+  "Online Financial Fraud :: UPI Related Frauds": [
+    "rbi_liability_2017",
+    "rbi_liability_coop_2017",
+    "rbi_fraudulent_ebt_2026",
+    "rbi_fraudulent_ebt_2026_pr",
+    "rbi_fraudulent_ebt_2026_feedback",
+    "rbios_2026",
+    "rbios_2026_faq",
+    "rbios_2021",
+    "rbi_tat_2019",
+    "rbi_md_digital_payment_security",
+    "rbi_md_kyc",
+    "rbi_kyc_faq",
+    "rbi_beaware",
+    "i4c_citizen_reporting_frauds",
+    "npci_upi_drm",
+    "npci_upi_safety",
+    "i4c_financial_fraud_brochure",
+    "mha_1930_launch"
+  ],
+  "Online Financial Fraud :: DebitCredit Card FraudSim Swap Fraud": [
+    "rbi_liability_2017",
+    "rbi_liability_coop_2017",
+    "rbi_fraudulent_ebt_2026",
+    "rbi_fraudulent_ebt_2026_pr",
+    "rbi_fraudulent_ebt_2026_feedback",
+    "rbios_2026",
+    "rbios_2026_faq",
+    "rbios_2021",
+    "rbi_tat_2019",
+    "rbi_md_digital_payment_security",
+    "rbi_md_cards",
+    "rbi_cards_faq",
+    "rbi_beaware",
+    "i4c_citizen_reporting_frauds",
+    "i4c_financial_fraud_brochure",
+    "mha_1930_launch",
+    "pib_chakshu_reporting"
+  ],
+  "Online Financial Fraud :: Internet Banking Related Fraud": [
+    "rbi_liability_2017",
+    "rbi_liability_coop_2017",
+    "rbi_fraudulent_ebt_2026",
+    "rbi_fraudulent_ebt_2026_pr",
+    "rbi_fraudulent_ebt_2026_feedback",
+    "rbios_2026",
+    "rbios_2026_faq",
+    "rbios_2021",
+    "rbi_tat_2019",
+    "rbi_md_digital_payment_security",
+    "rbi_md_kyc",
+    "rbi_kyc_faq",
+    "rbi_beaware",
+    "i4c_citizen_reporting_frauds",
+    "i4c_financial_fraud_brochure",
+    "mha_1930_launch"
+  ],
+  "Online Financial Fraud :: Fraud CallVishing": [
+    "rbi_liability_2017",
+    "rbi_liability_coop_2017",
+    "rbi_fraudulent_ebt_2026",
+    "rbi_fraudulent_ebt_2026_pr",
+    "rbi_fraudulent_ebt_2026_feedback",
+    "rbios_2026",
+    "rbios_2026_faq",
+    "rbios_2021",
+    "rbi_md_kyc",
+    "rbi_kyc_faq",
+    "rbi_beaware",
+    "i4c_citizen_reporting_frauds",
+    "pib_digital_arrest",
+    "pib_blackmail_digital_arrest_alert",
+    "pib_digital_arrest_steps",
+    "dot_sms_scammers",
+    "dot_electricity_kyc",
+    "dot_spoofed_calls",
+    "i4c_financial_fraud_brochure",
+    "mha_1930_launch",
+    "pib_chakshu_reporting"
+  ],
+  "Online Financial Fraud :: EWallet Related Fraud": [
+    "rbi_liability_2017",
+    "rbi_liability_coop_2017",
+    "rbi_fraudulent_ebt_2026",
+    "rbi_fraudulent_ebt_2026_pr",
+    "rbi_fraudulent_ebt_2026_feedback",
+    "rbios_2026",
+    "rbios_2026_faq",
+    "rbios_2021",
+    "rbi_tat_2019",
+    "rbi_md_digital_payment_security",
+    "rbi_md_kyc",
+    "rbi_kyc_faq",
+    "rbi_md_ppi",
+    "rbi_beaware",
+    "i4c_citizen_reporting_frauds",
+    "i4c_financial_fraud_brochure",
+    "mha_1930_launch"
+  ],
+  "Online Financial Fraud :: Business Email CompromiseEmail Takeover": [
+    "rbi_liability_2017",
+    "rbi_liability_coop_2017",
+    "rbi_fraudulent_ebt_2026",
+    "rbi_fraudulent_ebt_2026_pr",
+    "rbi_fraudulent_ebt_2026_feedback",
+    "rbios_2026",
+    "rbios_2026_faq",
+    "rbios_2021",
+    "rbi_beaware",
+    "i4c_citizen_reporting_frauds",
+    "i4c_financial_fraud_brochure",
+    "mha_1930_launch"
+  ],
+  "Online Financial Fraud :: DematDepository Fraud": [
+    "rbios_2026",
+    "rbios_2026_faq",
+    "rbios_2021",
+    "rbi_beaware",
+    "i4c_citizen_reporting_frauds",
+    "sebi_fake_trading_app",
+    "sebi_stock_guru",
+    "sebi_pump_dump",
+    "sebi_beware_investment",
+    "i4c_financial_fraud_brochure",
+    "mha_1930_launch"
+  ],
+  "Cryptocurrency Crime :: Cryptocurrency Fraud": [
+    "rbios_2026",
+    "rbios_2026_faq",
+    "rbios_2021",
+    "rbi_beaware",
+    "i4c_citizen_reporting_frauds",
+    "sebi_fake_trading_app",
+    "sebi_beware_investment",
+    "i4c_financial_fraud_brochure",
+    "mha_1930_launch"
+  ],
+  "Online and Social Media Related Crime :: Online Job Fraud": [
+    "rbios_2026",
+    "rbios_2026_faq",
+    "rbios_2021",
+    "rbi_beaware",
+    "i4c_citizen_reporting_frauds",
+    "sebi_beware_investment",
+    "i4c_financial_fraud_brochure",
+    "mha_1930_launch",
+    "pib_chakshu_reporting"
+  ],
+  "Online and Social Media Related Crime :: Cheating by Impersonation": [
+    "rbios_2026",
+    "rbios_2026_faq",
+    "rbios_2021",
+    "rbi_md_kyc",
+    "rbi_kyc_faq",
+    "rbi_beaware",
+    "i4c_citizen_reporting_frauds",
+    "pib_digital_arrest",
+    "pib_blackmail_digital_arrest_alert",
+    "pib_digital_arrest_steps",
+    "dot_spoofed_calls",
+    "sebi_fake_trading_app",
+    "sebi_stock_guru",
+    "i4c_financial_fraud_brochure",
+    "mha_1930_launch",
+    "pib_chakshu_reporting",
+    "it_rules_2021"
+  ],
+  "Online and Social Media Related Crime :: Online Matrimonial Fraud": [
+    "rbios_2026",
+    "rbios_2026_faq",
+    "rbios_2021",
+    "rbi_beaware",
+    "i4c_citizen_reporting_frauds",
+    "i4c_financial_fraud_brochure",
+    "mha_1930_launch",
+    "it_rules_2021"
+  ],
+  "Online and Social Media Related Crime :: Profile Hacking Identity Theft": [
+    "rbi_md_digital_payment_security",
+    "pib_chakshu_reporting",
+    "it_rules_2021"
+  ],
+  "Any Other Cyber Crime :: Other": [
+    "rbi_digital_lending_2025"
+  ],
+  "Crime Against Women & Children :: Cyber Blackmailing & Threatening": [
+    "rbi_digital_lending_2025",
+    "pib_digital_arrest",
+    "pib_blackmail_digital_arrest_alert",
+    "it_rules_2021"
+  ],
+  "Online and Social Media Related Crime :: Cyber Bullying  Stalking  Sexting": [
+    "rbi_digital_lending_2025",
+    "it_rules_2021"
+  ],
+  "Online and Social Media Related Crime :: EMail Phishing": [
+    "rbi_beaware",
+    "dot_sms_scammers",
+    "dot_electricity_kyc",
+    "i4c_financial_fraud_brochure",
+    "mha_1930_launch",
+    "pib_chakshu_reporting"
+  ],
+  "Online and Social Media Related Crime :: FakeImpersonating Profile": [
+    "rbi_beaware",
+    "i4c_financial_fraud_brochure",
+    "mha_1930_launch",
+    "it_rules_2021"
+  ],
+  "Cyber Attack/ Dependent Crimes :: * (Ransomware, Malware, Data Breach, Hacking/Defacement, DoS, SQLi)": [
+    "certin_directions_2022",
+    "certin_directions_faq"
+  ],
+  "Hacking  Damage to computercomputer system etc :: Unauthorised AccessData Breach": [
+    "certin_directions_2022",
+    "certin_directions_faq"
+  ],
+  "Hacking  Damage to computercomputer system etc :: Email Hacking": [
+    "certin_directions_2022",
+    "certin_directions_faq"
+  ],
+  "Sexually Obscene material :: Unspecified": [
+    "it_rules_2021"
+  ],
+  "Sexually Explicit Act :: Unspecified": [
+    "it_rules_2021"
+  ],
+  "Online and Social Media Related Crime :: Provocative Speech for unlawful acts": [
+    "it_rules_2021"
+  ]
+}

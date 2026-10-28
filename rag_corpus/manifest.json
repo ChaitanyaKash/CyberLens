@@ -1,0 +1,965 @@
+[
+  {
+    "id": "rbi_liability_2017",
+    "title": "Customer Protection - Limiting Liability of Customers in Unauthorised Electronic Banking Transactions (RBI/2017-18/15)",
+    "issuer": "RBI",
+    "date": "2017-07-06",
+    "url": "https://rbidocs.rbi.org.in/rdocs/notification/PDFs/NOTI15D620D2C4D2CA4A33AABC928CA6204B19.PDF",
+    "file": "pdf/rbi_liability_2017.pdf",
+    "type": "pdf",
+    "priority": "core",
+    "subtypes": [
+      "Online Financial Fraud :: UPI Related Frauds",
+      "Online Financial Fraud :: DebitCredit Card FraudSim Swap Fraud",
+      "Online Financial Fraud :: Internet Banking Related Fraud",
+      "Online Financial Fraud :: Fraud CallVishing",
+      "Online Financial Fraud :: EWallet Related Fraud",
+      "Online Financial Fraud :: Business Email CompromiseEmail Takeover"
+    ],
+    "note": "Zero liability if reported within 3 working days; applies to transactions up to 31 Dec 2026.",
+    "alt_urls": [
+      "https://www.rbi.org.in/commonman/Upload/English/Notification/PDFs/NOTI1506072017.PDF",
+      "https://www.rbi.org.in/commonman/Upload/English/Notification/PDFs/NOTI15D620D2C4D2CA4A33AABC928CA6204B19.PDF"
+    ],
+    "role": "rights",
+    "effective_from": "",
+    "effective_to": "2026-12-31"
+  },
+  {
+    "id": "rbi_liability_coop_2017",
+    "title": "Limiting Liability of Customers of Co-operative Banks in Unauthorised Electronic Banking Transactions (RBI/2017-18/109)",
+    "issuer": "RBI",
+    "date": "2017-12-14",
+    "url": "https://www.rbi.org.in/commonman/Upload/English/Notification/PDFs/NT109ML141217.PDF",
+    "file": "pdf/rbi_liability_coop_2017.pdf",
+    "type": "pdf",
+    "priority": "core",
+    "subtypes": [
+      "Online Financial Fraud :: UPI Related Frauds",
+      "Online Financial Fraud :: DebitCredit Card FraudSim Swap Fraud",
+      "Online Financial Fraud :: Internet Banking Related Fraud",
+      "Online Financial Fraud :: Fraud CallVishing",
+      "Online Financial Fraud :: EWallet Related Fraud",
+      "Online Financial Fraud :: Business Email CompromiseEmail Takeover"
+    ],
+    "note": "Same rules for co-operative bank customers.",
+    "alt_urls": [],
+    "role": "rights",
+    "effective_from": "",
+    "effective_to": "2026-12-31"
+  },
+  {
+    "id": "rbi_fraudulent_ebt_2026",
+    "title": "Commercial Banks - Responsible Business Conduct Third Amendment Directions, 2026 (customer protection in fraudulent EBTs, RBI/2026-27/167)",
+    "issuer": "RBI",
+    "date": "2026-06-24",
+    "url": "https://rbidocs.rbi.org.in/rdocs/notification/PDFs/NT16738E653AADCEC4217BEFFA92C050F69AD.PDF",
+    "file": "pdf/rbi_fraudulent_ebt_2026.pdf",
+    "type": "pdf",
+    "priority": "core",
+    "subtypes": [
+      "Online Financial Fraud :: UPI Related Frauds",
+      "Online Financial Fraud :: DebitCredit Card FraudSim Swap Fraud",
+      "Online Financial Fraud :: Internet Banking Related Fraud",
+      "Online Financial Fraud :: Fraud CallVishing",
+      "Online Financial Fraud :: EWallet Related Fraud",
+      "Online Financial Fraud :: Business Email CompromiseEmail Takeover"
+    ],
+    "note": "Replaces the 2017 liability rules for transactions on/after 1 Jan 2027: wider fraud scope, burden of proof on bank, small-value compensation.",
+    "alt_urls": [
+      "https://www.rbi.org.in/commonman/Upload/English/Notification/PDFs/NT16738E653AADCEC4217BEFFA92C050F69AD.PDF"
+    ],
+    "role": "rights",
+    "effective_from": "2027-01-01",
+    "effective_to": ""
+  },
+  {
+    "id": "rbi_fraudulent_ebt_2026_pr",
+    "title": "Press release: final directions on limiting customer liability in digital transactions",
+    "issuer": "RBI",
+    "date": "2026-06-24",
+    "url": "https://rbidocs.rbi.org.in/rdocs/PressRelease/PDFs/PR53300489E7BEED14CA5B9563AAFE37049AC.PDF",
+    "file": "pdf/rbi_fraudulent_ebt_2026_pr.pdf",
+    "type": "pdf",
+    "priority": "core",
+    "subtypes": [
+      "Online Financial Fraud :: UPI Related Frauds",
+      "Online Financial Fraud :: DebitCredit Card FraudSim Swap Fraud",
+      "Online Financial Fraud :: Internet Banking Related Fraud",
+      "Online Financial Fraud :: Fraud CallVishing",
+      "Online Financial Fraud :: EWallet Related Fraud",
+      "Online Financial Fraud :: Business Email CompromiseEmail Takeover"
+    ],
+    "note": "Plain-language summary of the 2026 change; landing page https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=63011",
+    "alt_urls": [
+      "https://www.rbi.org.in/commonman/Upload/English/PressRelease/PDFs/PR53300489E7BEED14CA5B9563AAFE37049AC.PDF"
+    ],
+    "role": "rights",
+    "effective_from": "",
+    "effective_to": ""
+  },
+  {
+    "id": "rbi_fraudulent_ebt_2026_feedback",
+    "title": "Feedback statement (annex) on the 2026 customer-liability directions",
+    "issuer": "RBI",
+    "date": "2026-06-24",
+    "url": "https://rbidocs.rbi.org.in/rdocs/content/pdfs/Annex24062026FULL.pdf",
+    "file": "pdf/rbi_fraudulent_ebt_2026_feedback.pdf",
+    "type": "pdf",
+    "priority": "optional",
+    "subtypes": [
+      "Online Financial Fraud :: UPI Related Frauds",
+      "Online Financial Fraud :: DebitCredit Card FraudSim Swap Fraud",
+      "Online Financial Fraud :: Internet Banking Related Fraud",
+      "Online Financial Fraud :: Fraud CallVishing",
+      "Online Financial Fraud :: EWallet Related Fraud",
+      "Online Financial Fraud :: Business Email CompromiseEmail Takeover"
+    ],
+    "note": "Explains reasoning; useful for edge cases.",
+    "alt_urls": [
+      "https://www.rbi.org.in/commonman/Upload/English/Content/PDFs/Annex24062026FULL.pdf"
+    ],
+    "role": "background",
+    "effective_from": "",
+    "effective_to": ""
+  },
+  {
+    "id": "rbios_2026",
+    "title": "Reserve Bank - Integrated Ombudsman Scheme, 2026",
+    "issuer": "RBI",
+    "date": "2026-07-01",
+    "url": "https://rbidocs.rbi.org.in/rdocs/content/pdfs/SCHEME16012026_A.pdf",
+    "file": "pdf/rbios_2026.pdf",
+    "type": "pdf",
+    "priority": "core",
+    "subtypes": [
+      "Online Financial Fraud :: UPI Related Frauds",
+      "Online Financial Fraud :: DebitCredit Card FraudSim Swap Fraud",
+      "Online Financial Fraud :: Internet Banking Related Fraud",
+      "Online Financial Fraud :: Fraud CallVishing",
+      "Online Financial Fraud :: EWallet Related Fraud",
+      "Online Financial Fraud :: Business Email CompromiseEmail Takeover",
+      "Online Financial Fraud :: DematDepository Fraud",
+      "Cryptocurrency Crime :: Cryptocurrency Fraud",
+      "Online and Social Media Related Crime :: Online Job Fraud",
+      "Online and Social Media Related Crime :: Cheating by Impersonation",
+      "Online and Social Media Related Crime :: Online Matrimonial Fraud"
+    ],
+    "note": "In force from 1 Jul 2026; replaces RB-IOS 2021. Wait 30 days after complaining to the bank (or less if bank rejects).",
+    "alt_urls": [
+      "https://www.rbi.org.in/commonman/Upload/English/Content/PDFs/SCHEME16012026_A.pdf"
+    ],
+    "role": "procedure",
+    "effective_from": "2026-07-01",
+    "effective_to": ""
+  },
+  {
+    "id": "rbios_2026_faq",
+    "title": "FAQs - Reserve Bank Integrated Ombudsman Scheme, 2026",
+    "issuer": "RBI",
+    "date": "2026-07-01",
+    "url": "https://www.rbi.org.in/commonman/Upload/English/FAQs/PDFs/RBIOS01072026.pdf",
+    "file": "pdf/rbios_2026_faq.pdf",
+    "type": "pdf",
+    "priority": "core",
+    "subtypes": [
+      "Online Financial Fraud :: UPI Related Frauds",
+      "Online Financial Fraud :: DebitCredit Card FraudSim Swap Fraud",
+      "Online Financial Fraud :: Internet Banking Related Fraud",
+      "Online Financial Fraud :: Fraud CallVishing",
+      "Online Financial Fraud :: EWallet Related Fraud",
+      "Online Financial Fraud :: Business Email CompromiseEmail Takeover",
+      "Online Financial Fraud :: DematDepository Fraud",
+      "Cryptocurrency Crime :: Cryptocurrency Fraud",
+      "Online and Social Media Related Crime :: Online Job Fraud",
+      "Online and Social Media Related Crime :: Cheating by Impersonation",
+      "Online and Social Media Related Crime :: Online Matrimonial Fraud"
+    ],
+    "note": "Victim-friendly Q&A on how/when to file at cms.rbi.org.in.",
+    "alt_urls": [],
+    "role": "procedure",
+    "effective_from": "2026-07-01",
+    "effective_to": ""
+  },
+  {
+    "id": "rbios_2021",
+    "title": "Reserve Bank - Integrated Ombudsman Scheme, 2021",
+    "issuer": "RBI",
+    "date": "2021-11-12",
+    "url": "https://rbidocs.rbi.org.in/rdocs/content/pdfs/RBIOS2021_121121.pdf",
+    "file": "pdf/rbios_2021.pdf",
+    "type": "pdf",
+    "priority": "optional",
+    "subtypes": [
+      "Online Financial Fraud :: UPI Related Frauds",
+      "Online Financial Fraud :: DebitCredit Card FraudSim Swap Fraud",
+      "Online Financial Fraud :: Internet Banking Related Fraud",
+      "Online Financial Fraud :: Fraud CallVishing",
+      "Online Financial Fraud :: EWallet Related Fraud",
+      "Online Financial Fraud :: Business Email CompromiseEmail Takeover",
+      "Online Financial Fraud :: DematDepository Fraud",
+      "Cryptocurrency Crime :: Cryptocurrency Fraud",
+      "Online and Social Media Related Crime :: Online Job Fraud",
+      "Online and Social Media Related Crime :: Cheating by Impersonation",
+      "Online and Social Media Related Crime :: Online Matrimonial Fraud"
+    ],
+    "note": "Only for complaints filed before 1 Jul 2026; tag as superseded.",
+    "alt_urls": [
+      "https://www.rbi.org.in/commonman/Upload/English/Content/PDFs/RBIOS2021_121121.pdf"
+    ],
+    "role": "procedure",
+    "effective_from": "",
+    "effective_to": "2026-06-30"
+  },
+  {
+    "id": "rbi_tat_2019",
+    "title": "Harmonisation of TAT and customer compensation for failed transactions using authorised payment systems (RBI/2019-20/67)",
+    "issuer": "RBI",
+    "date": "2019-09-20",
+    "url": "https://rbidocs.rbi.org.in/rdocs/notification/PDFs/CIRCULAR677EC931A7A65E4D99AA957D8E85BC0A2A.PDF",
+    "file": "pdf/rbi_tat_2019.pdf",
+    "type": "pdf",
+    "priority": "core",
+    "subtypes": [
+      "Online Financial Fraud :: UPI Related Frauds",
+      "Online Financial Fraud :: DebitCredit Card FraudSim Swap Fraud",
+      "Online Financial Fraud :: Internet Banking Related Fraud",
+      "Online Financial Fraud :: EWallet Related Fraud"
+    ],
+    "note": "Auto-reversal deadlines and per-day compensation for failed UPI/IMPS/card/wallet transactions.",
+    "alt_urls": [
+      "https://www.rbi.org.in/commonman/Upload/English/Notification/PDFs/CIRCULAR677EC931A7A65E4D99AA957D8E85BC0A2A.PDF"
+    ],
+    "role": "rights",
+    "effective_from": "",
+    "effective_to": ""
+  },
+  {
+    "id": "rbi_md_digital_payment_security",
+    "title": "Master Direction on Digital Payment Security Controls (RBI/2020-21/74)",
+    "issuer": "RBI",
+    "date": "2021-02-18",
+    "url": "https://rbidocs.rbi.org.in/rdocs/notification/PDFs/MD7493544C24B5FC47D0AB12798C61CDB56F.PDF",
+    "file": "pdf/rbi_md_digital_payment_security.pdf",
+    "type": "pdf",
+    "priority": "optional",
+    "subtypes": [
+      "Online Financial Fraud :: UPI Related Frauds",
+      "Online Financial Fraud :: DebitCredit Card FraudSim Swap Fraud",
+      "Online Financial Fraud :: Internet Banking Related Fraud",
+      "Online Financial Fraud :: EWallet Related Fraud",
+      "Online and Social Media Related Crime :: Profile Hacking Identity Theft"
+    ],
+    "note": "Bank IT-security obligations; rarely answers a victim question.",
+    "alt_urls": [
+      "https://www.rbi.org.in/commonman/Upload/English/Notification/PDFs/MD7493544C24B5FC47D0AB12798C61CDB56F.PDF"
+    ],
+    "role": "background",
+    "effective_from": "",
+    "effective_to": ""
+  },
+  {
+    "id": "rbi_md_kyc",
+    "title": "Master Direction - Know Your Customer (KYC) Direction, 2016 (updated 14 Aug 2025)",
+    "issuer": "RBI",
+    "date": "2025-08-14",
+    "url": "https://rbidocs.rbi.org.in/rdocs/notification/PDFs/MD18KYCF6E92C82E1E1419D87323E3869BC9F13.PDF",
+    "file": "pdf/rbi_md_kyc.pdf",
+    "type": "pdf",
+    "priority": "optional",
+    "subtypes": [
+      "Online Financial Fraud :: Fraud CallVishing",
+      "Online Financial Fraud :: UPI Related Frauds",
+      "Online Financial Fraud :: Internet Banking Related Fraud",
+      "Online Financial Fraud :: EWallet Related Fraud",
+      "Online and Social Media Related Crime :: Cheating by Impersonation"
+    ],
+    "note": "107-page bank compliance text; noisy for victims. Index only if needed; rbi_kyc_faq covers victim questions.",
+    "alt_urls": [
+      "https://www.rbi.org.in/commonman/Upload/English/Notification/PDFs/MD18KYCF6E92C82E1E1419D87323E3869BC9F13.pdf",
+      "https://www.rbi.org.in/commonman/Upload/English/Notification/PDFs/MD18KYCF6E92C82E1E1419D87323E3869BC9F13.PDF"
+    ],
+    "role": "background",
+    "effective_from": "",
+    "effective_to": ""
+  },
+  {
+    "id": "rbi_kyc_faq",
+    "title": "FAQs on Master Direction on KYC",
+    "issuer": "RBI",
+    "date": "2025-06-09",
+    "url": "https://www.rbi.org.in/commonman/Upload/English/FAQs/PDFs/KYC09062025.pdf",
+    "file": "pdf/rbi_kyc_faq.pdf",
+    "type": "pdf",
+    "priority": "core",
+    "subtypes": [
+      "Online Financial Fraud :: Fraud CallVishing",
+      "Online Financial Fraud :: UPI Related Frauds",
+      "Online Financial Fraud :: Internet Banking Related Fraud",
+      "Online Financial Fraud :: EWallet Related Fraud",
+      "Online and Social Media Related Crime :: Cheating by Impersonation"
+    ],
+    "note": "Plain-language KYC answers.",
+    "alt_urls": [],
+    "role": "rights",
+    "effective_from": "",
+    "effective_to": ""
+  },
+  {
+    "id": "rbi_md_cards",
+    "title": "Master Direction - Credit Card and Debit Card - Issuance and Conduct Directions, 2022 (updated 7 Mar 2024)",
+    "issuer": "RBI",
+    "date": "2024-03-07",
+    "url": "https://rbidocs.rbi.org.in/rdocs/notification/PDFs/92MDCREDITDEBITCARDC423AFFB5E7945149C95CDD2F71E9158.PDF",
+    "file": "pdf/rbi_md_cards.pdf",
+    "type": "pdf",
+    "priority": "supporting",
+    "subtypes": [
+      "Online Financial Fraud :: DebitCredit Card FraudSim Swap Fraud"
+    ],
+    "note": "Card blocking, disputed charges, unsolicited cards.",
+    "alt_urls": [
+      "https://www.rbi.org.in/commonman/Upload/English/Notification/PDFs/92MDCREDITDEBITCARDC423AFFB5E7945149C95CDD2F71E9158.PDF"
+    ],
+    "role": "rights",
+    "effective_from": "",
+    "effective_to": ""
+  },
+  {
+    "id": "rbi_cards_faq",
+    "title": "FAQs on Master Direction - Credit Card and Debit Card",
+    "issuer": "RBI",
+    "date": "2024",
+    "url": "https://www.rbi.org.in/commonman/Upload/English/FAQs/PDFs/FAQMDCreditCardandDebitCard.pdf",
+    "file": "pdf/rbi_cards_faq.pdf",
+    "type": "pdf",
+    "priority": "core",
+    "subtypes": [
+      "Online Financial Fraud :: DebitCredit Card FraudSim Swap Fraud"
+    ],
+    "note": "",
+    "alt_urls": [],
+    "role": "rights",
+    "effective_from": "",
+    "effective_to": ""
+  },
+  {
+    "id": "rbi_md_ppi",
+    "title": "Master Directions on Prepaid Payment Instruments (PPIs) (updated 30 Sep 2026)",
+    "issuer": "RBI",
+    "date": "2026-09-30",
+    "url": "https://rbidocs.rbi.org.in/rdocs/notification/PDFs/82MDPPIS2708202181CF0A6FCD1B47B88CAE8E92A228B160.PDF",
+    "file": "pdf/rbi_md_ppi.pdf",
+    "type": "pdf",
+    "priority": "core",
+    "subtypes": [
+      "Online Financial Fraud :: EWallet Related Fraud"
+    ],
+    "note": "E-wallet rules incl. customer liability for unauthorised wallet transactions.",
+    "alt_urls": [
+      "https://www.rbi.org.in/commonman/Upload/English/Notification/PDFs/82MDPPIS2708202181CF0A6FCD1B47B88CAE8E92A228B160.PDF"
+    ],
+    "role": "rights",
+    "effective_from": "",
+    "effective_to": ""
+  },
+  {
+    "id": "rbi_digital_lending_2025",
+    "title": "Reserve Bank of India (Digital Lending) Directions, 2025 (RBI/2025-26/36)",
+    "issuer": "RBI",
+    "date": "2025-05-08",
+    "url": "https://rbidocs.rbi.org.in/rdocs/notification/PDFs/36NT8C402BE7C2A349E0BFFF3C526668CD7A.PDF",
+    "file": "pdf/rbi_digital_lending_2025.pdf",
+    "type": "pdf",
+    "priority": "core",
+    "subtypes": [
+      "Any Other Cyber Crime :: Other",
+      "Crime Against Women & Children :: Cyber Blackmailing & Threatening",
+      "Online and Social Media Related Crime :: Cyber Bullying  Stalking  Sexting"
+    ],
+    "note": "Loan-app harassment/recovery abuse; no CyberLens label of its own, routes from Other/blackmail.",
+    "alt_urls": [
+      "https://www.rbi.org.in/commonman/Upload/English/Notification/PDFs/36NT8C402BE7C2A349E0BFFF3C526668CD7A.PDF"
+    ],
+    "role": "rights",
+    "effective_from": "",
+    "effective_to": ""
+  },
+  {
+    "id": "rbi_beaware",
+    "title": "BE(A)WARE - A booklet on modus operandi of financial fraudsters",
+    "issuer": "RBI",
+    "date": "2022-03-07",
+    "url": "https://www.rbi.org.in/commonman/Upload/English/Content/PDFs/English%20BEAWARE.pdf",
+    "file": "pdf/rbi_beaware.pdf",
+    "type": "pdf",
+    "priority": "core",
+    "subtypes": [
+      "Online Financial Fraud :: UPI Related Frauds",
+      "Online Financial Fraud :: DebitCredit Card FraudSim Swap Fraud",
+      "Online Financial Fraud :: Internet Banking Related Fraud",
+      "Online Financial Fraud :: Fraud CallVishing",
+      "Online Financial Fraud :: EWallet Related Fraud",
+      "Online Financial Fraud :: Business Email CompromiseEmail Takeover",
+      "Online Financial Fraud :: DematDepository Fraud",
+      "Cryptocurrency Crime :: Cryptocurrency Fraud",
+      "Online and Social Media Related Crime :: Online Job Fraud",
+      "Online and Social Media Related Crime :: Cheating by Impersonation",
+      "Online and Social Media Related Crime :: Online Matrimonial Fraud",
+      "Online and Social Media Related Crime :: EMail Phishing",
+      "Online and Social Media Related Crime :: FakeImpersonating Profile"
+    ],
+    "note": "Best single prevention doc; each fraud type with do's and don'ts.",
+    "alt_urls": [],
+    "role": "prevention",
+    "effective_from": "",
+    "effective_to": ""
+  },
+  {
+    "id": "rbi_alert_family",
+    "title": "RBI Kehta Hai - Alert Family booklet",
+    "issuer": "RBI",
+    "date": "n/a",
+    "url": "https://rbikehtahai.rbi.org.in/images/AlertFamilyEnglish.pdf",
+    "file": "pdf/rbi_alert_family.pdf",
+    "type": "pdf",
+    "priority": "exclude",
+    "subtypes": [
+      "Online Financial Fraud :: UPI Related Frauds",
+      "Online Financial Fraud :: DebitCredit Card FraudSim Swap Fraud",
+      "Online Financial Fraud :: Internet Banking Related Fraud",
+      "Online Financial Fraud :: Fraud CallVishing",
+      "Online Financial Fraud :: EWallet Related Fraud",
+      "Online Financial Fraud :: Business Email CompromiseEmail Takeover",
+      "Online Financial Fraud :: DematDepository Fraud",
+      "Cryptocurrency Crime :: Cryptocurrency Fraud",
+      "Online and Social Media Related Crime :: Online Job Fraud",
+      "Online and Social Media Related Crime :: Cheating by Impersonation",
+      "Online and Social Media Related Crime :: Online Matrimonial Fraud"
+    ],
+    "note": "Image-only comic: only ~570 words of extractable text. Skip unless you OCR it.",
+    "alt_urls": [],
+    "role": "prevention",
+    "effective_from": "",
+    "effective_to": ""
+  },
+  {
+    "id": "i4c_citizen_reporting_frauds",
+    "title": "Citizen Financial Cyber Frauds Reporting and Management System - instructions (1930)",
+    "issuer": "MHA / I4C",
+    "date": "n/a",
+    "url": "https://cybercrime.gov.in/UploadMedia/instructions_citizenreportingcyberfrauds.pdf",
+    "file": "pdf/i4c_citizen_reporting_frauds.pdf",
+    "type": "pdf",
+    "priority": "core",
+    "subtypes": [
+      "Online Financial Fraud :: UPI Related Frauds",
+      "Online Financial Fraud :: DebitCredit Card FraudSim Swap Fraud",
+      "Online Financial Fraud :: Internet Banking Related Fraud",
+      "Online Financial Fraud :: Fraud CallVishing",
+      "Online Financial Fraud :: EWallet Related Fraud",
+      "Online Financial Fraud :: Business Email CompromiseEmail Takeover",
+      "Online Financial Fraud :: DematDepository Fraud",
+      "Cryptocurrency Crime :: Cryptocurrency Fraud",
+      "Online and Social Media Related Crime :: Online Job Fraud",
+      "Online and Social Media Related Crime :: Cheating by Impersonation",
+      "Online and Social Media Related Crime :: Online Matrimonial Fraud"
+    ],
+    "note": "How 1930 freezes money; the golden hour.",
+    "alt_urls": [],
+    "role": "procedure",
+    "effective_from": "",
+    "effective_to": ""
+  },
+  {
+    "id": "i4c_portal_manual",
+    "title": "User Manual for National Cybercrime Reporting Portal (report other cybercrime, v1.0)",
+    "issuer": "MHA / I4C",
+    "date": "n/a",
+    "url": "https://cybercrime.gov.in/uploadmedia/mha-citizenmanualreportothercybercrime-v10.pdf",
+    "file": "pdf/i4c_portal_manual.pdf",
+    "type": "pdf",
+    "priority": "core",
+    "subtypes": "ALL",
+    "note": "Step-by-step complaint filing at cybercrime.gov.in; feeds the complaint draft.",
+    "alt_urls": [
+      "https://www.cybercrime.gov.in/UploadMedia/MHA-CitizenManualReportOtherCyberCrime-v10.pdf"
+    ],
+    "role": "procedure",
+    "effective_from": "",
+    "effective_to": ""
+  },
+  {
+    "id": "pib_digital_arrest",
+    "title": "PIB: Digital arrest scam (MHA reply)",
+    "issuer": "PIB / MHA",
+    "date": "2024-12",
+    "url": "https://www.pib.gov.in/Pressreleaseshare.aspx?PRID=2082761&reg=48&lang=2",
+    "file": "html/pib_digital_arrest.html",
+    "type": "html",
+    "priority": "core",
+    "subtypes": [
+      "Online Financial Fraud :: Fraud CallVishing",
+      "Online and Social Media Related Crime :: Cheating by Impersonation",
+      "Crime Against Women & Children :: Cyber Blackmailing & Threatening"
+    ],
+    "note": "Save page as text/PDF.",
+    "alt_urls": [],
+    "role": "prevention",
+    "effective_from": "",
+    "effective_to": ""
+  },
+  {
+    "id": "pib_blackmail_digital_arrest_alert",
+    "title": "PIB: Alert against 'Blackmail' and 'Digital Arrest' by cyber criminals impersonating authorities",
+    "issuer": "PIB / MHA",
+    "date": "2024-05",
+    "url": "https://www.pib.gov.in/PressReleasePage.aspx?PRID=2020570",
+    "file": "html/pib_blackmail_digital_arrest_alert.html",
+    "type": "html",
+    "priority": "core",
+    "subtypes": [
+      "Online Financial Fraud :: Fraud CallVishing",
+      "Online and Social Media Related Crime :: Cheating by Impersonation",
+      "Crime Against Women & Children :: Cyber Blackmailing & Threatening"
+    ],
+    "note": "Save page as text/PDF.",
+    "alt_urls": [],
+    "role": "prevention",
+    "effective_from": "",
+    "effective_to": ""
+  },
+  {
+    "id": "pib_digital_arrest_steps",
+    "title": "PIB: Steps taken to address digital arrest scams",
+    "issuer": "PIB / MHA",
+    "date": "2025-03",
+    "url": "https://www.pib.gov.in/PressReleasePage.aspx?PRID=2110809&reg=3&lang=2",
+    "file": "html/pib_digital_arrest_steps.html",
+    "type": "html",
+    "priority": "supporting",
+    "subtypes": [
+      "Online Financial Fraud :: Fraud CallVishing",
+      "Online and Social Media Related Crime :: Cheating by Impersonation"
+    ],
+    "note": "Save page as text/PDF.",
+    "alt_urls": [],
+    "role": "background",
+    "effective_from": "",
+    "effective_to": ""
+  },
+  {
+    "id": "sanchar_saathi_help",
+    "title": "Sanchar Saathi Help (Chakshu - report suspected fraud calls/SMS/WhatsApp, lost phone, connections in your name)",
+    "issuer": "DoT",
+    "date": "n/a",
+    "url": "https://sancharsaathi.gov.in/Home/help.jsp",
+    "file": "html/sanchar_saathi_help.html",
+    "type": "html",
+    "priority": "exclude",
+    "subtypes": [
+      "Online Financial Fraud :: Fraud CallVishing",
+      "Online Financial Fraud :: DebitCredit Card FraudSim Swap Fraud",
+      "Online and Social Media Related Crime :: EMail Phishing",
+      "Online and Social Media Related Crime :: Cheating by Impersonation",
+      "Online and Social Media Related Crime :: Online Job Fraud",
+      "Online and Social Media Related Crime :: Profile Hacking Identity Theft"
+    ],
+    "note": "Saved page is mostly portal navigation; Chakshu details come from pib_chakshu_reporting / dot_* instead.",
+    "alt_urls": [],
+    "role": "procedure",
+    "effective_from": "",
+    "effective_to": ""
+  },
+  {
+    "id": "dot_sms_scammers",
+    "title": "DoT and MHA strike down on SMS scammers (press release)",
+    "issuer": "DoT / MHA (via PIB)",
+    "date": "n/a",
+    "url": "https://www.pib.gov.in/PressReleaseIframePage.aspx?PRID=2021797",
+    "file": "html/dot_sms_scammers.html",
+    "type": "html",
+    "priority": "supporting",
+    "subtypes": [
+      "Online and Social Media Related Crime :: EMail Phishing",
+      "Online Financial Fraud :: Fraud CallVishing"
+    ],
+    "note": "Original Sanchar Saathi PDF link is dead; PIB copy of the same release.",
+    "alt_urls": [],
+    "role": "prevention",
+    "effective_from": "",
+    "effective_to": ""
+  },
+  {
+    "id": "dot_electricity_kyc",
+    "title": "DoT takes action against Electricity KYC Update Scam (press release)",
+    "issuer": "DoT (via PIB)",
+    "date": "2024-06-17",
+    "url": "https://www.pib.gov.in/PressReleasePage.aspx?PRID=2025970&reg=48&lang=2",
+    "file": "text/dot_electricity_kyc.txt",
+    "type": "txt",
+    "priority": "supporting",
+    "subtypes": [
+      "Online Financial Fraud :: Fraud CallVishing",
+      "Online and Social Media Related Crime :: EMail Phishing"
+    ],
+    "note": "Transcribed from screenshot of the PIB page.",
+    "alt_urls": [],
+    "role": "prevention",
+    "effective_from": "",
+    "effective_to": ""
+  },
+  {
+    "id": "dot_spoofed_calls",
+    "title": "DoT combats cyber-frauds: central system to stop spoofed international calls",
+    "issuer": "DoT (via PIB)",
+    "date": "n/a",
+    "url": "https://www.pib.gov.in/PressReleasePage.aspx?PRID=2062022&reg=48&lang=2",
+    "file": "html/dot_spoofed_calls.html",
+    "type": "html",
+    "priority": "supporting",
+    "subtypes": [
+      "Online Financial Fraud :: Fraud CallVishing",
+      "Online and Social Media Related Crime :: Cheating by Impersonation"
+    ],
+    "note": "PIB copy of the same release.",
+    "alt_urls": [
+      "https://www.pib.gov.in/PressReleaseIframePage.aspx?PRID=2087644"
+    ],
+    "role": "prevention",
+    "effective_from": "",
+    "effective_to": ""
+  },
+  {
+    "id": "npci_upi_drm",
+    "title": "RBI Online Dispute Resolution (ODR) System for Digital Payments (RBI/2020-21/21)",
+    "issuer": "RBI",
+    "date": "2020-08-06",
+    "url": "https://www.rbi.org.in/commonman/Upload/English/Notification/PDFs/21ODR602F0A579EB246AA885776A76122DB0C.PDF",
+    "file": "pdf/npci_upi_drm.pdf",
+    "type": "pdf",
+    "priority": "core",
+    "subtypes": [
+      "Online Financial Fraud :: UPI Related Frauds"
+    ],
+    "note": "Covers FAILED transactions only (not fraud). Use for 'money debited but not credited'; escalate to Ombudsman after 30 days.",
+    "alt_urls": [],
+    "role": "procedure",
+    "effective_from": "",
+    "effective_to": ""
+  },
+  {
+    "id": "npci_upi_safety",
+    "title": "NPCI - UPI Safety Shield",
+    "issuer": "NPCI",
+    "date": "n/a",
+    "url": "https://www.npci.org.in/safety-feature",
+    "file": "text/npci_upi_safety.txt",
+    "type": "txt",
+    "priority": "supporting",
+    "subtypes": [
+      "Online Financial Fraud :: UPI Related Frauds"
+    ],
+    "note": "Text copied from the NPCI page by hand on 2026-10-27 (page is JS-rendered).",
+    "alt_urls": [],
+    "role": "prevention",
+    "effective_from": "",
+    "effective_to": ""
+  },
+  {
+    "id": "sebi_fake_trading_app",
+    "title": "SEBI - Beware of fake trading app scams",
+    "issuer": "SEBI",
+    "date": "n/a",
+    "url": "https://investor.sebi.gov.in/pdf/Fake%20trading%20app%20scam%20Landscape.pdf",
+    "file": "pdf/sebi_fake_trading_app.pdf",
+    "type": "pdf",
+    "priority": "core",
+    "subtypes": [
+      "Online Financial Fraud :: DematDepository Fraud",
+      "Cryptocurrency Crime :: Cryptocurrency Fraud",
+      "Online and Social Media Related Crime :: Cheating by Impersonation"
+    ],
+    "note": "",
+    "alt_urls": [],
+    "role": "prevention",
+    "effective_from": "",
+    "effective_to": ""
+  },
+  {
+    "id": "sebi_stock_guru",
+    "title": "SEBI - Stock market guru scams",
+    "issuer": "SEBI",
+    "date": "n/a",
+    "url": "https://investor.sebi.gov.in/pdf/Stock%20Market%20Guru%20Scams%20final.pdf",
+    "file": "pdf/sebi_stock_guru.pdf",
+    "type": "pdf",
+    "priority": "supporting",
+    "subtypes": [
+      "Online Financial Fraud :: DematDepository Fraud",
+      "Online and Social Media Related Crime :: Cheating by Impersonation"
+    ],
+    "note": "",
+    "alt_urls": [],
+    "role": "prevention",
+    "effective_from": "",
+    "effective_to": ""
+  },
+  {
+    "id": "sebi_pump_dump",
+    "title": "SEBI - Caution: pump and dump scam",
+    "issuer": "SEBI",
+    "date": "n/a",
+    "url": "https://investor.sebi.gov.in/pdf/Pump%20and%20Dump%20Scam%20final.pdf",
+    "file": "pdf/sebi_pump_dump_v2.pdf",
+    "type": "pdf",
+    "priority": "supporting",
+    "subtypes": [
+      "Online Financial Fraud :: DematDepository Fraud"
+    ],
+    "note": "First download was truncated/corrupt; re-download.",
+    "alt_urls": [],
+    "role": "prevention",
+    "effective_from": "",
+    "effective_to": ""
+  },
+  {
+    "id": "sebi_beware_investment",
+    "title": "SEBI - Staying away from investment frauds",
+    "issuer": "SEBI",
+    "date": "n/a",
+    "url": "https://investor.sebi.gov.in/beware-of-investment.html",
+    "file": "html/sebi_beware_investment.html",
+    "type": "html",
+    "priority": "core",
+    "subtypes": [
+      "Online Financial Fraud :: DematDepository Fraud",
+      "Cryptocurrency Crime :: Cryptocurrency Fraud",
+      "Online and Social Media Related Crime :: Online Job Fraud"
+    ],
+    "note": "Save page as text/PDF.",
+    "alt_urls": [],
+    "role": "prevention",
+    "effective_from": "",
+    "effective_to": ""
+  },
+  {
+    "id": "certin_directions_2022",
+    "title": "CERT-In Directions under Section 70B(6) of the IT Act (28 Apr 2022)",
+    "issuer": "CERT-In / MeitY",
+    "date": "2022-04-28",
+    "url": "https://www.cert-in.org.in/PDF/CERT-In_Directions_70B_28.04.2022.pdf",
+    "file": "pdf/certin_directions_2022.pdf",
+    "type": "pdf",
+    "priority": "optional",
+    "subtypes": [
+      "Cyber Attack/ Dependent Crimes :: * (Ransomware, Malware, Data Breach, Hacking/Defacement, DoS, SQLi)",
+      "Hacking  Damage to computercomputer system etc :: Unauthorised AccessData Breach",
+      "Hacking  Damage to computercomputer system etc :: Email Hacking"
+    ],
+    "note": "Obligations on organisations (6-hour incident reporting); only for org victims of ransomware/breach.",
+    "alt_urls": [],
+    "role": "background",
+    "effective_from": "",
+    "effective_to": ""
+  },
+  {
+    "id": "certin_directions_faq",
+    "title": "FAQs on CERT-In Cyber Security Directions",
+    "issuer": "CERT-In / MeitY",
+    "date": "2022-05",
+    "url": "https://www.cert-in.org.in/PDF/FAQs_on_CyberSecurityDirections_May2022.pdf",
+    "file": "pdf/certin_directions_faq.pdf",
+    "type": "pdf",
+    "priority": "optional",
+    "subtypes": [
+      "Cyber Attack/ Dependent Crimes :: * (Ransomware, Malware, Data Breach, Hacking/Defacement, DoS, SQLi)",
+      "Hacking  Damage to computercomputer system etc :: Unauthorised AccessData Breach",
+      "Hacking  Damage to computercomputer system etc :: Email Hacking"
+    ],
+    "note": "Same as CERT-In directions.",
+    "alt_urls": [],
+    "role": "background",
+    "effective_from": "",
+    "effective_to": ""
+  },
+  {
+    "id": "it_act_2000",
+    "title": "Information Technology Act, 2000 (updated, incl. 2008 amendment: s.43, 66, 66C, 66D, 66E, 67, 67A, 67B)",
+    "issuer": "Legislative Dept / India Code",
+    "date": "2000",
+    "url": "https://www.indiacode.nic.in/bitstream/123456789/13116/1/it_act_2000_updated.pdf",
+    "file": "pdf/it_act_2000_updated.pdf",
+    "type": "pdf",
+    "priority": "core",
+    "subtypes": "ALL",
+    "note": "Old download was the original 2000 text WITHOUT 66C/66D/66E/67A/67B; replaced.",
+    "alt_urls": [
+      "https://upload.indiacode.nic.in/view-casepdf?type=act&id=AC_CEN_45_76_00001_200021_1517807324077"
+    ],
+    "role": "law",
+    "effective_from": "",
+    "effective_to": ""
+  },
+  {
+    "id": "i4c_financial_fraud_brochure",
+    "title": "Financial fraud awareness brochures (I4C)",
+    "issuer": "MHA / I4C",
+    "date": "n/a",
+    "url": "https://cybercrime.gov.in/pdf/Financial%20Fraud%20Brochures%20final.pdf",
+    "file": "pdf/i4c_financial_fraud_brochure.pdf",
+    "type": "pdf",
+    "priority": "supporting",
+    "subtypes": [
+      "Online Financial Fraud :: UPI Related Frauds",
+      "Online Financial Fraud :: DebitCredit Card FraudSim Swap Fraud",
+      "Online Financial Fraud :: Internet Banking Related Fraud",
+      "Online Financial Fraud :: Fraud CallVishing",
+      "Online Financial Fraud :: EWallet Related Fraud",
+      "Online Financial Fraud :: Business Email CompromiseEmail Takeover",
+      "Online Financial Fraud :: DematDepository Fraud",
+      "Cryptocurrency Crime :: Cryptocurrency Fraud",
+      "Online and Social Media Related Crime :: Online Job Fraud",
+      "Online and Social Media Related Crime :: Cheating by Impersonation",
+      "Online and Social Media Related Crime :: Online Matrimonial Fraud",
+      "Online and Social Media Related Crime :: EMail Phishing",
+      "Online and Social Media Related Crime :: FakeImpersonating Profile"
+    ],
+    "note": "",
+    "alt_urls": [],
+    "role": "prevention",
+    "effective_from": "",
+    "effective_to": ""
+  },
+  {
+    "id": "mha_1930_launch",
+    "title": "PIB/MHA: Citizen Financial Cyber Fraud Reporting - 1930 helpline launch",
+    "issuer": "MHA",
+    "date": "2021-06-18",
+    "url": "https://www.mha.gov.in/sites/default/files/CyberFraud_18062021_1.pdf",
+    "file": "pdf/mha_1930_launch.pdf",
+    "type": "pdf",
+    "priority": "core",
+    "subtypes": [
+      "Online Financial Fraud :: UPI Related Frauds",
+      "Online Financial Fraud :: DebitCredit Card FraudSim Swap Fraud",
+      "Online Financial Fraud :: Internet Banking Related Fraud",
+      "Online Financial Fraud :: Fraud CallVishing",
+      "Online Financial Fraud :: EWallet Related Fraud",
+      "Online Financial Fraud :: Business Email CompromiseEmail Takeover",
+      "Online Financial Fraud :: DematDepository Fraud",
+      "Cryptocurrency Crime :: Cryptocurrency Fraud",
+      "Online and Social Media Related Crime :: Online Job Fraud",
+      "Online and Social Media Related Crime :: Cheating by Impersonation",
+      "Online and Social Media Related Crime :: Online Matrimonial Fraud",
+      "Online and Social Media Related Crime :: EMail Phishing",
+      "Online and Social Media Related Crime :: FakeImpersonating Profile"
+    ],
+    "note": "Backup for the 1930 process if the cybercrime.gov.in PDF stays blocked.",
+    "alt_urls": [],
+    "role": "procedure",
+    "effective_from": "",
+    "effective_to": ""
+  },
+  {
+    "id": "pib_chakshu_reporting",
+    "title": "PIB: Vigilant citizens help prevent cyber-crimes by reporting fraudulent call attempts (Chakshu)",
+    "issuer": "DoT (via PIB)",
+    "date": "2024-05-22",
+    "url": "https://www.pib.gov.in/Pressreleaseshare.aspx?PRID=2021309&reg=48&lang=2",
+    "file": "text/pib_chakshu_reporting.txt",
+    "type": "txt",
+    "priority": "core",
+    "subtypes": [
+      "Online Financial Fraud :: Fraud CallVishing",
+      "Online Financial Fraud :: DebitCredit Card FraudSim Swap Fraud",
+      "Online and Social Media Related Crime :: EMail Phishing",
+      "Online and Social Media Related Crime :: Cheating by Impersonation",
+      "Online and Social Media Related Crime :: Online Job Fraud",
+      "Online and Social Media Related Crime :: Profile Hacking Identity Theft"
+    ],
+    "note": "Transcribed from screenshot of the PIB page.",
+    "alt_urls": [],
+    "role": "procedure",
+    "effective_from": "",
+    "effective_to": ""
+  },
+  {
+    "id": "bns_2023",
+    "title": "Bharatiya Nyaya Sanhita, 2023 (replaced IPC from 1 Jul 2024: cheating s.318, cheating by personation s.319, extortion s.308, stalking s.78, sexual harassment s.75, criminal intimidation s.351, organised crime incl. cyber-crime s.111)",
+    "issuer": "MHA / Legislative Dept",
+    "date": "2023-12-25",
+    "url": "https://www.mha.gov.in/sites/default/files/2024-04/250883_english_01042024.pdf",
+    "file": "pdf/bns_2023.pdf",
+    "type": "pdf",
+    "priority": "core",
+    "subtypes": "ALL",
+    "note": "Criminal law sections for the complaint draft; IT Act alone misses cheating/extortion.",
+    "alt_urls": [
+      "https://www.indiacode.nic.in/bitstream/123456789/20062/1/a2023-45.pdf"
+    ],
+    "role": "law",
+    "effective_from": "",
+    "effective_to": ""
+  },
+  {
+    "id": "bnss_2023",
+    "title": "Bharatiya Nagarik Suraksha Sanhita, 2023 (replaced CrPC: zero FIR / e-FIR s.173, free FIR copy)",
+    "issuer": "MHA / Legislative Dept",
+    "date": "2023-12-25",
+    "url": "https://www.mha.gov.in/sites/default/files/2024-04/250884_2_english_01042024.pdf",
+    "file": "pdf/bnss_2023.pdf",
+    "type": "pdf",
+    "priority": "supporting",
+    "subtypes": "ALL",
+    "note": "Right to file FIR at any police station (zero FIR) and electronically. Large file; index s.173 and nearby only if needed.",
+    "alt_urls": [
+      "https://www.indiacode.nic.in/bitstream/123456789/20099/1/A202346.pdf"
+    ],
+    "role": "procedure",
+    "effective_from": "",
+    "effective_to": ""
+  },
+  {
+    "id": "it_rules_2021",
+    "title": "IT (Intermediary Guidelines and Digital Media Ethics Code) Rules, 2021 (updated 6 Apr 2023)",
+    "issuer": "MeitY",
+    "date": "2023-04-06",
+    "url": "https://www.meity.gov.in/static/uploads/2024/02/Information-Technology-Intermediary-Guidelines-and-Digital-Media-Ethics-Code-Rules-2021-updated-06.04.2023-.pdf",
+    "file": "pdf/it_rules_2021.pdf",
+    "type": "pdf",
+    "priority": "core",
+    "subtypes": [
+      "Online and Social Media Related Crime :: Cyber Bullying  Stalking  Sexting",
+      "Online and Social Media Related Crime :: FakeImpersonating Profile",
+      "Online and Social Media Related Crime :: Profile Hacking Identity Theft",
+      "Online and Social Media Related Crime :: Cheating by Impersonation",
+      "Crime Against Women & Children :: Cyber Blackmailing & Threatening",
+      "Sexually Obscene material :: Unspecified",
+      "Sexually Explicit Act :: Unspecified",
+      "Online and Social Media Related Crime :: Online Matrimonial Fraud",
+      "Online and Social Media Related Crime :: Provocative Speech for unlawful acts"
+    ],
+    "note": "Platforms must remove intimate/morphed images within 24 hours of a victim's complaint (rule 3(2)(b)) and act on grievances in 15 days; key for sextortion, fake profiles. Check MeitY for 2025-26 amendments.",
+    "alt_urls": [],
+    "role": "rights",
+    "effective_from": "",
+    "effective_to": ""
+  },
+  {
+    "id": "pib_ncrp_1930",
+    "title": "PIB: National Cyber Crime Reporting Portal enables public to report cyber crimes (NCRP + 1930)",
+    "issuer": "MHA (via PIB)",
+    "date": "2024-12",
+    "url": "https://www.pib.gov.in/PressReleseDetailm.aspx?PRID=2085609",
+    "file": "html/pib_ncrp_1930.html",
+    "type": "html",
+    "priority": "core",
+    "subtypes": "ALL",
+    "note": "Fills the 1930/NCRP procedure gap while cybercrime.gov.in PDFs are blocked.",
+    "alt_urls": [],
+    "role": "procedure",
+    "effective_from": "",
+    "effective_to": ""
+  }
+]
