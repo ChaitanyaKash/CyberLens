@@ -1,0 +1,8 @@
+<resources>
+    <string name="cl_step_description">Step %1$d of %2$d: %3$s</string>
+    <string name="cl_step_done">Complete</string>
+    <string name="cl_step_current">In progress</string>
+    <string name="cl_step_waiting">Not started</string>
+    <string name="cl_sheet_handle">Drag to move this sheet</string>
+    <string name="cl_dismiss_sheet">Dismiss sheet</string>
+</resources>

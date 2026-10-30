@@ -1,6 +1,6 @@
 __pycache__/
 .venv/
-data/
+/data/
 reference/
 models/
 *.log
@@ -43,3 +43,19 @@ rag_corpus/html/
 rag_corpus/*_downloads.csv
 rag_corpus/download_status.csv
 rag_corpus/failed_links.html
+
+# Android private files and build output
+.gradle/
+.kotlin/
+.idea/
+local.properties
+keystore.properties
+*.jks
+*.keystore
+*.hprof
+*.apk
+*.aab
+android/model_export/*.bin
+android/model_export/*.onnx
+android/model_export/*.gguf
+android/model_export/*.litertlm
