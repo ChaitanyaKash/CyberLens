@@ -6,6 +6,9 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.*
+import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.platform.*
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.*
@@ -32,29 +35,44 @@ fun ComponentCatalogue(onBack: () -> Unit = {}, initialDark: Boolean = false,
     val previewDensity = if (large && !inheritedLarge) Density(density.density, 2f) else density
     CompositionLocalProvider(LocalDensity provides previewDensity) {
         CyberLensTheme(dark = dark, reduceMotion = effectiveMotion, reduceTransparency = effectiveSolid) {
-            CLLargeTitleScaffold(stringResource(R.string.components),
-                navigation = { CLSecondaryButton(stringResource(R.string.back), onBack) }) {
-                Text(stringResource(R.string.catalogue_body), style = MaterialTheme.typography.bodyLarge)
-                CLGroupedList {
-                    CLToggleRow(stringResource(R.string.dark_mode), dark, { dark = it })
-                    CLToggleRow(stringResource(R.string.large_text), large || inheritedLarge, { large = it },
-                        detail = if (inheritedLarge) stringResource(R.string.inherited_accessibility) else "", enabled = !inheritedLarge)
-                    CLToggleRow(stringResource(R.string.reduce_motion), effectiveMotion, { motion = it },
-                        detail = if (inheritedMotion) stringResource(R.string.inherited_accessibility) else "", enabled = !inheritedMotion)
-                    CLToggleRow(stringResource(R.string.reduce_transparency), effectiveSolid, { solid = it },
-                        detail = if (inheritedSolid) stringResource(R.string.inherited_accessibility) else "", enabled = !inheritedSolid)
-                }
-                CLHorizontalChoices {
-                    listOf(R.string.fonts, R.string.buttons, R.string.cards, R.string.progress).forEachIndexed { index, label ->
-                        CLChoiceChip(stringResource(label), selected = index == section, onClick = {
-                            if (section != index) {
-                                section = index
-                                catalogueHaptics.performHapticFeedback(androidx.compose.ui.hapticfeedback.HapticFeedbackType.SegmentTick)
+            val padding = LocalNavigationContentPadding.current
+            val direction = LocalLayoutDirection.current
+            val background = MaterialTheme.colorScheme.background
+            Box(Modifier.fillMaxSize().drawBehind {
+                val left = padding.calculateLeftPadding(direction).toPx()
+                val right = padding.calculateRightPadding(direction).toPx()
+                val top = padding.calculateTopPadding().toPx()
+                val bottom = padding.calculateBottomPadding().toPx()
+                drawRect(background, Offset(left, top), Size(
+                    (size.width - left - right).coerceAtLeast(0f),
+                    (size.height - top - bottom).coerceAtLeast(0f)))
+            }) {
+                CompositionLocalProvider(LocalContentColor provides MaterialTheme.colorScheme.onBackground) {
+                    CLLargeTitleScaffold(stringResource(R.string.components),
+                        navigation = { CLSecondaryButton(stringResource(R.string.back), onBack) }) {
+                        Text(stringResource(R.string.catalogue_body), style = MaterialTheme.typography.bodyLarge)
+                        CLGroupedList {
+                            CLToggleRow(stringResource(R.string.dark_mode), dark, { dark = it })
+                            CLToggleRow(stringResource(R.string.large_text), large || inheritedLarge, { large = it },
+                                detail = if (inheritedLarge) stringResource(R.string.inherited_accessibility) else "", enabled = !inheritedLarge)
+                            CLToggleRow(stringResource(R.string.reduce_motion), effectiveMotion, { motion = it },
+                                detail = if (inheritedMotion) stringResource(R.string.inherited_accessibility) else "", enabled = !inheritedMotion)
+                            CLToggleRow(stringResource(R.string.reduce_transparency), effectiveSolid, { solid = it },
+                                detail = if (inheritedSolid) stringResource(R.string.inherited_accessibility) else "", enabled = !inheritedSolid)
+                        }
+                        CLHorizontalChoices {
+                            listOf(R.string.fonts, R.string.buttons, R.string.cards, R.string.progress).forEachIndexed { index, label ->
+                                CLChoiceChip(stringResource(label), selected = index == section, onClick = {
+                                    if (section != index) {
+                                        section = index
+                                        catalogueHaptics.performHapticFeedback(androidx.compose.ui.hapticfeedback.HapticFeedbackType.SegmentTick)
+                                    }
+                                })
                             }
-                        })
+                        }
+                        CatalogueSamples(section, initialSheet = initialSheet && section == 3)
                     }
                 }
-                CatalogueSamples(section, initialSheet = initialSheet && section == 3)
             }
         }
     }
