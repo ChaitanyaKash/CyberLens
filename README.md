@@ -147,3 +147,8 @@ The default backend follows the recorded promotion criteria. Historical complain
 Structured masking covers selected URL, email, phone, payment and identifier patterns. Names, addresses and contextual identifiers may remain; masked text is not guaranteed anonymous. Processing and inference run locally. Raw datasets and model artifacts are excluded from version control; only trusted serialized models should be loaded.
 
 Synthetic typo tests cover a limited corruption pattern. Template-family grouping is heuristic. Performance on new scam scenarios, languages and label taxonomies requires independent data. The current scope is text classification; retrieval-based guidance and report drafting are planned extensions.
+
+
+## Authors
+Chaitanya Kashyap (B240006AI)
+Aditya (B240030CS)
