@@ -33,7 +33,7 @@ On complaint test messages whose normalized template does not occur in `train.cs
 The experimental `robust` call model reached **0.8256** clean / **0.7709** typo macro-F1 in nested family CV. It remains experimental because the paired family-bootstrap interval for clean improvement includes zero. Independent confirmation is required.
 <!-- RESULTS SUMMARY END -->
 
-The initial exact-deduplicated call split produced macro-F1 of 1.0000. Related templates still crossed that split, so the primary result uses the stricter template-family protocol. Earlier scores remain in the evaluation report for comparison.
+The initial exact-deduplicated split achieved a macro-F1 score of 1.0000. However, related templates were still present across the splits. Therefore, the stricter template-family split is adopted for the primary evaluation, while the earlier results are retained in the evaluation report for comparison.
 
 The default complaint model (`adjusted`) trains on the whole supplied `train.csv` without consulting `test.csv` and applies a validation-selected class-prior correction to the hybrid TF-IDF classifier. Compared with the previous default, official-test macro-F1 rises from 0.2345 to 0.2620 and accuracy from 0.5014 to 0.5512. The gain is concentrated in subtypes dominated by recurring complaint templates; on test templates absent from `train.csv`, macro-F1 is unchanged within uncertainty and accuracy improves by about two points. The [results](reports/RESULTS.md) give the per-slice and per-class breakdown.
 
