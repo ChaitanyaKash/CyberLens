@@ -152,3 +152,4 @@ Synthetic typo tests cover a limited corruption pattern. Template-family groupin
 ## Authors
 Chaitanya Kashyap (B240006AI)
 Aditya (B240030CS)
+Manish Kumar(B240106EE)
